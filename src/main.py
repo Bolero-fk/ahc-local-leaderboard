@@ -17,9 +17,9 @@ def main():
     args = parser.parse_args()
 
     if args.command == 'setup':
-        initializer.setup_leaderboard_system()
+        initializer.execute()
     elif args.command == 'submit':
-        initializer.setup_leaderboard_system()
+        submitter.execute()
     else:
         parser.print_help()
 
