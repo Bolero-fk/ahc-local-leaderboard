@@ -15,19 +15,41 @@ def create_directories():
 def initialize_database():
     """SQLiteデータベースを初期化する関数"""
     db_path = 'leader_board/leader_board.db'
+    
     if not os.path.exists(db_path):
         conn = sqlite3.connect(db_path)
         cursor = conn.cursor()
+
+        # スコア履歴テーブルの作成
         cursor.execute('''
-            CREATE TABLE IF NOT EXISTS leader_board (
+            CREATE TABLE IF NOT EXISTS score_history (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-                score INTEGER,
-                test_case_input TEXT,
-                test_case_output TEXT,
-                top_score INTEGER,
-                submission_time TEXT
+                total_absolute_score INTEGER NOT NULL,
+                total_relative_score INTEGER NOT NULL,
+                submission_time DATETIME NOT NULL UNIQUE
             )
         ''')
+
+        # テストケーステーブルの作成
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS test_cases (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                test_case_input TEXT NOT NULL UNIQUE,
+                absolute_score INTEGER NOT NULL,
+                score_history_id INTEGER NOT NULL,
+                FOREIGN KEY (score_history_id) REFERENCES score_history(id)
+            )
+        ''')
+
+        # トップスコアテーブルの作成
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS top_scores (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                test_case_input TEXT NOT NULL UNIQUE,
+                top_absolute_score INTEGER NOT NULL
+            )
+        ''')
+
         conn.commit()
         conn.close()
         print(f"データベース {db_path} を初期化しました。")
