@@ -1,6 +1,7 @@
 import sqlite3
 from datetime import datetime
 import score_calculater
+import shutil
 
 def reserve_score_history_table(submission_time):
     """スコア履歴テーブルに空の行を挿入し、そのIDを予約する"""
@@ -31,35 +32,51 @@ def delete_reserved_score_history(score_history_id):
     conn.commit()
     conn.close()
 
-def update_top_score_table(scores, score_history_id):
-    """トップスコアテーブルを更新する関数"""
-    conn = sqlite3.connect('leader_board/leader_board.db')
-    cursor = conn.cursor()
+def is_top_score(testcase):
+    """トップスコアかどうかを判定する関数"""
 
-    for score in scores:
-        cursor.execute('SELECT top_absolute_score FROM top_scores WHERE test_case_input = ?', (score.file_name,))
+    with sqlite3.connect('leader_board/leader_board.db') as conn:
+        cursor = conn.cursor()
+        cursor.execute('SELECT top_absolute_score FROM top_scores WHERE test_case_input = ?', (testcase.file_name,))
         result = cursor.fetchone()
 
-        if result:
-            top_score = result[0]
-            if score < top_score:
-                cursor.execute('''
-                    UPDATE top_scores
-                    SET top_absolute_score = ?, score_history_id = ?
-                    WHERE test_case_input = ?
-                ''', (score.score, score_history_id, score.file_name))
-        else:
-            cursor.execute('''
-                INSERT INTO top_scores (test_case_input, top_absolute_score, score_history_id)
-                VALUES (?, ?, ?)
-            ''', (score.file_name, score.score, score_history_id))
+        if not result:
+            return True
 
-    conn.commit()
-    conn.close()
+        top_score = result[0]
+        if testcase.score is not None and testcase.score < top_score:
+            return True
+        
+    return False
+
+def update_top_score_table(testcase, score_history_id):
+    """トップスコアテーブルを更新する関数"""
+
+    with sqlite3.connect('leader_board/leader_board.db') as conn:
+        cursor = conn.cursor()
+
+        cursor.execute('''
+                INSERT OR REPLACE INTO top_scores (test_case_input, top_absolute_score, score_history_id)
+                VALUES (?, ?, ?)
+            ''', (testcase.file_name, testcase.score, score_history_id))
+        conn.commit()
+
+def copy_output_file(testcase):
+    output_file = f'out/{testcase.file_name}'
+    dest_file = f'leader_board/top/{testcase.file_name}'
+
+    try:
+        shutil.copy(output_file, dest_file)
+    except Exception as e:
+        print(f"Failed to copy file {output_file}: {e}")
 
 def execute():
     submission_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     score_history_id = reserve_score_history_table(submission_time)
-    scores = score_calculater.execute()
-    update_top_score_table(scores, score_history_id)
+    testcases = score_calculater.execute()
+
+    for testcase in testcases:
+        if (is_top_score(testcase)):
+            update_top_score_table(testcase, score_history_id)
+            copy_output_file(testcase)
     # delete_reserved_score_history(score_history_id)
