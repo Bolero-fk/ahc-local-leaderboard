@@ -1,6 +1,6 @@
 import argparse
-import db_manager
 import initializer 
+import submitter
 from datetime import datetime
 
 def main():
@@ -8,33 +8,18 @@ def main():
     parser = argparse.ArgumentParser(description="AHCスコア履歴管理プログラム")
     
     subparsers = parser.add_subparsers(dest='command', help='利用可能なコマンド')
+    
+    subparsers.add_parser('setup', help='ローカル順位表を準備します')
 
-    # スコア追加のサブコマンド
-    add_parser = subparsers.add_parser('add', help='スコアを追加します')
-
-
-    add_parser.add_argument('--score', type=int, required=True, help='コンテストのスコア')
-    add_parser.add_argument('--input_file', type=str, required=True, help='テストケースの入力ファイル')
-    add_parser.add_argument('--output_file', type=str, required=True, help='テストケースの出力ファイル')
-    add_parser.add_argument('--top_score', type=int, required=True, help='テストケースのトップスコア')
-
-    # 履歴表示のサブコマンド
-    view_parser = subparsers.add_parser('view', help='スコア履歴を表示します')
-
-    setup_parser = subparsers.add_parser('setup', help='ローカル順位表を準備します')
+    subparsers.add_parser('submit', help='ローカル順位表に出力を提出します')
 
     # コマンドライン引数をパース
     args = parser.parse_args()
 
-    if args.command == 'add':
-        # スコアをデータベースに追加
-        submission_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        db_manager.add_score(args.score, args.input_file, args.output_file, args.top_score, submission_time)
-        print("スコアを追加しました。")
-
-    elif args.command == 'setup':
+    if args.command == 'setup':
         initializer.setup_leaderboard_system()
-
+    elif args.command == 'submit':
+        initializer.setup_leaderboard_system()
     else:
         parser.print_help()
 
