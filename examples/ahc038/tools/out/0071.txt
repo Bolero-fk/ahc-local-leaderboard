@@ -1,0 +1,49 @@
+6
+0 6
+1 2
+2 3
+2 4
+2 5
+7 7
+L..LLL...PPP
+.RL.LL...PPP
+.L.LR....PPP
+UR..L....PPP
+LLRLLL...PPP
+.R.......PPP
+DLL.RL...PPP
+URLR.L...PPP
+RLL..L...PPP
+URR.R....PPP
+LLR.LR...PPP
+LRLRRL...PPP
+LLL.L....PPP
+LR.L.....PPP
+RLLR.....PPP
+.RL......PPP
+RLLRRL...PPP
+URLLL....PPP
+RLR..L...PPP
+URLLLL...PPP
+D.RRL....PPP
+R.R.RL...PP.
+ULR..L...PPP
+DRRR.....P.P
+..LLRR...PPP
+DRRL.L...P.P
+DLL.R....PP.
+DRLR.R...PPP
+DL..R.....P.
+DLL.L....PP.
+RL.RR....PPP
+RLLR.....P..
+U.LRLR...PPP
+LRR.LL...P.P
+LRL.L.....PP
+.RR.......PP
+LLRR.....P..
+L.R..R.....P
+U..LL....PP.
+..LLLR...PPP
+U.RR.L...P..
+R.R..L...P.P
