@@ -34,8 +34,8 @@ def initialize_database():
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS test_cases (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-                test_case_input TEXT NOT NULL UNIQUE,
-                absolute_score INTEGER NOT NULL,
+                test_case_input TEXT NOT NULL,
+                absolute_score INTEGER,
                 score_history_id INTEGER NOT NULL,
                 FOREIGN KEY (score_history_id) REFERENCES score_history(id)
             )
@@ -46,7 +46,9 @@ def initialize_database():
             CREATE TABLE IF NOT EXISTS top_scores (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 test_case_input TEXT NOT NULL UNIQUE,
-                top_absolute_score INTEGER NOT NULL
+                top_absolute_score INTEGER,
+                score_history_id INTEGER NOT NULL,
+                FOREIGN KEY (score_history_id) REFERENCES score_history(id)
             )
         ''')
 
@@ -56,7 +58,7 @@ def initialize_database():
     else:
         print(f"データベース {db_path} は既に存在します。")
 
-def setup_leaderboard_system():
+def execute():
     """3つの初期化処理をまとめて実行する関数"""
     create_directories()       # ディレクトリ作成
     initialize_database()      # データベース初期化
