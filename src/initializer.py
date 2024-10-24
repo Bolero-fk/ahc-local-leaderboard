@@ -4,7 +4,7 @@ import json
 
 def create_directories():
     """必要なディレクトリを作成する関数"""
-    directories = ["leader_board", "leader_board/in", "leader_board/out", "config"]
+    directories = ["leader_board", "leader_board/top"]
     for directory in directories:
         if not os.path.exists(directory):
             os.makedirs(directory)
@@ -34,22 +34,7 @@ def initialize_database():
     else:
         print(f"データベース {db_path} は既に存在します。")
 
-def create_config_file():
-    """設定ファイルを作成する関数"""
-    config_path = 'config/settings.json'
-    if not os.path.exists(config_path):
-        default_config = {
-            "score_calculation_method": "default",
-            "threshold": 1000
-        }
-        with open(config_path, 'w') as config_file:
-            json.dump(default_config, config_file, indent=4)
-        print(f"設定ファイル {config_path} を作成しました。")
-    else:
-        print(f"設定ファイル {config_path} は既に存在します。")
-
 def setup_leaderboard_system():
     """3つの初期化処理をまとめて実行する関数"""
     create_directories()       # ディレクトリ作成
     initialize_database()      # データベース初期化
-    create_config_file()       # 設定ファイル作成
