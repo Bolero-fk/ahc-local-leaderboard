@@ -21,7 +21,7 @@ def main():
     # 履歴表示のサブコマンド
     view_parser = subparsers.add_parser('view', help='スコア履歴を表示します')
 
-    set_up_parser = subparsers.add_parser('set_up', help='ローカル順位表を準備します')
+    setup_parser = subparsers.add_parser('setup', help='ローカル順位表を準備します')
 
     # コマンドライン引数をパース
     args = parser.parse_args()
@@ -32,7 +32,7 @@ def main():
         db_manager.add_score(args.score, args.input_file, args.output_file, args.top_score, submission_time)
         print("スコアを追加しました。")
 
-    elif args.command == 'set_up':
+    elif args.command == 'setup':
         initializer.setup_leaderboard_system()
 
     else:
