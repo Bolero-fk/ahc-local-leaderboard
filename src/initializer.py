@@ -24,8 +24,8 @@ def initialize_database():
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS score_history (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-                total_absolute_score INTEGER NOT NULL,
-                total_relative_score INTEGER NOT NULL,
+                total_absolute_score INTEGER,
+                total_relative_score INTEGER,
                 submission_time DATETIME NOT NULL UNIQUE
             )
         ''')

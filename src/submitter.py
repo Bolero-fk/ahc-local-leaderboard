@@ -5,35 +5,36 @@ import shutil
 
 def reserve_score_history_table(submission_time):
     """スコア履歴テーブルに空の行を挿入し、そのIDを予約する"""
-    conn = sqlite3.connect('leader_board/leader_board.db')
-    cursor = conn.cursor()
 
-    # 空のスコア履歴を挿入し、score_history_idを取得
-    cursor.execute('''
-        INSERT INTO score_history (total_absolute_score, total_relative_score, submission_time)
-        VALUES (?, ?, ?)
-    ''', (-1, -1, submission_time))
+    with sqlite3.connect('leader_board/leader_board.db') as conn:
+        cursor = conn.cursor()
+        cursor.execute('''
+            INSERT INTO score_history (total_absolute_score, total_relative_score, submission_time)
+            VALUES (?, ?, ?)
+        ''', (None, None, submission_time))
 
-    score_history_id = cursor.lastrowid  # 挿入された行のIDを取得
-
-    conn.commit()
-    conn.close()
+        score_history_id = cursor.lastrowid
+        conn.commit()
 
     return score_history_id
 
-def delete_reserved_score_history(score_history_id):
-    """指定されたscore_history_idの行を削除する"""
-    conn = sqlite3.connect('leader_board/leader_board.db')
-    cursor = conn.cursor()
+def update_score_history_table(score_history_id, sum_absolute_score, sum_relative_score):
+    """スコア履歴テーブルを更新する関数"""
 
-    # 該当する行を削除
-    cursor.execute('DELETE FROM score_history WHERE id = ?', (score_history_id,))
+    with sqlite3.connect('leader_board/leader_board.db') as conn:
+        cursor = conn.cursor()
 
-    conn.commit()
-    conn.close()
+        # スコア履歴テーブルに絶対スコアと相対スコアを更新
+        cursor.execute('''
+            UPDATE score_history
+            SET total_absolute_score = ?, total_relative_score = ?
+            WHERE id = ?
+        ''', (sum_absolute_score, sum_relative_score, score_history_id))
 
-def is_top_score(testcase):
-    """トップスコアかどうかを判定する関数"""
+        conn.commit()
+
+def fetch_top_score(testcase):
+    """トップスコアを取得する関数"""
 
     with sqlite3.connect('leader_board/leader_board.db') as conn:
         cursor = conn.cursor()
@@ -41,13 +42,13 @@ def is_top_score(testcase):
         result = cursor.fetchone()
 
         if not result:
-            return True
+            return testcase.score, True
 
         top_score = result[0]
         if testcase.score is not None and testcase.score < top_score:
-            return True
+            return testcase.score, True
         
-    return False
+    return top_score, False
 
 def update_top_score_table(testcase, score_history_id):
     """トップスコアテーブルを更新する関数"""
@@ -87,14 +88,37 @@ def update_test_case_table(testcase, score_history_id):
 
 def execute():
     submission_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
     score_history_id = reserve_score_history_table(submission_time)
     testcases = score_calculater.execute()
 
+    sum_absolute_score = 0
+    sum_relative_score = 0
+
     for testcase in testcases:
-        if (is_top_score(testcase)):
+        top_score, is_topscore_case = fetch_top_score(testcase)
+
+        if (is_topscore_case):
             update_top_score_table(testcase, score_history_id)
             copy_output_file(testcase)
 
         update_test_case_table(testcase, score_history_id)
+
+        absolute_score = 0
+        relative_score = 0
+        
+        if (testcase.score is not None):
+            absolute_score = testcase.score
+            relative_score = round(pow(10, 9) * (top_score/testcase.score))
+        else: 
+            absolute_score = round(pow(10, 9))
+            relative_score = 0
+
+        sum_absolute_score += absolute_score
+        sum_relative_score += relative_score
+
+        print(testcase.file_name, ":", absolute_score, relative_score)
+    
+    update_score_history_table(score_history_id, sum_absolute_score, sum_relative_score)
 
     # delete_reserved_score_history(score_history_id)
