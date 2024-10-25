@@ -3,6 +3,9 @@ from datetime import datetime
 import score_calculater
 import shutil
 from colorama import Fore, Style
+import math
+from rich.console import Console
+from rich.text import Text
 
 def reserve_score_history_table(submission_time):
     """スコア履歴テーブルに空の行を挿入し、そのIDを予約する"""
@@ -87,24 +90,46 @@ def update_test_case_table(testcase, score_history_id):
 
         conn.commit()
 
-def get_relative_score_color(relative_score):
-    """relative_score の値に応じて適切な色を返す関数 (5段階 + 特別な0と1000000000)"""
-    if relative_score == 0:
-        return Fore.LIGHTRED_EX + Style.BRIGHT
-    elif 1 <= relative_score <= 333333333:
-        return Fore.RED
-    elif 333333334 <= relative_score <= 666666666:
-        return Fore.YELLOW
-    elif 666666667 <= relative_score < 1000000000:
-        return Fore.GREEN
-    elif relative_score == 1000000000:
-        return Fore.GREEN + Style.BRIGHT
+def exponential_interpolation(start, end, t, factor=5):
+    """指数関数的な補完を行う関数（expを使用）"""
+    exp_t = math.exp(t * factor) - 1  # exp に基づく変換（factor で急激さを調整）
+    exp_max = math.exp(factor) - 1    # 正規化のための最大値
+    normalized_t = exp_t / exp_max    # 0〜1 に正規化
+    return start + (end - start) * normalized_t
 
-    return Fore.RESET 
+def get_gradient_color(relative_score):
+    """relative_score の値に応じて赤→黄色→緑のグラデーションを生成する関数"""
+    max_score = 1000000000
+
+    color_thr = max_score * 0.9
+    if relative_score <= color_thr:
+        # 0 ~ color_thr は赤→黄色
+        t = relative_score / color_thr
+        red = 255
+        green = exponential_interpolation(0, 255, t)
+        blue = 0
+    else:
+        # color_thr ~ max_score は黄色→緑
+        t = (relative_score - color_thr) / (max_score - color_thr)
+        red = exponential_interpolation(255, 0, t)
+        green = 255
+        blue = 0
+
+    return f"rgb({int(red)},{int(green)},{int(blue)})"
 
 def print_colored_output(file_name, absolute_score, relative_score):
-    relative_score_color = get_relative_score_color(relative_score)
-    print(f"{Fore.WHITE}{file_name}{Style.RESET_ALL}: {Fore.WHITE}{absolute_score}{Style.RESET_ALL}, {relative_score_color}{relative_score}{Style.RESET_ALL}")
+
+    absolute_score_text = Text(str(absolute_score), style="white")
+    
+    # relative_score のグラデーションカラーを取得
+    relative_score_color = get_gradient_color(relative_score)
+    relative_score_text = Text(str(relative_score), style=relative_score_color)
+
+    # 出力
+    console = Console()
+    console.print(f"{file_name}: ", end="")
+    console.print(absolute_score_text, end=", ")
+    console.print(relative_score_text)
 
 def execute(relative_score_calculator, submit_file='out'):
     submission_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -135,6 +160,6 @@ def execute(relative_score_calculator, submit_file='out'):
         sum_absolute_score += absolute_score
         sum_relative_score += relative_score
 
-        print_colored_output(testcase.file_name, absolute_score, relative_score)
+        print_colored_output(testcase.file_name, testcase.score, relative_score)
     
     update_score_history_table(score_history_id, sum_absolute_score, sum_relative_score)
