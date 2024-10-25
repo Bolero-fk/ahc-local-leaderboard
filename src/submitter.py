@@ -63,8 +63,8 @@ def update_top_score_table(testcase, score_history_id):
             ''', (testcase.file_name, testcase.score, score_history_id))
         conn.commit()
 
-def copy_output_file(testcase):
-    output_file = f'out/{testcase.file_name}'
+def copy_output_file(submit_file, testcase):
+    output_file = f'{submit_file}/{testcase.file_name}'
     dest_file = f'leader_board/top/{testcase.file_name}'
 
     try:
@@ -106,11 +106,11 @@ def print_colored_output(file_name, absolute_score, relative_score):
     relative_score_color = get_relative_score_color(relative_score)
     print(f"{Fore.WHITE}{file_name}{Style.RESET_ALL}: {Fore.WHITE}{absolute_score}{Style.RESET_ALL}, {relative_score_color}{relative_score}{Style.RESET_ALL}")
 
-def execute(relative_score_calculator):
+def execute(relative_score_calculator, submit_file='out'):
     submission_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
     score_history_id = reserve_score_history_table(submission_time)
-    testcases = score_calculater.execute()
+    testcases = score_calculater.execute(submit_file)
 
     sum_absolute_score = 0
     sum_relative_score = 0
@@ -120,7 +120,7 @@ def execute(relative_score_calculator):
 
         if (is_topscore_case):
             update_top_score_table(testcase, score_history_id)
-            copy_output_file(testcase)
+            copy_output_file(submit_file, testcase)
 
         update_test_case_table(testcase, score_history_id)
 

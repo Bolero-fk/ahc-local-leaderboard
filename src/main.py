@@ -19,7 +19,8 @@ def main():
     
     subparsers.add_parser('setup', help='ローカル順位表を準備します')
 
-    subparsers.add_parser('submit', help='ローカル順位表に出力を提出します')
+    submit_parser = subparsers.add_parser('submit', help='ローカル順位表に出力を提出します')
+    submit_parser.add_argument('--submit-file', type=str, help='提出する output ファイルを指定します')
 
     # コマンドライン引数をパース
     args = parser.parse_args()
@@ -28,7 +29,10 @@ def main():
         initializer.execute()
     elif args.command == 'submit':
         scoring_type = load_scoring_type()
-        submitter.execute(get_relative_score_calculator(scoring_type))
+        if args.submit_file:
+            submitter.execute(get_relative_score_calculator(scoring_type), submit_file=args.submit_file)
+        else:
+            submitter.execute(get_relative_score_calculator(scoring_type))
     else:
         parser.print_help()
 

@@ -17,7 +17,7 @@ class RelativeScoreCalculaterInterface(ABC):
         pass
 
 class MaximizationScoring(RelativeScoreCalculaterInterface):
-    def calculate_relative_score(self, top_score, testcase_score):
+    def calculate_relative_score(self, testcase_score, top_score):
         if testcase_score is None:
             return 0
         
@@ -37,7 +37,7 @@ class MaximizationScoring(RelativeScoreCalculaterInterface):
         return 0
 
 class MinimizationScoring(RelativeScoreCalculaterInterface):
-    def calculate_relative_score(self, top_score, testcase_score):
+    def calculate_relative_score(self, testcase_score, top_score):
         if testcase_score is None:
             return 0
         
