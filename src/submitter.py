@@ -70,6 +70,21 @@ def copy_output_file(testcase):
     except Exception as e:
         print(f"Failed to copy file {output_file}: {e}")
 
+
+def update_test_case_table(testcase, score_history_id):
+    """テストケーステーブルに1件ずつ行を追加する関数"""
+
+    with sqlite3.connect('leader_board/leader_board.db') as conn:
+        cursor = conn.cursor()
+
+        # 各テストケースを1件ずつ挿入
+        cursor.execute('''
+            INSERT INTO test_cases (test_case_input, absolute_score, score_history_id)
+            VALUES (?, ?, ?)
+        ''', (testcase.file_name, testcase.score, score_history_id))
+
+        conn.commit()
+
 def execute():
     submission_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     score_history_id = reserve_score_history_table(submission_time)
@@ -79,4 +94,7 @@ def execute():
         if (is_top_score(testcase)):
             update_top_score_table(testcase, score_history_id)
             copy_output_file(testcase)
+
+        update_test_case_table(testcase, score_history_id)
+
     # delete_reserved_score_history(score_history_id)
