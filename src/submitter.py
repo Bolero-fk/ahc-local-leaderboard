@@ -2,6 +2,8 @@ import sqlite3
 from datetime import datetime
 import score_calculater
 import shutil
+from relative_score_calculater import MinimizationScoring, MaximizationScoring
+relative_score_calculator = MinimizationScoring()
 
 def reserve_score_history_table(submission_time):
     """スコア履歴テーブルに空の行を挿入し、そのIDを予約する"""
@@ -45,7 +47,7 @@ def fetch_top_score(testcase):
             return testcase.score, True
 
         top_score = result[0]
-        if testcase.score is not None and testcase.score < top_score:
+        if testcase.score is not None and relative_score_calculator.is_better_score(testcase.score, top_score):
             return testcase.score, True
         
     return top_score, False
@@ -105,14 +107,12 @@ def execute():
         update_test_case_table(testcase, score_history_id)
 
         absolute_score = 0
-        relative_score = 0
-        
+        relative_score = relative_score_calculator.calculate_relative_score(testcase.score, top_score)
+
         if (testcase.score is not None):
             absolute_score = testcase.score
-            relative_score = round(pow(10, 9) * (top_score/testcase.score))
         else: 
-            absolute_score = round(pow(10, 9))
-            relative_score = 0
+            absolute_score = relative_score_calculator.get_provisional_score()
 
         sum_absolute_score += absolute_score
         sum_relative_score += relative_score
@@ -120,5 +120,3 @@ def execute():
         print(testcase.file_name, ":", absolute_score, relative_score)
     
     update_score_history_table(score_history_id, sum_absolute_score, sum_relative_score)
-
-    # delete_reserved_score_history(score_history_id)
