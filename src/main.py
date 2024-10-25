@@ -1,7 +1,15 @@
 import argparse
+import yaml
 import initializer 
 import submitter
-from datetime import datetime
+from relative_score_calculater import get_relative_score_calculator
+
+def load_scoring_type():
+    """config.yaml を読み込み、scoring_type に基づいた計算クラスを返す"""
+    with open("leader_board/config.yaml", "r") as file:
+        config = yaml.safe_load(file)
+    
+    return config.get("scoring_type", "Minimization")
 
 def main():
     # コマンドライン引数のパーサーを作成
@@ -19,7 +27,8 @@ def main():
     if args.command == 'setup':
         initializer.execute()
     elif args.command == 'submit':
-        submitter.execute()
+        scoring_type = load_scoring_type()
+        submitter.execute(get_relative_score_calculator(scoring_type))
     else:
         parser.print_help()
 

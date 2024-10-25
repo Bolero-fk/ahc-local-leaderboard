@@ -2,8 +2,6 @@ import sqlite3
 from datetime import datetime
 import score_calculater
 import shutil
-from relative_score_calculater import MinimizationScoring, MaximizationScoring
-relative_score_calculator = MinimizationScoring()
 
 def reserve_score_history_table(submission_time):
     """スコア履歴テーブルに空の行を挿入し、そのIDを予約する"""
@@ -35,7 +33,7 @@ def update_score_history_table(score_history_id, sum_absolute_score, sum_relativ
 
         conn.commit()
 
-def fetch_top_score(testcase):
+def fetch_top_score(relative_score_calculator, testcase):
     """トップスコアを取得する関数"""
 
     with sqlite3.connect('leader_board/leader_board.db') as conn:
@@ -88,7 +86,7 @@ def update_test_case_table(testcase, score_history_id):
 
         conn.commit()
 
-def execute():
+def execute(relative_score_calculator):
     submission_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
     score_history_id = reserve_score_history_table(submission_time)
@@ -98,7 +96,7 @@ def execute():
     sum_relative_score = 0
 
     for testcase in testcases:
-        top_score, is_topscore_case = fetch_top_score(testcase)
+        top_score, is_topscore_case = fetch_top_score(relative_score_calculator, testcase)
 
         if (is_topscore_case):
             update_top_score_table(testcase, score_history_id)

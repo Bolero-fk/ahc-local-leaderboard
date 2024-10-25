@@ -16,6 +16,26 @@ class RelativeScoreCalculaterInterface(ABC):
         """絶対スコアが None のときの暫定スコアを返す"""
         pass
 
+class MaximizationScoring(RelativeScoreCalculaterInterface):
+    def calculate_relative_score(self, top_score, testcase_score):
+        if testcase_score is None:
+            return 0
+        
+        return round(pow(10, 9) * (testcase_score / top_score))
+    
+    def is_better_score(self, testcase_score, top_score):
+
+        if(top_score is None):
+            return True
+
+        if(testcase_score is None):
+            return False
+
+        return testcase_score > top_score
+
+    def get_provisional_score(self):
+        return 0
+
 class MinimizationScoring(RelativeScoreCalculaterInterface):
     def calculate_relative_score(self, top_score, testcase_score):
         if testcase_score is None:
@@ -36,22 +56,10 @@ class MinimizationScoring(RelativeScoreCalculaterInterface):
     def get_provisional_score(self):
         return round(pow(10, 9))
 
-class MaximizationScoring(RelativeScoreCalculaterInterface):
-    def calculate_relative_score(self, top_score, testcase_score):
-        if testcase_score is None:
-            return 0
-        
-        return round(pow(10, 9) * (testcase_score / top_score))
+def get_relative_score_calculator(scoring_type):
+    if scoring_type == "Maximization":
+        return MaximizationScoring()
+    elif scoring_type == "Minimization":
+        return MinimizationScoring()
     
-    def is_better_score(self, testcase_score, top_score):
-
-        if(top_score is None):
-            return True
-
-        if(testcase_score is None):
-            return False
-
-        return testcase_score > top_score
-
-    def get_provisional_score(self):
-        return 0
+    raise Exception("Not Found Scoring Type")

@@ -1,6 +1,6 @@
 import os
 import sqlite3
-import json
+import yaml
 
 def create_directories():
     """必要なディレクトリを作成する関数"""
@@ -8,9 +8,6 @@ def create_directories():
     for directory in directories:
         if not os.path.exists(directory):
             os.makedirs(directory)
-            print(f"ディレクトリ {directory} を作成しました。")
-        else:
-            print(f"ディレクトリ {directory} は既に存在します。")
 
 def initialize_database():
     """SQLiteデータベースを初期化する関数"""
@@ -54,11 +51,28 @@ def initialize_database():
 
         conn.commit()
         conn.close()
-        print(f"データベース {db_path} を初期化しました。")
-    else:
-        print(f"データベース {db_path} は既に存在します。")
 
+def create_config_file():
+    """スコア設定の選択をユーザーに求め、config.yaml ファイルを作成する関数"""
+    config_path = "leader_board/config.yaml"
+
+    if not os.path.exists(config_path):
+        # ユーザーにスコア設定の選択を促す
+        print("スコアの計算方法を選択してください:")
+        print("1: Maximization（スコアが高い方が良い）")
+        print("2: Minimization（スコアが低い方が良い）")
+        choice = input("選択肢の番号を入力してください（1または2）: ")
+
+        # 入力に基づいて設定を決定
+        scoring_type = "Maximization" if choice == "1" else "Minimization"
+
+        # config.yaml に設定を書き込む
+        config_data = {"scoring_type": scoring_type}
+        with open(config_path, "w") as file:
+            yaml.dump(config_data, file)
+        
 def execute():
     """3つの初期化処理をまとめて実行する関数"""
     create_directories()       # ディレクトリ作成
     initialize_database()      # データベース初期化
+    create_config_file()       # 設定ファイル作成
