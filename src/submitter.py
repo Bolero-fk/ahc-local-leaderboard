@@ -2,6 +2,7 @@ import sqlite3
 from datetime import datetime
 import score_calculater
 import shutil
+from colorama import Fore, Style
 
 def reserve_score_history_table(submission_time):
     """スコア履歴テーブルに空の行を挿入し、そのIDを予約する"""
@@ -86,6 +87,25 @@ def update_test_case_table(testcase, score_history_id):
 
         conn.commit()
 
+def get_relative_score_color(relative_score):
+    """relative_score の値に応じて適切な色を返す関数 (5段階 + 特別な0と1000000000)"""
+    if relative_score == 0:
+        return Fore.LIGHTRED_EX + Style.BRIGHT
+    elif 1 <= relative_score <= 333333333:
+        return Fore.RED
+    elif 333333334 <= relative_score <= 666666666:
+        return Fore.YELLOW
+    elif 666666667 <= relative_score < 1000000000:
+        return Fore.GREEN
+    elif relative_score == 1000000000:
+        return Fore.GREEN + Style.BRIGHT
+
+    return Fore.RESET 
+
+def print_colored_output(file_name, absolute_score, relative_score):
+    relative_score_color = get_relative_score_color(relative_score)
+    print(f"{Fore.WHITE}{file_name}{Style.RESET_ALL}: {Fore.WHITE}{absolute_score}{Style.RESET_ALL}, {relative_score_color}{relative_score}{Style.RESET_ALL}")
+
 def execute(relative_score_calculator):
     submission_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
@@ -115,6 +135,6 @@ def execute(relative_score_calculator):
         sum_absolute_score += absolute_score
         sum_relative_score += relative_score
 
-        print(testcase.file_name, ":", absolute_score, relative_score)
+        print_colored_output(testcase.file_name, absolute_score, relative_score)
     
     update_score_history_table(score_history_id, sum_absolute_score, sum_relative_score)
