@@ -15,15 +15,13 @@ def reserve_score_history_table(submission_time):
     with DatabaseManager() as conn:
         cursor = conn.cursor()
         cursor.execute('''
-            INSERT INTO score_history (total_absolute_score, total_relative_score, submission_time)
-            VALUES (?, ?, ?)
-        ''', (None, None, submission_time))
+            INSERT INTO score_history (submission_time)
+            VALUES (?)
+        ''', (submission_time,))
 
-        score_history_id = cursor.lastrowid
+    return cursor.lastrowid 
 
-    return score_history_id
-
-def update_score_history_table(score_history_id, sum_absolute_score, sum_relative_score):
+def update_score_history_table(score_history_id, sum_absolute_score, sum_relative_score, invalid_score_count):
     """スコア履歴テーブルを更新する関数"""
 
     with DatabaseManager() as conn:
@@ -32,9 +30,9 @@ def update_score_history_table(score_history_id, sum_absolute_score, sum_relativ
         # スコア履歴テーブルに絶対スコアと相対スコアを更新
         cursor.execute('''
             UPDATE score_history
-            SET total_absolute_score = ?, total_relative_score = ?
+            SET total_absolute_score = ?, total_relative_score = ?, invalid_score_count = ?
             WHERE id = ?
-        ''', (sum_absolute_score, sum_relative_score, score_history_id))
+        ''', (sum_absolute_score, sum_relative_score, invalid_score_count, score_history_id))
 
 
 def fetch_top_score(relative_score_calculator, testcase):
@@ -162,11 +160,13 @@ def execute(relative_score_calculator, submit_file='out'):
         if (testcase.score is not None):
             absolute_score = testcase.score
         else: 
-            absolute_score = relative_score_calculator.get_provisional_score()
+            absolute_score = 0
 
         sum_absolute_score += absolute_score
         sum_relative_score += relative_score
 
         print_colored_output(testcase.file_name, testcase.score, relative_score)
     
-    update_score_history_table(score_history_id, sum_absolute_score, sum_relative_score)
+    invalid_score_count = sum(1 for testcase in testcases if testcase.score is None)
+
+    update_score_history_table(score_history_id, sum_absolute_score, sum_relative_score, invalid_score_count)

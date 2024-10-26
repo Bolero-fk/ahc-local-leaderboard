@@ -11,13 +11,11 @@ class RelativeScoreCalculaterInterface(ABC):
         """スコアの優劣を判断する"""
         pass
 
-    @abstractmethod
-    def get_provisional_score(self):
-        """絶対スコアが None のときの暫定スコアを返す"""
-        pass
-
 class MaximizationScoring(RelativeScoreCalculaterInterface):
     def calculate_relative_score(self, testcase_score, top_score):
+        if top_score is None:
+           return round(pow(10, 9))
+
         if testcase_score is None:
             return 0
         
@@ -33,11 +31,11 @@ class MaximizationScoring(RelativeScoreCalculaterInterface):
 
         return testcase_score > top_score
 
-    def get_provisional_score(self):
-        return 0
-
 class MinimizationScoring(RelativeScoreCalculaterInterface):
     def calculate_relative_score(self, testcase_score, top_score):
+        if top_score is None:
+           return round(pow(10, 9))
+
         if testcase_score is None:
             return 0
         
@@ -52,9 +50,6 @@ class MinimizationScoring(RelativeScoreCalculaterInterface):
             return False
 
         return testcase_score < top_score
-
-    def get_provisional_score(self):
-        return round(pow(10, 9))
 
 def get_relative_score_calculator(scoring_type):
     if scoring_type == "Maximization":

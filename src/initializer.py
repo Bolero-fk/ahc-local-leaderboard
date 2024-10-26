@@ -23,6 +23,7 @@ def initialize_database():
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     total_absolute_score INTEGER,
                     total_relative_score INTEGER,
+                    invalid_score_count INTEGER DEFAULT 0,
                     submission_time DATETIME NOT NULL UNIQUE
                 )
             ''')

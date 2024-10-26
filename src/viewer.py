@@ -1,6 +1,6 @@
 from rich.console import Console
 from rich.table import Table
-
+from rich.text import Text
 from database_manager import DatabaseManager 
 
 console = Console()
@@ -11,14 +11,20 @@ def get_top_score_summary():
         cursor = conn.cursor()
 
         # 全テストケースのトップスコアの合計を取得
-        cursor.execute('SELECT SUM(top_absolute_score), COUNT(*) FROM top_scores')
-        total_absolute_score, test_case_count = cursor.fetchone()
+        cursor.execute('''
+            SELECT COALESCE(SUM(top_absolute_score), 0) AS total_absolute_score,
+                   COUNT(*) AS total_cases,
+                   COUNT(*) - COUNT(top_absolute_score) AS invalid_score_count
+            FROM top_scores        
+        ''')
+        
+        total_absolute_score, test_case_count, invalid_score_count = cursor.fetchone()
 
     # Total Relative Score を 10^9 * テストケース数 で計算
     total_relative_score = 10**9 * test_case_count
 
     # トップスコアの情報を仮定した形式で返す
-    return ("Top Score Summary", total_absolute_score, total_relative_score)
+    return ("  Top Score Summary", total_absolute_score, total_relative_score, invalid_score_count)
 
 def view_latest_10_scores():
     """データベースから最新の10件のスコア履歴を取得し、トップスコアの合計を加えて表示する"""
@@ -27,15 +33,15 @@ def view_latest_10_scores():
         
         # 最新10件のスコア履歴を取得
         cursor.execute('''
-            SELECT submission_time, total_absolute_score, total_relative_score
+            SELECT submission_time, total_absolute_score, total_relative_score, invalid_score_count
             FROM score_history
             ORDER BY submission_time DESC
             LIMIT 10
         ''')
         rows = cursor.fetchall()
 
-    # トップスコアの合計情報を取得
-    top_score_summary = get_top_score_summary()
+    # トップスコアの合計情報を rows の先頭に追加
+    rows.insert(0, get_top_score_summary())
 
     # 表を作成
     table = Table(title="Latest 10 Scores (Including Top Score)")
@@ -43,12 +49,17 @@ def view_latest_10_scores():
     table.add_column("Total Absolute Score", justify="right")
     table.add_column("Total Relative Score", justify="right")
 
-    # トップスコアを先頭に追加
-    table.add_row(*map(str, top_score_summary))
-
     # 最新10件のスコア履歴をテーブルに追加
-    for row in rows:
-        table.add_row(row[0], str(row[1]), str(row[2]))
+    for submission_time, total_absolute_score, total_relative_score, invalid_score_count in rows:
+
+        # Total Absolute Scoreの表示を調整
+        if invalid_score_count > 0:
+            abs_score_text = Text(f"{total_absolute_score}", style="white")
+            abs_score_text.append(f" ({invalid_score_count})", style="bold red")
+        else:
+            abs_score_text = Text(str(total_absolute_score), style="white")
+
+        table.add_row(submission_time, abs_score_text, str(total_relative_score))
 
     console.print(table)
 
