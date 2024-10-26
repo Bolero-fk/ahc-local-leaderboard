@@ -50,9 +50,9 @@ def view_latest_10_scores():
     table.add_column("Total Absolute Score", justify="right")
     table.add_column("Total Relative Score", justify="right")
 
-    sorted_scores = sorted([row[2] for row in rows], reverse=True)  # 降順にソート
+    sorted_scores = sorted([row[2] for row in rows[1:]], reverse=True)  # 降順にソート
     score_rankings = {}
-    current_rank = 0
+    current_rank = 1
 
     # スコアごとに最も良い順位を割り当てる
     for i, score in enumerate(sorted_scores):
@@ -60,9 +60,19 @@ def view_latest_10_scores():
             score_rankings[score] = current_rank  # 新しいスコアが出現したら現在の順位を割り当て
         current_rank += 1
 
+    # 最初の行 (Top Score Summary) の追加
+    submission_time, total_absolute_score, total_relative_score, invalid_score_count = rows[0]
+    abs_score_text = Text(str(total_absolute_score), style="white")
+    if invalid_score_count > 0:
+        abs_score_text.append(f" ({invalid_score_count})", style="bold red")
+
+    table.add_row("Top", submission_time, abs_score_text, str(total_relative_score))
+
+    # 区切り線を追加
+    table.add_row("─" * 8, "─" * 20, "─" * 20, "─" * 20)
 
     # 最新10件のスコア履歴をテーブルに追加
-    for submission_time, total_absolute_score, total_relative_score, invalid_score_count in rows:
+    for submission_time, total_absolute_score, total_relative_score, invalid_score_count in rows[1:]:
 
         # Total Absolute Scoreの表示を調整
         if invalid_score_count > 0:
