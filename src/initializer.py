@@ -35,7 +35,8 @@ def initialize_database():
                     test_case_input TEXT NOT NULL,
                     absolute_score INTEGER,
                     score_history_id INTEGER NOT NULL,
-                    FOREIGN KEY (score_history_id) REFERENCES score_history(id)
+                    FOREIGN KEY (score_history_id) REFERENCES score_history(id) ON DELETE CASCADE,
+                    UNIQUE(test_case_input, score_history_id)
                 )
             ''')
 
@@ -44,11 +45,11 @@ def initialize_database():
                 CREATE TABLE IF NOT EXISTS top_scores (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     test_case_input TEXT NOT NULL UNIQUE,
-                    top_absolute_score INTEGER,
-                    second_top_score  INTEGER,
+                    top_absolute_score INTEGER DEFAULT NULL,
+                    second_top_score INTEGER DEFAULT NULL,
                     is_updated BOOLEAN NOT NULL DEFAULT FALSE,
                     score_history_id INTEGER NOT NULL,
-                    FOREIGN KEY (score_history_id) REFERENCES score_history(id)
+                    FOREIGN KEY (score_history_id) REFERENCES score_history(id) ON DELETE SET NULL
                 )
             ''')
 
