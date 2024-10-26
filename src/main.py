@@ -2,6 +2,7 @@ import argparse
 import yaml
 import initializer 
 import submitter
+import viewer
 from relative_score_calculater import get_relative_score_calculator
 import relative_score_updater
 
@@ -23,6 +24,9 @@ def main():
     submit_parser = subparsers.add_parser('submit', help='ローカル順位表に出力を提出します')
     submit_parser.add_argument('--submit-file', type=str, help='提出する output ファイルを指定します')
 
+    # view コマンド
+    subparsers.add_parser('view', help='スコア履歴やテストケースを表示します')
+
     # コマンドライン引数をパース
     args = parser.parse_args()
 
@@ -37,6 +41,8 @@ def main():
 
         relative_score_updater.execute(get_relative_score_calculator(scoring_type))
 
+    elif args.command == 'view':
+        viewer.execute()
     else:
         parser.print_help()
 
