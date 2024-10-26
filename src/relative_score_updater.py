@@ -1,8 +1,8 @@
-import sqlite3
+from database_manager import DatabaseManager 
 
 def fetch_updated_top_scores():
     """is_updated が TRUE のトップスコアとセミトップスコアを取得する"""
-    with sqlite3.connect('leader_board/leader_board.db') as conn:
+    with DatabaseManager() as conn:
         cursor = conn.cursor()
         cursor.execute('''
             SELECT test_case_input, top_absolute_score, second_top_score
@@ -14,7 +14,7 @@ def fetch_updated_top_scores():
 
 def fetch_all_history_ids():
     """score_history テーブルから最新のエントリを除外してすべての score_history_id を取得する関数"""
-    with sqlite3.connect('leader_board/leader_board.db') as conn:
+    with DatabaseManager() as conn:
         cursor = conn.cursor()
         cursor.execute('''
             SELECT id
@@ -27,7 +27,7 @@ def fetch_all_history_ids():
 
 def fetch_absolute_score_for_case(test_case_input, score_history_id):
     """指定された test_case_input と score_history_id に対応する absolute_score を取得する関数"""
-    with sqlite3.connect('leader_board/leader_board.db') as conn:
+    with DatabaseManager() as conn:
         cursor = conn.cursor()
         cursor.execute('''
             SELECT absolute_score
@@ -57,7 +57,7 @@ def calculate_total_relative_score_diff (relative_score_calculator, score_histor
 def update_score_history_with_relative_diff(history_id, relative_score_diff):
     """score_history テーブルの total_relative_score を relative_score_diff に基づき更新する関数"""
 
-    with sqlite3.connect('leader_board/leader_board.db') as conn:
+    with DatabaseManager() as conn:
         cursor = conn.cursor()
 
         # 現在の total_relative_score を取得
@@ -76,19 +76,16 @@ def update_score_history_with_relative_diff(history_id, relative_score_diff):
             WHERE id = ?
         ''', (new_relative_score, history_id))
 
-        conn.commit()    
-
 def reset_is_updated_flags():
     """top_scores テーブルの is_updated フラグを FALSE にリセットする関数"""
 
-    with sqlite3.connect('leader_board/leader_board.db') as conn:
+    with DatabaseManager() as conn:
         cursor = conn.cursor()
         cursor.execute('''
             UPDATE top_scores
             SET is_updated = FALSE
             WHERE is_updated = TRUE
         ''')
-        conn.commit()
 
 def execute(relative_score_calculator):
     updated_top_scores  = fetch_updated_top_scores()

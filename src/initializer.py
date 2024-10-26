@@ -1,6 +1,7 @@
 import os
-import sqlite3
 import yaml
+
+from database_manager import DatabaseManager 
 
 def create_directories():
     """必要なディレクトリを作成する関数"""
@@ -11,48 +12,44 @@ def create_directories():
 
 def initialize_database():
     """SQLiteデータベースを初期化する関数"""
-    db_path = 'leader_board/leader_board.db'
     
-    if not os.path.exists(db_path):
-        conn = sqlite3.connect(db_path)
-        cursor = conn.cursor()
+    if not os.path.exists(DatabaseManager._DB_PATH):
+        with DatabaseManager() as conn:
+            cursor = conn.cursor()
 
-        # スコア履歴テーブルの作成
-        cursor.execute('''
-            CREATE TABLE IF NOT EXISTS score_history (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                total_absolute_score INTEGER,
-                total_relative_score INTEGER,
-                submission_time DATETIME NOT NULL UNIQUE
-            )
-        ''')
+            # スコア履歴テーブルの作成
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS score_history (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    total_absolute_score INTEGER,
+                    total_relative_score INTEGER,
+                    submission_time DATETIME NOT NULL UNIQUE
+                )
+            ''')
 
-        # テストケーステーブルの作成
-        cursor.execute('''
-            CREATE TABLE IF NOT EXISTS test_cases (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                test_case_input TEXT NOT NULL,
-                absolute_score INTEGER,
-                score_history_id INTEGER NOT NULL,
-                FOREIGN KEY (score_history_id) REFERENCES score_history(id)
-            )
-        ''')
+            # テストケーステーブルの作成
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS test_cases (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    test_case_input TEXT NOT NULL,
+                    absolute_score INTEGER,
+                    score_history_id INTEGER NOT NULL,
+                    FOREIGN KEY (score_history_id) REFERENCES score_history(id)
+                )
+            ''')
 
-        # トップスコアテーブルの作成
-        cursor.execute('''
-            CREATE TABLE IF NOT EXISTS top_scores (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                test_case_input TEXT NOT NULL UNIQUE,
-                top_absolute_score INTEGER,
-                second_top_score  INTEGER,
-                is_updated BOOLEAN NOT NULL DEFAULT FALSE,
-                score_history_id INTEGER NOT NULL,
-                FOREIGN KEY (score_history_id) REFERENCES score_history(id)
-            )
-        ''')
-
-        conn.commit()
-        conn.close()
+            # トップスコアテーブルの作成
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS top_scores (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    test_case_input TEXT NOT NULL UNIQUE,
+                    top_absolute_score INTEGER,
+                    second_top_score  INTEGER,
+                    is_updated BOOLEAN NOT NULL DEFAULT FALSE,
+                    score_history_id INTEGER NOT NULL,
+                    FOREIGN KEY (score_history_id) REFERENCES score_history(id)
+                )
+            ''')
 
 def create_config_file():
     """スコア設定の選択をユーザーに求め、config.yaml ファイルを作成する関数"""

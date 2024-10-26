@@ -1,13 +1,13 @@
-import sqlite3
 from rich.console import Console
 from rich.table import Table
+
+from database_manager import DatabaseManager 
 
 console = Console()
 
 def get_top_score_summary():
     """top_scores テーブルから合計 Absolute Score とトップスコアの情報を取得"""
-    db_path = 'leader_board/leader_board.db'
-    with sqlite3.connect(db_path) as conn:
+    with DatabaseManager() as conn:
         cursor = conn.cursor()
 
         # 全テストケースのトップスコアの合計を取得
@@ -22,8 +22,7 @@ def get_top_score_summary():
 
 def view_latest_10_scores():
     """データベースから最新の10件のスコア履歴を取得し、トップスコアの合計を加えて表示する"""
-    db_path = 'leader_board/leader_board.db'
-    with sqlite3.connect(db_path) as conn:
+    with DatabaseManager() as conn:
         cursor = conn.cursor()
         
         # 最新10件のスコア履歴を取得

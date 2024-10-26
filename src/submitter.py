@@ -1,16 +1,18 @@
-import sqlite3
-from datetime import datetime
-import score_calculater
-import shutil
-from colorama import Fore, Style
 import math
+import shutil
+from datetime import datetime
+
+from colorama import Fore, Style
 from rich.console import Console
 from rich.text import Text
+
+import score_calculater
+from database_manager import DatabaseManager
 
 def reserve_score_history_table(submission_time):
     """スコア履歴テーブルに空の行を挿入し、そのIDを予約する"""
 
-    with sqlite3.connect('leader_board/leader_board.db') as conn:
+    with DatabaseManager() as conn:
         cursor = conn.cursor()
         cursor.execute('''
             INSERT INTO score_history (total_absolute_score, total_relative_score, submission_time)
@@ -18,14 +20,13 @@ def reserve_score_history_table(submission_time):
         ''', (None, None, submission_time))
 
         score_history_id = cursor.lastrowid
-        conn.commit()
 
     return score_history_id
 
 def update_score_history_table(score_history_id, sum_absolute_score, sum_relative_score):
     """スコア履歴テーブルを更新する関数"""
 
-    with sqlite3.connect('leader_board/leader_board.db') as conn:
+    with DatabaseManager() as conn:
         cursor = conn.cursor()
 
         # スコア履歴テーブルに絶対スコアと相対スコアを更新
@@ -35,12 +36,11 @@ def update_score_history_table(score_history_id, sum_absolute_score, sum_relativ
             WHERE id = ?
         ''', (sum_absolute_score, sum_relative_score, score_history_id))
 
-        conn.commit()
 
 def fetch_top_score(relative_score_calculator, testcase):
     """トップスコアを取得する関数"""
 
-    with sqlite3.connect('leader_board/leader_board.db') as conn:
+    with DatabaseManager() as conn:
         cursor = conn.cursor()
         cursor.execute('SELECT top_absolute_score FROM top_scores WHERE test_case_input = ?', (testcase.file_name,))
         result = cursor.fetchone()
@@ -57,7 +57,7 @@ def fetch_top_score(relative_score_calculator, testcase):
 def update_top_score_table(testcase, score_history_id):
     """トップスコアテーブルを更新する関数"""
 
-    with sqlite3.connect('leader_board/leader_board.db') as conn:
+    with DatabaseManager() as conn:
         cursor = conn.cursor()
 
         cursor.execute('SELECT top_absolute_score FROM top_scores WHERE test_case_input = ?', (testcase.file_name,))
@@ -73,7 +73,6 @@ def update_top_score_table(testcase, score_history_id):
             VALUES (?, ?, ?, ?, ?)
         ''', (testcase.file_name, testcase.score, second_top_score, True, score_history_id))
 
-        conn.commit()
 
 def copy_output_file(submit_file, testcase):
     output_file = f'{submit_file}/{testcase.file_name}'
@@ -88,7 +87,7 @@ def copy_output_file(submit_file, testcase):
 def update_test_case_table(testcase, score_history_id):
     """テストケーステーブルに1件ずつ行を追加する関数"""
 
-    with sqlite3.connect('leader_board/leader_board.db') as conn:
+    with DatabaseManager() as conn:
         cursor = conn.cursor()
 
         # 各テストケースを1件ずつ挿入
@@ -97,7 +96,6 @@ def update_test_case_table(testcase, score_history_id):
             VALUES (?, ?, ?)
         ''', (testcase.file_name, testcase.score, score_history_id))
 
-        conn.commit()
 
 def exponential_interpolation(start, end, t, factor=5):
     """指数関数的な補完を行う関数（expを使用）"""
