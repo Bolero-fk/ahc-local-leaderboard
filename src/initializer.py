@@ -44,6 +44,8 @@ def initialize_database():
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 test_case_input TEXT NOT NULL UNIQUE,
                 top_absolute_score INTEGER,
+                second_top_score  INTEGER,
+                is_updated BOOLEAN NOT NULL DEFAULT FALSE,
                 score_history_id INTEGER NOT NULL,
                 FOREIGN KEY (score_history_id) REFERENCES score_history(id)
             )

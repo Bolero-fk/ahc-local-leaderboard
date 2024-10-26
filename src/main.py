@@ -3,6 +3,7 @@ import yaml
 import initializer 
 import submitter
 from relative_score_calculater import get_relative_score_calculator
+import relative_score_updater
 
 def load_scoring_type():
     """config.yaml を読み込み、scoring_type に基づいた計算クラスを返す"""
@@ -33,6 +34,9 @@ def main():
             submitter.execute(get_relative_score_calculator(scoring_type), submit_file=args.submit_file)
         else:
             submitter.execute(get_relative_score_calculator(scoring_type))
+
+        relative_score_updater.execute(get_relative_score_calculator(scoring_type))
+
     else:
         parser.print_help()
 

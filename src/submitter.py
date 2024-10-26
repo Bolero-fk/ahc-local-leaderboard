@@ -60,10 +60,19 @@ def update_top_score_table(testcase, score_history_id):
     with sqlite3.connect('leader_board/leader_board.db') as conn:
         cursor = conn.cursor()
 
+        cursor.execute('SELECT top_absolute_score FROM top_scores WHERE test_case_input = ?', (testcase.file_name,))
+        result = cursor.fetchone()
+
+        if result is not None:
+            second_top_score = result[0]
+        else:
+            second_top_score = None
+
         cursor.execute('''
-                INSERT OR REPLACE INTO top_scores (test_case_input, top_absolute_score, score_history_id)
-                VALUES (?, ?, ?)
-            ''', (testcase.file_name, testcase.score, score_history_id))
+            INSERT OR REPLACE INTO top_scores (test_case_input, top_absolute_score, second_top_score, is_updated, score_history_id)
+            VALUES (?, ?, ?, ?, ?)
+        ''', (testcase.file_name, testcase.score, second_top_score, True, score_history_id))
+
         conn.commit()
 
 def copy_output_file(submit_file, testcase):
