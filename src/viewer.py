@@ -45,9 +45,21 @@ def view_latest_10_scores():
 
     # 表を作成
     table = Table(title="Latest 10 Scores (Including Top Score)")
+    table.add_column("Ranking", justify="right")
     table.add_column("Submission Time", justify="left")
     table.add_column("Total Absolute Score", justify="right")
     table.add_column("Total Relative Score", justify="right")
+
+    sorted_scores = sorted([row[2] for row in rows], reverse=True)  # 降順にソート
+    score_rankings = {}
+    current_rank = 0
+
+    # スコアごとに最も良い順位を割り当てる
+    for i, score in enumerate(sorted_scores):
+        if score not in score_rankings:
+            score_rankings[score] = current_rank  # 新しいスコアが出現したら現在の順位を割り当て
+        current_rank += 1
+
 
     # 最新10件のスコア履歴をテーブルに追加
     for submission_time, total_absolute_score, total_relative_score, invalid_score_count in rows:
@@ -59,7 +71,10 @@ def view_latest_10_scores():
         else:
             abs_score_text = Text(str(total_absolute_score), style="white")
 
-        table.add_row(submission_time, abs_score_text, str(total_relative_score))
+        # total_relative_score の順位を取得
+        rank = score_rankings[total_relative_score]
+
+        table.add_row(str(rank), submission_time, abs_score_text, str(total_relative_score))
 
     console.print(table)
 
