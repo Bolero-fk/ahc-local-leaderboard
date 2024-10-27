@@ -6,6 +6,7 @@ from score_record import ScoreRecords, ScoreRecord
 def create_score_table(title):
     """スコアテーブルを作成し、列を追加する"""
     table = Table(title=title)
+    table.add_column("ID", justify="right")
     table.add_column("Ranking", justify="right")
     table.add_column("Submission Time", justify="left")
     table.add_column("Total Absolute Score", justify="right")
@@ -14,7 +15,7 @@ def create_score_table(title):
 
 def add_separator_row(table):
     """区切り線をテーブルに追加する"""
-    table.add_row("─" * 8, "─" * 20, "─" * 20, "─" * 20)
+    table.add_row("─" * 8, "─" * 8, "─" * 20, "─" * 20, "─" * 20)
 
 def view_latest_10_scores():
     """データベースから最新の10件のスコア履歴を取得し、トップスコアの合計を加えて表示する"""
@@ -30,6 +31,7 @@ def view_latest_10_scores():
     top_record = ScoreRecord.fetch_top()
     table.add_row(
         "Top",
+        "Top",
         top_record.submission_time,
         top_record.format_absolute_score(),
         str(top_record.total_relative_score)
@@ -42,6 +44,7 @@ def view_latest_10_scores():
     for record in score_records.records:
         rank = score_rankings[record.total_relative_score]
         table.add_row(
+            str(record.id),
             str(rank),
             record.submission_time,
             record.format_absolute_score(),

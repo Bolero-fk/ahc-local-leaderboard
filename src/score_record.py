@@ -4,7 +4,8 @@ from rich.text import Text
 from database_manager import DatabaseManager 
 
 class ScoreRecord:
-    def __init__(self, submission_time, total_absolute_score, total_relative_score, invalid_score_count):
+    def __init__(self, id, submission_time, total_absolute_score, total_relative_score, invalid_score_count):
+        self.id = id
         self.submission_time = submission_time
         self.total_absolute_score = total_absolute_score
         self.total_relative_score = total_relative_score
@@ -32,7 +33,7 @@ class ScoreRecord:
         
         # Total Relative Score は全テストケースが最大スコアを取った場合を仮定
         total_relative_score = 10**9 * total_cases
-        return cls("Top Score Summary", total_absolute_score, total_relative_score, invalid_score_count)
+        return cls("Top", "Top Score Summary", total_absolute_score, total_relative_score, invalid_score_count)
 
 
 class ScoreRecords:
@@ -45,7 +46,7 @@ class ScoreRecords:
         with DatabaseManager() as conn:
             cursor = conn.cursor()
             cursor.execute('''
-                SELECT submission_time, total_absolute_score, total_relative_score, invalid_score_count
+                SELECT id, submission_time, total_absolute_score, total_relative_score, invalid_score_count
                 FROM score_history
                 ORDER BY submission_time DESC
                 LIMIT ?
