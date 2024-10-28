@@ -1,4 +1,4 @@
-# score_formatter.py
+import re
 from rich.text import Text
 
 class ScoreFormatter:
@@ -42,3 +42,14 @@ class ScoreFormatter:
         """相対スコアの表示をグラデーションカラーで整形"""
         relative_score_color = ScoreFormatter.get_gradient_color(relative_score, max_score)
         return Text(str(relative_score), style=relative_score_color)
+    
+    @staticmethod
+    def format_test_case_input(test_case_input):
+        """Test Case Inputの数値部分を青色でフォーマットする"""
+        input_text = Text()
+        for part in re.split(r'(\d+|\.)', test_case_input):
+            if part.isdigit() or part == '.':
+                input_text.append(part, style="bold cyan")
+            else:
+                input_text.append(part, style="white")
+        return input_text

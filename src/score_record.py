@@ -26,6 +26,19 @@ class ScoreRecord:
         total_relative_score = 10**9 * total_cases
         return cls("Top", "Top Score Summary", total_absolute_score, total_relative_score, invalid_score_count, "Top")
 
+    @classmethod
+    def fetch(cls, submission_id):
+        """指定された提出IDの詳細を表示する"""
+        with DatabaseManager() as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                SELECT id, submission_time, total_absolute_score, total_relative_score, invalid_score_count, relative_rank
+                FROM score_history
+                WHERE id = ?     
+            ''', (submission_id, ))
+            id, submission_time, total_absolute_score, total_relative_score, invalid_score_count, relative_rank = cursor.fetchone()
+        
+            return cls(id, submission_time, total_absolute_score, total_relative_score, invalid_score_count, relative_rank)
 
 class ScoreRecords:
     def __init__(self, records):

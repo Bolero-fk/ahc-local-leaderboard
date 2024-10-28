@@ -26,7 +26,13 @@ def main():
     submit_parser.add_argument('--submit-file', type=str, help='提出する output ファイルを指定します')
 
     # view コマンド
-    subparsers.add_parser('view', help='スコア履歴やテストケースを表示します')
+    view_parser = subparsers.add_parser('view', help='スコア履歴やテストケースを表示します')
+    view_parser.add_argument(
+        '--detail',
+        help='詳細表示する提出IDを指定します (ID または latest または top が指定できます)',
+        type=str,
+        metavar="<id>"
+    )
 
     # コマンドライン引数をパース
     args = parser.parse_args()
@@ -44,7 +50,19 @@ def main():
         score_history_table_updater.update_relative_ranks()
 
     elif args.command == 'view':
-        viewer.execute()
+        if args.detail:
+            scoring_type = load_scoring_type()
+            if args.detail.isdigit():
+                viewer.show_detail(int(args.detail), get_relative_score_calculator(scoring_type))
+            elif args.detail == "latest":
+                viewer.show_latest_detail()
+            elif args.detail == "top":
+                viewer.show_top_detail()
+            else:
+                print("エラー: 有効なID、'latest' または 'top' を指定してください")
+        else:
+            viewer.show_summary_list()
+
     else:
         parser.print_help()
 
