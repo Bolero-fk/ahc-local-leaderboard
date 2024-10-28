@@ -5,7 +5,7 @@ import initializer
 import submitter
 import viewer
 from relative_score_calculater import get_relative_score_calculator
-import relative_score_updater
+import score_history_table_updater
 
 def load_scoring_type():
     """config.yaml を読み込み、scoring_type に基づいた計算クラスを返す"""
@@ -40,7 +40,8 @@ def main():
         else:
             submitter.execute(get_relative_score_calculator(scoring_type))
 
-        relative_score_updater.execute(get_relative_score_calculator(scoring_type))
+        score_history_table_updater.update_relative_score(get_relative_score_calculator(scoring_type))
+        score_history_table_updater.update_relative_ranks()
 
     elif args.command == 'view':
         viewer.execute()

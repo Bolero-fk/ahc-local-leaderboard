@@ -1,15 +1,13 @@
-from datetime import datetime
-from rich.text import Text
-
 from database_manager import DatabaseManager 
 
 class ScoreRecord:
-    def __init__(self, id, submission_time, total_absolute_score, total_relative_score, invalid_score_count):
+    def __init__(self, id, submission_time, total_absolute_score, total_relative_score, invalid_score_count, relative_rank):
         self.id = id
         self.submission_time = submission_time
         self.total_absolute_score = total_absolute_score
         self.total_relative_score = total_relative_score
         self.invalid_score_count = invalid_score_count
+        self.relative_rank = relative_rank
 
     @classmethod
     def fetch_top(cls):
@@ -26,7 +24,7 @@ class ScoreRecord:
         
         # Total Relative Score は全テストケースが最大スコアを取った場合を仮定
         total_relative_score = 10**9 * total_cases
-        return cls("Top", "Top Score Summary", total_absolute_score, total_relative_score, invalid_score_count)
+        return cls("Top", "Top Score Summary", total_absolute_score, total_relative_score, invalid_score_count, "Top")
 
 
 class ScoreRecords:
@@ -39,7 +37,7 @@ class ScoreRecords:
         with DatabaseManager() as conn:
             cursor = conn.cursor()
             cursor.execute('''
-                SELECT id, submission_time, total_absolute_score, total_relative_score, invalid_score_count
+                SELECT id, submission_time, total_absolute_score, total_relative_score, invalid_score_count, relative_rank
                 FROM score_history
                 ORDER BY submission_time DESC
                 LIMIT ?
@@ -48,9 +46,3 @@ class ScoreRecords:
         
         records = [ScoreRecord(*row) for row in rows]
         return cls(records)
-
-    def calculate_score_rankings(self):
-        """total_relative_score の順位を計算し、各スコアに最も良い順位を割り当てる"""
-        sorted_scores = sorted(set(record.total_relative_score for record in self.records), reverse=True)
-        score_rankings = {score: rank + 1 for rank, score in enumerate(sorted_scores)}
-        return score_rankings

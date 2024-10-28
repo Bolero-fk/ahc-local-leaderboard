@@ -8,7 +8,7 @@ def create_score_table(title):
     """スコアテーブルを作成し、列を追加する"""
     table = Table(title=title)
     table.add_column("ID", justify="right")
-    table.add_column("Ranking", justify="right")
+    table.add_column("Rank", justify="right")
     table.add_column("Submission Time", justify="left")
     table.add_column("Total Absolute Score", justify="right")
     table.add_column("Total Relative Score", justify="right")
@@ -23,7 +23,6 @@ def view_latest_10_scores():
     
     # 最新10件のスコア履歴を取得
     score_records = ScoreRecords.fetch_latest()
-    score_rankings = score_records.calculate_score_rankings()
 
     # 表を作成
     table = create_score_table("Latest 10 Scores (Including Top Score)")
@@ -43,10 +42,9 @@ def view_latest_10_scores():
 
     # 最新10件のスコア履歴をテーブルに追加
     for record in score_records.records:
-        rank = score_rankings[record.total_relative_score]
         table.add_row(
             str(record.id),
-            str(rank),
+            str(record.relative_rank),
             record.submission_time,
             ScoreFormatter.format_total_absolute_score(record.total_absolute_score, record.invalid_score_count),
             ScoreFormatter.format_relative_score(record.total_relative_score, 100000000000)

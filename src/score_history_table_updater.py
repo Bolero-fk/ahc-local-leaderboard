@@ -87,7 +87,7 @@ def reset_is_updated_flags():
             WHERE is_updated = TRUE
         ''')
 
-def execute(relative_score_calculator):
+def update_relative_score(relative_score_calculator):
     updated_top_scores  = fetch_updated_top_scores()
 
     # すべての history_id を取得（最新の要素はデータベースに追加時に計算済みなので除外）
@@ -98,3 +98,64 @@ def execute(relative_score_calculator):
         update_score_history_with_relative_diff(history_id, total_relative_score_diff)
     
     reset_is_updated_flags()
+
+def fetch_latest_submission():
+    """スコア履歴テーブルから最新の行を取得する"""
+    with DatabaseManager() as conn:
+        cursor = conn.cursor()
+        cursor.execute('''
+            SELECT id, total_relative_score
+            FROM score_history
+            ORDER BY id DESC
+            LIMIT 1
+        ''')
+        
+        return cursor.fetchone()
+
+def update_relative_rank(latest_submission):
+    """指定されたidについてランクを設定する関数"""
+    latest_id, latest_relative_score = latest_submission
+
+    with DatabaseManager() as conn:
+        cursor = conn.cursor()
+
+        # 最新の提出の relative_score より高いスコアを持つ提出数を数える
+        cursor.execute('''
+            SELECT COUNT(*)
+            FROM score_history
+            WHERE total_relative_score >= ? and id != ?
+        ''', (latest_relative_score, latest_id))
+        
+        higher_score_count = cursor.fetchone()[0] + 1
+        
+        # ランキングを設定（上位の提出数 + 1）
+        latest_rank = higher_score_count
+
+        # 最新の提出のランクを更新
+        cursor.execute('''
+            UPDATE score_history
+            SET relative_rank = ?
+            WHERE id = ?
+        ''', (latest_rank, latest_id))
+
+def update_lower_ranks(latest_submission):
+    """指定されたスコアより低いスコアを持つ提出のランクを +1 する関数"""
+
+    latest_id, latest_relative_score = latest_submission
+
+    with DatabaseManager() as conn:
+        cursor = conn.cursor()
+        
+        cursor.execute('''
+            UPDATE score_history
+            SET relative_rank = relative_rank + 1
+            WHERE total_relative_score < ? and id != ?
+        ''', (latest_relative_score, latest_id))
+
+def update_relative_ranks():
+    latest_submission = fetch_latest_submission()
+    if not latest_submission:
+        return  # データがない場合は処理終了
+
+    update_relative_rank(latest_submission)
+    update_lower_ranks(latest_submission)

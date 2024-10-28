@@ -24,6 +24,7 @@ def initialize_database():
                     total_absolute_score INTEGER,
                     total_relative_score INTEGER,
                     invalid_score_count INTEGER DEFAULT 0,
+                    relative_rank INTEGER DEFAULT NULL,
                     submission_time DATETIME NOT NULL UNIQUE
                 )
             ''')
