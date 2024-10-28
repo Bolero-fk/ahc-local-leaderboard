@@ -1,6 +1,7 @@
 from rich.console import Console
 from rich.table import Table
 
+from score_formatter import ScoreFormatter
 from score_record import ScoreRecords, ScoreRecord
 
 def create_score_table(title):
@@ -33,8 +34,8 @@ def view_latest_10_scores():
         "Top",
         "Top",
         top_record.submission_time,
-        top_record.format_absolute_score(),
-        str(top_record.total_relative_score)
+        ScoreFormatter.format_total_absolute_score(top_record.total_absolute_score, top_record.invalid_score_count),
+        ScoreFormatter.format_relative_score(top_record.total_relative_score, 100000000000)
     )
 
     # 区切り線を追加
@@ -47,12 +48,12 @@ def view_latest_10_scores():
             str(record.id),
             str(rank),
             record.submission_time,
-            record.format_absolute_score(),
-            str(record.total_relative_score)
+            ScoreFormatter.format_total_absolute_score(record.total_absolute_score, record.invalid_score_count),
+            ScoreFormatter.format_relative_score(record.total_relative_score, 100000000000)
         )
   
     Console().print(table)
 
-def execute():
+def show_summary_list():
     """最新10件とトップスコアのサマリーをまとめて表示する"""
     view_latest_10_scores()

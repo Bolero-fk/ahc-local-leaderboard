@@ -11,13 +11,6 @@ class ScoreRecord:
         self.total_relative_score = total_relative_score
         self.invalid_score_count = invalid_score_count
 
-    def format_absolute_score(self):
-        """Total Absolute Scoreの表示を調整"""
-        abs_score_text = Text(str(self.total_absolute_score), style="white")
-        if self.invalid_score_count > 0:
-            abs_score_text.append(f" ({self.invalid_score_count})", style="bold red")
-        return abs_score_text
-
     @classmethod
     def fetch_top(cls):
         """トップスコアの合計情報を取得"""

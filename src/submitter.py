@@ -7,6 +7,7 @@ from rich.console import Console
 from rich.text import Text
 
 import score_calculater
+from score_formatter import ScoreFormatter
 from database_manager import DatabaseManager
 
 def reserve_score_history_table(submission_time):
@@ -94,41 +95,11 @@ def update_test_case_table(testcase, score_history_id):
             VALUES (?, ?, ?)
         ''', (testcase.file_name, testcase.score, score_history_id))
 
-
-def exponential_interpolation(start, end, t, factor=5):
-    """指数関数的な補完を行う関数（expを使用）"""
-    exp_t = math.exp(t * factor) - 1  # exp に基づく変換（factor で急激さを調整）
-    exp_max = math.exp(factor) - 1    # 正規化のための最大値
-    normalized_t = exp_t / exp_max    # 0〜1 に正規化
-    return start + (end - start) * normalized_t
-
-def get_gradient_color(relative_score):
-    """relative_score の値に応じて赤→黄色→緑のグラデーションを生成する関数"""
-    max_score = 1000000000
-
-    color_thr = max_score * 0.9
-    if relative_score <= color_thr:
-        # 0 ~ color_thr は赤→黄色
-        t = relative_score / color_thr
-        red = 255
-        green = exponential_interpolation(0, 255, t)
-        blue = 0
-    else:
-        # color_thr ~ max_score は黄色→緑
-        t = (relative_score - color_thr) / (max_score - color_thr)
-        red = exponential_interpolation(255, 0, t)
-        green = 255
-        blue = 0
-
-    return f"rgb({int(red)},{int(green)},{int(blue)})"
-
 def print_colored_output(file_name, absolute_score, relative_score):
 
     absolute_score_text = Text(str(absolute_score), style="white")
     
-    # relative_score のグラデーションカラーを取得
-    relative_score_color = get_gradient_color(relative_score)
-    relative_score_text = Text(str(relative_score), style=relative_score_color)
+    relative_score_text = ScoreFormatter.format_relative_score(relative_score, 1000000000)
 
     # 出力
     console = Console()
