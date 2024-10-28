@@ -8,6 +8,14 @@ class ScoreRecord:
         self.total_relative_score = total_relative_score
         self.invalid_score_count = invalid_score_count
         self.relative_rank = relative_rank
+    
+    def add_score(self, detail_record, relative_score):
+        if (detail_record.absolute_score is not None):
+            self.total_absolute_score += detail_record.absolute_score
+        else:
+            self.invalid_score_count += 1
+
+        self.total_relative_score += relative_score
 
     @classmethod
     def fetch_top(cls):

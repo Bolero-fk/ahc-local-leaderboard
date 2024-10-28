@@ -4,7 +4,7 @@ from rich.text import Text
 
 from score_formatter import ScoreFormatter
 from score_record import ScoreRecords, ScoreRecord
-from detail_score_record import DetailScoreRecord
+from detail_score_record import DetailScoreRecords, DetailScoreRecord
 
 def create_summary_table_with_header(title):
     """省略テーブルをヘッダー付きで作成します"""
@@ -86,18 +86,18 @@ def create_detail_table_with_header(title):
     table.add_column("Relative Score", justify="right")
     return table
 
-def show_test_case_table(detail_record, relative_score_calculator):
+def show_test_case_table(detail_records, relative_score_calculator):
     """テストケースの詳細を表示するテーブルを作成"""
-    test_case_table = create_detail_table_with_header(f"Submission Details for ID {detail_record.id}")
+    test_case_table = create_detail_table_with_header(f"Submission Details for ID {detail_records.id}")
 
-    for test_case_input, absolute_score, top_score in zip(detail_record.input_test_cases, detail_record.absolute_scores, detail_record.top_scores):
-        input_text = ScoreFormatter.format_test_case_input(test_case_input)
-        abs_score_text = Text(str(absolute_score), style="white" if str(absolute_score).isdigit() else "red")
+    for detail_record in detail_records.records:
+        input_text = ScoreFormatter.format_test_case_input(detail_record.input_test_case)
+        abs_score_text = Text(str(detail_record.absolute_score), style="white" if str(detail_record.absolute_score).isdigit() else "red")
 
-        score_difference = abs(absolute_score - top_score) if absolute_score is not None and top_score is not None else "None"
+        score_difference = abs(detail_record.absolute_score - detail_record.top_score) if detail_record.absolute_score is not None and detail_record.top_score is not None else "None"
         score_diff_text = Text(str(score_difference), style="white" if str(score_difference).isdigit() else "red")
 
-        relative_score = relative_score_calculator.calculate_relative_score(absolute_score, top_score)
+        relative_score = relative_score_calculator.calculate_relative_score(detail_record.absolute_score, detail_record.top_score)
         relative_score_text = ScoreFormatter.format_relative_score(relative_score, 1000000000)
 
         test_case_table.add_row(input_text, abs_score_text, score_diff_text, relative_score_text)
@@ -110,5 +110,5 @@ def show_detail(submission_id, relative_score_calculator):
     summary_record = ScoreRecord.fetch(submission_id)
     show_summary_table(summary_record)
 
-    detail_record = DetailScoreRecord.fetch(submission_id)
-    show_test_case_table(detail_record, relative_score_calculator)
+    detail_records = DetailScoreRecords.fetch(submission_id)
+    show_test_case_table(detail_records, relative_score_calculator)

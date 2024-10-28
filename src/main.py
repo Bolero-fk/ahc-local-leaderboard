@@ -2,7 +2,7 @@ import argparse
 import yaml
 import initializer 
 
-import submitter
+from submitter import Submitter
 import viewer
 from relative_score_calculater import get_relative_score_calculator
 import score_history_table_updater
@@ -41,10 +41,11 @@ def main():
         initializer.execute()
     elif args.command == 'submit':
         scoring_type = load_scoring_type()
+        submitter = Submitter(get_relative_score_calculator(scoring_type))
         if args.submit_file:
-            submitter.execute(get_relative_score_calculator(scoring_type), submit_file=args.submit_file)
+            submitter.execute(submit_file_path=args.submit_file)
         else:
-            submitter.execute(get_relative_score_calculator(scoring_type))
+            submitter.execute()
 
         score_history_table_updater.update_relative_score(get_relative_score_calculator(scoring_type))
         score_history_table_updater.update_relative_ranks()

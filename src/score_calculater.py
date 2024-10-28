@@ -1,15 +1,8 @@
 import os
 import subprocess
 
-class TestCaseScore:
-    """テストケースのスコアを管理するクラス"""
-    def __init__(self, file_name, score):
-        self.file_name = file_name
-        self.score = score
+from test_case import TestCase
 
-    def __repr__(self):
-        return f"TestCaseScore(file_name='{self.file_name}', score={self.score})"
-    
 def is_valid_output(stdout):
     """標準出力が期待するフォーマットか確認する関数"""
     return len(stdout.decode('utf-8').split('\n')) == 2
@@ -38,10 +31,10 @@ def calculate_all_scores(submit_file):
                     if(not is_valid_output(score_process.stdout)):
                         raise Exception("Error: calculate score ", input_file)
 
-                    score = float(score_process.stdout.decode('utf-8').split(' ')[-1].strip())
+                    score = int(score_process.stdout.decode('utf-8').split(' ')[-1].strip())
             except:
                 score = None
-            test_case_scores.append(TestCaseScore(sample_path, score))
+            test_case_scores.append(TestCase(sample_path, score))
 
     return test_case_scores
                 

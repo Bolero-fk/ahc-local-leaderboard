@@ -1,11 +1,15 @@
 from database_manager import DatabaseManager 
 
 class DetailScoreRecord:
-    def __init__(self, id, input_test_cases, absolute_scores, top_scores):
+    def __init__(self, input_test_case, absolute_score, top_score):
+        self.input_test_case = input_test_case
+        self.absolute_score = absolute_score
+        self.top_score = top_score
+
+class DetailScoreRecords:
+    def __init__(self, id, records):
         self.id = id
-        self.input_test_cases = input_test_cases
-        self.absolute_scores = absolute_scores
-        self.top_scores = top_scores
+        self.records = records
 
     @classmethod
     def fetch(cls, submission_id):
@@ -21,8 +25,6 @@ class DetailScoreRecord:
             ''', (submission_id, ))
 
             rows = cursor.fetchall()
-            input_test_cases = [row[0] for row in rows]
-            absolute_scores = [row[1] for row in rows]
-            top_scores = [row[2] for row in rows]
+            records = [DetailScoreRecord(*row) for row in rows]
 
-            return cls(submission_id, input_test_cases, absolute_scores, top_scores)
+            return cls(submission_id, records)
