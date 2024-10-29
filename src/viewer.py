@@ -10,7 +10,7 @@ from database_manager import DatabaseManager
 def create_summary_table_with_header(title):
     """省略テーブルをヘッダー付きで作成します"""
     table = Table(title=title)
-    table.add_column("ID", justify="right")
+    table.add_column("Id", justify="right")
     table.add_column("Rank", justify="right")
     table.add_column("Submission Time", justify="left")
     table.add_column("Total Absolute Score", justify="right")
@@ -118,3 +118,28 @@ def show_latest_detail(relative_score_calculator):
     """最新の提出の詳細を表示する"""
     latest_id = DatabaseManager.fetch_latest_id()
     show_detail(latest_id, relative_score_calculator)
+
+def create_top_detail_table_with_header(title):
+    """詳細テーブルをヘッダー付きで作成します"""
+    table = Table(title=title)
+    table.add_column("Test Case", justify="left")
+    table.add_column("Absolute Score", justify="right")
+    table.add_column("Id", justify="right")
+    return table
+
+def show_top_test_case_table(detail_records):
+    """トップテストケースの詳細を表示するテーブルを作成"""
+    test_case_table = create_top_detail_table_with_header(f"Submission Details for Top Case")
+
+    for detail_record in sorted(detail_records.records, key=lambda record: record.input_test_case):
+        input_text = ScoreFormatter.format_test_case_input(detail_record.input_test_case)
+        abs_score_text = Text(str(detail_record.absolute_score), style="white" if str(detail_record.absolute_score).isdigit() else "red")
+
+        test_case_table.add_row(input_text, abs_score_text, str(detail_record.id))
+
+    Console().print(test_case_table)
+
+def show_top_detail():
+    """各テストケースにおけるトップケースの詳細を表示する"""
+    detail_records = DetailScoreRecords.fetch_top_scores()
+    show_top_test_case_table(detail_records)
