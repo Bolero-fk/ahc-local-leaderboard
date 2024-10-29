@@ -92,3 +92,12 @@ class DatabaseManager:
             cursor.execute('SELECT id FROM score_history ORDER BY submission_time DESC LIMIT 1')
             result = cursor.fetchone()
             return result[0] if result is not None else None
+
+    @staticmethod
+    def fetch_test_case_count():
+        """登録されているテストケースの数を取得する"""
+        with DatabaseManager() as conn:
+            cursor = conn.cursor()
+            cursor.execute('SELECT COUNT(*) FROM top_scores')
+            result = cursor.fetchone()
+            return result[0]
