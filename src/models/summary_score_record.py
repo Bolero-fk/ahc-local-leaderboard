@@ -1,4 +1,4 @@
-from database_manager import DatabaseManager 
+from database.database_manager import DatabaseManager 
 
 class SummaryScoreRecord:
     def __init__(self, id, submission_time, total_absolute_score, total_relative_score, invalid_score_count, relative_rank):

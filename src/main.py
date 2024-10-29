@@ -1,11 +1,11 @@
 import argparse
 import yaml
-import initializer 
+import init.initializer as initializer 
 
-from submitter import Submitter
-import viewer
-from relative_score_calculater import get_relative_score_calculator
-import relative_score_updater
+from submit.submitter import Submitter
+import view.viewer as viewer
+from utils.relative_score_calculater import get_relative_score_calculator
+import database.relative_score_updater as relative_score_updater
 
 def load_scoring_type():
     """config.yaml を読み込み、scoring_type に基づいた計算クラスを返す"""

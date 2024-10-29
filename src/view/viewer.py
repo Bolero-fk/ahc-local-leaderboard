@@ -1,7 +1,7 @@
-from summary_score_record import SummaryScoreRecords, SummaryScoreRecord
-from detail_score_record import DetailScoreRecords
-from database_manager import DatabaseManager
-from table_builder import SummaryTableBuilder, DetailTableBuilder, TopDetailTableBuilder
+from models.summary_score_record import SummaryScoreRecords, SummaryScoreRecord
+from models.detail_score_record import DetailScoreRecords
+from database.database_manager import DatabaseManager
+from view.table_builder import SummaryTableBuilder, DetailTableBuilder, TopDetailTableBuilder
 
 MAX_SINGLE_RELATIVE_SCORE = 1000000000
 

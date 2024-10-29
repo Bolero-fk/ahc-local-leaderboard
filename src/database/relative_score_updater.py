@@ -1,4 +1,4 @@
-from database_manager import DatabaseManager 
+from database.database_manager import DatabaseManager 
 
 def fetch_updated_top_scores():
     """is_updated が TRUE のトップスコアとセミトップスコアを取得する"""

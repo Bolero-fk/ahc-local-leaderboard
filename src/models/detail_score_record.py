@@ -1,4 +1,4 @@
-from database_manager import DatabaseManager 
+from database.database_manager import DatabaseManager 
 
 class DetailScoreRecord:
     def __init__(self, input_test_case, absolute_score, top_score):

@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from rich.table import Table
 from rich.console import Console
 
-from score_formatter import ScoreFormatter
+from view.score_formatter import ScoreFormatter
 
 class TableBuilder(ABC):
     def __init__(self, title):

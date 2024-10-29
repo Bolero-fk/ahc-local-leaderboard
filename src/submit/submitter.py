@@ -1,11 +1,11 @@
 import shutil
 from datetime import datetime
 
-import test_case_evaluator
-from database_manager import DatabaseManager
-from summary_score_record import SummaryScoreRecord
-from detail_score_record import DetailScoreRecords, DetailScoreRecord
-import viewer
+import submit.test_case_evaluator as test_case_evaluator
+from database.database_manager import DatabaseManager
+from models.summary_score_record import SummaryScoreRecord
+from models.detail_score_record import DetailScoreRecords, DetailScoreRecord
+import view.viewer as viewer
 
 def copy_output_file(submit_file, test_case):
     output_file = f'{submit_file}/{test_case.file_name}'

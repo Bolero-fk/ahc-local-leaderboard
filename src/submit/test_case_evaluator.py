@@ -1,7 +1,7 @@
 import os
 import subprocess
 
-from test_case import TestCase
+from models.test_case import TestCase
 
 def is_valid_output(stdout):
     """標準出力が期待するフォーマットか確認する関数"""
