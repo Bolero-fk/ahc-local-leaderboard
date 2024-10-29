@@ -1,6 +1,5 @@
 from rich.console import Console
 from rich.table import Table
-from rich.text import Text
 
 from score_formatter import ScoreFormatter
 from score_record import ScoreRecords, ScoreRecord
@@ -93,10 +92,9 @@ def show_test_case_table(detail_records, relative_score_calculator):
 
     for detail_record in detail_records.records:
         input_text = ScoreFormatter.format_test_case_input(detail_record.input_test_case)
-        abs_score_text = Text(str(detail_record.absolute_score), style="white" if str(detail_record.absolute_score).isdigit() else "red")
+        abs_score_text = ScoreFormatter.format_absolute_score(detail_record.absolute_score)
 
-        score_difference = abs(detail_record.absolute_score - detail_record.top_score) if detail_record.absolute_score is not None and detail_record.top_score is not None else "None"
-        score_diff_text = Text(str(score_difference), style="white" if str(score_difference).isdigit() else "red")
+        score_diff_text = ScoreFormatter.format_score_diff(detail_record.absolute_score, detail_record.top_score) 
 
         relative_score = relative_score_calculator(detail_record.absolute_score, detail_record.top_score)
         relative_score_text = ScoreFormatter.format_relative_score(relative_score, 1000000000)
@@ -133,7 +131,7 @@ def show_top_test_case_table(detail_records):
 
     for detail_record in sorted(detail_records.records, key=lambda record: record.input_test_case):
         input_text = ScoreFormatter.format_test_case_input(detail_record.input_test_case)
-        abs_score_text = Text(str(detail_record.absolute_score), style="white" if str(detail_record.absolute_score).isdigit() else "red")
+        abs_score_text = ScoreFormatter.format_absolute_score(detail_record.absolute_score)
 
         test_case_table.add_row(input_text, abs_score_text, str(detail_record.id))
 

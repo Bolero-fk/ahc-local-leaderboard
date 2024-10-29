@@ -13,6 +13,11 @@ class ScoreFormatter:
         return abs_score_text
 
     @staticmethod
+    def format_absolute_score(absolute_score):
+        """絶対スコアの表示を生成します"""
+        return Text(str(absolute_score), style="white" if str(absolute_score).isdigit() else "red")
+
+    @staticmethod
     def exponential_interpolation(start, end, t):
         """指数関数的な補間を実行する関数"""
         return int(start + (end - start) * (t ** 2))
@@ -42,7 +47,13 @@ class ScoreFormatter:
         """相対スコアの表示をグラデーションカラーで整形"""
         relative_score_color = ScoreFormatter.get_gradient_color(relative_score, max_score)
         return Text(str(relative_score), style=relative_score_color)
-    
+
+    @staticmethod
+    def format_score_diff(absolute_score, top_score):
+        """トップスコアとの差分の表示を生成します"""
+        score_difference = abs(absolute_score - top_score) if absolute_score is not None and top_score is not None else "None"
+        return Text(str(score_difference), style="white" if str(score_difference).isdigit() else "red")
+
     @staticmethod
     def format_test_case_input(test_case_input):
         """Test Case Inputの数値部分を青色でフォーマットする"""
