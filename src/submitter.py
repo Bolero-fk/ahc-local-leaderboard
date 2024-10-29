@@ -27,7 +27,7 @@ class Submitter:
 
         for test_case in test_cases:
             new_top_score = self._try_update_top_score(test_case, score_history_id)
-            relative_score = self.relative_score_calculator.calculate_relative_score(test_case.score, new_top_score)
+            relative_score = self.relative_score_calculator(test_case.score, new_top_score)
 
             DatabaseManager.insert_test_case(test_case, score_history_id)
 

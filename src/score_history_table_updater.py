@@ -49,8 +49,8 @@ def calculate_total_relative_score_diff (relative_score_calculator, score_histor
     for test_case_input, top_score, second_top_score in updated_top_scores:
         # 各テストケースのスコア履歴からスコアを取得し、相対スコアを計算
         absolute_score = fetch_absolute_score_for_case(test_case_input, score_history_id)
-        total_score_diff -= relative_score_calculator.calculate_relative_score(absolute_score, second_top_score)
-        total_score_diff += relative_score_calculator.calculate_relative_score(absolute_score, top_score)
+        total_score_diff -= relative_score_calculator(absolute_score, second_top_score)
+        total_score_diff += relative_score_calculator(absolute_score, top_score)
 
     return total_score_diff
 

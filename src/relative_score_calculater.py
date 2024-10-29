@@ -11,6 +11,9 @@ class RelativeScoreCalculaterInterface(ABC):
         """スコアの優劣を判断する"""
         pass
 
+    def __call__(self, testcase_score, top_score):
+        return self.calculate_relative_score(testcase_score, top_score)
+
 class MaximizationScoring(RelativeScoreCalculaterInterface):
     def calculate_relative_score(self, testcase_score, top_score):
         if top_score is None:

@@ -98,7 +98,7 @@ def show_test_case_table(detail_records, relative_score_calculator):
         score_difference = abs(detail_record.absolute_score - detail_record.top_score) if detail_record.absolute_score is not None and detail_record.top_score is not None else "None"
         score_diff_text = Text(str(score_difference), style="white" if str(score_difference).isdigit() else "red")
 
-        relative_score = relative_score_calculator.calculate_relative_score(detail_record.absolute_score, detail_record.top_score)
+        relative_score = relative_score_calculator(detail_record.absolute_score, detail_record.top_score)
         relative_score_text = ScoreFormatter.format_relative_score(relative_score, 1000000000)
 
         test_case_table.add_row(input_text, abs_score_text, score_diff_text, relative_score_text)
