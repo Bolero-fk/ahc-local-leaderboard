@@ -5,6 +5,7 @@ from rich.text import Text
 from score_formatter import ScoreFormatter
 from score_record import ScoreRecords, ScoreRecord
 from detail_score_record import DetailScoreRecords, DetailScoreRecord
+from database_manager import DatabaseManager
 
 def create_summary_table_with_header(title):
     """省略テーブルをヘッダー付きで作成します"""
@@ -112,3 +113,8 @@ def show_detail(submission_id, relative_score_calculator):
 
     detail_records = DetailScoreRecords.fetch(submission_id)
     show_test_case_table(detail_records, relative_score_calculator)
+
+def show_latest_detail(relative_score_calculator):
+    """最新の提出の詳細を表示する"""
+    latest_id = DatabaseManager.fetch_latest_id()
+    show_detail(latest_id, relative_score_calculator)

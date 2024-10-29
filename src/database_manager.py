@@ -83,3 +83,12 @@ class DatabaseManager:
             cursor.execute('SELECT top_absolute_score FROM top_scores WHERE test_case_input = ?', (test_case.file_name,))
             result = cursor.fetchone()
             return result[0] if result is not None else None
+
+    @staticmethod
+    def fetch_latest_id():
+        """最新の提出のidを取得する"""
+        with DatabaseManager() as conn:
+            cursor = conn.cursor()
+            cursor.execute('SELECT id FROM score_history ORDER BY submission_time DESC LIMIT 1')
+            result = cursor.fetchone()
+            return result[0] if result is not None else None

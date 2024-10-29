@@ -56,7 +56,7 @@ def main():
             if args.detail.isdigit():
                 viewer.show_detail(int(args.detail), get_relative_score_calculator(scoring_type))
             elif args.detail == "latest":
-                viewer.show_latest_detail()
+                viewer.show_latest_detail(get_relative_score_calculator(scoring_type))
             elif args.detail == "top":
                 viewer.show_top_detail()
             else:
