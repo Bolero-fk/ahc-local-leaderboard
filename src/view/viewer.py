@@ -1,25 +1,23 @@
-from models.summary_score_record import SummaryScoreRecords, SummaryScoreRecord
-from models.detail_score_record import DetailScoreRecords
-from database.database_manager import DatabaseManager
+from database.database_manager import ScoreHistoryRepository, TestCaseRepository, TopScoresRepository
 from view.table_builder import SummaryTableBuilder, DetailTableBuilder, TopDetailTableBuilder
 
 MAX_SINGLE_RELATIVE_SCORE = 1000000000
 
 def fetch_sum_max_relative_score():
-    test_case_count = DatabaseManager.fetch_test_case_count()
+    test_case_count = TopScoresRepository.fetch_test_case_count()
     return test_case_count * MAX_SINGLE_RELATIVE_SCORE
 
 def view_latest_10_scores():
     """データベースから最新の10件のスコア履歴を取得し、トップスコアの合計を加えて表示する"""
     table_builder = SummaryTableBuilder("Latest 10 Scores (Including Top Score)", fetch_sum_max_relative_score())
 
-    top_record = SummaryScoreRecord.fetch_top()
+    top_record = TopScoresRepository.fetch_top_summary_record()
     table_builder.insert_record(top_record)
 
     table_builder.add_separator_row()
 
     # 最新10件のスコア履歴を取得
-    score_records = SummaryScoreRecords.fetch_latest()
+    score_records = ScoreHistoryRepository.fetch_latest_records(10)
     for record in score_records.records:
         table_builder.insert_record(record)
     
@@ -45,15 +43,15 @@ def show_test_case_table(detail_records, relative_score_calculator):
 
 def show_detail(submission_id, relative_score_calculator):
     """指定された提出IDの詳細を表示する"""
-    summary_record = SummaryScoreRecord.fetch(submission_id)
+    summary_record = ScoreHistoryRepository.fetch_record(submission_id)
     show_summary_table(summary_record)
 
-    detail_records = DetailScoreRecords.fetch(submission_id)
+    detail_records = TestCaseRepository.fetch_records(submission_id)
     show_test_case_table(detail_records, relative_score_calculator)
 
 def show_latest_detail(relative_score_calculator):
     """最新の提出の詳細を表示する"""
-    latest_id = DatabaseManager.fetch_latest_id()
+    latest_id = ScoreHistoryRepository.fetch_latest_id()
     show_detail(latest_id, relative_score_calculator)
 
 def show_top_test_case_table(detail_records):
@@ -66,5 +64,5 @@ def show_top_test_case_table(detail_records):
 
 def show_top_detail():
     """各テストケースにおけるトップケースの詳細を表示する"""
-    detail_records = DetailScoreRecords.fetch_top_scores()
+    detail_records = TopScoresRepository.fetch_top_detail_records()
     show_top_test_case_table(detail_records)

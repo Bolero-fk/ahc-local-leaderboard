@@ -2,7 +2,7 @@ import shutil
 from datetime import datetime
 
 import submit.test_case_evaluator as test_case_evaluator
-from database.database_manager import DatabaseManager
+from database.database_manager import ScoreHistoryRepository, TestCaseRepository, TopScoresRepository
 from models.summary_score_record import SummaryScoreRecord
 from models.detail_score_record import DetailScoreRecords, DetailScoreRecord
 import view.viewer as viewer
@@ -29,7 +29,7 @@ class Submitter:
             new_top_score = self._try_update_top_score(test_case, score_history_id)
             relative_score = self.relative_score_calculator(test_case.score, new_top_score)
 
-            DatabaseManager.insert_test_case(test_case, score_history_id)
+            TestCaseRepository.insert_test_case(test_case, score_history_id)
 
             detail_record = DetailScoreRecord(test_case.file_name, test_case.score, new_top_score)
             detail_records.records.append(detail_record)
@@ -39,11 +39,11 @@ class Submitter:
 
     def _try_update_top_score(self, test_case, score_history_id):
         """テストケースのスコアを評価し、必要に応じてトップスコアを更新する"""
-        top_score = DatabaseManager.fetch_top_score(test_case)
+        top_score = TopScoresRepository.fetch_top_score(test_case)
         is_topscore_case = self.relative_score_calculator.is_better_score(test_case.score, top_score)
 
         if is_topscore_case:
-            DatabaseManager.update_top_score(test_case, score_history_id)
+            TopScoresRepository.update_top_score(test_case, score_history_id)
             copy_output_file(self.submit_file_path, test_case)
 
         new_top_score = test_case.score if is_topscore_case else top_score
@@ -54,9 +54,9 @@ class Submitter:
         self.submission_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
         test_cases = test_case_evaluator.execute(submit_file_path)
-        score_history_id = DatabaseManager.reserve_score_history_table(self.submission_time)
+        score_history_id = ScoreHistoryRepository.reserve_score_history(self.submission_time)
 
         detail_records, score_record = self._process_test_cases(test_cases, score_history_id)
             
         viewer.show_test_case_table(detail_records, self.relative_score_calculator)
-        DatabaseManager.update_score_history_table(score_record)
+        ScoreHistoryRepository.update_score_history(score_record)
