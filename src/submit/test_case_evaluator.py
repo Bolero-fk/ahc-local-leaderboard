@@ -1,6 +1,8 @@
 import os
 import subprocess
 
+from rich.progress import track
+
 from models.test_case import TestCase
 
 def is_valid_output(stdout):
@@ -13,7 +15,7 @@ def calculate_all_scores(submit_file):
     input_file_paths = os.listdir('in')
     input_file_paths.sort()
 
-    for sample_path in input_file_paths:
+    for sample_path in track(input_file_paths, description="Test Case Processing...", auto_refresh=False):
         # 入力ファイルと出力ファイルのパスを設定
         input_file = 'in/' + sample_path
         output_file = submit_file + '/' + sample_path
