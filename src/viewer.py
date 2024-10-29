@@ -1,4 +1,4 @@
-from score_record import ScoreRecords, ScoreRecord
+from summary_score_record import SummaryScoreRecords, SummaryScoreRecord
 from detail_score_record import DetailScoreRecords
 from database_manager import DatabaseManager
 from table_builder import SummaryTableBuilder, DetailTableBuilder, TopDetailTableBuilder
@@ -13,13 +13,13 @@ def view_latest_10_scores():
     """データベースから最新の10件のスコア履歴を取得し、トップスコアの合計を加えて表示する"""
     table_builder = SummaryTableBuilder("Latest 10 Scores (Including Top Score)", fetch_sum_max_relative_score())
 
-    top_record = ScoreRecord.fetch_top()
+    top_record = SummaryScoreRecord.fetch_top()
     table_builder.insert_record(top_record)
 
     table_builder.add_separator_row()
 
     # 最新10件のスコア履歴を取得
-    score_records = ScoreRecords.fetch_latest()
+    score_records = SummaryScoreRecords.fetch_latest()
     for record in score_records.records:
         table_builder.insert_record(record)
     
@@ -45,7 +45,7 @@ def show_test_case_table(detail_records, relative_score_calculator):
 
 def show_detail(submission_id, relative_score_calculator):
     """指定された提出IDの詳細を表示する"""
-    summary_record = ScoreRecord.fetch(submission_id)
+    summary_record = SummaryScoreRecord.fetch(submission_id)
     show_summary_table(summary_record)
 
     detail_records = DetailScoreRecords.fetch(submission_id)

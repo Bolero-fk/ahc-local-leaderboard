@@ -1,6 +1,6 @@
 from database_manager import DatabaseManager 
 
-class ScoreRecord:
+class SummaryScoreRecord:
     def __init__(self, id, submission_time, total_absolute_score, total_relative_score, invalid_score_count, relative_rank):
         self.id = id
         self.submission_time = submission_time
@@ -48,7 +48,7 @@ class ScoreRecord:
         
             return cls(id, submission_time, total_absolute_score, total_relative_score, invalid_score_count, relative_rank)
 
-class ScoreRecords:
+class SummaryScoreRecords:
     def __init__(self, records):
         self.records = records
 
@@ -65,5 +65,5 @@ class ScoreRecords:
             ''', (limit,))
             rows = cursor.fetchall()
         
-        records = [ScoreRecord(*row) for row in rows]
+        records = [SummaryScoreRecord(*row) for row in rows]
         return cls(records)

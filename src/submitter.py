@@ -1,9 +1,9 @@
 import shutil
 from datetime import datetime
 
-import score_calculater
+import test_case_evaluator
 from database_manager import DatabaseManager
-from score_record import ScoreRecord
+from summary_score_record import SummaryScoreRecord
 from detail_score_record import DetailScoreRecords, DetailScoreRecord
 import viewer
 
@@ -23,7 +23,7 @@ class Submitter:
     def _process_test_cases(self, test_cases, score_history_id):
         """各テストケースのスコアと記録を処理する"""
         detail_records = DetailScoreRecords(score_history_id, [])
-        score_record = ScoreRecord(score_history_id, self.submission_time, 0, 0, 0, None)
+        score_record = SummaryScoreRecord(score_history_id, self.submission_time, 0, 0, 0, None)
 
         for test_case in test_cases:
             new_top_score = self._try_update_top_score(test_case, score_history_id)
@@ -53,7 +53,7 @@ class Submitter:
         self.submit_file_path = submit_file_path
         self.submission_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-        test_cases = score_calculater.execute(submit_file_path)
+        test_cases = test_case_evaluator.execute(submit_file_path)
         score_history_id = DatabaseManager.reserve_score_history_table(self.submission_time)
 
         detail_records, score_record = self._process_test_cases(test_cases, score_history_id)
