@@ -7,8 +7,8 @@ def fetch_sum_max_relative_score():
     test_case_count = TopScoresRepository.fetch_test_case_count()
     return test_case_count * MAX_SINGLE_RELATIVE_SCORE
 
-def view_latest_10_scores():
-    """データベースから最新の10件のスコア履歴を取得し、トップスコアの合計を加えて表示する"""
+def view_latest_scores(list_length):
+    """データベースから最新の{list_length}件のスコア履歴を取得し、トップスコアの合計を加えて表示する"""
     table_builder = SummaryTableBuilder("Latest 10 Scores (Including Top Score)", fetch_sum_max_relative_score())
 
     top_record = TopScoresRepository.fetch_top_summary_record()
@@ -16,16 +16,15 @@ def view_latest_10_scores():
 
     table_builder.add_separator_row()
 
-    # 最新10件のスコア履歴を取得
-    score_records = ScoreHistoryRepository.fetch_latest_records(10)
+    score_records = ScoreHistoryRepository.fetch_latest_records(list_length)
     for record in score_records.records:
         table_builder.insert_record(record)
     
     table_builder.display()
 
-def show_summary_list():
-    """最新10件とトップスコアのサマリーをまとめて表示する"""
-    view_latest_10_scores()
+def show_summary_list(list_length):
+    """最新{list_length}件とトップスコアのサマリーをまとめて表示する"""
+    view_latest_scores(list_length)
 
 def show_summary_table(summary_record):
     """提出サマリー情報を表示するテーブルを作成"""
