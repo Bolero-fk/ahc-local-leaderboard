@@ -16,21 +16,19 @@ def load_scoring_type():
     return config.get("scoring_type", "Minimization")
 
 def main():
-    # コマンドライン引数のパーサーを作成
-    parser = argparse.ArgumentParser(description="AHCスコア履歴管理プログラム")
+    parser = argparse.ArgumentParser(description="Local Lederboard")
     
-    subparsers = parser.add_subparsers(dest='command', help='利用可能なコマンド')
+    subparsers = parser.add_subparsers(dest='command', help='Available commands')
     
-    subparsers.add_parser('setup', help='ローカル順位表を準備します')
+    subparsers.add_parser('setup', help='Setup the local leaderboard')
 
-    submit_parser = subparsers.add_parser('submit', help='ローカル順位表に出力を提出します')
-    submit_parser.add_argument('--submit-file', type=str, help='提出する output ファイルを指定します')
+    submit_parser = subparsers.add_parser('submit', help='Submit output to the local leaderboard')
+    submit_parser.add_argument('--submit-file', type=str, help='Specify the submit file to submit')
 
-    # view コマンド
-    view_parser = subparsers.add_parser('view', help='スコア履歴やテストケースを表示します')
+    view_parser = subparsers.add_parser('view', help='View score history and test case details')
     view_parser.add_argument(
         '--detail',
-        help='詳細表示する提出IDを指定します (ID または latest または top が指定できます)',
+        help='Specify the submission Id to view details (can specify ID, latest, or top)',
         type=str,
         metavar="<id>"
     )
@@ -66,7 +64,7 @@ def main():
             elif args.detail == "top":
                 viewer.show_top_detail()
             else:
-                print("エラー: 有効なID、'latest' または 'top' を指定してください")
+                print("Error: Please specify a valid ID, 'latest', or 'top'")
         else:
             viewer.show_summary_list()
 
