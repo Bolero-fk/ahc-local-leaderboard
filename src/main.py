@@ -6,6 +6,7 @@ from submit.submitter import Submitter
 import view.viewer as viewer
 from utils.relative_score_calculater import get_relative_score_calculator
 import database.relative_score_updater as relative_score_updater
+from utils.validator import Validator
 
 def load_scoring_type():
     """config.yaml を読み込み、scoring_type に基づいた計算クラスを返す"""
@@ -39,7 +40,12 @@ def main():
 
     if args.command == 'setup':
         initializer.execute()
-    elif args.command == 'submit':
+
+    if(not Validator.validate_file_structure()):
+        print("Structure validation failed. Please run the setup command.\n")
+        return
+
+    if args.command == 'submit':
         scoring_type = load_scoring_type()
         submitter = Submitter(get_relative_score_calculator(scoring_type))
         if args.submit_file:
@@ -53,7 +59,7 @@ def main():
     elif args.command == 'view':
         if args.detail:
             scoring_type = load_scoring_type()
-            if args.detail.isdigit():
+            if args.detail.isdigit() and Validator.validate_id_exists(int(args.detail)):
                 viewer.show_detail(int(args.detail), get_relative_score_calculator(scoring_type))
             elif args.detail == "latest":
                 viewer.show_latest_detail(get_relative_score_calculator(scoring_type))

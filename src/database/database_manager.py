@@ -135,6 +135,19 @@ class ScoreHistoryRepository:
         records = [SummaryScoreRecord(*row) for row in rows]
         return SummaryScoreRecords(records)
 
+    def exists_id(id):
+        """指定されたidがscore_historyテーブルに存在するか確認"""
+        with DatabaseManager() as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                SELECT COUNT(*)
+                FROM score_history
+                WHERE id = ?
+            ''', (id,))
+            result = cursor.fetchone()[0]
+            
+            return result > 0
+
 class TestCaseRepository:
     
     @staticmethod
