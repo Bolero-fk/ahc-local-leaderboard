@@ -9,14 +9,14 @@ def fetch_sum_max_relative_score():
 
 def view_latest_scores(list_length):
     """データベースから最新の{list_length}件のスコア履歴を取得し、トップスコアの合計を加えて表示する"""
-    table_builder = SummaryTableBuilder("Latest 10 Scores (Including Top Score)", fetch_sum_max_relative_score())
 
     top_record = TopScoresRepository.fetch_top_summary_record()
-    table_builder.insert_record(top_record)
+    score_records = ScoreHistoryRepository.fetch_latest_records(list_length)
 
+    table_builder = SummaryTableBuilder(f"Latest {len(score_records.records)} Scores (Including Top Score)", fetch_sum_max_relative_score())
+    table_builder.insert_record(top_record)
     table_builder.add_separator_row()
 
-    score_records = ScoreHistoryRepository.fetch_latest_records(list_length)
     for record in score_records.records:
         table_builder.insert_record(record)
     
