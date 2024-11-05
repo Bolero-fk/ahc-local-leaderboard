@@ -47,6 +47,7 @@ def main():
 
     if args.command == 'setup':
         initializer.execute()
+        return
 
     if(not Validator.validate_file_structure()):
         ConsoleHandler.print_error("Structure validation failed.")
