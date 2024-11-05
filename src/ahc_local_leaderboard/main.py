@@ -1,12 +1,12 @@
 import argparse
 import yaml
-import init.initializer as initializer 
 
-from submit.submitter import Submitter
-import view.viewer as viewer
-from utils.relative_score_calculater import get_relative_score_calculator
-import database.relative_score_updater as relative_score_updater
-from utils.validator import Validator
+from ahc_local_leaderboard.init import initializer as initializer
+from ahc_local_leaderboard.submit.submitter import Submitter
+import ahc_local_leaderboard.view.viewer as viewer
+from ahc_local_leaderboard.utils.relative_score_calculater import get_relative_score_calculator
+import ahc_local_leaderboard.database.relative_score_updater as relative_score_updater
+from ahc_local_leaderboard.utils.validator import Validator
 
 def load_scoring_type():
     """config.yaml を読み込み、scoring_type に基づいた計算クラスを返す"""

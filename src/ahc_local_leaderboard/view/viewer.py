@@ -1,5 +1,5 @@
-from database.database_manager import ScoreHistoryRepository, TestCaseRepository, TopScoresRepository
-from view.table_builder import SummaryTableBuilder, DetailTableBuilder, TopDetailTableBuilder
+from ahc_local_leaderboard.database.database_manager import ScoreHistoryRepository, TestCaseRepository, TopScoresRepository
+from ahc_local_leaderboard.view.table_builder import SummaryTableBuilder, DetailTableBuilder, TopDetailTableBuilder
 
 MAX_SINGLE_RELATIVE_SCORE = 1000000000
 

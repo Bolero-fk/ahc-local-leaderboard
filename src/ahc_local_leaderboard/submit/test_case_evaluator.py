@@ -3,7 +3,7 @@ import subprocess
 
 from rich.progress import track
 
-from models.test_case import TestCase
+from ahc_local_leaderboard.models.test_case import TestCase
 
 def is_valid_output(stdout):
     """標準出力が期待するフォーマットか確認する関数"""

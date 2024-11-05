@@ -1,6 +1,6 @@
 import sqlite3
-from models.summary_score_record import SummaryScoreRecords, SummaryScoreRecord
-from models.detail_score_record import DetailScoreRecords, DetailScoreRecord, TopDetailScoreRecord
+from ahc_local_leaderboard.models.summary_score_record import SummaryScoreRecords, SummaryScoreRecord
+from ahc_local_leaderboard.models.detail_score_record import DetailScoreRecords, DetailScoreRecord, TopDetailScoreRecord
 
 class DatabaseManager:
     """データベース接続を管理するクラス"""

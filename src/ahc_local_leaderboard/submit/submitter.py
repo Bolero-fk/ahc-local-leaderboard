@@ -1,11 +1,11 @@
 import shutil
 from datetime import datetime
 
-import submit.test_case_evaluator as test_case_evaluator
-from database.database_manager import ScoreHistoryRepository, TestCaseRepository, TopScoresRepository
-from models.summary_score_record import SummaryScoreRecord
-from models.detail_score_record import DetailScoreRecords, DetailScoreRecord
-import view.viewer as viewer
+import ahc_local_leaderboard.submit.test_case_evaluator as test_case_evaluator
+from ahc_local_leaderboard.database.database_manager import ScoreHistoryRepository, TestCaseRepository, TopScoresRepository
+from ahc_local_leaderboard.models.summary_score_record import SummaryScoreRecord
+from ahc_local_leaderboard.models.detail_score_record import DetailScoreRecords, DetailScoreRecord
+import ahc_local_leaderboard.view.viewer as viewer
 
 def copy_output_file(submit_file, test_case):
     output_file = f'{submit_file}/{test_case.file_name}'

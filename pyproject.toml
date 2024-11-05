@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "ahc-local-leaderboard"
+version = "0.1.0"
+description = "Manages a local leaderboard for AHC, enabling you to view relative scores based on your own submission files."
+authors = ["Bolero"]
+license = "MIT"
+readme = "README.md"
+
+packages = [
+    { include = "ahc_local_leaderboard", from = "src" }
+]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pyyaml = "^6.0.2"
+rich = "^13.9.4"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+local-leaderboard = "ahc_local_leaderboard.main:main"

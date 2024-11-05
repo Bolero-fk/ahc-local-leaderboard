@@ -1,6 +1,6 @@
 import os
 
-from database.database_manager import ScoreHistoryRepository
+from ahc_local_leaderboard.database.database_manager import ScoreHistoryRepository
 
 class Validator:
     REQUIRED_DIRECTORIES = ['leader_board', 'leader_board/top']
