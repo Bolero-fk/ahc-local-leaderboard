@@ -7,6 +7,7 @@ import ahc_local_leaderboard.view.viewer as viewer
 from ahc_local_leaderboard.utils.relative_score_calculater import get_relative_score_calculator
 import ahc_local_leaderboard.database.relative_score_updater as relative_score_updater
 from ahc_local_leaderboard.utils.validator import Validator
+from ahc_local_leaderboard.utils.console_handler import ConsoleHandler
 
 def load_scoring_type():
     """config.yaml を読み込み、scoring_type に基づいた計算クラスを返す"""
@@ -48,7 +49,8 @@ def main():
         initializer.execute()
 
     if(not Validator.validate_file_structure()):
-        print("Structure validation failed. Please run the setup command.\n")
+        ConsoleHandler.print_error("Structure validation failed.")
+        ConsoleHandler.print_directive("local-leaderboard setup")
         return
 
     scoring_type = load_scoring_type()
@@ -73,7 +75,12 @@ def main():
             elif args.detail == "top":
                 viewer.show_top_detail()
             else:
-                print("Error: Please specify a valid ID, 'latest', or 'top'")
+                ConsoleHandler.print_error("Invalid argument for 'view --detail' option.")
+                ConsoleHandler.print_directives([
+                    "local-leaderboard view --detail <id>",
+                    "local-leaderboard view --detail latest",
+                    "local-leaderboard view --detail top"
+                ])
         else:
             viewer.show_summary_list(args.limit)
 

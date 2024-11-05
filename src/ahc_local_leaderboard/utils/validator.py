@@ -1,6 +1,7 @@
 import os
 
 from ahc_local_leaderboard.database.database_manager import ScoreHistoryRepository
+from ahc_local_leaderboard.utils.console_handler import ConsoleHandler
 
 class Validator:
     REQUIRED_DIRECTORIES = ['leader_board', 'leader_board/top']
@@ -18,7 +19,7 @@ class Validator:
     def _check_directories():
         missing_dirs = [d for d in Validator.REQUIRED_DIRECTORIES if not os.path.isdir(d)]
         if missing_dirs:
-            print(f"Missing directories: {', '.join(missing_dirs)}")
+            ConsoleHandler.print_error(f"Missing directories: {', '.join(missing_dirs)}")
             return False
         return True
 
@@ -26,7 +27,7 @@ class Validator:
     def _check_files():
         missing_files = [f for f in Validator.REQUIRED_FILES if not os.path.isfile(f)]
         if missing_files:
-            print(f"Missing files: {', '.join(missing_files)}")
+            ConsoleHandler.print_error(f"Missing files: {', '.join(missing_files)}")
             return False
         return True
 

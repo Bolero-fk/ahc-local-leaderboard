@@ -1,13 +1,12 @@
 from abc import ABC, abstractmethod
 from rich.table import Table
-from rich.console import Console
 
 from ahc_local_leaderboard.view.score_formatter import ScoreFormatter
+from ahc_local_leaderboard.utils.console_handler import ConsoleHandler
 
 class TableBuilder(ABC):
     def __init__(self, title):
         self.table = Table(title=title)
-        self.console = Console()
         self.define_header()
 
     @abstractmethod
@@ -22,8 +21,7 @@ class TableBuilder(ABC):
 
     def display(self):
         """テーブルを表示するメソッド"""
-        self.console.print(self.table)
-
+        ConsoleHandler.console.print(self.table)
 
 class SummaryTableBuilder(TableBuilder):
     def __init__(self, title, max_relative_score):
