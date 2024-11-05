@@ -15,10 +15,29 @@ python = "^3.10"
 pyyaml = "^6.0.2"
 rich = "^13.9.4"
 
-
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
 local-leaderboard = "ahc_local_leaderboard.main:main"
+
+[tool.poetry.group.dev.dependencies]
+black = { version = "^24.8.0", extras = ["lint"] }
+isort = { version = "^5.10.1", extras = ["lint"] }
+
+poethepoet = "^0.29.0"
+
+flake8 = { version = "^7.0.0", extras = ["lint"] }
+pyproject-flake8 = { version = "^7.0.0", extras = ["lint"] }
+
+[tool.poe.tasks]
+flake8 = "pflake8 --extend-ignore=E203,E701 --max-line-length=119 src/ahc_local_leaderboard"
+isort = "isort --profile black src/ahc_local_leaderboard"
+black = "black --line-length=119 src/ahc_local_leaderboard"
+mypy = "mypy --strict --ignore-missing-imports --no-site-packages src/ahc_local_leaderboard/ "
+format = ["isort", "black", "mypy", "flake8"]
+
+"lint:isort" = "isort --profile black --check-only --diff src/ahc_local_leaderboard"
+"lint:black" = "black --line-length=119 --diff --check src/ahc_local_leaderboard"
+lint = ["lint:isort", "lint:black", "mypy", "flake8"]

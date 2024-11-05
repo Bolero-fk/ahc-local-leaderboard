@@ -5,22 +5,24 @@ import yaml
 from ahc_local_leaderboard.database.database_manager import DatabaseManager
 
 
-def create_directories():
+def create_directories() -> None:
     """必要なディレクトリを作成する関数"""
     directories = ["leader_board", "leader_board/top"]
     for directory in directories:
         if not os.path.exists(directory):
             os.makedirs(directory)
 
-def initialize_database():
+
+def initialize_database() -> None:
     """SQLiteデータベースを初期化する関数"""
-    
+
     if not os.path.exists(DatabaseManager._DB_PATH):
         with DatabaseManager() as conn:
             cursor = conn.cursor()
 
             # スコア履歴テーブルの作成
-            cursor.execute('''
+            cursor.execute(
+                """
                 CREATE TABLE IF NOT EXISTS score_history (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     total_absolute_score INTEGER,
@@ -29,10 +31,12 @@ def initialize_database():
                     relative_rank INTEGER DEFAULT NULL,
                     submission_time DATETIME NOT NULL UNIQUE
                 )
-            ''')
+            """
+            )
 
             # テストケーステーブルの作成
-            cursor.execute('''
+            cursor.execute(
+                """
                 CREATE TABLE IF NOT EXISTS test_cases (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     test_case_input TEXT NOT NULL,
@@ -41,10 +45,12 @@ def initialize_database():
                     FOREIGN KEY (score_history_id) REFERENCES score_history(id) ON DELETE CASCADE,
                     UNIQUE(test_case_input, score_history_id)
                 )
-            ''')
+            """
+            )
 
             # トップスコアテーブルの作成
-            cursor.execute('''
+            cursor.execute(
+                """
                 CREATE TABLE IF NOT EXISTS top_scores (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     test_case_input TEXT NOT NULL UNIQUE,
@@ -54,9 +60,11 @@ def initialize_database():
                     score_history_id INTEGER NOT NULL,
                     FOREIGN KEY (score_history_id) REFERENCES score_history(id) ON DELETE SET NULL
                 )
-            ''')
+            """
+            )
 
-def create_config_file():
+
+def create_config_file() -> None:
     """スコア設定の選択をユーザーに求め、config.yaml ファイルを作成する関数"""
     config_path = "leader_board/config.yaml"
 
@@ -75,8 +83,9 @@ def create_config_file():
         with open(config_path, "w") as file:
             yaml.dump(config_data, file)
 
-def execute():
+
+def execute() -> None:
     """3つの初期化処理をまとめて実行する関数"""
-    create_directories()       # ディレクトリ作成
-    initialize_database()      # データベース初期化
-    create_config_file()       # 設定ファイル作成
+    create_directories()  # ディレクトリ作成
+    initialize_database()  # データベース初期化
+    create_config_file()  # 設定ファイル作成

@@ -1,4 +1,5 @@
 import re
+from typing import Optional
 
 from rich.text import Text
 
@@ -7,7 +8,7 @@ class ScoreFormatter:
     """スコアの見た目を整形する専用クラス"""
 
     @staticmethod
-    def format_total_absolute_score(total_absolute_score, invalid_score_count=0):
+    def format_total_absolute_score(total_absolute_score: int, invalid_score_count: int = 0) -> Text:
         """Total Absolute Scoreの表示を調整"""
         abs_score_text = Text(str(total_absolute_score), style="white")
         if invalid_score_count > 0:
@@ -15,17 +16,17 @@ class ScoreFormatter:
         return abs_score_text
 
     @staticmethod
-    def format_absolute_score(absolute_score):
+    def format_absolute_score(absolute_score: Optional[int]) -> Text:
         """絶対スコアの表示を生成します"""
         return Text(str(absolute_score), style="white" if str(absolute_score).isdigit() else "red")
 
     @staticmethod
-    def exponential_interpolation(start, end, t):
+    def exponential_interpolation(start: float, end: float, t: float) -> int:
         """指数関数的な補間を実行する関数"""
-        return int(start + (end - start) * (t ** 2))
+        return int(start + (end - start) * (t**2))
 
     @staticmethod
-    def get_gradient_color(relative_score, max_score):
+    def get_gradient_color(relative_score: int, max_score: int) -> str:
         """relative_score の値に応じて赤→黄色→緑のグラデーションを生成する関数"""
         color_thr = max_score * 0.9
 
@@ -43,25 +44,28 @@ class ScoreFormatter:
             blue = 0
 
         return f"rgb({int(red)},{int(green)},{int(blue)})"
-    
+
     @staticmethod
-    def format_relative_score(relative_score, max_score):
+    def format_relative_score(relative_score: int, max_score: int) -> Text:
         """相対スコアの表示をグラデーションカラーで整形"""
         relative_score_color = ScoreFormatter.get_gradient_color(relative_score, max_score)
         return Text(str(relative_score), style=relative_score_color)
 
+    # TODO
     @staticmethod
-    def format_score_diff(absolute_score, top_score):
+    def format_score_diff(absolute_score: Optional[int], top_score: Optional[int]) -> Text:
         """トップスコアとの差分の表示を生成します"""
-        score_difference = abs(absolute_score - top_score) if absolute_score is not None and top_score is not None else "None"
+        score_difference = (
+            abs(absolute_score - top_score) if absolute_score is not None and top_score is not None else "None"
+        )
         return Text(str(score_difference), style="white" if str(score_difference).isdigit() else "red")
 
     @staticmethod
-    def format_test_case_input(test_case_input):
+    def format_test_case_input(test_case_input: str) -> Text:
         """Test Case Inputの数値部分を青色でフォーマットする"""
         input_text = Text()
-        for part in re.split(r'(\d+|\.)', test_case_input):
-            if part.isdigit() or part == '.':
+        for part in re.split(r"(\d+|\.)", test_case_input):
+            if part.isdigit() or part == ".":
                 input_text.append(part, style="bold cyan")
             else:
                 input_text.append(part, style="white")

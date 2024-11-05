@@ -5,28 +5,28 @@ class ConsoleHandler:
     console = Console()
 
     @staticmethod
-    def print_error(message):
+    def print_error(message: str) -> None:
         """赤字のエラーメッセージを表示"""
         ConsoleHandler.console.print(f"[bold red]Error:[/] {message}")
 
     @staticmethod
-    def print_success(message):
+    def print_success(message: str) -> None:
         """緑字の成功メッセージを表示"""
         ConsoleHandler.console.print(f"[bold green]{message}[/]")
 
     @staticmethod
-    def print_info(message):
+    def print_info(message: str) -> None:
         """青字の情報メッセージを表示"""
         ConsoleHandler.console.print(f"[bold cyan]{message}[/]")
 
     @staticmethod
-    def print_directive(command):
+    def print_directive(command: str) -> None:
         """ユーザーが実行すべきコマンドの指示を表示"""
         ConsoleHandler.console.print("Please run the following command:", style="yellow")
         ConsoleHandler.console.print(f"  $ {command}", style="bold cyan")
 
     @staticmethod
-    def print_directives(commands):
+    def print_directives(commands: list[str]) -> None:
         """ユーザーが実行すべき複数のコマンドの指示を表示"""
         ConsoleHandler.console.print("Please run one of the following commands:", style="yellow")
         for command in commands:

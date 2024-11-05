@@ -1,4 +1,5 @@
 import argparse
+from typing import Any, Dict
 
 import yaml
 
@@ -13,47 +14,44 @@ from ahc_local_leaderboard.utils.relative_score_calculater import (
 from ahc_local_leaderboard.utils.validator import Validator
 
 
-def load_scoring_type():
+def load_scoring_type() -> str:
     """config.yaml を読み込み、scoring_type に基づいた計算クラスを返す"""
     with open("leader_board/config.yaml", "r") as file:
-        config = yaml.safe_load(file)
-    
-    return config.get("scoring_type", "Minimization")
+        config: Dict[str, Any] = yaml.safe_load(file)
 
-def main():
+    return str(config.get("scoring_type", "Minimization"))
+
+
+def main() -> None:
     parser = argparse.ArgumentParser(description="Local Lederboard")
-    
-    subparsers = parser.add_subparsers(dest='command', help='Available commands')
-    
-    subparsers.add_parser('setup', help='Setup the local leaderboard')
 
-    submit_parser = subparsers.add_parser('submit', help='Submit output to the local leaderboard')
-    submit_parser.add_argument('--submit-file', type=str, help='Specify the submit file to submit')
+    subparsers = parser.add_subparsers(dest="command", help="Available commands")
 
-    view_parser = subparsers.add_parser('view', help='View score history and test case details')
+    subparsers.add_parser("setup", help="Setup the local leaderboard")
+
+    submit_parser = subparsers.add_parser("submit", help="Submit output to the local leaderboard")
+    submit_parser.add_argument("--submit-file", type=str, help="Specify the submit file to submit")
+
+    view_parser = subparsers.add_parser("view", help="View score history and test case details")
 
     view_parser.add_argument(
-        'limit',
-        help='Specify the number of score history entries to display',
-        type=int,
-        nargs='?',
-        default=10
+        "limit", help="Specify the number of score history entries to display", type=int, nargs="?", default=10
     )
 
     view_parser.add_argument(
-        '--detail',
-        help='Specify the submission Id to view details (can specify ID, latest, or top)',
+        "--detail",
+        help="Specify the submission Id to view details (can specify ID, latest, or top)",
         type=str,
-        metavar="<id>"
+        metavar="<id>",
     )
 
     args = parser.parse_args()
 
-    if args.command == 'setup':
+    if args.command == "setup":
         initializer.execute()
         return
 
-    if(not Validator.validate_file_structure()):
+    if not Validator.validate_file_structure():
         ConsoleHandler.print_error("Structure validation failed.")
         ConsoleHandler.print_directive("local-leaderboard setup")
         return
@@ -61,7 +59,7 @@ def main():
     scoring_type = load_scoring_type()
     relative_score_calculator = get_relative_score_calculator(scoring_type)
 
-    if args.command == 'submit':
+    if args.command == "submit":
         submitter = Submitter(relative_score_calculator)
         if args.submit_file:
             submitter.execute(submit_file_path=args.submit_file)
@@ -71,7 +69,7 @@ def main():
         relative_score_updater.update_relative_score(relative_score_calculator)
         relative_score_updater.update_relative_ranks()
 
-    elif args.command == 'view':
+    elif args.command == "view":
         if args.detail:
             if args.detail.isdigit() and Validator.validate_id_exists(int(args.detail)):
                 viewer.show_detail(int(args.detail), relative_score_calculator)
@@ -81,16 +79,19 @@ def main():
                 viewer.show_top_detail()
             else:
                 ConsoleHandler.print_error("Invalid argument for 'view --detail' option.")
-                ConsoleHandler.print_directives([
-                    "local-leaderboard view --detail <id>",
-                    "local-leaderboard view --detail latest",
-                    "local-leaderboard view --detail top"
-                ])
+                ConsoleHandler.print_directives(
+                    [
+                        "local-leaderboard view --detail <id>",
+                        "local-leaderboard view --detail latest",
+                        "local-leaderboard view --detail top",
+                    ]
+                )
         else:
             viewer.show_summary_list(args.limit)
 
     else:
         parser.print_help()
+
 
 if __name__ == "__main__":
     main()
