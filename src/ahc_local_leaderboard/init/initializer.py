@@ -1,7 +1,9 @@
 import os
+
 import yaml
 
-from ahc_local_leaderboard.database.database_manager import DatabaseManager 
+from ahc_local_leaderboard.database.database_manager import DatabaseManager
+
 
 def create_directories():
     """必要なディレクトリを作成する関数"""
@@ -72,7 +74,7 @@ def create_config_file():
         config_data = {"scoring_type": scoring_type}
         with open(config_path, "w") as file:
             yaml.dump(config_data, file)
-        
+
 def execute():
     """3つの初期化処理をまとめて実行する関数"""
     create_directories()       # ディレクトリ作成

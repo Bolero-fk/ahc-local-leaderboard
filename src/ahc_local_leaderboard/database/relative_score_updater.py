@@ -1,5 +1,10 @@
-from ahc_local_leaderboard.database.database_manager import ScoreHistoryRepository, TestCaseRepository, TopScoresRepository
-    
+from ahc_local_leaderboard.database.database_manager import (
+    ScoreHistoryRepository,
+    TestCaseRepository,
+    TopScoresRepository,
+)
+
+
 def calculate_total_relative_score_diff (relative_score_calculator, non_latest_record, updated_top_scores):
     """指定された score_history_id と更新が必要なトップスコアから相対スコアを計算する"""
 

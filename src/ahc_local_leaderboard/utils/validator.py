@@ -3,6 +3,7 @@ import os
 from ahc_local_leaderboard.database.database_manager import ScoreHistoryRepository
 from ahc_local_leaderboard.utils.console_handler import ConsoleHandler
 
+
 class Validator:
     REQUIRED_DIRECTORIES = ['leader_board', 'leader_board/top']
     REQUIRED_FILES = ['leader_board/leader_board.db', 'leader_board/config.yaml']

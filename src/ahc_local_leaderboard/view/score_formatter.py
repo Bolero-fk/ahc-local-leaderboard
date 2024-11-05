@@ -1,5 +1,7 @@
 import re
+
 from rich.text import Text
+
 
 class ScoreFormatter:
     """スコアの見た目を整形する専用クラス"""

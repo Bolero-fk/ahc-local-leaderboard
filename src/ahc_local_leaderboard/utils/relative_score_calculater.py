@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+
 class RelativeScoreCalculaterInterface(ABC):
     @abstractmethod
     def calculate_relative_score(self, testcase_score, top_score):

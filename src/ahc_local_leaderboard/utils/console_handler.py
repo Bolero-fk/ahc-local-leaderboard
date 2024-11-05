@@ -1,5 +1,6 @@
 from rich.console import Console
 
+
 class ConsoleHandler:
     console = Console()
 

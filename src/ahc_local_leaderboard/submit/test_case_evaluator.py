@@ -5,6 +5,7 @@ from rich.progress import track
 
 from ahc_local_leaderboard.models.test_case import TestCase
 
+
 def is_valid_output(stdout):
     """標準出力が期待するフォーマットか確認する関数"""
     return len(stdout.decode('utf-8').split('\n')) == 2
@@ -39,7 +40,7 @@ def calculate_all_scores(submit_file):
             test_case_scores.append(TestCase(sample_path, score))
 
     return test_case_scores
-                
+
 
 def execute(submit_file='out'):
     return calculate_all_scores(submit_file)
