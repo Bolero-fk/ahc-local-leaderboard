@@ -1,4 +1,3 @@
-import shutil
 from datetime import datetime
 from typing import Optional, Tuple
 
@@ -15,20 +14,10 @@ from ahc_local_leaderboard.models.detail_score_record import (
 )
 from ahc_local_leaderboard.models.summary_score_record import SummaryScoreRecord
 from ahc_local_leaderboard.models.test_case import TestCase
+from ahc_local_leaderboard.utils.file_utility import FiliUtility
 from ahc_local_leaderboard.utils.relative_score_calculater import (
     RelativeScoreCalculaterInterface,
 )
-
-
-# TODO
-def copy_output_file(submit_file: str, test_case: TestCase) -> None:
-    output_file = f"{submit_file}/{test_case.file_name}"
-    dest_file = f"leader_board/top/{test_case.file_name}"
-
-    try:
-        shutil.copy(output_file, dest_file)
-    except Exception as e:
-        print(f"Failed to copy file {output_file}: {e}")
 
 
 class Submitter:
@@ -62,7 +51,7 @@ class Submitter:
 
         if is_topscore_case:
             TopScoresRepository.update_top_score(test_case, score_history_id)
-            copy_output_file(self.submit_file_path, test_case)
+            FiliUtility.copy_submit_file_to_leaderboard(self.submit_file_path, test_case)
 
         new_top_score = test_case.score if is_topscore_case else top_score
         return new_top_score
