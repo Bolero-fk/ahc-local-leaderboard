@@ -15,6 +15,7 @@ python = "^3.10"
 pyyaml = "^6.0.2"
 rich = "^13.9.4"
 pytest = "^8.3.3"
+mypy = "^1.13.0"
 
 [build-system]
 requires = ["poetry-core"]
@@ -33,12 +34,12 @@ flake8 = { version = "^7.0.0", extras = ["lint"] }
 pyproject-flake8 = { version = "^7.0.0", extras = ["lint"] }
 
 [tool.poe.tasks]
-flake8 = "pflake8 --extend-ignore=E203,E701 --max-line-length=119 src/ahc_local_leaderboard"
-isort = "isort --profile black src/ahc_local_leaderboard"
-black = "black --line-length=119 src/ahc_local_leaderboard"
-mypy = "mypy --strict --ignore-missing-imports --no-site-packages src/ahc_local_leaderboard/ "
+flake8 = "pflake8 --extend-ignore=E203,E701 --max-line-length=119 src/ahc_local_leaderboard tests"
+isort = "isort --profile black src/ahc_local_leaderboard tests"
+black = "black --line-length=119 src/ahc_local_leaderboard tests"
+mypy = "mypy --strict --ignore-missing-imports --no-site-packages --allow-untyped-decorators src/ahc_local_leaderboard tests"
 format = ["isort", "black", "mypy", "flake8"]
 
-"lint:isort" = "isort --profile black --check-only --diff src/ahc_local_leaderboard"
-"lint:black" = "black --line-length=119 --diff --check src/ahc_local_leaderboard"
+"lint:isort" = "isort --profile black --check-only --diff src/ahc_local_leaderboard tests"
+"lint:black" = "black --line-length=119 --diff --check src/ahc_local_leaderboard tests"
 lint = ["lint:isort", "lint:black", "mypy", "flake8"]
