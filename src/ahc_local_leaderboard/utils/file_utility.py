@@ -1,3 +1,4 @@
+import os
 import shutil
 
 from ahc_local_leaderboard.models.test_case import TestCase
@@ -5,6 +6,17 @@ from ahc_local_leaderboard.utils.validator import Validator
 
 
 class FiliUtility:
+
+    @staticmethod
+    def path_exists(path: str) -> bool:
+        """指定されたパスが存在するかを確認します"""
+        return os.path.exists(path)
+
+    @staticmethod
+    def try_create_directory(directory_path: str) -> None:
+        """指定されたディレクトリが存在しない場合のみディレクトリを作成します"""
+        os.makedirs(directory_path, exist_ok=True)
+
     @staticmethod
     def copy_submit_file_to_leaderboard(submit_path: str, test_case: TestCase) -> None:
         """入力された提出ファイルを順位表ディレクトリにコピーします"""
