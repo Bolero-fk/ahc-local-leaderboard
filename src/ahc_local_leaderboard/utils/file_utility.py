@@ -5,7 +5,7 @@ from ahc_local_leaderboard.models.test_case import TestCase
 from ahc_local_leaderboard.utils.validator import Validator
 
 
-class FiliUtility:
+class FileUtility:
 
     @staticmethod
     def path_exists(path: str) -> bool:

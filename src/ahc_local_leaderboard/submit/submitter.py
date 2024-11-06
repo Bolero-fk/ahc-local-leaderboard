@@ -14,7 +14,7 @@ from ahc_local_leaderboard.models.detail_score_record import (
 )
 from ahc_local_leaderboard.models.summary_score_record import SummaryScoreRecord
 from ahc_local_leaderboard.models.test_case import TestCase
-from ahc_local_leaderboard.utils.file_utility import FiliUtility
+from ahc_local_leaderboard.utils.file_utility import FileUtility
 from ahc_local_leaderboard.utils.relative_score_calculater import (
     RelativeScoreCalculaterInterface,
 )
@@ -51,7 +51,7 @@ class Submitter:
 
         if is_topscore_case:
             TopScoresRepository.update_top_score(test_case, score_history_id)
-            FiliUtility.copy_submit_file_to_leaderboard(self.submit_file_path, test_case)
+            FileUtility.copy_submit_file_to_leaderboard(self.submit_file_path, test_case)
 
         new_top_score = test_case.score if is_topscore_case else top_score
         return new_top_score

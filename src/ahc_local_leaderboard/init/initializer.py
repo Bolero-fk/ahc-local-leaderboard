@@ -1,20 +1,20 @@
 import yaml
 
 from ahc_local_leaderboard.database.database_manager import DatabaseManager
-from ahc_local_leaderboard.utils.file_utility import FiliUtility
+from ahc_local_leaderboard.utils.file_utility import FileUtility
 
 
 def create_directories() -> None:
     """必要なディレクトリを作成する関数"""
     directories = ["leader_board", "leader_board/top"]
     for directory in directories:
-        FiliUtility.try_create_directory(directory)
+        FileUtility.try_create_directory(directory)
 
 
 def initialize_database() -> None:
     """SQLiteデータベースを初期化する関数"""
 
-    if not FiliUtility.path_exists(DatabaseManager._DB_PATH):
+    if not FileUtility.path_exists(DatabaseManager._DB_PATH):
         with DatabaseManager() as conn:
             cursor = conn.cursor()
 
@@ -66,7 +66,7 @@ def create_config_file() -> None:
     """スコア設定の選択をユーザーに求め、config.yaml ファイルを作成する関数"""
     config_path = "leader_board/config.yaml"
 
-    if not FiliUtility.path_exists(config_path):
+    if not FileUtility.path_exists(config_path):
         # ユーザーにスコア設定の選択を促す
         print("スコアの計算方法を選択してください:")
         print("1: Maximization（スコアが高い方が良い）")
