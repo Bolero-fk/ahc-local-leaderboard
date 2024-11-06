@@ -5,34 +5,42 @@ from ahc_local_leaderboard.utils.validator import Validator
 
 
 class RelativeScoreCalculaterInterface(ABC):
+    MIN_SCORE = 0
+    MAX_SCORE = round(pow(10, 9))
 
     @abstractmethod
-    def score_ratio(self, testcase_score: int, top_score: int) -> float:
+    def score_ratio(self, a: int, b: int) -> float:
         """スコアの比率を計算します"""
         pass
 
     @abstractmethod
-    def compare_scores(self, testcase_score: int, top_score: int) -> bool:
+    def compare_scores(self, a: int, b: int) -> bool:
         """スコアの比較を計算します"""
         pass
 
     def calculate_relative_score(self, testcase_score: Optional[int], top_score: Optional[int]) -> int:
         """相対スコアを計算します"""
         if top_score is None:
-            return round(pow(10, 9))
+            return self.MAX_SCORE
         if testcase_score is None:
-            return 0
-        return round(pow(10, 9) * self.score_ratio(testcase_score, top_score))
+            return self.MIN_SCORE
 
-    def is_better_score(self, testcase_score: Optional[int], top_score: Optional[int]) -> bool:
-        """スコアの優劣を判断します"""
-        if top_score is None:
+        if testcase_score != top_score and not self.is_better_score(top_score, testcase_score):
+            raise ValueError(
+                f"Invalid top score: top_score={top_score} should be better than testcase_score={testcase_score}"
+            )
+
+        return round(self.MAX_SCORE * self.score_ratio(testcase_score, top_score))
+
+    def is_better_score(self, a: Optional[int], b: Optional[int]) -> bool:
+        """スコアaがスコアbより優れているかを判断します"""
+        if b is None:
             return True
 
-        if testcase_score is None:
+        if a is None:
             return False
 
-        return self.compare_scores(testcase_score, top_score)
+        return self.compare_scores(a, b)
 
     def __call__(self, testcase_score: Optional[int], top_score: Optional[int]) -> int:
         return self.calculate_relative_score(testcase_score, top_score)
@@ -40,20 +48,20 @@ class RelativeScoreCalculaterInterface(ABC):
 
 class MaximizationScoring(RelativeScoreCalculaterInterface):
 
-    def score_ratio(self, testcase_score: int, top_score: int) -> float:
-        return testcase_score / top_score
+    def score_ratio(self, a: int, b: int) -> float:
+        return a / b
 
-    def compare_scores(self, testcase_score: int, top_score: int) -> bool:
-        return testcase_score > top_score
+    def compare_scores(self, a: int, b: int) -> bool:
+        return a > b
 
 
 class MinimizationScoring(RelativeScoreCalculaterInterface):
 
-    def score_ratio(self, testcase_score: int, top_score: int) -> float:
-        return top_score / testcase_score
+    def score_ratio(self, a: int, b: int) -> float:
+        return b / a
 
-    def compare_scores(self, testcase_score: int, top_score: int) -> bool:
-        return testcase_score < top_score
+    def compare_scores(self, a: int, b: int) -> bool:
+        return a < b
 
 
 def get_relative_score_calculator(scoring_type: str) -> RelativeScoreCalculaterInterface:
