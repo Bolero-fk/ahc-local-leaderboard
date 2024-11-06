@@ -18,19 +18,38 @@ class FileUtility:
         os.makedirs(directory_path, exist_ok=True)
 
     @staticmethod
-    def copy_submit_file_to_leaderboard(submit_path: str, test_case: TestCase) -> None:
-        """入力された提出ファイルを順位表ディレクトリにコピーします"""
-
-        submit_file = f"{submit_path}/{test_case.file_name}"
-        if not Validator.check_file(submit_file):
-            raise FileNotFoundError(f"Submit file '{submit_file}' does not exist and could not be validated.")
-
-        dest_dir = "leader_board/top"
-        if not Validator.check_directory(dest_dir):
-            raise FileNotFoundError(f"Destination directory '{dest_dir}' does not exist and could not be validated.")
-
-        dest_file = f"{dest_dir}/{test_case.file_name}"
+    def copy_file(src: str, dest: str) -> None:
+        """指定されたファイルをコピーします"""
         try:
-            shutil.copy(submit_file, dest_file)
+            shutil.copy(src, dest)
         except Exception as e:
-            raise IOError(f"Failed to copy file from '{submit_file}' to '{dest_file}': {e}")
+            raise IOError(f"Failed to copy file from '{src}' to '{dest}': {e}")
+
+    @staticmethod
+    def get_submit_file_path(submit_dir_path: str, test_case: TestCase) -> str:
+        """test_caseで指定されている提出ファイルのパスを取得します"""
+        submit_file_path = f"{submit_dir_path}/{test_case.file_name}"
+        if not Validator.check_file(submit_file_path):
+            raise FileNotFoundError(f"Submit file '{submit_file_path}' does not exist and could not be validated.")
+
+        return submit_file_path
+
+    @staticmethod
+    def get_top_file_path(test_case: TestCase) -> str:
+        """test_caseで指定されている提出ファイルのトップケースのパスを取得します"""
+        top_directory_path = "leader_board/top"
+        if not Validator.check_directory(top_directory_path):
+            raise FileNotFoundError(
+                f"Destination directory '{top_directory_path}' does not exist and could not be validated."
+            )
+
+        top_file_path = f"{top_directory_path}/{test_case.file_name}"
+
+        return top_file_path
+
+    @staticmethod
+    def copy_submit_file_to_leaderboard(submit_dir_path: str, test_case: TestCase) -> None:
+        """入力された提出ファイルを順位表ディレクトリにコピーします"""
+        submit_file_path = FileUtility.get_submit_file_path(submit_dir_path, test_case)
+        top_file_path = FileUtility.get_top_file_path(test_case)
+        FileUtility.copy_file(submit_file_path, top_file_path)
