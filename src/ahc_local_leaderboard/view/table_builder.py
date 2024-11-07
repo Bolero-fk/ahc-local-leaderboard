@@ -115,5 +115,5 @@ class TopDetailTableBuilder(TableBuilder[TopDetailScoreRecord]):
         self.table.add_row(
             ScoreFormatter.format_test_case_input(record.input_test_case),
             ScoreFormatter.format_absolute_score(record.absolute_score),
-            str(record.id),
+            str(record.submittion_id),
         )

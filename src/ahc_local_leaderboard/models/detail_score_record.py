@@ -11,9 +11,10 @@ class DetailScoreRecord:
 
 class TopDetailScoreRecord(DetailScoreRecord):
 
-    def __init__(self, input_test_case: str, top_score: Optional[int], id: int) -> None:
+    def __init__(self, input_test_case: str, top_score: Optional[int], submittion_id: int) -> None:
+        assert 0 < submittion_id
         super().__init__(input_test_case, top_score, top_score)
-        self.id = id
+        self.submittion_id = submittion_id
 
 
 T = TypeVar("T", bound=DetailScoreRecord)
@@ -21,5 +22,10 @@ T = TypeVar("T", bound=DetailScoreRecord)
 
 class DetailScoreRecords(Generic[T]):
     def __init__(self, id: Union[int, str], records: list[T]) -> None:
+        if isinstance(id, int):
+            assert 0 < id
+        elif isinstance(id, str):
+            assert id == "Top"
+
         self.id = id
         self.records = records
