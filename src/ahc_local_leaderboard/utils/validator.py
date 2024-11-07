@@ -50,11 +50,3 @@ class Validator:
     def validate_id_exists(id: int) -> bool:
         """指定されたscore_history_idがscore_historyテーブルに存在するか確認"""
         return ScoreHistoryRepository.exists_id(id)
-
-    @staticmethod
-    def validate_scoring_type(scoring_type: str) -> bool:
-        valid_scoring_types = ["Maximization", "Minimization"]
-        if scoring_type not in valid_scoring_types:
-            ConsoleHandler.print_error(f"Not Found Scoring Type: {scoring_type}")
-            return False
-        return True

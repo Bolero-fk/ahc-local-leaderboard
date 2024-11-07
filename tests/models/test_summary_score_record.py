@@ -1,12 +1,22 @@
+from typing import Optional
+
+import pytest
+
 from ahc_local_leaderboard.models.detail_score_record import DetailScoreRecord
-from ahc_local_leaderboard.models.summary_score_record import (  # 実際のモジュール名に変更
+from ahc_local_leaderboard.models.summary_score_record import (
     SummaryScoreRecord,
     SummaryScoreRecords,
     TopSummaryScoreRecord,
 )
 
 
-def check_summary_score_record_attributes(
+@pytest.mark.parametrize("id", [1, 1000])
+@pytest.mark.parametrize("submission_time", ["2023-01-01 10:00:00", "today"])
+@pytest.mark.parametrize("total_absolute_score", [-100000, 0, 100000])
+@pytest.mark.parametrize("total_relative_score", [0, 100000])
+@pytest.mark.parametrize("invalid_score_count", [0, 100000])
+@pytest.mark.parametrize("relative_rank", [None, 1, 100000])
+def test_summary_score_record_initialization(
     id: int,
     submission_time: str,
     total_absolute_score: int,
@@ -25,12 +35,30 @@ def check_summary_score_record_attributes(
     assert record.relative_rank == relative_rank
 
 
-def test_summary_score_record_initialization() -> None:
-    # SummaryScoreRecord の初期化と属性確認
-    check_summary_score_record_attributes(1, "2023-01-01 10:00:00", 500, 800, 2, 5)
+@pytest.mark.parametrize("id", [-1000, -1])
+@pytest.mark.parametrize("submission_time", ["2023-01-01 10:00:00", "today"])
+@pytest.mark.parametrize("total_absolute_score", [-100000, 0, 100000])
+@pytest.mark.parametrize("total_relative_score", [-100000, -1])
+@pytest.mark.parametrize("invalid_score_count", [-100000, -1])
+@pytest.mark.parametrize("relative_rank", [-100000, 0])
+def test_summary_score_record_initialization_assertions(
+    id: int,
+    submission_time: str,
+    total_absolute_score: int,
+    total_relative_score: int,
+    invalid_score_count: int,
+    relative_rank: int,
+) -> None:
+    with pytest.raises(AssertionError):
+        SummaryScoreRecord(
+            id, submission_time, total_absolute_score, total_relative_score, invalid_score_count, relative_rank
+        )
 
 
-def check_top_summary_score_record_attributes(
+@pytest.mark.parametrize("total_absolute_score", [-100000, 0, 100000])
+@pytest.mark.parametrize("total_relative_score", [0, 100000])
+@pytest.mark.parametrize("invalid_score_count", [0, 100000])
+def test_top_summary_score_record_initialization(
     total_absolute_score: int,
     total_relative_score: int,
     invalid_score_count: int,
@@ -41,56 +69,65 @@ def check_top_summary_score_record_attributes(
     assert record.invalid_score_count == invalid_score_count
 
 
-def test_top_summary_score_record_initialization() -> None:
-    # TopSummaryScoreRecord の初期化と属性確認
-    check_top_summary_score_record_attributes(1000, 1500, 3)
+@pytest.mark.parametrize("total_absolute_score", [-100000, 0, 100000])
+@pytest.mark.parametrize("total_relative_score", [-100000, -1])
+@pytest.mark.parametrize("invalid_score_count", [-100000, -1])
+def test_top_summary_score_record_initialization_assertions(
+    total_absolute_score: int,
+    total_relative_score: int,
+    invalid_score_count: int,
+) -> None:
+    with pytest.raises(AssertionError):
+        TopSummaryScoreRecord(total_absolute_score, total_relative_score, invalid_score_count)
 
 
-def test_summary_score_record_add_score() -> None:
-    # add_score メソッドのテスト
+@pytest.mark.parametrize("absolute_score1", [None, 0, 100])
+@pytest.mark.parametrize("absolute_score2", [None, 0, 100])
+@pytest.mark.parametrize("relative_score1", [-100, 0, 100])
+@pytest.mark.parametrize("relative_score2", [-100, 0, 100])
+def test_summary_score_record_add_score(
+    absolute_score1: Optional[int], absolute_score2: Optional[int], relative_score1: int, relative_score2: int
+) -> None:
+    total_absolute_score = 100
+    total_relative_score = 100
+    invalid_score_count = 0
     record = SummaryScoreRecord(
         id=1,
         submission_time="2023-01-01 10:00:00",
-        total_absolute_score=500,
-        total_relative_score=800,
-        invalid_score_count=0,
+        total_absolute_score=total_absolute_score,
+        total_relative_score=total_relative_score,
+        invalid_score_count=invalid_score_count,
         relative_rank=5,
     )
 
-    # absolute_score が存在する DetailScoreRecord の追加
-    detail_record = DetailScoreRecord("test_case_1", 100, 200)
-    record.add_score(detail_record, relative_score=150)
-    assert record.total_absolute_score == 600
-    assert record.total_relative_score == 950
-    assert record.invalid_score_count == 0
+    detail_record1 = DetailScoreRecord("test_case_1", absolute_score1, 200)
+    record.add_score(detail_record1, relative_score=relative_score1)
+    if isinstance(absolute_score1, int):
+        total_absolute_score += absolute_score1
+    else:
+        invalid_score_count += 1
+    total_relative_score += relative_score1
 
-    # absolute_score が None の DetailScoreRecord の追加
-    detail_record_with_none = DetailScoreRecord("test_case_2", None, 200)
-    record.add_score(detail_record_with_none, relative_score=100)
-    assert record.total_absolute_score == 600
-    assert record.total_relative_score == 1050
-    assert record.invalid_score_count == 1
+    assert record.total_absolute_score == total_absolute_score
+    assert record.total_relative_score == total_relative_score
+    assert record.invalid_score_count == invalid_score_count
+
+    detail_record2 = DetailScoreRecord("test_case_2", absolute_score2, 200)
+    record.add_score(detail_record2, relative_score=relative_score2)
+    if isinstance(absolute_score2, int):
+        total_absolute_score += absolute_score2
+    else:
+        invalid_score_count += 1
+    total_relative_score += relative_score2
+
+    assert record.total_absolute_score == total_absolute_score
+    assert record.total_relative_score == total_relative_score
+    assert record.invalid_score_count == invalid_score_count
 
 
-def test_summary_score_records_initialization() -> None:
-    # SummaryScoreRecords の初期化と属性確認
-    record1 = SummaryScoreRecord(
-        id=1,
-        submission_time="2023-01-01 10:00:00",
-        total_absolute_score=500,
-        total_relative_score=800,
-        invalid_score_count=2,
-        relative_rank=5,
-    )
-    record2 = SummaryScoreRecord(
-        id=2,
-        submission_time="2023-01-01 11:00:00",
-        total_absolute_score=700,
-        total_relative_score=900,
-        invalid_score_count=1,
-        relative_rank=3,
-    )
-    summary_records = SummaryScoreRecords(records=[record1, record2])
-    assert len(summary_records.records) == 2
-    assert summary_records.records[0].id == 1
-    assert summary_records.records[1].id == 2
+@pytest.mark.parametrize("record_count", [0, 1, 10])
+def test_summary_score_records_initialization(record_count: int) -> None:
+
+    records = [SummaryScoreRecord(i + 1, f"test_case_{i}", i * 100, i * 200, 0, i + 1) for i in range(record_count)]
+    summary_records = SummaryScoreRecords(records=records)
+    assert len(summary_records.records) == record_count

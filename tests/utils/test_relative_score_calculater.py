@@ -1,4 +1,4 @@
-from unittest.mock import Mock, patch
+from typing import Optional
 
 import pytest
 
@@ -10,66 +10,77 @@ from ahc_local_leaderboard.utils.relative_score_calculater import (
 )
 
 
-def test_maximization_calculate_relative_score() -> None:
+@pytest.mark.parametrize("score", [None, -100, 0, 500, 1000])
+@pytest.mark.parametrize("top_score", [None, -100, 0, 500, 1000])
+def test_maximization_calculate_relative_score(score: Optional[int], top_score: Optional[int]) -> None:
     maximization = MaximizationScoring()
 
-    # 正常な計算
-    assert maximization.calculate_relative_score(500, 1000) == 500_000_000
-    assert maximization.calculate_relative_score(500, 500) == RelativeScoreCalculaterInterface.MAX_SCORE
-    assert maximization.calculate_relative_score(None, 1000) == RelativeScoreCalculaterInterface.MIN_SCORE
-    assert maximization.calculate_relative_score(500, None) == RelativeScoreCalculaterInterface.MAX_SCORE
+    if not isinstance(top_score, int):
+        assert maximization(score, top_score) == RelativeScoreCalculaterInterface.MAX_SCORE
+    elif not isinstance(score, int):
+        assert maximization(score, top_score) == RelativeScoreCalculaterInterface.MIN_SCORE
+    elif score <= 0 or top_score <= 0:
+        with pytest.raises(AssertionError):
+            maximization(score, top_score)
+    elif score > top_score:
+        with pytest.raises(AssertionError):
+            maximization(score, top_score)
+    else:
+        assert maximization(score, top_score) == round(RelativeScoreCalculaterInterface.MAX_SCORE * score / top_score)
 
-    # 無効な比較の場合
-    with pytest.raises(ValueError, match="Invalid top score"):
-        maximization.calculate_relative_score(500, 400)
 
-
-def test_minimization_calculate_relative_score() -> None:
+@pytest.mark.parametrize("score", [None, -100, 0, 500, 1000])
+@pytest.mark.parametrize("top_score", [None, -100, 0, 500, 1000])
+def test_minimization_calculate_relative_score(score: Optional[int], top_score: Optional[int]) -> None:
     minimization = MinimizationScoring()
 
-    # 正常な計算
-    assert minimization.calculate_relative_score(1000, 500) == 500_000_000
-    assert minimization.calculate_relative_score(500, 500) == RelativeScoreCalculaterInterface.MAX_SCORE
-    assert minimization.calculate_relative_score(None, 1000) == RelativeScoreCalculaterInterface.MIN_SCORE
-    assert minimization.calculate_relative_score(500, None) == RelativeScoreCalculaterInterface.MAX_SCORE
+    if not isinstance(top_score, int):
+        assert minimization(score, top_score) == RelativeScoreCalculaterInterface.MAX_SCORE
+    elif not isinstance(score, int):
+        assert minimization(score, top_score) == RelativeScoreCalculaterInterface.MIN_SCORE
+    elif score <= 0 or top_score <= 0:
+        with pytest.raises(AssertionError):
+            minimization(score, top_score)
+    elif score < top_score:
+        with pytest.raises(AssertionError):
+            minimization(score, top_score)
+    else:
+        assert minimization(score, top_score) == round(RelativeScoreCalculaterInterface.MAX_SCORE * top_score / score)
 
-    # 無効な比較の場合
-    with pytest.raises(ValueError, match="Invalid top score"):
-        minimization.calculate_relative_score(500, 600)
 
-
-def test_maximization_is_better_score() -> None:
+@pytest.mark.parametrize("a", [None, -100, 0, 500, 1000])
+@pytest.mark.parametrize("b", [None, -100, 0, 500, 1000])
+def test_maximization_is_better_score(a: Optional[int], b: Optional[int]) -> None:
     maximization = MaximizationScoring()
 
-    # 比較が正しく行われるかの確認
-    assert maximization.is_better_score(600, 500) is True
-    assert maximization.is_better_score(400, 500) is False
-    assert maximization.is_better_score(500, 500) is False
-    assert maximization.is_better_score(500, None) is True
-    assert maximization.is_better_score(None, 500) is False
-    assert maximization.is_better_score(None, None) is True
+    if not isinstance(b, int):
+        assert maximization.is_better_score(a, b)
+    elif not isinstance(a, int):
+        assert not maximization.is_better_score(a, b)
+    else:
+        assert maximization.is_better_score(a, b) == (a > b)
 
 
-def test_minimization_is_better_score() -> None:
+@pytest.mark.parametrize("a", [None, -100, 0, 500, 1000])
+@pytest.mark.parametrize("b", [None, -100, 0, 500, 1000])
+def test_minimization_is_better_score(a: Optional[int], b: Optional[int]) -> None:
     minimization = MinimizationScoring()
 
-    # 比較が正しく行われるかの確認
-    assert minimization.is_better_score(600, 500) is False
-    assert minimization.is_better_score(400, 500) is True
-    assert minimization.is_better_score(500, 500) is False
-    assert minimization.is_better_score(500, None) is True
-    assert minimization.is_better_score(None, 500) is False
-    assert minimization.is_better_score(None, None) is True
+    if not isinstance(b, int):
+        assert minimization.is_better_score(a, b)
+    elif not isinstance(a, int):
+        assert not minimization.is_better_score(a, b)
+    else:
+        assert minimization.is_better_score(a, b) == (a < b)
 
 
-@patch("ahc_local_leaderboard.utils.validator.Validator.validate_scoring_type", return_value=True)
-def test_get_relative_score(mock_validator: Mock) -> None:
-    max_calculator = get_relative_score_calculator("Maximization")
-    assert isinstance(max_calculator, MaximizationScoring)
+@pytest.mark.parametrize("scoring_type", ["Maximization", "Minimization", "", "$%'-_@{}~`!#()'."])
+def test_get_relative_score(scoring_type: str) -> None:
 
-    min_calculator = get_relative_score_calculator("Minimization")
-    assert isinstance(min_calculator, MinimizationScoring)
-
-    mock_validator.return_value = False
-    with pytest.raises(ValueError, match="Not Found Scoring Type"):
-        get_relative_score_calculator("InvalidType")
+    if scoring_type == "Maximization":
+        assert isinstance(get_relative_score_calculator(scoring_type), MaximizationScoring)
+    elif scoring_type == "Minimization":
+        assert isinstance(get_relative_score_calculator(scoring_type), MinimizationScoring)
+    else:
+        with pytest.raises(AssertionError):
+            get_relative_score_calculator(scoring_type)

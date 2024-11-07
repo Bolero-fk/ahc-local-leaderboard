@@ -30,7 +30,7 @@ class Submitter:
     ) -> Tuple[DetailScoreRecords[DetailScoreRecord], SummaryScoreRecord]:
         """各テストケースのスコアと記録を処理する"""
         detail_records = DetailScoreRecords[DetailScoreRecord](score_history_id, [])
-        score_record = SummaryScoreRecord(score_history_id, self.submission_time, 0, 0, 0, -1)
+        score_record = SummaryScoreRecord(score_history_id, self.submission_time, 0, 0, 0, None)
 
         for test_case in test_cases:
             new_top_score = self._try_update_top_score(test_case, score_history_id)

@@ -1,62 +1,55 @@
-from typing import Optional
+from typing import Optional, Union
 
-from ahc_local_leaderboard.models.detail_score_record import (  # 実際のモジュール名に変更
+import pytest
+
+from ahc_local_leaderboard.models.detail_score_record import (
     DetailScoreRecord,
     DetailScoreRecords,
     TopDetailScoreRecord,
 )
 
 
-def check_detail_score_record_attributes(
-    expected_file_name: str, expected_score: Optional[int], expected_top_score: Optional[int]
-) -> None:
-    record = DetailScoreRecord(expected_file_name, expected_score, expected_top_score)
-    assert record.input_test_case == expected_file_name
-    assert record.absolute_score == expected_score
-    assert record.top_score == expected_top_score
+@pytest.mark.parametrize("input", ["test1", "", "$%'-_@{}~`!#()'."])
+@pytest.mark.parametrize("score1", [None, -100000, -1, 0, 1, 100000])
+@pytest.mark.parametrize("score2", [None, -100000, -1, 0, 1, 100000])
+def test_detail_score_record_initialization(input: str, score1: Optional[int], score2: Optional[int]) -> None:
+    record = DetailScoreRecord(input, score1, score2)
+    assert record.input_test_case == input
+    assert record.absolute_score == score1
+    assert record.top_score == score2
 
 
-def check_top_detail_score_record_attributes(
-    expected_file_name: str, expected_top_score: Optional[int], expected_id: int
-) -> None:
-    top_record = TopDetailScoreRecord(expected_file_name, expected_top_score, expected_id)
-    assert top_record.input_test_case == expected_file_name
-    assert top_record.absolute_score == expected_top_score
-    assert top_record.top_score == expected_top_score
-    assert top_record.id == expected_id
+@pytest.mark.parametrize("input", ["test1", "", "$%'-_@{}~`!#()'."])
+@pytest.mark.parametrize("top_score", [None, -100000, -1, 0, 1, 100000])
+@pytest.mark.parametrize("id", [1, 100000])
+def test_top_detail_score_record_initialization(input: str, top_score: Optional[int], id: int) -> None:
+    top_record = TopDetailScoreRecord(input, top_score, id)
+    assert top_record.input_test_case == input
+    assert top_record.absolute_score == top_score
+    assert top_record.top_score == top_score
+    assert top_record.submittion_id == id
 
 
-def test_detail_score_record_initialization() -> None:
-    # DetailScoreRecord の初期化と属性確認
-    check_detail_score_record_attributes("test_case_1", 100, 200)
-    check_detail_score_record_attributes("test_case_2", None, 200)
-    check_detail_score_record_attributes("test_case_3", 100, None)
-    check_detail_score_record_attributes("test_case_4", None, None)
+@pytest.mark.parametrize("input", ["test1", "", "$%'-_@{}~`!#()'."])
+@pytest.mark.parametrize("top_score", [None, -100000, -1, 0, 1, 100000])
+@pytest.mark.parametrize("id", [-100000, -1])
+def test_top_detail_score_record_initialization_assertions(input: str, top_score: Optional[int], id: int) -> None:
+    with pytest.raises(AssertionError):
+        TopDetailScoreRecord(input, top_score, id)
 
 
-def test_top_detail_score_record_initialization() -> None:
-    # TopDetailScoreRecord の初期化と属性確認
-    check_top_detail_score_record_attributes("test_case_1", 300, 1)
-    check_top_detail_score_record_attributes("test_case_2", None, 1)
+@pytest.mark.parametrize("id", [1, 100000, "Top"])
+@pytest.mark.parametrize("record_count", [0, 1, 10])
+def test_detail_score_records_initialization(id: Union[int, str], record_count: int) -> None:
+    records = [DetailScoreRecord(f"test_case_{i}", i * 100, i * 200) for i in range(record_count)]
+    detail_records = DetailScoreRecords(id=id, records=records)
+    assert detail_records.id == id
+    assert len(detail_records.records) == record_count
 
 
-def test_detail_score_records_initialization() -> None:
-    # DetailScoreRecords の初期化と属性確認
-    records = [DetailScoreRecord("test_case_1", 100, 200), DetailScoreRecord("test_case_2", 150, 250)]
-    detail_records = DetailScoreRecords(id=1, records=records)
-    assert detail_records.id == 1
-    assert len(detail_records.records) == 2
-    assert detail_records.records[0].input_test_case == "test_case_1"
-    assert detail_records.records[1].input_test_case == "test_case_2"
-    assert detail_records.records[0].absolute_score == 100
-    assert detail_records.records[1].absolute_score == 150
-
-
-def test_detail_score_records_with_string_id() -> None:
-    # DetailScoreRecords で文字列 ID を使った初期化と属性確認
-    records = [TopDetailScoreRecord("test_case_1", 100, 200), TopDetailScoreRecord("test_case_2", 150, 250)]
-    detail_records = DetailScoreRecords(id="A1", records=records)
-    assert detail_records.id == "A1"
-    assert len(detail_records.records) == 2
-    assert detail_records.records[0].input_test_case == "test_case_1"
-    assert detail_records.records[1].input_test_case == "test_case_2"
+@pytest.mark.parametrize("id", [-100000, -1, "aaa", ""])
+@pytest.mark.parametrize("record_count", [1])
+def test_detail_score_records_initialization_assertions(id: Union[int, str], record_count: int) -> None:
+    records = [DetailScoreRecord(f"test_case_{i}", i * 100, i * 200) for i in range(record_count)]
+    with pytest.raises(AssertionError):
+        DetailScoreRecords(id=id, records=records)

@@ -1,8 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import Optional
 
-from ahc_local_leaderboard.utils.validator import Validator
-
 
 class RelativeScoreCalculaterInterface(ABC):
     MIN_SCORE = 0
@@ -25,10 +23,8 @@ class RelativeScoreCalculaterInterface(ABC):
         if testcase_score is None:
             return self.MIN_SCORE
 
-        if testcase_score != top_score and not self.is_better_score(top_score, testcase_score):
-            raise ValueError(
-                f"Invalid top score: top_score={top_score} should be better than testcase_score={testcase_score}"
-            )
+        assert 0 < testcase_score and 0 < top_score
+        assert testcase_score == top_score or self.is_better_score(top_score, testcase_score)
 
         return round(self.MAX_SCORE * self.score_ratio(testcase_score, top_score))
 
@@ -66,7 +62,5 @@ class MinimizationScoring(RelativeScoreCalculaterInterface):
 
 def get_relative_score_calculator(scoring_type: str) -> RelativeScoreCalculaterInterface:
 
-    if Validator.validate_scoring_type(scoring_type):
-        return MaximizationScoring() if scoring_type == "Maximization" else MinimizationScoring()
-
-    raise ValueError(f"Not Found Scoring Type: {scoring_type}")
+    assert scoring_type in ["Maximization", "Minimization"]
+    return MaximizationScoring() if scoring_type == "Maximization" else MinimizationScoring()

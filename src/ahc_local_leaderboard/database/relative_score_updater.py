@@ -63,6 +63,7 @@ def update_lower_ranks(latest_record: SummaryScoreRecord) -> None:
     lower_score_records = ScoreHistoryRepository.fetch_lower_score_records(latest_record)
 
     for lower_score_record in lower_score_records.records:
+        assert isinstance(lower_score_record.relative_rank, int)
         lower_score_record.relative_rank += 1
         ScoreHistoryRepository.update_score_history(lower_score_record)
 
