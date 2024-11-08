@@ -1,8 +1,7 @@
 from datetime import datetime
-from typing import Optional, Tuple
+from typing import Optional
 
 import ahc_local_leaderboard.submit.test_case_evaluator as test_case_evaluator
-import ahc_local_leaderboard.view.viewer as viewer
 from ahc_local_leaderboard.database.database_manager import (
     ScoreHistoryRepository,
     TestCaseRepository,
@@ -25,9 +24,7 @@ class Submitter:
     def __init__(self, relative_score_calculator: RelativeScoreCalculaterInterface) -> None:
         self.relative_score_calculator = relative_score_calculator
 
-    def _process_test_cases(
-        self, test_cases: list[TestCase], score_history_id: int
-    ) -> Tuple[DetailScoreRecords[DetailScoreRecord], SummaryScoreRecord]:
+    def _process_test_cases(self, test_cases: list[TestCase], score_history_id: int) -> SummaryScoreRecord:
         """各テストケースのスコアと記録を処理する"""
         detail_records = DetailScoreRecords[DetailScoreRecord](score_history_id, [])
         score_record = SummaryScoreRecord(score_history_id, self.submission_time, 0, 0, 0, None)
@@ -42,7 +39,7 @@ class Submitter:
             detail_records.records.append(detail_record)
             score_record.add_score(detail_record, relative_score)
 
-        return detail_records, score_record
+        return score_record
 
     def _try_update_top_score(self, test_case: TestCase, score_history_id: int) -> Optional[int]:
         """テストケースのスコアを評価し、必要に応じてトップスコアを更新する"""
@@ -63,7 +60,5 @@ class Submitter:
         test_cases = test_case_evaluator.execute(submit_file_path)
         score_history_id = ScoreHistoryRepository.reserve_score_history(self.submission_time)
 
-        detail_records, score_record = self._process_test_cases(test_cases, score_history_id)
-
-        viewer.show_test_case_table(detail_records, self.relative_score_calculator)
+        score_record = self._process_test_cases(test_cases, score_history_id)
         ScoreHistoryRepository.update_score_history(score_record)

@@ -29,3 +29,6 @@ class DetailScoreRecords(Generic[T]):
 
         self.id = id
         self.records = records
+
+    def sort_records_by_input_file_name(self) -> None:
+        self.records = sorted(self.records, key=lambda record: record.input_test_case)

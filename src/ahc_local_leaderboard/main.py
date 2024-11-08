@@ -4,7 +4,12 @@ from typing import Any, Dict
 import yaml
 
 import ahc_local_leaderboard.database.relative_score_updater as relative_score_updater
-import ahc_local_leaderboard.view.viewer as viewer
+from ahc_local_leaderboard.database.database_manager import (
+    ScoreHistoryRepository,
+    TestCaseRepository,
+    TopScoresRepository,
+)
+from ahc_local_leaderboard.database.record_read_service import RecordReadService
 from ahc_local_leaderboard.init import initializer as initializer
 from ahc_local_leaderboard.submit.submitter import Submitter
 from ahc_local_leaderboard.utils.console_handler import ConsoleHandler
@@ -12,6 +17,7 @@ from ahc_local_leaderboard.utils.relative_score_calculater import (
     get_relative_score_calculator,
 )
 from ahc_local_leaderboard.utils.validator import Validator
+from ahc_local_leaderboard.view.viewer import Viewer
 
 
 def load_scoring_type() -> str:
@@ -59,6 +65,8 @@ def main() -> None:
     scoring_type = load_scoring_type()
     relative_score_calculator = get_relative_score_calculator(scoring_type)
 
+    record_read_service = RecordReadService(ScoreHistoryRepository(), TestCaseRepository(), TopScoresRepository())
+
     if args.command == "submit":
         submitter = Submitter(relative_score_calculator)
         if args.submit_file:
@@ -68,13 +76,16 @@ def main() -> None:
 
         relative_score_updater.update_relative_score(relative_score_calculator)
         relative_score_updater.update_relative_ranks()
+        viewer = Viewer(record_read_service, relative_score_calculator)
+        viewer.show_latest_detail()
 
     elif args.command == "view":
+        viewer = Viewer(record_read_service, relative_score_calculator)
         if args.detail:
             if args.detail.isdigit() and Validator.validate_id_exists(int(args.detail)):
-                viewer.show_detail(int(args.detail), relative_score_calculator)
+                viewer.show_detail(int(args.detail))
             elif args.detail == "latest":
-                viewer.show_latest_detail(relative_score_calculator)
+                viewer.show_latest_detail()
             elif args.detail == "top":
                 viewer.show_top_detail()
             else:

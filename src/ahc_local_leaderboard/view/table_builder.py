@@ -35,6 +35,10 @@ class TableBuilder(ABC, Generic[T]):
         """各行を挿入するための抽象メソッド"""
         pass
 
+    def insert_records(self, records: list[T]) -> None:
+        for record in records:
+            self.insert_record(record)
+
     def display(self) -> None:
         """テーブルを表示するメソッド"""
         ConsoleHandler.console.print(self.table)
