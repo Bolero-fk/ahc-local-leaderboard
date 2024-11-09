@@ -1,7 +1,6 @@
 from datetime import datetime
 from typing import Optional
 
-import ahc_local_leaderboard.submit.test_case_evaluator as test_case_evaluator
 from ahc_local_leaderboard.database.database_manager import (
     ScoreHistoryRepository,
     TestCaseRepository,
@@ -12,7 +11,12 @@ from ahc_local_leaderboard.models.detail_score_record import (
     DetailScoreRecords,
 )
 from ahc_local_leaderboard.models.summary_score_record import SummaryScoreRecord
-from ahc_local_leaderboard.models.test_case import TestCase
+from ahc_local_leaderboard.models.test_case import TestCase, TestCases
+from ahc_local_leaderboard.models.test_file import TestFiles
+from ahc_local_leaderboard.submit.test_file_processor import (
+    AtCoderTestFileProcessor,
+    TestFilesProcessor,
+)
 from ahc_local_leaderboard.utils.file_utility import FileUtility
 from ahc_local_leaderboard.utils.relative_score_calculater import (
     RelativeScoreCalculaterInterface,
@@ -24,7 +28,7 @@ class Submitter:
     def __init__(self, relative_score_calculator: RelativeScoreCalculaterInterface) -> None:
         self.relative_score_calculator = relative_score_calculator
 
-    def _process_test_cases(self, test_cases: list[TestCase], score_history_id: int) -> SummaryScoreRecord:
+    def _process_test_cases(self, test_cases: TestCases, score_history_id: int) -> SummaryScoreRecord:
         """各テストケースのスコアと記録を処理する"""
         detail_records = DetailScoreRecords[DetailScoreRecord](score_history_id, [])
         score_record = SummaryScoreRecord(score_history_id, self.submission_time, 0, 0, 0, None)
@@ -53,11 +57,13 @@ class Submitter:
         new_top_score = test_case.score if is_topscore_case else top_score
         return new_top_score
 
-    def execute(self, submit_file_path: str = "out") -> None:
+    def execute(self, test_files: TestFiles, submit_file_path: str = "out") -> None:
         self.submit_file_path = submit_file_path
         self.submission_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-        test_cases = test_case_evaluator.execute(submit_file_path)
+        test_files_processor = TestFilesProcessor(test_files, AtCoderTestFileProcessor())
+        test_cases = test_files_processor.process_test_files()
+
         score_history_id = ScoreHistoryRepository.reserve_score_history(self.submission_time)
 
         score_record = self._process_test_cases(test_cases, score_history_id)
