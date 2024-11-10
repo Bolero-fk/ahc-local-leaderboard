@@ -1,70 +1,34 @@
 from datetime import datetime
-from typing import Optional
 
-from ahc_local_leaderboard.database.database_manager import (
-    ScoreHistoryRepository,
-    TestCaseRepository,
-    TopScoresRepository,
-)
-from ahc_local_leaderboard.models.detail_score_record import (
-    DetailScoreRecord,
-    DetailScoreRecords,
-)
-from ahc_local_leaderboard.models.summary_score_record import SummaryScoreRecord
-from ahc_local_leaderboard.models.test_case import TestCase, TestCases
+from ahc_local_leaderboard.database.record_write_service import RecordWriteService
 from ahc_local_leaderboard.models.test_file import TestFiles
-from ahc_local_leaderboard.submit.test_file_processor import (
-    AtCoderTestFileProcessor,
-    TestFilesProcessor,
-)
-from ahc_local_leaderboard.utils.file_utility import FileUtility
-from ahc_local_leaderboard.utils.relative_score_calculater import (
-    RelativeScoreCalculaterInterface,
-)
+from ahc_local_leaderboard.submit.reserved_record_updater import ReservedRecordUpdater
+from ahc_local_leaderboard.submit.test_case_processor import TestCasesProcessor
+from ahc_local_leaderboard.submit.test_file_processor import TestFilesProcessor
 
 
 class Submitter:
 
-    def __init__(self, relative_score_calculator: RelativeScoreCalculaterInterface) -> None:
-        self.relative_score_calculator = relative_score_calculator
+    def __init__(
+        self,
+        record_write_service: RecordWriteService,
+        test_files_processor: TestFilesProcessor,
+        test_case_processor: TestCasesProcessor,
+        reserved_record_updater: ReservedRecordUpdater,
+    ) -> None:
+        self.record_write_service = record_write_service
+        self.test_files_processor = test_files_processor
+        self.test_case_processor = test_case_processor
+        self.reserved_record_updater = reserved_record_updater
 
-    def _process_test_cases(self, test_cases: TestCases, score_history_id: int) -> SummaryScoreRecord:
-        """各テストケースのスコアと記録を処理する"""
-        detail_records = DetailScoreRecords[DetailScoreRecord](score_history_id, [])
-        score_record = SummaryScoreRecord(score_history_id, self.submission_time, 0, 0, 0, None)
+    def execute(self, test_files: TestFiles) -> None:
+        """入力された'test_files'の実行結果をローカル順位表に提出する"""
 
-        for test_case in test_cases:
-            new_top_score = self._try_update_top_score(test_case, score_history_id)
-            relative_score = self.relative_score_calculator(test_case.score, new_top_score)
+        test_cases = self.test_files_processor.process_test_files(test_files)
 
-            TestCaseRepository.insert_test_case(test_case, score_history_id)
+        submission_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        reserved_record = self.record_write_service.reserve_score_history(submission_time)
 
-            detail_record = DetailScoreRecord(test_case.file_name, test_case.score, new_top_score)
-            detail_records.records.append(detail_record)
-            score_record.add_score(detail_record, relative_score)
+        self.test_case_processor.process_test_cases(test_cases, reserved_record.id)
 
-        return score_record
-
-    def _try_update_top_score(self, test_case: TestCase, score_history_id: int) -> Optional[int]:
-        """テストケースのスコアを評価し、必要に応じてトップスコアを更新する"""
-        top_score = TopScoresRepository.fetch_top_score(test_case)
-        is_topscore_case = self.relative_score_calculator.is_better_score(test_case.score, top_score)
-
-        if is_topscore_case:
-            TopScoresRepository.update_top_score(test_case, score_history_id)
-            FileUtility.copy_submit_file_to_leaderboard(self.submit_file_path, test_case)
-
-        new_top_score = test_case.score if is_topscore_case else top_score
-        return new_top_score
-
-    def execute(self, test_files: TestFiles, submit_file_path: str = "out") -> None:
-        self.submit_file_path = submit_file_path
-        self.submission_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-
-        test_files_processor = TestFilesProcessor(test_files, AtCoderTestFileProcessor())
-        test_cases = test_files_processor.process_test_files()
-
-        score_history_id = ScoreHistoryRepository.reserve_score_history(self.submission_time)
-
-        score_record = self._process_test_cases(test_cases, score_history_id)
-        ScoreHistoryRepository.update_score_history(score_record)
+        self.reserved_record_updater.update_reserved_record(reserved_record)

@@ -43,7 +43,7 @@ class DatabaseManager:
 
 class ScoreHistoryRepository:
     @staticmethod
-    def reserve_score_history(submission_time: str) -> int:
+    def reserve_score_history(submission_time: str) -> SummaryScoreRecord:
         """スコア履歴テーブルに空行を挿入し、そのIDを返します"""
         with DatabaseManager() as conn:
             cursor = conn.cursor()
@@ -59,7 +59,7 @@ class ScoreHistoryRepository:
         if lastrowid is None:
             raise ValueError("Failed to insert a new row into the score_history table.")
 
-        return lastrowid
+        return SummaryScoreRecord(lastrowid, submission_time, 0, 0, 0, None)
 
     @staticmethod
     def update_score_history(record: SummaryScoreRecord) -> None:

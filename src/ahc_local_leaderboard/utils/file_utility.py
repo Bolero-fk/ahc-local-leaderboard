@@ -26,15 +26,6 @@ class FileUtility:
             raise IOError(f"Failed to copy file from '{src}' to '{dest}': {e}")
 
     @staticmethod
-    def get_submit_file_path(submit_dir_path: str, test_case: TestCase) -> str:
-        """test_caseで指定されている提出ファイルのパスを取得します"""
-        submit_file_path = f"{submit_dir_path}/{test_case.file_name}"
-        if not Validator.check_file(submit_file_path):
-            raise FileNotFoundError(f"Submit file '{submit_file_path}' does not exist and could not be validated.")
-
-        return submit_file_path
-
-    @staticmethod
     def get_top_file_path(test_case: TestCase) -> str:
         """test_caseで指定されている提出ファイルのトップケースのパスを取得します"""
         top_directory_path = "leader_board/top"
@@ -48,8 +39,8 @@ class FileUtility:
         return top_file_path
 
     @staticmethod
-    def copy_submit_file_to_leaderboard(submit_dir_path: str, test_case: TestCase) -> None:
+    def copy_submit_file_to_leaderboard(test_case: TestCase) -> None:
         """入力された提出ファイルを順位表ディレクトリにコピーします"""
-        submit_file_path = FileUtility.get_submit_file_path(submit_dir_path, test_case)
+        submit_file_path = test_case.submit_file_path
         top_file_path = FileUtility.get_top_file_path(test_case)
         FileUtility.copy_file(submit_file_path, top_file_path)

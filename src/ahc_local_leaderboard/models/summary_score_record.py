@@ -1,6 +1,12 @@
 from typing import Optional
 
-from ahc_local_leaderboard.models.detail_score_record import DetailScoreRecord
+from ahc_local_leaderboard.models.detail_score_record import (
+    DetailScoreRecord,
+    DetailScoreRecords,
+)
+from ahc_local_leaderboard.utils.relative_score_calculater import (
+    RelativeScoreCalculaterInterface,
+)
 
 
 class SummaryScoreRecord:
@@ -33,6 +39,16 @@ class SummaryScoreRecord:
             self.invalid_score_count += 1
 
         self.total_relative_score += relative_score
+
+    def update(
+        self,
+        detail_records: DetailScoreRecords[DetailScoreRecord],
+        relative_score_calculator: RelativeScoreCalculaterInterface,
+    ) -> None:
+
+        self.total_absolute_score = detail_records.calculate_total_absolute_score()
+        self.total_relative_score = detail_records.calculate_total_relative_score(relative_score_calculator)
+        self.invalid_score_count = detail_records.calculate_invalid_score_count()
 
 
 class TopSummaryScoreRecord:

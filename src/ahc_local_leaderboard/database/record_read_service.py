@@ -1,3 +1,5 @@
+from typing import Optional
+
 from ahc_local_leaderboard.database.database_manager import (
     ScoreHistoryRepository,
     TestCaseRepository,
@@ -13,6 +15,7 @@ from ahc_local_leaderboard.models.summary_score_record import (
     SummaryScoreRecords,
     TopSummaryScoreRecord,
 )
+from ahc_local_leaderboard.models.test_case import TestCase
 
 
 class RecordReadService:
@@ -52,3 +55,6 @@ class RecordReadService:
         detail_records = self.fetch_top_detail_records()
         detail_records.sort_records_by_input_file_name()
         return detail_records
+
+    def fetch_top_score(self, test_case: TestCase) -> Optional[int]:
+        return TopScoresRepository.fetch_top_score(test_case)

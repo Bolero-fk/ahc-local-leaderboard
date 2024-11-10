@@ -10,10 +10,21 @@ from ahc_local_leaderboard.database.database_manager import (
     TopScoresRepository,
 )
 from ahc_local_leaderboard.database.record_read_service import RecordReadService
+from ahc_local_leaderboard.database.record_write_service import RecordWriteService
 from ahc_local_leaderboard.init import initializer as initializer
 from ahc_local_leaderboard.models.test_file import TestFiles
+from ahc_local_leaderboard.submit.reserved_record_updater import ReservedRecordUpdater
 from ahc_local_leaderboard.submit.submitter import Submitter
+from ahc_local_leaderboard.submit.test_case_processor import (
+    TestCaseProcessor,
+    TestCasesProcessor,
+)
+from ahc_local_leaderboard.submit.test_file_processor import (
+    AtCoderTestFileProcessor,
+    TestFilesProcessor,
+)
 from ahc_local_leaderboard.utils.console_handler import ConsoleHandler
+from ahc_local_leaderboard.utils.file_utility import FileUtility
 from ahc_local_leaderboard.utils.relative_score_calculater import (
     get_relative_score_calculator,
 )
@@ -67,15 +78,29 @@ def main() -> None:
     relative_score_calculator = get_relative_score_calculator(scoring_type)
 
     record_read_service = RecordReadService(ScoreHistoryRepository(), TestCaseRepository(), TopScoresRepository())
+    record_write_service = RecordWriteService(ScoreHistoryRepository(), TestCaseRepository(), TopScoresRepository())
 
     if args.command == "submit":
+        test_files = TestFiles("in", args.submit_file)
+        testfiles_processor = TestFilesProcessor(AtCoderTestFileProcessor())
 
-        submitter = Submitter(relative_score_calculator)
+        test_cases_processor = TestCasesProcessor(
+            TestCaseProcessor(record_read_service, record_write_service, relative_score_calculator, FileUtility())
+        )
+
+        reserved_record_updater = ReservedRecordUpdater(
+            record_read_service, record_write_service, relative_score_calculator
+        )
+
+        submitter = Submitter(
+            record_write_service,
+            testfiles_processor,
+            test_cases_processor,
+            reserved_record_updater,
+        )
         if args.submit_file:
-            test_files = TestFiles("in", args.submit_file)
-            submitter.execute(test_files, submit_file_path=args.submit_file)
+            submitter.execute(test_files)
         else:
-            test_files = TestFiles("in", "out")
             submitter.execute(test_files)
 
         relative_score_updater.update_relative_score(relative_score_calculator)

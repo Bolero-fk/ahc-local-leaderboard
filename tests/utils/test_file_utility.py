@@ -21,6 +21,7 @@ def test_case() -> TestCase:
     """テストケース用のモックオブジェクトを作成"""
     case = Mock(spec=TestCase)
     case.file_name = "test_submit.txt"
+    case.submit_file_path = "out/test_submit.txt"
     return case
 
 
@@ -59,22 +60,6 @@ def test_copy_file(mock_copy: Mock, temp_dir: str) -> None:
         FileUtility.copy_file(src, dest)
 
 
-@patch("ahc_local_leaderboard.utils.validator.Validator.check_file", return_value=True)
-def test_get_submit_file_path(mock_check_file: Mock, temp_dir: str, test_case: TestCase) -> None:
-    # 提出ファイルの作成
-    submit_file_path = os.path.join(temp_dir, test_case.file_name)
-
-    # 正常にファイルパスが取得されることを確認
-    result = FileUtility.get_submit_file_path(temp_dir, test_case)
-    assert result == submit_file_path
-    mock_check_file.assert_called_once_with(submit_file_path)
-
-    # バリデーションが失敗した場合のエラーハンドリング
-    mock_check_file.return_value = False
-    with pytest.raises(FileNotFoundError):
-        FileUtility.get_submit_file_path(temp_dir, test_case)
-
-
 @patch("ahc_local_leaderboard.utils.validator.Validator.check_directory", return_value=True)
 def test_get_top_file_path(mock_check_directory: Mock, test_case: TestCase) -> None:
     # 順位表ディレクトリのパス取得
@@ -89,21 +74,17 @@ def test_get_top_file_path(mock_check_directory: Mock, test_case: TestCase) -> N
         FileUtility.get_top_file_path(test_case)
 
 
-@patch("ahc_local_leaderboard.utils.validator.Validator.check_file", return_value=True)
 @patch("ahc_local_leaderboard.utils.validator.Validator.check_directory", return_value=True)
 @patch("shutil.copy")
-def test_copy_submit_file_to_leaderboard(
-    mock_copy: Mock, mock_check_directory: Mock, mock_check_file: Mock, temp_dir: str, test_case: TestCase
-) -> None:
-    submit_file_path = os.path.join(temp_dir, test_case.file_name)
+def test_copy_submit_file_to_leaderboard(mock_copy: Mock, mock_check_directory: Mock, test_case: TestCase) -> None:
+
     top_dir = "leader_board/top"
 
-    FileUtility.copy_submit_file_to_leaderboard(temp_dir, test_case)
+    FileUtility.copy_submit_file_to_leaderboard(test_case)
 
     # 各バリデーションメソッドが正しく呼ばれたか確認
-    mock_check_file.assert_called_once_with(submit_file_path)
     mock_check_directory.assert_called_once_with("leader_board/top")
 
     # コピーが行われたか確認
     expected_dest = f"{top_dir}/{test_case.file_name}"
-    mock_copy.assert_called_once_with(submit_file_path, expected_dest)
+    mock_copy.assert_called_once_with(test_case.submit_file_path, expected_dest)

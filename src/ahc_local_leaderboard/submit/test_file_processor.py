@@ -53,18 +53,19 @@ class TestFilesProcessor:
 
     LOADING_TEXT = "Test Case Processing..."
 
-    def __init__(self, test_files: TestFiles, test_file_processor: TestFileProcessorInterface) -> None:
-        self.test_files = test_files
+    def __init__(self, test_file_processor: TestFileProcessorInterface) -> None:
         self.test_file_processor = test_file_processor
 
-    def process_test_files(self) -> TestCases:
+    def process_test_files(self, test_files: TestFiles) -> TestCases:
         """全てのテストファイルのスコアを計算する"""
+
+        self.test_files = test_files
 
         test_cases = TestCases()
         self.test_files.add_all_files()
 
         for test_file in track(self.test_files, description=self.LOADING_TEXT, total=self.test_files.file_count):
             score = self.test_file_processor.process_test_file(test_file)
-            test_cases.add_test_case(TestCase(test_file.file_name, score))
+            test_cases.add_test_case(TestCase(test_file.file_name, score, test_file.submit_file_path))
 
         return test_cases
