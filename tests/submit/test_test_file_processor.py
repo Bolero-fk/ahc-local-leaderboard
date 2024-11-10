@@ -145,9 +145,9 @@ def test_process_test_files(
     mock_test_files = generate_mock_test_files(file_names)
     mock_test_file_processor.process_test_file.side_effect = expected_scores
 
-    processor = TestFilesProcessor(mock_test_files, mock_test_file_processor)
+    processor = TestFilesProcessor(mock_test_file_processor)
 
-    test_cases = processor.process_test_files()
+    test_cases = processor.process_test_files(mock_test_files)
 
     assert len(test_cases.test_cases) == len(expected_scores)
     for i, test_case in enumerate(test_cases):

@@ -1,13 +1,30 @@
 from typing import Optional
+from unittest.mock import Mock
 
 import pytest
 
-from ahc_local_leaderboard.models.detail_score_record import DetailScoreRecord
+from ahc_local_leaderboard.models.detail_score_record import (
+    DetailScoreRecord,
+    DetailScoreRecords,
+)
 from ahc_local_leaderboard.models.summary_score_record import (
     SummaryScoreRecord,
     SummaryScoreRecords,
     TopSummaryScoreRecord,
 )
+from ahc_local_leaderboard.utils.relative_score_calculater import (
+    RelativeScoreCalculaterInterface,
+)
+
+
+@pytest.fixture
+def mock_detail_score_records() -> Mock:
+    return Mock(spec=DetailScoreRecords)
+
+
+@pytest.fixture
+def mock_relative_score_calculator() -> Mock:
+    return Mock(spec=RelativeScoreCalculaterInterface)
 
 
 @pytest.mark.parametrize("id", [1, 1000])
@@ -33,6 +50,34 @@ def test_summary_score_record_initialization(
     assert record.total_relative_score == total_relative_score
     assert record.invalid_score_count == invalid_score_count
     assert record.relative_rank == relative_rank
+
+
+@pytest.fixture
+def sample_summary_record() -> SummaryScoreRecord:
+    return SummaryScoreRecord(1, "2023-01-01 10:00:00", 100, 0, 0, 1)
+
+
+@pytest.mark.parametrize("total_absolute_score ", [1, 100000])
+@pytest.mark.parametrize("total_relative_score ", [1, 100000])
+@pytest.mark.parametrize("invalid_score_count ", [1, 100000])
+def test_update(
+    mock_detail_score_records: Mock,
+    mock_relative_score_calculator: Mock,
+    sample_summary_record: SummaryScoreRecord,
+    total_absolute_score: int,
+    total_relative_score: int,
+    invalid_score_count: int,
+) -> None:
+
+    mock_detail_score_records.calculate_total_absolute_score.return_value = total_absolute_score
+    mock_detail_score_records.calculate_total_relative_score.return_value = total_relative_score
+    mock_detail_score_records.calculate_invalid_score_count.return_value = invalid_score_count
+
+    sample_summary_record.update(mock_detail_score_records, mock_relative_score_calculator)
+
+    assert sample_summary_record.total_absolute_score == total_absolute_score
+    assert sample_summary_record.total_relative_score == total_relative_score
+    assert sample_summary_record.invalid_score_count == invalid_score_count
 
 
 @pytest.mark.parametrize("id", [-1000, -1])
