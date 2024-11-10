@@ -3,7 +3,7 @@ from typing import Any, Dict
 
 import yaml
 
-import ahc_local_leaderboard.database.relative_score_updater as relative_score_updater
+import ahc_local_leaderboard.submit.relative_score_updater as relative_score_updater
 from ahc_local_leaderboard.database.database_manager import (
     ScoreHistoryRepository,
     TestCaseRepository,
