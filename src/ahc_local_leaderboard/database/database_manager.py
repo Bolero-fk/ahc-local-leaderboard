@@ -103,6 +103,23 @@ class ScoreHistoryRepository:
         return SummaryScoreRecord(*row)
 
     @staticmethod
+    def fetch_all_record() -> SummaryScoreRecords:
+        with DatabaseManager() as conn:
+            cursor = conn.cursor()
+            cursor.execute(
+                """
+                SELECT id, submission_time, total_absolute_score, total_relative_score,
+                            invalid_score_count, relative_rank
+                FROM score_history
+            """
+            )
+
+            rows = cursor.fetchall()
+
+        records = [SummaryScoreRecord(*row) for row in rows]
+        return SummaryScoreRecords(records)
+
+    @staticmethod
     def fetch_non_latest_records() -> SummaryScoreRecords:
         """最新エントリ以外のスコア履歴レコードを取得します"""
         with DatabaseManager() as conn:

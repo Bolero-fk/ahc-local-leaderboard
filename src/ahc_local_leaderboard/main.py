@@ -3,7 +3,6 @@ from typing import Any, Dict
 
 import yaml
 
-import ahc_local_leaderboard.submit.relative_score_updater as relative_score_updater
 from ahc_local_leaderboard.database.database_manager import (
     ScoreHistoryRepository,
     TestCaseRepository,
@@ -13,6 +12,7 @@ from ahc_local_leaderboard.database.record_read_service import RecordReadService
 from ahc_local_leaderboard.database.record_write_service import RecordWriteService
 from ahc_local_leaderboard.init import initializer as initializer
 from ahc_local_leaderboard.models.test_file import TestFiles
+from ahc_local_leaderboard.submit.relative_score_updater import RelativeScoreUpdater
 from ahc_local_leaderboard.submit.reserved_record_updater import ReservedRecordUpdater
 from ahc_local_leaderboard.submit.submitter import Submitter
 from ahc_local_leaderboard.submit.test_case_processor import (
@@ -88,6 +88,10 @@ def main() -> None:
             TestCaseProcessor(record_read_service, record_write_service, relative_score_calculator, FileUtility())
         )
 
+        relative_score_updater = RelativeScoreUpdater(
+            record_read_service, record_write_service, relative_score_calculator
+        )
+
         reserved_record_updater = ReservedRecordUpdater(
             record_read_service, record_write_service, relative_score_calculator
         )
@@ -97,14 +101,14 @@ def main() -> None:
             testfiles_processor,
             test_cases_processor,
             reserved_record_updater,
+            relative_score_updater,
         )
+
         if args.submit_file:
             submitter.execute(test_files)
         else:
             submitter.execute(test_files)
 
-        relative_score_updater.update_relative_score(relative_score_calculator)
-        relative_score_updater.update_relative_ranks()
         viewer = Viewer(record_read_service, relative_score_calculator)
         viewer.show_latest_detail()
 

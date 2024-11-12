@@ -28,6 +28,15 @@ class RelativeScoreCalculaterInterface(ABC):
 
         return round(self.MAX_SCORE * self.score_ratio(testcase_score, top_score))
 
+    def calculate_diff_relative_score(
+        self, testcase_score: Optional[int], top_score: Optional[int], pre_top_score: Optional[int]
+    ) -> int:
+        """top_score 更新による相対スコアの差分を計算する"""
+
+        return self.calculate_relative_score(testcase_score, top_score) - self.calculate_relative_score(
+            testcase_score, pre_top_score
+        )
+
     def is_better_score(self, a: Optional[int], b: Optional[int]) -> bool:
         """スコアaがスコアbより優れているかを判断します"""
         if b is None:

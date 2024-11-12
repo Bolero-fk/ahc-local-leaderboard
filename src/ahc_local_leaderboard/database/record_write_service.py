@@ -30,3 +30,6 @@ class RecordWriteService:
 
     def reserve_score_history(self, submission_time: str) -> SummaryScoreRecord:
         return ScoreHistoryRepository.reserve_score_history(submission_time)
+
+    def reset_is_updated_flags(self) -> None:
+        TopScoresRepository.reset_is_updated_flags()

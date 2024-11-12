@@ -58,3 +58,15 @@ class RecordReadService:
 
     def fetch_top_score(self, test_case: TestCase) -> Optional[int]:
         return TopScoresRepository.fetch_top_score(test_case)
+
+    def fetch_absolute_score(self, test_case_input: str, id: int) -> Optional[int]:
+        return TestCaseRepository.fetch_absolute_score(test_case_input, id)
+
+    def fetch_updated_top_scores(self) -> list[tuple[str, int, int]]:
+        return TopScoresRepository.fetch_updated_top_scores()
+
+    def fetch_all_summary_records(self) -> SummaryScoreRecords:
+        return ScoreHistoryRepository.fetch_all_record()
+
+    def fetch_non_latest_records(self) -> SummaryScoreRecords:
+        return ScoreHistoryRepository.fetch_non_latest_records()
