@@ -40,6 +40,48 @@ class DatabaseManager:
             self.connection.close()
             self.connection = None
 
+    SCORE_HISTORY_TABLE = """
+    CREATE TABLE IF NOT EXISTS score_history (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        total_absolute_score INTEGER,
+        total_relative_score INTEGER,
+        invalid_score_count INTEGER DEFAULT 0,
+        relative_rank INTEGER DEFAULT NULL,
+        submission_time DATETIME NOT NULL UNIQUE
+    )
+    """
+
+    TEST_CASES_TABLE = """
+    CREATE TABLE IF NOT EXISTS test_cases (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        test_case_input TEXT NOT NULL,
+        absolute_score INTEGER,
+        score_history_id INTEGER NOT NULL,
+        FOREIGN KEY (score_history_id) REFERENCES score_history(id) ON DELETE CASCADE,
+        UNIQUE(test_case_input, score_history_id)
+    )
+    """
+
+    TOP_SCORES_TABLE = """
+    CREATE TABLE IF NOT EXISTS top_scores (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        test_case_input TEXT NOT NULL UNIQUE,
+        top_absolute_score INTEGER DEFAULT NULL,
+        second_top_score INTEGER DEFAULT NULL,
+        is_updated BOOLEAN NOT NULL DEFAULT FALSE,
+        score_history_id INTEGER NOT NULL,
+        FOREIGN KEY (score_history_id) REFERENCES score_history(id) ON DELETE SET NULL
+    )
+    """
+
+    @staticmethod
+    def setup() -> None:
+        with DatabaseManager() as conn:
+            cursor = conn.cursor()
+            cursor.execute(DatabaseManager.SCORE_HISTORY_TABLE)
+            cursor.execute(DatabaseManager.TEST_CASES_TABLE)
+            cursor.execute(DatabaseManager.TOP_SCORES_TABLE)
+
 
 class ScoreHistoryRepository:
     @staticmethod

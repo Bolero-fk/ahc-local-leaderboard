@@ -1,4 +1,5 @@
 from ahc_local_leaderboard.database.database_manager import (
+    DatabaseManager,
     ScoreHistoryRepository,
     TestCaseRepository,
     TopScoresRepository,
@@ -33,3 +34,6 @@ class RecordWriteService:
 
     def reset_is_updated_flags(self) -> None:
         TopScoresRepository.reset_is_updated_flags()
+
+    def setup_database(self) -> None:
+        DatabaseManager.setup()

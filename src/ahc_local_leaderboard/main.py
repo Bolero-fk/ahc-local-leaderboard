@@ -4,13 +4,14 @@ from typing import Any, Dict
 import yaml
 
 from ahc_local_leaderboard.database.database_manager import (
+    DatabaseManager,
     ScoreHistoryRepository,
     TestCaseRepository,
     TopScoresRepository,
 )
 from ahc_local_leaderboard.database.record_read_service import RecordReadService
 from ahc_local_leaderboard.database.record_write_service import RecordWriteService
-from ahc_local_leaderboard.init import initializer as initializer
+from ahc_local_leaderboard.init.initializer import Initializer
 from ahc_local_leaderboard.models.test_file import TestFiles
 from ahc_local_leaderboard.submit.relative_score_updater import RelativeScoreUpdater
 from ahc_local_leaderboard.submit.reserved_record_updater import ReservedRecordUpdater
@@ -65,7 +66,11 @@ def main() -> None:
 
     args = parser.parse_args()
 
+    record_read_service = RecordReadService(ScoreHistoryRepository(), TestCaseRepository(), TopScoresRepository())
+    record_write_service = RecordWriteService(ScoreHistoryRepository(), TestCaseRepository(), TopScoresRepository())
+
     if args.command == "setup":
+        initializer = Initializer(record_write_service, FileUtility(), DatabaseManager._DB_PATH)
         initializer.execute()
         return
 
@@ -76,9 +81,6 @@ def main() -> None:
 
     scoring_type = load_scoring_type()
     relative_score_calculator = get_relative_score_calculator(scoring_type)
-
-    record_read_service = RecordReadService(ScoreHistoryRepository(), TestCaseRepository(), TopScoresRepository())
-    record_write_service = RecordWriteService(ScoreHistoryRepository(), TestCaseRepository(), TopScoresRepository())
 
     if args.command == "submit":
         test_files = TestFiles("in", args.submit_file)
