@@ -1,4 +1,5 @@
 from typing import Optional
+from unittest.mock import patch
 
 import pytest
 
@@ -84,3 +85,19 @@ def test_get_relative_score(scoring_type: str) -> None:
     else:
         with pytest.raises(AssertionError):
             get_relative_score_calculator(scoring_type)
+
+
+@pytest.mark.parametrize("top_diff", [-10, 0, 10])
+@pytest.mark.parametrize("prev_diff", [-10, 0, 10])
+def test_calculate_diff_relative_score(top_diff: int, prev_diff: int) -> None:
+    calculator = MaximizationScoring()
+
+    with patch.object(calculator, "calculate_relative_score", side_effect=[top_diff, prev_diff]) as mock_calculate:
+        # サンプル用に適当な値をいれている
+        abs_score, top_score, prev_score = -1, 0, 1
+        result = calculator.calculate_diff_relative_score(abs_score, top_score, prev_score)
+
+        mock_calculate.assert_any_call(abs_score, top_score)
+        mock_calculate.assert_any_call(abs_score, prev_score)
+
+        assert result == top_diff - prev_diff

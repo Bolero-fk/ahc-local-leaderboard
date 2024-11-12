@@ -176,3 +176,51 @@ def test_summary_score_records_initialization(record_count: int) -> None:
     records = [SummaryScoreRecord(i + 1, f"test_case_{i}", i * 100, i * 200, 0, i + 1) for i in range(record_count)]
     summary_records = SummaryScoreRecords(records=records)
     assert len(summary_records.records) == record_count
+
+
+def test_add_record() -> None:
+    record1 = Mock(spec=SummaryScoreRecord)
+    record2 = Mock(spec=SummaryScoreRecord)
+    records = SummaryScoreRecords([record1])
+
+    records.add_record(record2)
+
+    assert len(records.records) == 2
+    assert records.records[-1] == record2
+
+
+def test_update_relative_ranks() -> None:
+    record1 = Mock(spec=SummaryScoreRecord, total_relative_score=300)
+    record2 = Mock(spec=SummaryScoreRecord, total_relative_score=200)
+    record3 = Mock(spec=SummaryScoreRecord, total_relative_score=400)
+    records = SummaryScoreRecords([record1, record2, record3])
+
+    records.update_relative_ranks()
+
+    assert record3.relative_rank == 1
+    assert record1.relative_rank == 2
+    assert record2.relative_rank == 3
+
+
+def test_get_latest_record() -> None:
+    record1 = Mock(spec=SummaryScoreRecord, submission_time="2023-01-01 10:00:00")
+    record2 = Mock(spec=SummaryScoreRecord, submission_time="2023-01-02 10:00:00")
+    record3 = Mock(spec=SummaryScoreRecord, submission_time="2023-01-01 12:00:00")
+    records = SummaryScoreRecords([record1, record2, record3])
+
+    latest_record = records.get_latest_record()
+
+    assert latest_record == record2
+
+
+def test_get_records_except_latest() -> None:
+    record1 = Mock(spec=SummaryScoreRecord, submission_time="2023-01-01 10:00:00")
+    record2 = Mock(spec=SummaryScoreRecord, submission_time="2023-01-02 10:00:00")
+    record3 = Mock(spec=SummaryScoreRecord, submission_time="2023-01-01 12:00:00")
+    records = SummaryScoreRecords([record1, record2, record3])
+
+    remaining_records = records.get_records_except_latest()
+
+    assert record2 not in remaining_records
+    assert record1 in remaining_records
+    assert record3 in remaining_records
