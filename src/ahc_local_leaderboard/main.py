@@ -67,7 +67,9 @@ def main() -> None:
     args = parser.parse_args()
 
     record_read_service = RecordReadService(ScoreHistoryRepository(), TestCaseRepository(), TopScoresRepository())
-    record_write_service = RecordWriteService(ScoreHistoryRepository(), TestCaseRepository(), TopScoresRepository())
+    record_write_service = RecordWriteService(
+        DatabaseManager(), ScoreHistoryRepository(), TestCaseRepository(), TopScoresRepository()
+    )
 
     if args.command == "setup":
         initializer = Initializer(record_write_service, FileUtility(), DatabaseManager._DB_PATH)

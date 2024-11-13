@@ -86,7 +86,7 @@ class DatabaseManager:
 
 class ScoreHistoryRepository:
     @staticmethod
-    def reserve_score_history(submission_time: str) -> SummaryScoreRecord:
+    def reserve_empty_score_history_record(submission_time: str) -> SummaryScoreRecord:
         """スコア履歴テーブルに空行を挿入し、そのIDを返します"""
         with DatabaseManager() as conn:
             cursor = conn.cursor()

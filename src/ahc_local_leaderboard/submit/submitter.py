@@ -30,7 +30,7 @@ class Submitter:
         test_cases = self.test_files_processor.process_test_files(test_files)
 
         submission_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        reserved_record = self.record_write_service.reserve_score_history(submission_time)
+        reserved_record = self.record_write_service.reserve_empty_score_history_record(submission_time)
 
         self.test_case_processor.process_test_cases(test_cases, reserved_record.id)
 
