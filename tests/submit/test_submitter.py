@@ -72,13 +72,13 @@ def test_submitter_execute_calls_in_order(
     )
 
     mock_test_files_processor.process_test_files.return_value = mock_test_cases
-    mock_record_write_service.reserve_score_history.return_value = mock_reserved_record
+    mock_record_write_service.reserve_empty_score_history_record.return_value = mock_reserved_record
     mock_reserved_record.id = 1
 
     submitter.execute(mock_test_files)
 
     mock_test_files_processor.process_test_files.assert_called_once_with(mock_test_files)
-    mock_record_write_service.reserve_score_history.assert_called_once()
+    mock_record_write_service.reserve_empty_score_history_record.assert_called_once()
     mock_test_cases_processor.process_test_cases.assert_called_once_with(mock_test_cases, mock_reserved_record.id)
     mock_reserved_record_updater.update_reserved_record.assert_called_once_with(mock_reserved_record)
     mock_relative_score_updater.apply_relative_score_updates.assert_called_once()
