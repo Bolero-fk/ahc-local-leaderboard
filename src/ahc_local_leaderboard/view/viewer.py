@@ -30,7 +30,7 @@ class Viewer:
         assert 0 <= list_length
 
         top_record = self.record_read_service.fetch_top_summary_record()
-        score_records = self.record_read_service.fetch_latest_records(list_length)
+        score_records = self.record_read_service.fetch_recent_summary_records(list_length)
 
         table_builder = SummaryTableBuilder(
             f"Latest {len(score_records.records)} Scores (Including Top Score)", self.MAX_SUM_RELATIVE_SCORE
@@ -70,10 +70,10 @@ class Viewer:
         """指定された提出IDの詳細テーブルを表示する"""
         assert 0 < submission_id
 
-        summary_record = self.record_read_service.fetch_summary_record(submission_id)
+        summary_record = self.record_read_service.fetch_summary_record_by_submission_id(submission_id)
         self.show_summary_table(summary_record)
 
-        detail_records = self.record_read_service.fetch_detail_records(submission_id)
+        detail_records = self.record_read_service.fetch_detail_records_by_submission_id(submission_id)
         self.show_test_case_table(detail_records)
 
     def show_latest_detail(self) -> None:

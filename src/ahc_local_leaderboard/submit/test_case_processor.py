@@ -29,7 +29,7 @@ class TestCaseProcessor:
 
     def try_update_top_score(self, test_case: TestCase, score_history_id: int) -> None:
         """'test_case'のスコアを評価し、トップスコアを超えているならトップスコアを更新する"""
-        top_score = self.record_read_service.fetch_top_score(test_case)
+        top_score = self.record_read_service.fetch_top_score_for_test_case(test_case)
         if self.relative_score_calculator.is_better_score(test_case.score, top_score):
             self.update_top_score(test_case, score_history_id)
 

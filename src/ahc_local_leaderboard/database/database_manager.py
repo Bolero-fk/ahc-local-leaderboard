@@ -13,6 +13,7 @@ from ahc_local_leaderboard.models.summary_score_record import (
     TopSummaryScoreRecord,
 )
 from ahc_local_leaderboard.models.test_case import TestCase
+from ahc_local_leaderboard.models.updated_top_score import UpdatedTopScore
 
 
 class DatabaseManager:
@@ -124,7 +125,7 @@ class ScoreHistoryRepository:
             )
 
     @staticmethod
-    def fetch_record(id: int) -> SummaryScoreRecord:
+    def fetch_summary_record_by_submission_id(id: int) -> SummaryScoreRecord:
         """指定されたIDのスコアレコードを取得します"""
         with DatabaseManager() as conn:
             cursor = conn.cursor()
@@ -197,10 +198,10 @@ class ScoreHistoryRepository:
     def fetch_latest_record() -> SummaryScoreRecord:
         """最新のスコア履歴レコードを取得します"""
         latest_id = ScoreHistoryRepository.fetch_latest_id()
-        return ScoreHistoryRepository.fetch_record(latest_id)
+        return ScoreHistoryRepository.fetch_summary_record_by_submission_id(latest_id)
 
     @staticmethod
-    def fetch_latest_records(limit: int) -> SummaryScoreRecords:
+    def fetch_recent_summary_records(limit: int) -> SummaryScoreRecords:
         """最新のスコア履歴レコードを指定数分取得します"""
         with DatabaseManager() as conn:
             cursor = conn.cursor()
@@ -288,7 +289,7 @@ class TestCaseRepository:
             )
 
     @staticmethod
-    def fetch_absolute_score(test_case_input: str, score_history_id: int) -> Optional[int]:
+    def fetch_absolute_score_for_test_case(test_case_input: str, score_history_id: int) -> Optional[int]:
         """指定されたtest_case_inputとscore_history_idに対応するabsolute_scoreを取得します"""
         with DatabaseManager() as conn:
             cursor = conn.cursor()
@@ -308,7 +309,7 @@ class TestCaseRepository:
         return result[0]
 
     @staticmethod
-    def fetch_records(submission_id: int) -> DetailScoreRecords[DetailScoreRecord]:
+    def fetch_records_by_submission_id(submission_id: int) -> DetailScoreRecords[DetailScoreRecord]:
         """指定された提出IDに関連するレコードを取得します"""
 
         with DatabaseManager() as conn:
@@ -349,7 +350,7 @@ class TopScoresRepository:
             )
 
     @staticmethod
-    def fetch_top_score(test_case: TestCase) -> Optional[int]:
+    def fetch_top_score_for_test_case(test_case: TestCase) -> Optional[int]:
         """指定されたテストケースのトップスコアを取得します"""
         with DatabaseManager() as conn:
             cursor = conn.cursor()
@@ -382,7 +383,7 @@ class TopScoresRepository:
         return result[0]
 
     @staticmethod
-    def fetch_updated_top_scores() -> list[tuple[str, int, int]]:
+    def fetch_recently_updated_top_scores() -> list[UpdatedTopScore]:
         """is_updatedがTRUEであるテストケースのトップスコアおよびセミトップスコアを取得します"""
         with DatabaseManager() as conn:
             cursor = conn.cursor()
@@ -394,7 +395,9 @@ class TopScoresRepository:
             """
             )
 
-            return cursor.fetchall()
+            records = cursor.fetchall()
+
+            return [UpdatedTopScore(file_name=row[0], top_score=row[1], second_top_score=row[2]) for row in records]
 
     @staticmethod
     def fetch_top_summary_record() -> TopSummaryScoreRecord:

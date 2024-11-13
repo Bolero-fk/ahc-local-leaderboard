@@ -4,6 +4,7 @@ from ahc_local_leaderboard.models.summary_score_record import (
     SummaryScoreRecord,
     SummaryScoreRecords,
 )
+from ahc_local_leaderboard.models.updated_top_score import UpdatedTopScore
 from ahc_local_leaderboard.utils.relative_score_calculater import (
     RelativeScoreCalculaterInterface,
 )
@@ -23,20 +24,21 @@ class RelativeScoreUpdater:
     def calculate_individual_relative_score_diff(
         self,
         non_latest_record: SummaryScoreRecord,
-        updated_top_score: tuple[str, int, int],
+        updated_top_score: UpdatedTopScore,
     ) -> int:
         """指定されたレコードの相対スコア更新前後の差分を計算する"""
 
-        test_case_input, top_score, second_top_score = updated_top_score
-        absolute_score = self.record_read_service.fetch_absolute_score(test_case_input, non_latest_record.id)
+        absolute_score = self.record_read_service.fetch_absolute_score_for_test_case(
+            updated_top_score.file_name, non_latest_record.id
+        )
         return self.relative_score_calculator.calculate_diff_relative_score(
-            absolute_score, top_score, second_top_score
+            absolute_score, updated_top_score.top_score, updated_top_score.second_top_score
         )
 
     def calculate_total_relative_score_diff(
         self,
         non_latest_record: SummaryScoreRecord,
-        updated_top_scores: list[tuple[str, int, int]],
+        updated_top_scores: list[UpdatedTopScore],
     ) -> int:
         """指定されたレコードの相対スコア更新前後の差分の総和を計算する"""
 
@@ -49,7 +51,7 @@ class RelativeScoreUpdater:
     def update_relative_scores(self, records: list[SummaryScoreRecord]) -> None:
         """入力されたレコードの相対スコアを更新する"""
 
-        updated_top_scores = self.record_read_service.fetch_updated_top_scores()
+        updated_top_scores = self.record_read_service.fetch_recently_updated_top_scores()
         for summary_record in records:
             total_relative_score_diff = self.calculate_total_relative_score_diff(summary_record, updated_top_scores)
             summary_record.total_relative_score += total_relative_score_diff
