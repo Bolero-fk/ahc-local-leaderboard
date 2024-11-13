@@ -83,13 +83,13 @@ def test_try_update_top_score(
     top_score = 90
     score_history_id = 1
 
-    mock_record_read_service.fetch_top_score.return_value = top_score
+    mock_record_read_service.fetch_top_score_for_test_case.return_value = top_score
     mock_relative_score_calculator.is_better_score.return_value = is_better
 
     with patch.object(TestCaseProcessor, "update_top_score") as mock_update_top_score:
         test_case_processor.try_update_top_score(test_case, score_history_id)
 
-        mock_record_read_service.fetch_top_score.assert_called_once_with(test_case)
+        mock_record_read_service.fetch_top_score_for_test_case.assert_called_once_with(test_case)
         mock_relative_score_calculator.is_better_score.assert_called_once_with(test_case.score, top_score)
 
         if is_better:

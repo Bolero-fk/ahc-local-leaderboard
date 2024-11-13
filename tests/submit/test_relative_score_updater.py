@@ -9,6 +9,7 @@ from ahc_local_leaderboard.models.summary_score_record import (
     SummaryScoreRecord,
     SummaryScoreRecords,
 )
+from ahc_local_leaderboard.models.updated_top_score import UpdatedTopScore
 from ahc_local_leaderboard.submit.relative_score_updater import RelativeScoreUpdater
 from ahc_local_leaderboard.utils.relative_score_calculater import (
     RelativeScoreCalculaterInterface,
@@ -30,6 +31,11 @@ def mock_relative_score_calculator() -> Mock:
     return Mock(spec=RelativeScoreCalculaterInterface)
 
 
+@pytest.fixture
+def mock_updated_top_score() -> Mock:
+    return Mock(spec=UpdatedTopScore)
+
+
 @pytest.mark.parametrize("file_name", ["test_case"])
 @pytest.mark.parametrize("id", [1])
 @pytest.mark.parametrize("abs_score", [10])
@@ -40,6 +46,7 @@ def test_calculate_individual_relative_score_diff(
     mock_record_read_service: Mock,
     mock_record_write_service: Mock,
     mock_relative_score_calculator: Mock,
+    mock_updated_top_score: Mock,
     file_name: str,
     id: int,
     abs_score: int,
@@ -52,15 +59,18 @@ def test_calculate_individual_relative_score_diff(
 
     non_latest_record = Mock(spec=SummaryScoreRecord)
     non_latest_record.id = id
-    updated_top_score = (file_name, top_score, prev_score)
 
-    mock_record_read_service.fetch_absolute_score.return_value = abs_score
+    mock_updated_top_score.file_name = file_name
+    mock_updated_top_score.top_score = top_score
+    mock_updated_top_score.second_top_score = prev_score
+
+    mock_record_read_service.fetch_absolute_score_for_test_case.return_value = abs_score
     mock_relative_score_calculator.calculate_diff_relative_score.return_value = score_diff
 
-    result = updater.calculate_individual_relative_score_diff(non_latest_record, updated_top_score)
+    result = updater.calculate_individual_relative_score_diff(non_latest_record, mock_updated_top_score)
 
     assert result == score_diff
-    mock_record_read_service.fetch_absolute_score.assert_called_once_with(file_name, id)
+    mock_record_read_service.fetch_absolute_score_for_test_case.assert_called_once_with(file_name, id)
     mock_relative_score_calculator.calculate_diff_relative_score.assert_called_once_with(
         abs_score, top_score, prev_score
     )
@@ -76,7 +86,7 @@ def test_calculate_total_relative_score_diff(
 
     updater = RelativeScoreUpdater(mock_record_read_service, mock_record_write_service, mock_relative_score_calculator)
     non_latest_record = Mock(spec=SummaryScoreRecord)
-    updated_top_scores = [("test_case_1", 100, 90) for _ in score_diffs]
+    updated_top_scores = [UpdatedTopScore("test_case_1", 100, 90) for _ in score_diffs]
 
     with patch.object(updater, "calculate_individual_relative_score_diff", side_effect=score_diffs) as mock_cal_diff:
 
