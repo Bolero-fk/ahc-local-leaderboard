@@ -18,6 +18,10 @@ class DetailScoreRecord:
     def get_absolute_score(self) -> int:
         return self.absolute_score if self.absolute_score is not None else 0
 
+    @classmethod
+    def from_row(cls, row: tuple[str, Optional[int], Optional[int]]) -> "DetailScoreRecord":
+        return cls(*row)
+
 
 class TopDetailScoreRecord(DetailScoreRecord):
 

@@ -51,6 +51,11 @@ class SummaryScoreRecord:
         self.total_relative_score = detail_records.calculate_total_relative_score(relative_score_calculator)
         self.invalid_score_count = detail_records.calculate_invalid_score_count()
 
+    @classmethod
+    def from_row(cls, row: tuple[int, str, int, int, int, Optional[int]]) -> "SummaryScoreRecord":
+        """クエリ結果のタプルからSummaryScoreRecordインスタンスを生成します"""
+        return cls(*row)
+
 
 class TopSummaryScoreRecord:
 

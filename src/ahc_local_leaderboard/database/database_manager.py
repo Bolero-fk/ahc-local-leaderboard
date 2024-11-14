@@ -25,7 +25,7 @@ class DatabaseManager:
         self.connection: Optional[sqlite3.Connection] = None
 
     def __enter__(self) -> sqlite3.Connection:
-        """with 文の開始時にデータベースに接続"""
+        """with 文の開始時にデータベースに接続します。"""
         self.connection = sqlite3.connect(self._DB_PATH)
         return self.connection
 
@@ -35,7 +35,7 @@ class DatabaseManager:
         exc_value: Optional[BaseException],
         traceback: Optional[traceback.TracebackException],
     ) -> None:
-        """with 文の終了時にデータベース接続を閉じる"""
+        """with 文の終了時にデータベース接続を閉じます。"""
         if self.connection:
             self.connection.commit()
             self.connection.close()
@@ -77,6 +77,7 @@ class DatabaseManager:
 
     @staticmethod
     def setup() -> None:
+        """必要なテーブルを作成してデータベースを初期化します。"""
         with DatabaseManager() as conn:
             cursor = conn.cursor()
             cursor.execute(DatabaseManager.SCORE_HISTORY_TABLE)
@@ -85,9 +86,9 @@ class DatabaseManager:
 
 
 class ScoreHistoryRepository:
-    @staticmethod
-    def reserve_empty_score_history_record(submission_time: str) -> SummaryScoreRecord:
-        """スコア履歴テーブルに空行を挿入し、そのIDを返します"""
+
+    def reserve_empty_score_history_record(self, submission_time: str) -> SummaryScoreRecord:
+        """指定された日時で空のスコア履歴レコードを作成し、そのレコードを返します。"""
         with DatabaseManager() as conn:
             cursor = conn.cursor()
             cursor.execute(
@@ -98,15 +99,14 @@ class ScoreHistoryRepository:
                 (submission_time,),
             )
 
-        lastrowid: Optional[int] = cursor.lastrowid
-        if lastrowid is None:
-            raise ValueError("Failed to insert a new row into the score_history table.")
+            lastrowid: Optional[int] = cursor.lastrowid
+            if lastrowid is None:
+                raise ValueError("Failed to insert a new row into the score_history table.")
 
-        return SummaryScoreRecord(lastrowid, submission_time, 0, 0, 0, None)
+            return SummaryScoreRecord(lastrowid, submission_time, 0, 0, 0, None)
 
-    @staticmethod
-    def update_score_history(record: SummaryScoreRecord) -> None:
-        """指定されたスコアレコードの情報でスコア履歴テーブルを更新します"""
+    def update_score_history(self, record: SummaryScoreRecord) -> None:
+        """指定されたスコア履歴レコードの内容でデータベースを更新します。"""
         with DatabaseManager() as conn:
             cursor = conn.cursor()
             cursor.execute(
@@ -124,9 +124,8 @@ class ScoreHistoryRepository:
                 ),
             )
 
-    @staticmethod
-    def fetch_summary_record_by_submission_id(id: int) -> SummaryScoreRecord:
-        """指定されたIDのスコアレコードを取得します"""
+    def fetch_summary_record_by_submission_id(self, id: int) -> SummaryScoreRecord:
+        """指定されたIDのスコア履歴レコードを取得し、返します。"""
         with DatabaseManager() as conn:
             cursor = conn.cursor()
             cursor.execute(
@@ -143,10 +142,10 @@ class ScoreHistoryRepository:
         if row is None:
             raise ValueError(f"No record found for id: {id}")
 
-        return SummaryScoreRecord(*row)
+        return SummaryScoreRecord.from_row(row)
 
-    @staticmethod
-    def fetch_all_record() -> SummaryScoreRecords:
+    def fetch_all_records(self) -> SummaryScoreRecords:
+        """すべてのスコア履歴レコードを取得し、返します。"""
         with DatabaseManager() as conn:
             cursor = conn.cursor()
             cursor.execute(
@@ -159,31 +158,11 @@ class ScoreHistoryRepository:
 
             rows = cursor.fetchall()
 
-        records = [SummaryScoreRecord(*row) for row in rows]
+        records = [SummaryScoreRecord.from_row(row) for row in rows]
         return SummaryScoreRecords(records)
 
-    @staticmethod
-    def fetch_non_latest_records() -> SummaryScoreRecords:
-        """最新エントリ以外のスコア履歴レコードを取得します"""
-        with DatabaseManager() as conn:
-            cursor = conn.cursor()
-            cursor.execute(
-                """
-                SELECT id, submission_time, total_absolute_score, total_relative_score,
-                            invalid_score_count, relative_rank
-                FROM score_history
-                WHERE submission_time < (SELECT MAX(submission_time) FROM score_history)
-                ORDER BY submission_time
-            """
-            )
-            rows = cursor.fetchall()
-
-        records = [SummaryScoreRecord(*row) for row in rows]
-        return SummaryScoreRecords(records)
-
-    @staticmethod
-    def fetch_latest_id() -> int:
-        """最新のスコア履歴IDを取得します"""
+    def fetch_latest_id(self) -> int:
+        """最新のスコア履歴レコードのIDを取得して返します。"""
         with DatabaseManager() as conn:
             cursor = conn.cursor()
             cursor.execute("SELECT id FROM score_history ORDER BY submission_time DESC LIMIT 1")
@@ -194,15 +173,8 @@ class ScoreHistoryRepository:
 
         return result[0]
 
-    @staticmethod
-    def fetch_latest_record() -> SummaryScoreRecord:
-        """最新のスコア履歴レコードを取得します"""
-        latest_id = ScoreHistoryRepository.fetch_latest_id()
-        return ScoreHistoryRepository.fetch_summary_record_by_submission_id(latest_id)
-
-    @staticmethod
-    def fetch_recent_summary_records(limit: int) -> SummaryScoreRecords:
-        """最新のスコア履歴レコードを指定数分取得します"""
+    def fetch_recent_summary_records(self, limit: int) -> SummaryScoreRecords:
+        """指定した数の最新スコア履歴レコードを取得し、返します。"""
         with DatabaseManager() as conn:
             cursor = conn.cursor()
             cursor.execute(
@@ -217,48 +189,11 @@ class ScoreHistoryRepository:
             )
             rows = cursor.fetchall()
 
-        records = [SummaryScoreRecord(*row) for row in rows]
+        records = [SummaryScoreRecord.from_row(row) for row in rows]
         return SummaryScoreRecords(records)
 
-    @staticmethod
-    def count_higher_score_records(record: SummaryScoreRecord) -> int:
-        """指定レコードより高いスコアのレコード数を返します"""
-        with DatabaseManager() as conn:
-            cursor = conn.cursor()
-            cursor.execute(
-                """
-                SELECT COUNT(*)
-                FROM score_history
-                WHERE total_relative_score >= ? and id != ?
-            """,
-                (record.total_relative_score, record.id),
-            )
-            result: tuple[int] = cursor.fetchone()
-
-            return result[0]
-
-    @staticmethod
-    def fetch_lower_score_records(record: SummaryScoreRecord) -> SummaryScoreRecords:
-        """指定レコードより低いスコアのレコードを取得します"""
-        with DatabaseManager() as conn:
-            cursor = conn.cursor()
-            cursor.execute(
-                """
-                SELECT id, submission_time, total_absolute_score, total_relative_score,
-                           invalid_score_count, relative_rank
-                FROM score_history
-                WHERE total_relative_score < ? and id != ?
-            """,
-                (record.total_relative_score, record.id),
-            )
-            rows = cursor.fetchall()
-
-        records = [SummaryScoreRecord(*row) for row in rows]
-        return SummaryScoreRecords(records)
-
-    @staticmethod
-    def exists_id(id: int) -> bool:
-        """指定されたidがscore_historyテーブルに存在するか確認"""
+    def exists_id(self, id: int) -> bool:
+        """指定したIDのスコア履歴レコードが存在するかを確認します。"""
         with DatabaseManager() as conn:
             cursor = conn.cursor()
             cursor.execute(
@@ -266,18 +201,19 @@ class ScoreHistoryRepository:
                 SELECT COUNT(*)
                 FROM score_history
                 WHERE id = ?
+                LIMIT 1
             """,
                 (id,),
             )
-            result: int = cursor.fetchone()[0]
 
+            result: int = cursor.fetchone()[0]
             return result > 0
 
 
 class TestCaseRepository:
-    @staticmethod
-    def insert_test_case(test_case: TestCase, score_history_id: int) -> None:
-        """テストケース情報をテストケーステーブルに挿入します"""
+
+    def insert_test_case(self, test_case: TestCase, score_history_id: int) -> None:
+        """指定されたテストケース情報をテストケーステーブルに挿入します。"""
         with DatabaseManager() as conn:
             cursor = conn.cursor()
             cursor.execute(
@@ -288,9 +224,8 @@ class TestCaseRepository:
                 (test_case.file_name, test_case.score, score_history_id),
             )
 
-    @staticmethod
-    def fetch_absolute_score_for_test_case(test_case_input: str, score_history_id: int) -> Optional[int]:
-        """指定されたtest_case_inputとscore_history_idに対応するabsolute_scoreを取得します"""
+    def fetch_absolute_score_for_test_case(self, test_case_input: str, score_history_id: int) -> Optional[int]:
+        """指定されたテストケースとスコア履歴IDの絶対スコアを取得します。"""
         with DatabaseManager() as conn:
             cursor = conn.cursor()
             cursor.execute(
@@ -308,9 +243,8 @@ class TestCaseRepository:
 
         return result[0]
 
-    @staticmethod
-    def fetch_records_by_submission_id(submission_id: int) -> DetailScoreRecords[DetailScoreRecord]:
-        """指定された提出IDに関連するレコードを取得します"""
+    def fetch_records_by_submission_id(self, submission_id: int) -> DetailScoreRecords[DetailScoreRecord]:
+        """指定された提出IDに関連するすべてのテストケースレコードを取得します。"""
 
         with DatabaseManager() as conn:
             cursor = conn.cursor()
@@ -325,7 +259,7 @@ class TestCaseRepository:
             )
 
             rows = cursor.fetchall()
-        records = [DetailScoreRecord(*row) for row in rows]
+        records = [DetailScoreRecord.from_row(row) for row in rows]
         return DetailScoreRecords[DetailScoreRecord](submission_id, records)
 
 

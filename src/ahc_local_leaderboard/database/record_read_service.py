@@ -33,7 +33,7 @@ class RecordReadService:
 
     def fetch_all_summary_records(self) -> SummaryScoreRecords:
         """データベース内の全サマリーレコードを取得します。"""
-        return self.score_history_repo.fetch_all_record()
+        return self.score_history_repo.fetch_all_records()
 
     def fetch_latest_submission_id(self) -> int:
         """データベース内の最新のレコードIDを取得します。"""
