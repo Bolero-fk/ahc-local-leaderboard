@@ -264,9 +264,9 @@ class TestCaseRepository:
 
 
 class TopScoresRepository:
-    @staticmethod
-    def update_top_score(test_case: TestCase, score_history_id: int) -> None:
-        """指定されたテストケースのスコアでトップスコアテーブルを更新します"""
+
+    def update_top_score(self, test_case: TestCase, score_history_id: int) -> None:
+        """指定テストケースのスコアをもとにトップスコアを更新します。"""
         with DatabaseManager() as conn:
             cursor = conn.cursor()
             cursor.execute(
@@ -283,9 +283,8 @@ class TopScoresRepository:
                 (test_case.file_name, test_case.score, second_top_score, True, score_history_id),
             )
 
-    @staticmethod
-    def fetch_top_score_for_test_case(test_case: TestCase) -> Optional[int]:
-        """指定されたテストケースのトップスコアを取得します"""
+    def fetch_top_score_for_test_case(self, test_case: TestCase) -> Optional[int]:
+        """指定テストケースのトップスコアを取得します。"""
         with DatabaseManager() as conn:
             cursor = conn.cursor()
             cursor.execute(
@@ -294,9 +293,8 @@ class TopScoresRepository:
             result = cursor.fetchone()
         return result[0] if result else None
 
-    @staticmethod
-    def reset_is_updated_flags() -> None:
-        """top_scoresテーブルのis_updatedフラグをすべてFALSEにリセットします"""
+    def reset_is_updated_flags(self) -> None:
+        """トップスコアテーブルのすべてのis_updatedフラグをリセットします。"""
         with DatabaseManager() as conn:
             cursor = conn.cursor()
             cursor.execute(
@@ -307,18 +305,16 @@ class TopScoresRepository:
             """
             )
 
-    @staticmethod
-    def fetch_test_case_count() -> int:
-        """登録されているテストケースの総数を取得します"""
+    def fetch_test_case_count(self) -> int:
+        """トップスコアテーブルに登録されたテストケース数を取得します。"""
         with DatabaseManager() as conn:
             cursor = conn.cursor()
             cursor.execute("SELECT COUNT(*) FROM top_scores")
             result: tuple[int] = cursor.fetchone()
         return result[0]
 
-    @staticmethod
-    def fetch_recently_updated_top_scores() -> list[UpdatedTopScore]:
-        """is_updatedがTRUEであるテストケースのトップスコアおよびセミトップスコアを取得します"""
+    def fetch_recently_updated_top_scores(self) -> list[UpdatedTopScore]:
+        """is_updatedがTRUEのテストケースのトップスコアとセカンドトップスコアを取得します。"""
         with DatabaseManager() as conn:
             cursor = conn.cursor()
             cursor.execute(
@@ -333,9 +329,8 @@ class TopScoresRepository:
 
             return [UpdatedTopScore(file_name=row[0], top_score=row[1], second_top_score=row[2]) for row in records]
 
-    @staticmethod
-    def fetch_top_summary_record() -> TopSummaryScoreRecord:
-        """top_scoresテーブルからトップスコアのサマリー情報を生成し、返します"""
+    def fetch_top_summary_record(self) -> TopSummaryScoreRecord:
+        """トップスコアテーブルのトップスコア情報を集計し、サマリーレコードを返します。"""
         with DatabaseManager() as conn:
             cursor = conn.cursor()
             cursor.execute(
@@ -352,9 +347,8 @@ class TopScoresRepository:
         total_relative_score = 10**9 * total_cases
         return TopSummaryScoreRecord(total_absolute_score, total_relative_score, invalid_score_count)
 
-    @staticmethod
-    def fetch_top_detail_records() -> DetailScoreRecords[TopDetailScoreRecord]:
-        """top_scoresテーブルからトップスコアの詳細情報を生成し、返します"""
+    def fetch_top_detail_records(self) -> DetailScoreRecords[TopDetailScoreRecord]:
+        """トップスコアテーブルのトップスコア詳細レコードを取得します。"""
         with DatabaseManager() as conn:
             cursor = conn.cursor()
             cursor.execute(
