@@ -32,11 +32,11 @@ def test_fetch_all_summary_records(
 ) -> None:
     score_history_repo, _, _ = mock_repos
     mock_data = Mock(spec=SummaryScoreRecords)
-    score_history_repo.fetch_all_record.return_value = mock_data
+    score_history_repo.fetch_all_records.return_value = mock_data
 
     result = service.fetch_all_summary_records()
     assert result == mock_data
-    score_history_repo.fetch_all_record.assert_called_once()
+    score_history_repo.fetch_all_records.assert_called_once()
 
 
 def test_fetch_latest_submission_id(
