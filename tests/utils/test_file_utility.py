@@ -1,5 +1,6 @@
 import os
 import tempfile
+from pathlib import Path
 from typing import Generator
 from unittest.mock import Mock, patch
 
@@ -61,12 +62,20 @@ def test_copy_file(mock_copy: Mock, temp_dir: str) -> None:
 
 
 @patch("ahc_local_leaderboard.utils.validator.Validator.check_directory", return_value=True)
-def test_get_top_file_path(mock_check_directory: Mock, test_case: TestCase) -> None:
+def test_get_top_file_path(
+    mock_check_directory: Mock,
+    test_case: TestCase,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     # 順位表ディレクトリのパス取得
-    expected_path = f"leader_board/top/{test_case.file_name}"
+
+    test_dir = "test"
+    monkeypatch.setattr("ahc_local_leaderboard.consts.ROOT_DIR", Path(test_dir))
+
+    expected_path = f"{test_dir}/leader_board/top/{test_case.file_name}"
     result = FileUtility.get_top_file_path(test_case)
     assert result == expected_path
-    mock_check_directory.assert_called_once_with("leader_board/top")
+    mock_check_directory.assert_called_once_with(f"{test_dir}/leader_board/top")
 
     # バリデーションが失敗した場合のエラーハンドリング
     mock_check_directory.return_value = False
@@ -76,15 +85,21 @@ def test_get_top_file_path(mock_check_directory: Mock, test_case: TestCase) -> N
 
 @patch("ahc_local_leaderboard.utils.validator.Validator.check_directory", return_value=True)
 @patch("shutil.copy")
-def test_copy_submit_file_to_leaderboard(mock_copy: Mock, mock_check_directory: Mock, test_case: TestCase) -> None:
+def test_copy_submit_file_to_leaderboard(
+    mock_copy: Mock,
+    mock_check_directory: Mock,
+    test_case: TestCase,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
 
-    top_dir = "leader_board/top"
+    test_dir = "test"
+    monkeypatch.setattr("ahc_local_leaderboard.consts.ROOT_DIR", Path(test_dir))
 
     FileUtility.copy_submit_file_to_leaderboard(test_case)
 
     # 各バリデーションメソッドが正しく呼ばれたか確認
-    mock_check_directory.assert_called_once_with("leader_board/top")
+    mock_check_directory.assert_called_once_with("test/leader_board/top")
 
     # コピーが行われたか確認
-    expected_dest = f"{top_dir}/{test_case.file_name}"
+    expected_dest = f"{test_dir}/leader_board/top/{test_case.file_name}"
     mock_copy.assert_called_once_with(test_case.submit_file_path, expected_dest)

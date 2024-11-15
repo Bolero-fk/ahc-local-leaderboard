@@ -1,8 +1,9 @@
-import os
 import sqlite3
 import tempfile
 from datetime import datetime
+from pathlib import Path
 from typing import Generator
+from unittest.mock import patch
 
 import pytest
 
@@ -23,11 +24,9 @@ from ahc_local_leaderboard.models.test_case import TestCase
 @pytest.fixture
 def temp_database() -> Generator[None, None, None]:
 
-    with tempfile.TemporaryDirectory() as temp_dir:
-        db_path = os.path.join(temp_dir, "test_leader_board.db")
-        DatabaseManager._DB_PATH = db_path
+    with tempfile.TemporaryDirectory() as temp_dir, patch("ahc_local_leaderboard.consts.ROOT_DIR", Path(temp_dir)):
+        (Path(temp_dir) / "leader_board").mkdir(parents=True, exist_ok=True)
         DatabaseManager.setup()
-
         yield
 
 

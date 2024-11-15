@@ -1,3 +1,5 @@
+import tempfile
+from pathlib import Path
 from unittest.mock import Mock, mock_open, patch
 
 import pytest
@@ -17,27 +19,24 @@ def mock_file_utility() -> Mock:
     return Mock(spec=FileUtility)
 
 
-@pytest.fixture
-def db_path() -> str:
-    return "leader_board/leader_board.db"
+def test_create_directories(
+    mock_record_write_service: Mock, mock_file_utility: Mock, monkeypatch: pytest.MonkeyPatch
+) -> None:
 
+    with tempfile.TemporaryDirectory() as temp_dir:
+        monkeypatch.setattr("ahc_local_leaderboard.consts.ROOT_DIR", Path(temp_dir))
 
-def test_create_directories(mock_record_write_service: Mock, mock_file_utility: Mock, db_path: str) -> None:
+        initializer = Initializer(mock_record_write_service, mock_file_utility)
+        initializer.create_directories()
 
-    initializer = Initializer(mock_record_write_service, mock_file_utility, db_path)
-
-    initializer.create_directories()
-
-    for directory in initializer.LEADERBOARD_DIRECTORIES:
-        mock_file_utility.try_create_directory.assert_any_call(directory)
+        for directory in initializer.leader_board_directoris:
+            mock_file_utility.try_create_directory.assert_any_call(str(directory))
 
 
 @pytest.mark.parametrize("path_exists", [False, True])
-def test_initialize_database(
-    mock_record_write_service: Mock, mock_file_utility: Mock, db_path: str, path_exists: bool
-) -> None:
+def test_initialize_database(mock_record_write_service: Mock, mock_file_utility: Mock, path_exists: bool) -> None:
 
-    initializer = Initializer(mock_record_write_service, mock_file_utility, db_path)
+    initializer = Initializer(mock_record_write_service, mock_file_utility)
 
     mock_file_utility.path_exists.return_value = path_exists
     initializer.initialize_database()
@@ -50,53 +49,49 @@ def test_initialize_database(
 
 @patch("builtins.input", side_effect=["1"])
 def test_prompt_scoring_type_maximization(
-    mock_input: Mock, mock_record_write_service: Mock, mock_file_utility: Mock, db_path: str
+    mock_input: Mock, mock_record_write_service: Mock, mock_file_utility: Mock
 ) -> None:
 
-    initializer = Initializer(mock_record_write_service, mock_file_utility, db_path)
+    initializer = Initializer(mock_record_write_service, mock_file_utility)
     result = initializer.prompt_scoring_type()
     assert result == "Maximization"
 
 
 @patch("builtins.input", side_effect=["2"])
 def test_prompt_scoring_type_minimization(
-    mock_input: Mock, mock_record_write_service: Mock, mock_file_utility: Mock, db_path: str
+    mock_input: Mock, mock_record_write_service: Mock, mock_file_utility: Mock
 ) -> None:
 
-    initializer = Initializer(mock_record_write_service, mock_file_utility, db_path)
+    initializer = Initializer(mock_record_write_service, mock_file_utility)
     result = initializer.prompt_scoring_type()
     assert result == "Minimization"
 
 
 @patch("builtins.input", side_effect=["3", "0", "abc", "a", "123", "2"])
 def test_prompt_scoring_type_invalid_input(
-    mock_input: Mock, mock_record_write_service: Mock, mock_file_utility: Mock, db_path: str
+    mock_input: Mock, mock_record_write_service: Mock, mock_file_utility: Mock
 ) -> None:
 
-    initializer = Initializer(mock_record_write_service, mock_file_utility, db_path)
+    initializer = Initializer(mock_record_write_service, mock_file_utility)
     result = initializer.prompt_scoring_type()
     assert result == "Minimization"
 
 
 @patch("builtins.open", new_callable=mock_open)
-def test_write_config_file(
-    mock_open: Mock, mock_record_write_service: Mock, mock_file_utility: Mock, db_path: str
-) -> None:
+def test_write_config_file(mock_open: Mock, mock_record_write_service: Mock, mock_file_utility: Mock) -> None:
 
-    initializer = Initializer(mock_record_write_service, mock_file_utility, db_path)
+    initializer = Initializer(mock_record_write_service, mock_file_utility)
     config_data = {"scoring_type": "Maximization"}
     with patch("yaml.dump") as mock_yaml_dump:
         initializer.write_config_file(config_data)
 
-        mock_open.assert_called_once_with(initializer.CONFIG_PATH, "w")
+        mock_open.assert_called_once_with(initializer.config_path, "w")
         mock_yaml_dump.assert_called_once_with(config_data, mock_open())
 
 
 @pytest.mark.parametrize("path_exists", [False, True])
-def test_create_config_file(
-    mock_record_write_service: Mock, mock_file_utility: Mock, db_path: str, path_exists: bool
-) -> None:
-    initializer = Initializer(mock_record_write_service, mock_file_utility, db_path)
+def test_create_config_file(mock_record_write_service: Mock, mock_file_utility: Mock, path_exists: bool) -> None:
+    initializer = Initializer(mock_record_write_service, mock_file_utility)
 
     mock_file_utility.path_exists.return_value = path_exists
 
@@ -116,8 +111,8 @@ def test_create_config_file(
             mock_write.assert_called_once_with({"scoring_type": "Maximization"})
 
 
-def test_execute(mock_record_write_service: Mock, mock_file_utility: Mock, db_path: str) -> None:
-    initializer = Initializer(mock_record_write_service, mock_file_utility, db_path)
+def test_execute(mock_record_write_service: Mock, mock_file_utility: Mock) -> None:
+    initializer = Initializer(mock_record_write_service, mock_file_utility)
 
     with patch.object(
         initializer,
