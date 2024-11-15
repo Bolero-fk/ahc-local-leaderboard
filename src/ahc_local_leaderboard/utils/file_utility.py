@@ -1,6 +1,7 @@
 import os
 import shutil
 
+from ahc_local_leaderboard.consts import get_top_dir
 from ahc_local_leaderboard.models.test_case import TestCase
 from ahc_local_leaderboard.utils.validator import Validator
 
@@ -28,7 +29,7 @@ class FileUtility:
     @staticmethod
     def get_top_file_path(test_case: TestCase) -> str:
         """test_caseで指定されている提出ファイルのトップケースのパスを取得します"""
-        top_directory_path = "leader_board/top"
+        top_directory_path = str(get_top_dir())
         if not Validator.check_directory(top_directory_path):
             raise FileNotFoundError(
                 f"Destination directory '{top_directory_path}' does not exist and could not be validated."

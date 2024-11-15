@@ -2,6 +2,7 @@ import sqlite3
 import traceback
 from typing import Optional, Type
 
+from ahc_local_leaderboard.consts import get_database_path
 from ahc_local_leaderboard.models.detail_score_record import (
     DetailScoreRecord,
     DetailScoreRecords,
@@ -19,14 +20,14 @@ from ahc_local_leaderboard.models.updated_top_score import UpdatedTopScore
 class DatabaseManager:
     """データベース接続を管理するクラス"""
 
-    _DB_PATH = "leader_board/leader_board.db"
-
     def __init__(self) -> None:
         self.connection: Optional[sqlite3.Connection] = None
 
     def __enter__(self) -> sqlite3.Connection:
         """with 文の開始時にデータベースに接続します。"""
-        self.connection = sqlite3.connect(self._DB_PATH)
+
+        self._db_path = str(get_database_path())
+        self.connection = sqlite3.connect(self._db_path)
         return self.connection
 
     def __exit__(

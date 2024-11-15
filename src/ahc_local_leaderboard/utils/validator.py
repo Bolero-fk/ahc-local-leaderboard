@@ -1,18 +1,26 @@
 import os
 
+from ahc_local_leaderboard.consts import (
+    get_config_path,
+    get_database_path,
+    get_leader_board_path,
+    get_top_dir,
+)
 from ahc_local_leaderboard.database.database_manager import ScoreHistoryRepository
 from ahc_local_leaderboard.utils.console_handler import ConsoleHandler
 
 
 class Validator:
-    REQUIRED_DIRECTORIES = ["leader_board", "leader_board/top"]
-    REQUIRED_FILES = ["leader_board/leader_board.db", "leader_board/config.yaml"]
 
     @staticmethod
     def validate_file_structure() -> bool:
         """ディレクトリとファイルの構造を検証し、問題があれば False を返す"""
-        dirs_ok = Validator.check_directories(Validator.REQUIRED_DIRECTORIES)
-        files_ok = Validator.check_files(Validator.REQUIRED_FILES)
+
+        required_derectories = [str(get_leader_board_path()), str(get_top_dir())]
+        required_files = [str(get_database_path()), str(get_config_path())]
+
+        dirs_ok = Validator.check_directories(required_derectories)
+        files_ok = Validator.check_files(required_files)
 
         return dirs_ok and files_ok
 

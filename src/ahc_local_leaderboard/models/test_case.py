@@ -13,10 +13,9 @@ class TestCase:
 class TestCases:
     __test__ = False  # pytest によるテスト収集を無効化
 
-    test_cases: list[TestCase] = []
-
     def __init__(self) -> None:
         self.test_case_count = 0
+        self.test_cases: list[TestCase] = []
 
     def add_test_case(self, test_case: TestCase) -> None:
         self.test_cases.append(test_case)
