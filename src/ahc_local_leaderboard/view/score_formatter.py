@@ -9,7 +9,7 @@ from ahc_local_leaderboard.view.color_interpolator import ColorInterpolator
 
 
 class ScoreFormatter:
-    """スコアの見た目を整形する専用クラス"""
+    """スコアをフォーマットし、視覚的に見やすく整形するためのクラス。"""
 
     DEFAULT_STYLE = Style(color="white")
     ERROR_STYLE = Style(color="red", bold=True)
@@ -26,7 +26,7 @@ class ScoreFormatter:
 
     @staticmethod
     def format_total_absolute_score(total_absolute_score: int, invalid_score_count: int = 0) -> Text:
-        """Total Absolute Scoreの表示を調整"""
+        """Total Absolute Scoreの表示を調整します。"""
 
         assert 0 <= total_absolute_score
         assert 0 <= invalid_score_count
@@ -39,12 +39,12 @@ class ScoreFormatter:
 
     @staticmethod
     def format_absolute_score(absolute_score: Optional[int]) -> Text:
-        """絶対スコアの表示を生成します"""
+        """絶対スコアの表示を生成します。"""
         return ScoreFormatter.format_optional_int(absolute_score)
 
     @staticmethod
     def get_relative_score_color(relative_score: int, max_score: int, threshold_ratio: float = 0.9) -> Color:
-        """relative_score の値に応じて赤→黄色→緑のグラデーションを生成する関数。
+        """relative_score の値に応じて赤→黄色→緑のグラデーションを生成します。
 
         AHC では可能な限り top_score に近いスコアを目指すため、スコアが大きいほど
         色の変化が強調されるように、指数補間を用いてグラデーションを生成しています。
@@ -72,14 +72,14 @@ class ScoreFormatter:
 
     @staticmethod
     def format_relative_score(relative_score: int, max_score: int) -> Text:
-        """相対スコアの表示をグラデーションカラーで整形"""
+        """相対スコアの表示をグラデーションカラーで整形します。"""
         assert 0 <= relative_score <= max_score
         relative_score_color = ScoreFormatter.get_relative_score_color(relative_score, max_score)
         return Text(str(relative_score), style=Style(color=relative_score_color))
 
     @staticmethod
     def format_score_diff(absolute_score: Optional[int], top_score: Optional[int]) -> Text:
-        """トップスコアとの差分の表示を生成します"""
+        """トップスコアとの差分の表示を生成します。"""
 
         if absolute_score is not None and top_score is not None:
             # スコアの最小化問題か最大化問題化で正負が変わるので絶対値をとっておく
@@ -91,7 +91,7 @@ class ScoreFormatter:
 
     @staticmethod
     def format_test_case_input(test_case_input: str) -> Text:
-        """Test Case Inputをフォーマットする"""
+        """Test Case Inputをフォーマットします。"""
 
         input_text = Text(test_case_input)
         # ReprHighlighter がいい感じにHighliteしてくれている気がする

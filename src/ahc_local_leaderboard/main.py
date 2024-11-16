@@ -24,6 +24,7 @@ from ahc_local_leaderboard.view.viewer import Viewer
 
 
 def handle_setup(initial_dependencies: PrevDependencies) -> None:
+    """ローカル順位表のセットアップを実行します。"""
     initializer = Initializer(
         initial_dependencies["record_write_service"],
         initial_dependencies["file_utility"],
@@ -35,6 +36,7 @@ def handle_setup(initial_dependencies: PrevDependencies) -> None:
 
 
 def handle_submit(dependencies: Dependencies, in_dir_path: Path, submit_dir_path: Path) -> None:
+    """指定した出力をローカル順位表に送信します。"""
     submitter = Submitter(
         dependencies["record_write_service"],
         dependencies["test_files_processor"],
@@ -53,6 +55,7 @@ def handle_submit(dependencies: Dependencies, in_dir_path: Path, submit_dir_path
 
 
 def handle_view(dependencies: Dependencies, limit: int, detail: str) -> None:
+    """スコア履歴やテストケースの詳細を表示します。"""
     viewer = Viewer(
         dependencies["record_read_service"],
         dependencies["relative_score_calculator"],

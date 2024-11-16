@@ -20,6 +20,7 @@ from ahc_local_leaderboard.models.updated_top_score import UpdatedTopScore
 
 
 class RecordReadService:
+    """データベースからスコアやテストケースの情報を読み取るためのサービスクラス。"""
 
     def __init__(
         self,
@@ -32,7 +33,7 @@ class RecordReadService:
         self.top_score_repo = top_score_repo
 
     def fetch_all_summary_records(self) -> SummaryScoreRecords:
-        """データベース内の全サマリーレコードを取得します。"""
+        """データベース内の全概要レコードを取得します。"""
         return self.score_history_repo.fetch_all_records()
 
     def fetch_latest_submission_id(self) -> int:
@@ -60,7 +61,7 @@ class RecordReadService:
         return self.test_case_repo.fetch_absolute_score_for_test_case(test_case_name, submission_id)
 
     def fetch_top_summary_record(self) -> TopSummaryScoreRecord:
-        """トップテストケースのサマリーレコードを取得します。"""
+        """トップテストケースの概要レコードを取得します。"""
         return self.top_score_repo.fetch_top_summary_record()
 
     def fetch_test_case_count(self) -> int:

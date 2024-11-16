@@ -18,7 +18,7 @@ from ahc_local_leaderboard.models.updated_top_score import UpdatedTopScore
 
 
 class DatabaseManager:
-    """データベース接続を管理するクラス"""
+    """データベース接続の管理とテーブルの作成を行うクラス。"""
 
     def __init__(self) -> None:
         self.connection: Optional[sqlite3.Connection] = None
@@ -87,6 +87,7 @@ class DatabaseManager:
 
 
 class ScoreHistoryRepository:
+    """スコア履歴テーブルへの操作を提供するクラス。"""
 
     def reserve_empty_score_history_record(self, submission_time: str) -> SummaryScoreRecord:
         """指定された日時で空のスコア履歴レコードを作成し、そのレコードを返します。"""
@@ -212,6 +213,7 @@ class ScoreHistoryRepository:
 
 
 class TestCaseRepository:
+    """テストケーステーブルへの操作を提供するクラス。"""
 
     def insert_test_case(self, test_case: TestCase, score_history_id: int) -> None:
         """指定されたテストケース情報をテストケーステーブルに挿入します。"""
@@ -265,6 +267,7 @@ class TestCaseRepository:
 
 
 class TopScoresRepository:
+    """トップスコアテーブルへの操作を提供するクラス。"""
 
     def update_top_score(self, test_case: TestCase, score_history_id: int) -> None:
         """指定テストケースのスコアをもとにトップスコアを更新します。"""
@@ -331,7 +334,7 @@ class TopScoresRepository:
             return [UpdatedTopScore(file_name=row[0], top_score=row[1], second_top_score=row[2]) for row in records]
 
     def fetch_top_summary_record(self) -> TopSummaryScoreRecord:
-        """トップスコアテーブルのトップスコア情報を集計し、サマリーレコードを返します。"""
+        """トップスコアテーブルのトップスコア情報を集計し、概要レコードを返します。"""
         with DatabaseManager() as conn:
             cursor = conn.cursor()
             cursor.execute(

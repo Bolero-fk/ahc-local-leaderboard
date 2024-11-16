@@ -11,6 +11,11 @@ from ahc_local_leaderboard.utils.relative_score_calculater import (
 
 
 class RelativeScoreUpdater:
+    """
+    相対スコアの更新を管理するクラス。
+    トップスコアの変更に基づいて、各スコア履歴の相対スコアや順位を更新します。
+    """
+
     def __init__(
         self,
         record_read_service: RecordReadService,
@@ -26,7 +31,7 @@ class RelativeScoreUpdater:
         non_latest_record: SummaryScoreRecord,
         updated_top_score: UpdatedTopScore,
     ) -> int:
-        """指定されたレコードの相対スコア更新前後の差分を計算する"""
+        """指定されたレコードの相対スコア更新前後の差分を計算します。"""
 
         absolute_score = self.record_read_service.fetch_absolute_score_for_test_case(
             updated_top_score.file_name, non_latest_record.id
@@ -40,7 +45,7 @@ class RelativeScoreUpdater:
         non_latest_record: SummaryScoreRecord,
         updated_top_scores: list[UpdatedTopScore],
     ) -> int:
-        """指定されたレコードの相対スコア更新前後の差分の総和を計算する"""
+        """指定されたレコードの相対スコア更新前後の差分の総和を計算します。"""
 
         total_score_diff = 0
         for updated_top_score in updated_top_scores:
@@ -49,7 +54,7 @@ class RelativeScoreUpdater:
         return total_score_diff
 
     def update_relative_scores(self, records: list[SummaryScoreRecord]) -> None:
-        """入力されたレコードの相対スコアを更新する"""
+        """入力されたレコードの相対スコアを更新します。"""
 
         updated_top_scores = self.record_read_service.fetch_recently_updated_top_scores()
         for summary_record in records:
@@ -57,7 +62,7 @@ class RelativeScoreUpdater:
             summary_record.total_relative_score += total_relative_score_diff
 
     def fetch_latest_and_remaining_records(self) -> tuple[SummaryScoreRecord, list[SummaryScoreRecord]]:
-        """データベースから最新のレコードと、それ以外のレコードを取得する"""
+        """データベースから最新のレコードと、それ以外のレコードを取得します。"""
 
         all_summary_records = self.record_read_service.fetch_all_summary_records()
 
@@ -68,7 +73,7 @@ class RelativeScoreUpdater:
         return latest_record, remaining_records
 
     def apply_relative_score_updates(self) -> None:
-        """データベース内の相対スコアに関連する内容を更新する"""
+        """データベース内の相対スコアに関連する内容を更新します。"""
 
         latest_record, remaining_records = self.fetch_latest_and_remaining_records()
 

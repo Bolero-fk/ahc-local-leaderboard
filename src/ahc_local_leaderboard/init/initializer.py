@@ -7,6 +7,7 @@ from ahc_local_leaderboard.utils.file_utility import FileUtility
 
 
 class Initializer:
+    """ローカル順位表の初期化処理を担当するクラス。"""
 
     def __init__(
         self,

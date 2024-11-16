@@ -9,6 +9,7 @@ from ahc_local_leaderboard.models.test_case import TestCase
 
 
 class RecordWriteService:
+    """データベースへのスコアやテストケース情報の書き込みを管理するサービスクラス。"""
 
     def __init__(
         self,

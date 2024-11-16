@@ -9,22 +9,26 @@ from ahc_local_leaderboard.models.test_file import TestFile, TestFiles
 
 
 class TestFileProcessorInterface(ABC):
+    """テストファイルを処理してスコアを計算するためのインターフェース。"""
+
     __test__ = False  # pytest によるテスト収集を無効化
 
     @abstractmethod
     def process_test_file(self, test_file: TestFile) -> Optional[int]:
-        """単一のテストファイルのスコアを計算し、成功した場合はスコアを返す"""
+        """単一のテストファイルのスコアを計算し、成功した場合はスコアを返します。"""
         pass
 
 
 class AtCoderTestFileProcessor(TestFileProcessorInterface):
+    """AtCoderのツールを使用してテストファイルを処理し、スコアを計算するクラス。"""
+
     def validate_output_format(self, decoded_output: str) -> None:
-        """標準出力が期待するフォーマットか検証する"""
+        """標準出力が期待するフォーマットか検証します。"""
         if len(decoded_output.split("\n")) != 2:
             raise ValueError("入力されたテストファイルでAHCツールを実行するとエラーを返しています")
 
     def parse_stdout(self, decoded_output: str) -> int:
-        """標準出力からスコアを取り出す"""
+        """標準出力からスコアを取り出します。"""
         try:
             score_str = decoded_output.split(" ")[-1].strip()
             return int(score_str)
@@ -32,7 +36,7 @@ class AtCoderTestFileProcessor(TestFileProcessorInterface):
             raise ValueError("スコアを標準出力から抽出できませんでした。")
 
     def process_test_file(self, test_file: TestFile) -> Optional[int]:
-        """AHCで配布されるツールを使ってスコアを計算し、成功した場合はスコアを返す"""
+        """AHCで配布されるツールを使ってスコアを計算し、成功した場合はスコアを返します。"""
         try:
             with open(test_file.input_file_path) as fin, open(test_file.submit_file_path) as fout:
                 score_process = subprocess.run(
@@ -49,6 +53,8 @@ class AtCoderTestFileProcessor(TestFileProcessorInterface):
 
 
 class TestFilesProcessor:
+    """複数のテストファイルを処理して、それらに対応するテストケースを生成するクラス。"""
+
     __test__ = False  # pytest によるテスト収集を無効化
 
     LOADING_TEXT = "Test Case Processing..."
@@ -57,7 +63,7 @@ class TestFilesProcessor:
         self.test_file_processor = test_file_processor
 
     def process_test_files(self, test_files: TestFiles) -> TestCases:
-        """全てのテストファイルのスコアを計算する"""
+        """全てのテストファイルのスコアを計算します。"""
 
         self.test_files = test_files
 

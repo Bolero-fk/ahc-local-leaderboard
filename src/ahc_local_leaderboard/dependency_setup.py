@@ -27,6 +27,8 @@ from ahc_local_leaderboard.utils.relative_score_calculater import (
 
 
 class PrevDependencies(TypedDict):
+    """scoring_type に依存しない初期依存関係を定義する型。"""
+
     record_read_service: RecordReadService
     record_write_service: RecordWriteService
     file_utility: FileUtility
@@ -34,6 +36,8 @@ class PrevDependencies(TypedDict):
 
 
 class Dependencies(TypedDict):
+    """scoring_type に依存するすべての依存関係を定義する型。"""
+
     record_read_service: RecordReadService
     record_write_service: RecordWriteService
     relative_score_calculator: RelativeScoreCalculaterInterface

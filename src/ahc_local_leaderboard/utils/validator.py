@@ -15,7 +15,7 @@ class Validator:
 
     @staticmethod
     def validate_file_structure() -> bool:
-        """ディレクトリとファイルの構造を検証し、問題があれば False を返す"""
+        """ディレクトリとファイルの構造を検証し、問題があれば False を返します。"""
 
         required_derectories = [get_leader_board_path(), get_top_dir()]
         required_files = [get_database_path(), get_config_path()]
@@ -27,6 +27,7 @@ class Validator:
 
     @staticmethod
     def check_directories(dirctory_paths: list[Path]) -> bool:
+        """指定されたディレクトリが存在するかを確認します。"""
         missing_dirs = [d for d in dirctory_paths if not os.path.isdir(d)]
         if missing_dirs:
             ConsoleHandler.print_error(f"Missing directories: {', '.join(str( missing_dirs))}")
@@ -35,6 +36,7 @@ class Validator:
 
     @staticmethod
     def check_files(file_paths: list[Path]) -> bool:
+        """指定されたファイルが存在するかを確認します。"""
         missing_files = [f for f in file_paths if not os.path.isfile(f)]
         if missing_files:
             ConsoleHandler.print_error(f"Missing files: {', '.join(str(missing_files))}")
@@ -43,5 +45,5 @@ class Validator:
 
     @staticmethod
     def validate_id_exists(id: int) -> bool:
-        """指定されたscore_history_idがscore_historyテーブルに存在するか確認"""
+        """指定されたscore_history_idがscore_historyテーブルに存在するか確認します。"""
         return ScoreHistoryRepository().exists_id(id)

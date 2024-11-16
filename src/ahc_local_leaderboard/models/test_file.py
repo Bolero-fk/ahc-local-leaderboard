@@ -4,6 +4,8 @@ from typing import Iterator
 
 
 class TestFile:
+    """個々のテストファイルを管理するクラス。"""
+
     __test__ = False  # pytest によるテスト収集を無効化
 
     # TODO ファイルの存在チェックのバリデーション
@@ -14,6 +16,8 @@ class TestFile:
 
 
 class TestFiles:
+    """複数のテストファイルを管理するクラス。"""
+
     __test__ = False  # pytest によるテスト収集を無効化
 
     def __init__(self, input_dir_path: Path, submit_dir_path: Path) -> None:
@@ -23,7 +27,7 @@ class TestFiles:
         self.test_files: list[TestFile] = []
 
     def add_all_files(self) -> None:
-        """入力ディレクトリ内のすべてのファイルをTestFileとして追加します"""
+        """入力ディレクトリ内のすべてのファイルをTestFileとして追加します。"""
         assert self.file_count == 0  # 呼び出すのは一回だけ
 
         input_file_names = os.listdir(self.input_dir_path)
@@ -33,7 +37,7 @@ class TestFiles:
 
     # TODO ファイル重複チェックのvalidation
     def add_file(self, file_name: str) -> None:
-        """指定されたファイルをTestFileオブジェクトとして追加します"""
+        """指定されたファイルをTestFileオブジェクトとして追加します。"""
 
         input_file_path = self.input_dir_path / file_name
         submit_file_path = self.submit_dir_path / file_name

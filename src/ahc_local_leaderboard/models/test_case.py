@@ -3,6 +3,8 @@ from typing import Iterator, Optional
 
 
 class TestCase:
+    """個々のテストケースを管理するクラス。"""
+
     __test__ = False  # pytest によるテスト収集を無効化
 
     def __init__(self, file_name: str, score: Optional[int], submit_file_path: Path) -> None:
@@ -12,6 +14,8 @@ class TestCase:
 
 
 class TestCases:
+    """複数のテストケースを管理するクラス。"""
+
     __test__ = False  # pytest によるテスト収集を無効化
 
     def __init__(self) -> None:
@@ -19,6 +23,7 @@ class TestCases:
         self.test_cases: list[TestCase] = []
 
     def add_test_case(self, test_case: TestCase) -> None:
+        """テストケースを追加します。"""
         self.test_cases.append(test_case)
         self.test_case_count += 1
 

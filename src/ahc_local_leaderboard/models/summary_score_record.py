@@ -11,6 +11,7 @@ from ahc_local_leaderboard.utils.relative_score_calculater import (
 
 
 class SummaryScoreRecord:
+    """提出に対応するスコアのサマリ情報を管理するクラス。"""
 
     def __init__(
         self,
@@ -38,6 +39,7 @@ class SummaryScoreRecord:
         detail_records: DetailScoreRecords[DetailScoreRecord],
         relative_score_calculator: RelativeScoreCalculaterInterface,
     ) -> None:
+        """詳細スコアレコードを基に、サマリスコア情報を更新します。"""
 
         self.total_absolute_score = detail_records.calculate_total_absolute_score()
         self.total_relative_score = detail_records.calculate_total_relative_score(relative_score_calculator)
@@ -45,11 +47,12 @@ class SummaryScoreRecord:
 
     @classmethod
     def from_row(cls, row: tuple[int, str, int, int, int, Optional[int]]) -> "SummaryScoreRecord":
-        """クエリ結果のタプルからSummaryScoreRecordインスタンスを生成します"""
+        """クエリ結果のタプルからSummaryScoreRecordインスタンスを生成します。"""
         return cls(*row)
 
 
 class TopSummaryScoreRecord:
+    """トップスコアに対応するサマリ情報を管理するクラス。"""
 
     def __init__(
         self,
@@ -66,6 +69,7 @@ class TopSummaryScoreRecord:
 
 
 class SummaryScoreRecords:
+    """複数の概要レコードを管理し、順位付けや最新レコードの取得を行うクラス。"""
 
     def __init__(self, records: list[SummaryScoreRecord]) -> None:
         self.records = records
@@ -74,11 +78,11 @@ class SummaryScoreRecords:
         return iter(self.records)
 
     def add_record(self, record: SummaryScoreRecord) -> None:
-        """指定された record を records に追加する"""
+        """指定された record を records に追加する。"""
         return self.records.append(record)
 
     def update_relative_ranks(self) -> None:
-        """total_relative_score に基づいて records を降順に並べ、relative_rank を設定する"""
+        """total_relative_score に基づいて records を降順に並べ、relative_rank を設定する。"""
         self.records.sort(key=lambda record: record.total_relative_score, reverse=True)
 
         relative_rank = 1
@@ -88,12 +92,12 @@ class SummaryScoreRecords:
 
     # TODO: submission_timeの型は datetime にする
     def get_latest_record(self) -> SummaryScoreRecord:
-        """submission_time が最も新しい record を返す"""
+        """submission_time が最も新しい record を返す。"""
         assert len(self.records) != 0
 
         return max(self.records, key=lambda record: datetime.strptime(record.submission_time, "%Y-%m-%d %H:%M:%S"))
 
     def get_records_except_latest(self) -> list[SummaryScoreRecord]:
-        """submission_time が最も新しい record 以外の records を返す"""
+        """submission_time が最も新しい record 以外の records を返す。"""
         latest_record = self.get_latest_record()
         return [record for record in self.records if record != latest_record]

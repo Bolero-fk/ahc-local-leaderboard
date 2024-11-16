@@ -5,6 +5,7 @@ import yaml
 
 
 class Config:
+    """設定ファイルの読み込みと設定データへのアクセスを管理するクラス。"""
 
     def __init__(self, config_path: Path):
         self.config_path = config_path

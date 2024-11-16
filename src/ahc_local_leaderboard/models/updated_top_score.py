@@ -1,4 +1,6 @@
 class UpdatedTopScore:
+    """更新されたトップスコア情報を管理するクラス。"""
+
     def __init__(self, file_name: str, top_score: int, second_top_score: int) -> None:
         self.file_name = file_name
         self.top_score = top_score

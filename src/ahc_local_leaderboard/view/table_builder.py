@@ -21,18 +21,20 @@ T = TypeVar("T")
 
 
 class TableBuilder(ABC, Generic[T]):
+    """テーブル構築のための基底クラス。"""
+
     def __init__(self, title: str) -> None:
         self.table = Table(title=title)
         self.define_header()
 
     @abstractmethod
     def define_header(self) -> None:
-        """テーブルのヘッダーを設定する抽象メソッド"""
+        """テーブルのヘッダーを設定する抽象メソッド。"""
         pass
 
     @abstractmethod
     def insert_record(self, record: T) -> None:
-        """各行を挿入するための抽象メソッド"""
+        """各行を挿入するための抽象メソッド。"""
         pass
 
     def insert_records(self, records: list[T]) -> None:
@@ -40,17 +42,20 @@ class TableBuilder(ABC, Generic[T]):
             self.insert_record(record)
 
     def display(self) -> None:
-        """テーブルを表示するメソッド"""
+        """テーブルを表示するメソッド。"""
         ConsoleHandler.console.print(self.table)
 
 
 class SummaryTableBuilder(TableBuilder[SummaryScoreRecord]):
+    """スコア概要を表示するテーブルを構築するクラス。"""
+
     def __init__(self, title: str, max_relative_score: int):
         self.max_relative_score = max_relative_score
 
         super().__init__(title)
 
     def define_header(self) -> None:
+        """スコア概要テーブルのヘッダーを定義します。"""
         self.table.add_column("Id", justify="right")
         self.table.add_column("Rank", justify="right")
         self.table.add_column("Submission Time", justify="left")
@@ -58,6 +63,7 @@ class SummaryTableBuilder(TableBuilder[SummaryScoreRecord]):
         self.table.add_column("Total Relative Score", justify="right")
 
     def insert_record(self, record: SummaryScoreRecord) -> None:
+        """スコア概要の各レコードを挿入します。"""
         self.table.add_row(
             str(record.id),
             str(record.relative_rank),
@@ -67,6 +73,7 @@ class SummaryTableBuilder(TableBuilder[SummaryScoreRecord]):
         )
 
     def insert_top_record(self, record: TopSummaryScoreRecord) -> None:
+        """トップスコアのレコードを挿入します。"""
         self.table.add_row(
             "Top",
             "Top",
@@ -76,11 +83,13 @@ class SummaryTableBuilder(TableBuilder[SummaryScoreRecord]):
         )
 
     def add_separator_row(self) -> None:
-        """区切り線をテーブルに追加する"""
+        """区切り線をテーブルに追加します。"""
         self.table.add_row("─" * 8, "─" * 8, "─" * 20, "─" * 20, "─" * 20)
 
 
 class DetailTableBuilder(TableBuilder[DetailScoreRecord]):
+    """スコア詳細を表示するテーブルを構築するクラス。"""
+
     def __init__(
         self, title: str, max_relative_score: int, relative_score_calculator: RelativeScoreCalculaterInterface
     ) -> None:
@@ -90,12 +99,14 @@ class DetailTableBuilder(TableBuilder[DetailScoreRecord]):
         super().__init__(title)
 
     def define_header(self) -> None:
+        """スコア詳細テーブルのヘッダーを定義します。"""
         self.table.add_column("Test Case", justify="left")
         self.table.add_column("Absolute Score", justify="right")
         self.table.add_column("Score Diff", justify="right")
         self.table.add_column("Relative Score", justify="right")
 
     def insert_record(self, record: DetailScoreRecord) -> None:
+        """スコア詳細の各レコードを挿入します。"""
         relative_score = self.relative_score_calculator(record.absolute_score, record.top_score)
 
         self.table.add_row(
@@ -107,15 +118,19 @@ class DetailTableBuilder(TableBuilder[DetailScoreRecord]):
 
 
 class TopDetailTableBuilder(TableBuilder[TopDetailScoreRecord]):
+    """トップスコア詳細を表示するテーブルを構築するクラス。"""
+
     def __init__(self, title: str):
         super().__init__(title)
 
     def define_header(self) -> None:
+        """トップスコア詳細テーブルのヘッダーを定義します。"""
         self.table.add_column("Test Case", justify="left")
         self.table.add_column("Absolute Score", justify="right")
         self.table.add_column("Id", justify="right")
 
     def insert_record(self, record: TopDetailScoreRecord) -> None:
+        """トップスコア詳細の各レコードを挿入します。"""
         self.table.add_row(
             ScoreFormatter.format_test_case_input(record.input_test_case),
             ScoreFormatter.format_absolute_score(record.absolute_score),

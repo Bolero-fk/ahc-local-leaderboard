@@ -16,6 +16,8 @@ from ahc_local_leaderboard.view.table_builder import (
 
 
 class Viewer:
+    """スコア履歴やテストケースの詳細を表示するクラス。"""
+
     MAX_SINGLE_RELATIVE_SCORE = 1000000000
 
     def __init__(
@@ -26,7 +28,7 @@ class Viewer:
         self.MAX_SUM_RELATIVE_SCORE = self.record_read_service.fetch_test_case_count() * self.MAX_SINGLE_RELATIVE_SCORE
 
     def show_summary_list(self, list_length: int) -> None:
-        """指定された件数（list_length）の最新スコア履歴とトップスコアを取得し、テーブル形式で表示する"""
+        """指定された件数（list_length）の最新スコア履歴とトップスコアを取得し、テーブル形式で表示します。"""
         assert 0 <= list_length
 
         top_record = self.record_read_service.fetch_top_summary_record()
@@ -42,7 +44,7 @@ class Viewer:
         table_builder.display()
 
     def show_summary_table(self, summary_record: SummaryScoreRecord) -> None:
-        """テストケースのサマリー情報テーブルを表示する"""
+        """テストケースの概要情報テーブルを表示します。"""
 
         table_builder = SummaryTableBuilder(
             f"Submission Summary for ID {summary_record.id}", self.MAX_SUM_RELATIVE_SCORE
@@ -55,7 +57,7 @@ class Viewer:
         self,
         detail_records: DetailScoreRecords[DetailScoreRecord],
     ) -> None:
-        """テストケースの詳細テーブルを表示する"""
+        """テストケースの詳細テーブルを表示します。"""
 
         table_builder = DetailTableBuilder(
             f"Submission Details for ID {detail_records.id}",
@@ -67,7 +69,7 @@ class Viewer:
         table_builder.display()
 
     def show_detail(self, submission_id: int) -> None:
-        """指定された提出IDの詳細テーブルを表示する"""
+        """指定された提出IDの詳細テーブルを表示します。"""
         assert 0 < submission_id
 
         summary_record = self.record_read_service.fetch_summary_record_by_submission_id(submission_id)
@@ -77,18 +79,18 @@ class Viewer:
         self.show_test_case_table(detail_records)
 
     def show_latest_detail(self) -> None:
-        """最新の提出の詳細テーブルを表示する"""
+        """最新の提出の詳細テーブルを表示します。"""
         latest_id = self.record_read_service.fetch_latest_submission_id()
         self.show_detail(latest_id)
 
     def show_top_test_case_table(self, detail_records: DetailScoreRecords[TopDetailScoreRecord]) -> None:
-        """トップテストケースの詳細テーブルを表示する"""
+        """トップテストケースの詳細テーブルを表示します。"""
         table_builder = TopDetailTableBuilder("Submission Details for Top Case")
 
         table_builder.insert_records(detail_records.records)
         table_builder.display()
 
     def show_top_detail(self) -> None:
-        """トップテストケースの詳細テーブルを表示する"""
+        """トップテストケースの詳細テーブルを表示します。"""
         detail_records = self.record_read_service.fetch_sorted_top_detail_records()
         self.show_top_test_case_table(detail_records)
