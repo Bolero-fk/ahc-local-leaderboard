@@ -61,33 +61,9 @@ def test_copy_file(mock_copy: Mock, temp_dir: Path) -> None:
         FileUtility.copy_file(src, dest)
 
 
-@patch("ahc_local_leaderboard.utils.validator.Validator.check_directory", return_value=True)
-def test_get_top_file_path(
-    mock_check_directory: Mock,
-    test_case: TestCase,
-    monkeypatch: pytest.MonkeyPatch,
-) -> None:
-    # 順位表ディレクトリのパス取得
-
-    test_dir = Path("test")
-    monkeypatch.setattr("ahc_local_leaderboard.consts.ROOT_DIR", test_dir)
-
-    expected_path = test_dir / "leader_board/top" / test_case.file_name
-    result = FileUtility.get_top_file_path(test_case)
-    assert result == expected_path
-    mock_check_directory.assert_called_once_with(test_dir / "leader_board/top")
-
-    # バリデーションが失敗した場合のエラーハンドリング
-    mock_check_directory.return_value = False
-    with pytest.raises(FileNotFoundError):
-        FileUtility.get_top_file_path(test_case)
-
-
-@patch("ahc_local_leaderboard.utils.validator.Validator.check_directory", return_value=True)
 @patch("shutil.copy")
 def test_copy_submit_file_to_leaderboard(
     mock_copy: Mock,
-    mock_check_directory: Mock,
     test_case: TestCase,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -96,9 +72,6 @@ def test_copy_submit_file_to_leaderboard(
     monkeypatch.setattr("ahc_local_leaderboard.consts.ROOT_DIR", test_dir)
 
     FileUtility.copy_submit_file_to_leaderboard(test_case)
-
-    # 各バリデーションメソッドが正しく呼ばれたか確認
-    mock_check_directory.assert_called_once_with(Path("test/leader_board/top"))
 
     # コピーが行われたか確認
     expected_dest = test_dir / "leader_board/top" / test_case.file_name

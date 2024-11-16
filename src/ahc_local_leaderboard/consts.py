@@ -19,9 +19,5 @@ def get_config_path() -> Path:
     return get_leader_board_path() / "config.yaml"
 
 
-def get_input_dir() -> Path:
-    return get_root_dir() / "in"
-
-
 def get_top_dir() -> Path:
     return get_leader_board_path() / "top"

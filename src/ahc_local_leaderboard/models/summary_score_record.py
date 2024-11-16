@@ -33,15 +33,6 @@ class SummaryScoreRecord:
         self.invalid_score_count = invalid_score_count
         self.relative_rank = relative_rank
 
-    # TODO 使っていないので消す
-    def add_score(self, detail_record: DetailScoreRecord, relative_score: int) -> None:
-        if detail_record.absolute_score is not None:
-            self.total_absolute_score += detail_record.absolute_score
-        else:
-            self.invalid_score_count += 1
-
-        self.total_relative_score += relative_score
-
     def update(
         self,
         detail_records: DetailScoreRecords[DetailScoreRecord],

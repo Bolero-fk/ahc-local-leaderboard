@@ -26,24 +26,10 @@ class Validator:
         return dirs_ok and files_ok
 
     @staticmethod
-    def check_directory(dirctory_path: Path) -> bool:
-        if not os.path.isdir(dirctory_path):
-            ConsoleHandler.print_error(f"Missing directory: {dirctory_path}")
-            return False
-        return True
-
-    @staticmethod
     def check_directories(dirctory_paths: list[Path]) -> bool:
         missing_dirs = [d for d in dirctory_paths if not os.path.isdir(d)]
         if missing_dirs:
             ConsoleHandler.print_error(f"Missing directories: {', '.join(str( missing_dirs))}")
-            return False
-        return True
-
-    @staticmethod
-    def check_file(file_path: Path) -> bool:
-        if not os.path.isfile(file_path):
-            ConsoleHandler.print_error(f"Missing file: {file_path}")
             return False
         return True
 

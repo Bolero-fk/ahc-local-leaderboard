@@ -4,7 +4,6 @@ from pathlib import Path
 
 from ahc_local_leaderboard.consts import get_top_dir
 from ahc_local_leaderboard.models.test_case import TestCase
-from ahc_local_leaderboard.utils.validator import Validator
 
 
 class FileUtility:
@@ -28,21 +27,8 @@ class FileUtility:
             raise IOError(f"Failed to copy file from '{src}' to '{dest}': {e}")
 
     @staticmethod
-    def get_top_file_path(test_case: TestCase) -> Path:
-        """test_caseで指定されている提出ファイルのトップケースのパスを取得します"""
-        top_directory_path = get_top_dir()
-        if not Validator.check_directory(top_directory_path):
-            raise FileNotFoundError(
-                f"Destination directory '{top_directory_path}' does not exist and could not be validated."
-            )
-
-        top_file_path = top_directory_path / test_case.file_name
-
-        return top_file_path
-
-    @staticmethod
     def copy_submit_file_to_leaderboard(test_case: TestCase) -> None:
         """入力された提出ファイルを順位表ディレクトリにコピーします"""
         submit_file_path = test_case.submit_file_path
-        top_file_path = FileUtility.get_top_file_path(test_case)
+        top_file_path = get_top_dir() / test_case.file_name
         FileUtility.copy_file(submit_file_path, top_file_path)
