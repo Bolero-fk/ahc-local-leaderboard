@@ -1,8 +1,9 @@
 import sqlite3
 import traceback
+from datetime import datetime
 from typing import Optional, Type
 
-from ahc_local_leaderboard.consts import get_database_path
+from ahc_local_leaderboard.consts import get_database_path, get_datetime_format
 from ahc_local_leaderboard.models.detail_score_record import (
     DetailScoreRecord,
     DetailScoreRecords,
@@ -89,7 +90,7 @@ class DatabaseManager:
 class ScoreHistoryRepository:
     """スコア履歴テーブルへの操作を提供するクラス。"""
 
-    def reserve_empty_score_history_record(self, submission_time: str) -> SummaryScoreRecord:
+    def reserve_empty_score_history_record(self, submission_time: datetime) -> SummaryScoreRecord:
         """指定された日時で空のスコア履歴レコードを作成し、そのレコードを返します。"""
         with DatabaseManager() as conn:
             cursor = conn.cursor()
@@ -98,7 +99,7 @@ class ScoreHistoryRepository:
                 INSERT INTO score_history (submission_time)
                 VALUES (?)
             """,
-                (submission_time,),
+                (submission_time.strftime(get_datetime_format()),),
             )
 
             lastrowid: Optional[int] = cursor.lastrowid

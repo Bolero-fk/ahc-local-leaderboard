@@ -1,3 +1,4 @@
+from datetime import datetime
 from unittest.mock import MagicMock, Mock
 
 import pytest
@@ -34,7 +35,7 @@ def test_reserve_empty_score_history_record(
     service: RecordWriteService, mock_repos: tuple[MagicMock, MagicMock, MagicMock, MagicMock]
 ) -> None:
     _, score_history_repo, _, _ = mock_repos
-    submission_time = "2023-11-12 12:34:56"
+    submission_time = datetime.now()
     mock_record = Mock(spec=SummaryScoreRecord)
     score_history_repo.reserve_empty_score_history_record.return_value = mock_record
 

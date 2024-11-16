@@ -3,6 +3,7 @@ from typing import Generic, TypeVar
 
 from rich.table import Table
 
+from ahc_local_leaderboard.consts import get_datetime_format
 from ahc_local_leaderboard.models.detail_score_record import (
     DetailScoreRecord,
     TopDetailScoreRecord,
@@ -67,7 +68,7 @@ class SummaryTableBuilder(TableBuilder[SummaryScoreRecord]):
         self.table.add_row(
             str(record.id),
             str(record.relative_rank),
-            record.submission_time,
+            record.submission_time.strftime(get_datetime_format()),
             ScoreFormatter.format_total_absolute_score(record.total_absolute_score, record.invalid_score_count),
             ScoreFormatter.format_relative_score(record.total_relative_score, self.max_relative_score),
         )

@@ -1,7 +1,9 @@
+from datetime import datetime
 from unittest.mock import Mock
 
 import pytest
 
+from ahc_local_leaderboard.consts import get_datetime_format
 from ahc_local_leaderboard.models.detail_score_record import DetailScoreRecords
 from ahc_local_leaderboard.models.summary_score_record import (
     SummaryScoreRecord,
@@ -23,25 +25,28 @@ def mock_relative_score_calculator() -> Mock:
     return Mock(spec=RelativeScoreCalculaterInterface)
 
 
+def is_same_datetime(time1: datetime, time2: datetime) -> bool:
+    return time1.strftime(get_datetime_format()) == time2.strftime(get_datetime_format())
+
+
 @pytest.mark.parametrize("id", [1, 1000])
-@pytest.mark.parametrize("submission_time", ["2023-01-01 10:00:00", "today"])
 @pytest.mark.parametrize("total_absolute_score", [-100000, 0, 100000])
 @pytest.mark.parametrize("total_relative_score", [0, 100000])
 @pytest.mark.parametrize("invalid_score_count", [0, 100000])
 @pytest.mark.parametrize("relative_rank", [None, 1, 100000])
 def test_summary_score_record_initialization(
     id: int,
-    submission_time: str,
     total_absolute_score: int,
     total_relative_score: int,
     invalid_score_count: int,
     relative_rank: int,
 ) -> None:
+    submission_time = datetime.now()
     record = SummaryScoreRecord(
         id, submission_time, total_absolute_score, total_relative_score, invalid_score_count, relative_rank
     )
     assert record.id == id
-    assert record.submission_time == submission_time
+    assert is_same_datetime(record.submission_time, submission_time)
     assert record.total_absolute_score == total_absolute_score
     assert record.total_relative_score == total_relative_score
     assert record.invalid_score_count == invalid_score_count
@@ -50,7 +55,7 @@ def test_summary_score_record_initialization(
 
 @pytest.fixture
 def sample_summary_record() -> SummaryScoreRecord:
-    return SummaryScoreRecord(1, "2023-01-01 10:00:00", 100, 0, 0, 1)
+    return SummaryScoreRecord(1, datetime.now(), 100, 0, 0, 1)
 
 
 @pytest.mark.parametrize("total_absolute_score ", [1, 100000])
@@ -77,19 +82,19 @@ def test_update(
 
 
 @pytest.mark.parametrize("id", [-1000, -1])
-@pytest.mark.parametrize("submission_time", ["2023-01-01 10:00:00", "today"])
 @pytest.mark.parametrize("total_absolute_score", [-100000, 0, 100000])
 @pytest.mark.parametrize("total_relative_score", [-100000, -1])
 @pytest.mark.parametrize("invalid_score_count", [-100000, -1])
 @pytest.mark.parametrize("relative_rank", [-100000, 0])
 def test_summary_score_record_initialization_assertions(
     id: int,
-    submission_time: str,
     total_absolute_score: int,
     total_relative_score: int,
     invalid_score_count: int,
     relative_rank: int,
 ) -> None:
+    submission_time = datetime.now()
+
     with pytest.raises(AssertionError):
         SummaryScoreRecord(
             id, submission_time, total_absolute_score, total_relative_score, invalid_score_count, relative_rank
@@ -125,7 +130,7 @@ def test_top_summary_score_record_initialization_assertions(
 @pytest.mark.parametrize("record_count", [0, 1, 10])
 def test_summary_score_records_initialization(record_count: int) -> None:
 
-    records = [SummaryScoreRecord(i + 1, f"test_case_{i}", i * 100, i * 200, 0, i + 1) for i in range(record_count)]
+    records = [SummaryScoreRecord(i + 1, datetime.now(), i * 100, i * 200, 0, i + 1) for i in range(record_count)]
     summary_records = SummaryScoreRecords(records=records)
     assert len(summary_records.records) == record_count
 

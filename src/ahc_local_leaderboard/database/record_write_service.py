@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from ahc_local_leaderboard.database.database_manager import (
     DatabaseManager,
     ScoreHistoryRepository,
@@ -27,7 +29,7 @@ class RecordWriteService:
         """データベースのセットアップを行います。"""
         self.database_manager.setup()
 
-    def reserve_empty_score_history_record(self, submission_time: str) -> SummaryScoreRecord:
+    def reserve_empty_score_history_record(self, submission_time: datetime) -> SummaryScoreRecord:
         """指定した提出時間で空のスコア履歴レコードを仮登録します。"""
         return self.score_history_repo.reserve_empty_score_history_record(submission_time)
 

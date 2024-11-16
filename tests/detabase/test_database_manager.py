@@ -1,12 +1,13 @@
 import sqlite3
 import tempfile
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Generator, Optional
 from unittest.mock import Mock, patch
 
 import pytest
 
+from ahc_local_leaderboard.consts import get_datetime_format
 from ahc_local_leaderboard.database.database_manager import (
     DatabaseManager,
     ScoreHistoryRepository,
@@ -31,11 +32,15 @@ def temp_database() -> Generator[None, None, None]:
 
 
 def get_temp_summary_record() -> SummaryScoreRecord:
-    return SummaryScoreRecord(1, "test", 1, 10, 1, 1)
+    return SummaryScoreRecord(1, datetime.now(), 1, 10, 1, 1)
 
 
-def get_now_time() -> str:
-    return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+def get_now_time() -> datetime:
+    return datetime.now()
+
+
+def is_same_datetime(time1: datetime, time2: datetime) -> bool:
+    return time1.strftime(get_datetime_format()) == time2.strftime(get_datetime_format())
 
 
 def test_database_connection(temp_database: Generator[None, None, None]) -> None:
@@ -119,7 +124,7 @@ def test_fetch_summary_record_by_submission_id(score_history_repository: ScoreHi
     fetched_record = score_history_repository.fetch_summary_record_by_submission_id(record.id)
 
     assert fetched_record.id == record.id
-    assert fetched_record.submission_time == record.submission_time
+    assert is_same_datetime(fetched_record.submission_time, record.submission_time)
     assert fetched_record.total_absolute_score == record.total_absolute_score
     assert fetched_record.total_relative_score == record.total_relative_score
     assert fetched_record.invalid_score_count == record.invalid_score_count
@@ -128,7 +133,7 @@ def test_fetch_summary_record_by_submission_id(score_history_repository: ScoreHi
 
 def test_fetch_all_record(score_history_repository: ScoreHistoryRepository) -> None:
 
-    submission_time1 = "test_time1"
+    submission_time1 = get_now_time()
     record1 = score_history_repository.reserve_empty_score_history_record(submission_time1)
     record1.total_absolute_score = 1
     record1.total_relative_score = 2
@@ -136,7 +141,7 @@ def test_fetch_all_record(score_history_repository: ScoreHistoryRepository) -> N
     record1.relative_rank = 4
     score_history_repository.update_score_history(record1)
 
-    submission_time2 = "test_time2"
+    submission_time2 = get_now_time() + timedelta(seconds=1)
     record2 = score_history_repository.reserve_empty_score_history_record(submission_time2)
     record2.total_absolute_score = 10
     record2.total_relative_score = 20
@@ -152,7 +157,7 @@ def test_fetch_all_record(score_history_repository: ScoreHistoryRepository) -> N
 
     for i in range(len(all_records.records)):
         assert all_records.records[i].id == records[i].id
-        assert all_records.records[i].submission_time == records[i].submission_time
+        assert is_same_datetime(all_records.records[i].submission_time, records[i].submission_time)
         assert all_records.records[i].total_absolute_score == records[i].total_absolute_score
         assert all_records.records[i].total_relative_score == records[i].total_relative_score
         assert all_records.records[i].invalid_score_count == records[i].invalid_score_count
@@ -161,11 +166,11 @@ def test_fetch_all_record(score_history_repository: ScoreHistoryRepository) -> N
 
 def test_fetch_latest_id(score_history_repository: ScoreHistoryRepository) -> None:
 
-    submission_time1 = "2024-11-11 11:11:11"
+    submission_time1 = get_now_time()
 
     score_history_repository.reserve_empty_score_history_record(submission_time1)
 
-    submission_time2 = "2024-12-12 12:12:12"
+    submission_time2 = get_now_time() + timedelta(seconds=100)
     record2 = score_history_repository.reserve_empty_score_history_record(submission_time2)
 
     latest_id = score_history_repository.fetch_latest_id()
@@ -174,7 +179,7 @@ def test_fetch_latest_id(score_history_repository: ScoreHistoryRepository) -> No
 
 def test_fetch_recent_summary_records(score_history_repository: ScoreHistoryRepository) -> None:
 
-    submission_time1 = "2024-11-11 11:11:11"
+    submission_time1 = get_now_time()
     record1 = score_history_repository.reserve_empty_score_history_record(submission_time1)
     record1.total_absolute_score = 1
     record1.total_relative_score = 2
@@ -182,7 +187,7 @@ def test_fetch_recent_summary_records(score_history_repository: ScoreHistoryRepo
     record1.relative_rank = 4
     score_history_repository.update_score_history(record1)
 
-    submission_time2 = "2024-12-12 12:12:12"
+    submission_time2 = get_now_time() + timedelta(seconds=100)
     record2 = score_history_repository.reserve_empty_score_history_record(submission_time2)
     record2.total_absolute_score = 10
     record2.total_relative_score = 20
@@ -194,7 +199,7 @@ def test_fetch_recent_summary_records(score_history_repository: ScoreHistoryRepo
     assert len(recent_records.records) == 1
 
     assert recent_records.records[0].id == record2.id
-    assert recent_records.records[0].submission_time == record2.submission_time
+    assert is_same_datetime(recent_records.records[0].submission_time, record2.submission_time)
     assert recent_records.records[0].total_absolute_score == record2.total_absolute_score
     assert recent_records.records[0].total_relative_score == record2.total_relative_score
     assert recent_records.records[0].invalid_score_count == record2.invalid_score_count

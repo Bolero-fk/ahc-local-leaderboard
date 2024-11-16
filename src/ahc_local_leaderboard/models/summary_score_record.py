@@ -1,6 +1,7 @@
 from datetime import datetime
 from typing import Iterator, Optional
 
+from ahc_local_leaderboard.consts import get_datetime_format
 from ahc_local_leaderboard.models.detail_score_record import (
     DetailScoreRecord,
     DetailScoreRecords,
@@ -16,7 +17,7 @@ class SummaryScoreRecord:
     def __init__(
         self,
         id: int,
-        submission_time: str,
+        submission_time: datetime,
         total_absolute_score: int,
         total_relative_score: int,
         invalid_score_count: int,
@@ -48,7 +49,7 @@ class SummaryScoreRecord:
     @classmethod
     def from_row(cls, row: tuple[int, str, int, int, int, Optional[int]]) -> "SummaryScoreRecord":
         """クエリ結果のタプルからSummaryScoreRecordインスタンスを生成します。"""
-        return cls(*row)
+        return cls(row[0], datetime.strptime(row[1], get_datetime_format()), row[2], row[3], row[4], row[5])
 
 
 class TopSummaryScoreRecord:
@@ -90,12 +91,11 @@ class SummaryScoreRecords:
             record.relative_rank = relative_rank
             relative_rank += 1
 
-    # TODO: submission_timeの型は datetime にする
     def get_latest_record(self) -> SummaryScoreRecord:
         """submission_time が最も新しい record を返す。"""
         assert len(self.records) != 0
 
-        return max(self.records, key=lambda record: datetime.strptime(record.submission_time, "%Y-%m-%d %H:%M:%S"))
+        return max(self.records, key=lambda record: record.submission_time)
 
     def get_records_except_latest(self) -> list[SummaryScoreRecord]:
         """submission_time が最も新しい record 以外の records を返す。"""

@@ -1,3 +1,4 @@
+from datetime import datetime
 from unittest.mock import MagicMock, Mock
 
 import pytest
@@ -32,15 +33,14 @@ def mock_relative_score_calculator() -> RelativeScoreCalculaterInterface:
 
 
 @pytest.mark.parametrize(
-    "id, submission_time, total_absolute_score, total_relative_score, invalid_score_count, relative_rank, max_diff",
+    "id, total_absolute_score, total_relative_score, invalid_score_count, relative_rank, max_diff",
     [
-        (1, "2023-01-01 10:00:00", 0, 0, 0, None, 0),
-        (1000, "$%'-_@{}~`!#()'.", 100000, 100000, 100000, 1, 1),
+        (1, 0, 0, 0, None, 0),
+        (1000, 100000, 100000, 100000, 1, 1),
     ],
 )
 def test_summary_table_builder_insert_record(
     id: int,
-    submission_time: str,
     total_absolute_score: int,
     total_relative_score: int,
     invalid_score_count: int,
@@ -50,7 +50,7 @@ def test_summary_table_builder_insert_record(
 ) -> None:
     record = SummaryScoreRecord(
         id=id,
-        submission_time=submission_time,
+        submission_time=datetime.now(),
         total_absolute_score=total_absolute_score,
         total_relative_score=total_relative_score,
         invalid_score_count=invalid_score_count,
