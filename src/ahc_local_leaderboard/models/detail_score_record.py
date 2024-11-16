@@ -8,9 +8,8 @@ from ahc_local_leaderboard.utils.relative_score_calculater import (
 class DetailScoreRecord:
     """個々のテストケースのスコア情報を管理するクラス。"""
 
-    # TODO input_test_case はfile nameに統一する
-    def __init__(self, input_test_case: str, absolute_score: Optional[int], top_score: Optional[int]) -> None:
-        self.input_test_case = input_test_case
+    def __init__(self, file_name: str, absolute_score: Optional[int], top_score: Optional[int]) -> None:
+        self.file_name = file_name
         self.absolute_score = absolute_score
         self.top_score = top_score
 
@@ -31,9 +30,9 @@ class DetailScoreRecord:
 class TopDetailScoreRecord(DetailScoreRecord):
     """トップスコアの詳細情報を管理するクラス。"""
 
-    def __init__(self, input_test_case: str, top_score: Optional[int], submittion_id: int) -> None:
+    def __init__(self, file_name: str, top_score: Optional[int], submittion_id: int) -> None:
         assert 0 < submittion_id
-        super().__init__(input_test_case, top_score, top_score)
+        super().__init__(file_name, top_score, top_score)
         self.submittion_id = submittion_id
 
 
@@ -54,7 +53,7 @@ class DetailScoreRecords(Generic[T]):
 
     def sort_records_by_input_file_name(self) -> None:
         """入力ファイル名でレコードをソートします。"""
-        self.records.sort(key=lambda record: record.input_test_case)
+        self.records.sort(key=lambda record: record.file_name)
 
     def calculate_total_absolute_score(self) -> int:
         """絶対スコアの合計を計算して返します。"""

@@ -127,7 +127,7 @@ class ScoreHistoryRepository:
                 ),
             )
 
-    def fetch_summary_record_by_submission_id(self, id: int) -> SummaryScoreRecord:
+    def fetch_summary_record_by_id(self, id: int) -> SummaryScoreRecord:
         """指定されたIDのスコア履歴レコードを取得し、返します。"""
         with DatabaseManager() as conn:
             cursor = conn.cursor()
@@ -247,7 +247,7 @@ class TestCaseRepository:
 
         return result[0]
 
-    def fetch_records_by_submission_id(self, submission_id: int) -> DetailScoreRecords[DetailScoreRecord]:
+    def fetch_records_by_id(self, submission_id: int) -> DetailScoreRecords[DetailScoreRecord]:
         """指定された提出IDに関連するすべてのテストケースレコードを取得します。"""
 
         with DatabaseManager() as conn:

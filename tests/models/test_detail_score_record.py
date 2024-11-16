@@ -23,7 +23,7 @@ def mock_relative_score_calculator() -> Mock:
 @pytest.mark.parametrize("score2", [None, -100000, -1, 0, 1, 100000])
 def test_detail_score_record_initialization(input: str, score1: Optional[int], score2: Optional[int]) -> None:
     record = DetailScoreRecord(input, score1, score2)
-    assert record.input_test_case == input
+    assert record.file_name == input
     assert record.absolute_score == score1
     assert record.top_score == score2
 
@@ -38,7 +38,7 @@ def test_detail_score_record_initialization(input: str, score1: Optional[int], s
 def test_calculate_relative_score(
     mock_relative_score_calculator: Mock, score: int, top_score: int, expected_relative_score: int
 ) -> None:
-    record = DetailScoreRecord(input_test_case="test_case_1", absolute_score=score, top_score=top_score)
+    record = DetailScoreRecord(file_name="test_case_1", absolute_score=score, top_score=top_score)
 
     mock_relative_score_calculator.return_value = expected_relative_score
     relative_score = record.calculate_relative_score(mock_relative_score_calculator)
@@ -56,7 +56,7 @@ def test_calculate_relative_score(
     ],
 )
 def test_get_absolute_score_with_value(score: Optional[int], expected_absolute_score: int) -> None:
-    record = DetailScoreRecord(input_test_case="test_case_1", absolute_score=score, top_score=1000)
+    record = DetailScoreRecord(file_name="test_case_1", absolute_score=score, top_score=1000)
     assert record.get_absolute_score() == expected_absolute_score
 
 
@@ -65,7 +65,7 @@ def test_get_absolute_score_with_value(score: Optional[int], expected_absolute_s
 @pytest.mark.parametrize("id", [1, 100000])
 def test_top_detail_score_record_initialization(input: str, top_score: Optional[int], id: int) -> None:
     top_record = TopDetailScoreRecord(input, top_score, id)
-    assert top_record.input_test_case == input
+    assert top_record.file_name == input
     assert top_record.absolute_score == top_score
     assert top_record.top_score == top_score
     assert top_record.submittion_id == id
@@ -98,16 +98,16 @@ def test_detail_score_records_initialization_assertions(id: Union[int, str], rec
 
 @pytest.fixture
 def sample_records() -> list[DetailScoreRecord]:
-    record1 = DetailScoreRecord(input_test_case="test1.txt", absolute_score=100, top_score=200)
-    record2 = DetailScoreRecord(input_test_case="test2.txt", absolute_score=None, top_score=200)
-    record3 = DetailScoreRecord(input_test_case="test3.txt", absolute_score=300, top_score=400)
+    record1 = DetailScoreRecord(file_name="test1.txt", absolute_score=100, top_score=200)
+    record2 = DetailScoreRecord(file_name="test2.txt", absolute_score=None, top_score=200)
+    record3 = DetailScoreRecord(file_name="test3.txt", absolute_score=300, top_score=400)
     return [record1, record2, record3]
 
 
 def test_sort_records_by_input_file_name(sample_records: list[DetailScoreRecord]) -> None:
     records = DetailScoreRecords[DetailScoreRecord](id=1, records=sample_records)
     records.sort_records_by_input_file_name()
-    assert [record.input_test_case for record in records.records] == ["test1.txt", "test2.txt", "test3.txt"]
+    assert [record.file_name for record in records.records] == ["test1.txt", "test2.txt", "test3.txt"]
 
 
 def test_calculate_total_absolute_score(sample_records: list[DetailScoreRecord]) -> None:

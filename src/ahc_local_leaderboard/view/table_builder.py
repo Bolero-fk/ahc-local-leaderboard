@@ -111,7 +111,7 @@ class DetailTableBuilder(TableBuilder[DetailScoreRecord]):
         relative_score = self.relative_score_calculator(record.absolute_score, record.top_score)
 
         self.table.add_row(
-            ScoreFormatter.format_test_case_input(record.input_test_case),
+            ScoreFormatter.format_test_case_input(record.file_name),
             ScoreFormatter.format_absolute_score(record.absolute_score),
             ScoreFormatter.format_score_diff(record.absolute_score, record.top_score),
             ScoreFormatter.format_relative_score(relative_score, self.max_relative_score),
@@ -133,7 +133,7 @@ class TopDetailTableBuilder(TableBuilder[TopDetailScoreRecord]):
     def insert_record(self, record: TopDetailScoreRecord) -> None:
         """トップスコア詳細の各レコードを挿入します。"""
         self.table.add_row(
-            ScoreFormatter.format_test_case_input(record.input_test_case),
+            ScoreFormatter.format_test_case_input(record.file_name),
             ScoreFormatter.format_absolute_score(record.absolute_score),
             str(record.submittion_id),
         )

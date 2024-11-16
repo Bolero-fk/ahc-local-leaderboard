@@ -45,5 +45,5 @@ class Validator:
 
     @staticmethod
     def validate_id_exists(id: int) -> bool:
-        """指定されたscore_history_idがscore_historyテーブルに存在するか確認します。"""
+        """指定されたsubmission_idがscore_historyテーブルに存在するか確認します。"""
         return ScoreHistoryRepository().exists_id(id)

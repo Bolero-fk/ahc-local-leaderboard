@@ -50,7 +50,7 @@ def test_update_reserved_record(
     mock_detail_records: Mock,
 ) -> None:
 
-    mock_record_read_service.fetch_detail_records_by_submission_id.return_value = mock_detail_records
+    mock_record_read_service.fetch_detail_records_by_id.return_value = mock_detail_records
 
     updater = ReservedRecordUpdater(
         record_read_service=mock_record_read_service,
@@ -60,6 +60,6 @@ def test_update_reserved_record(
 
     updater.update_reserved_record(mock_reserved_record)
 
-    mock_record_read_service.fetch_detail_records_by_submission_id.assert_called_once_with(mock_reserved_record.id)
+    mock_record_read_service.fetch_detail_records_by_id.assert_called_once_with(mock_reserved_record.id)
     mock_reserved_record.update.assert_called_once_with(mock_detail_records, mock_relative_score_calculator)
     mock_record_write_service.update_score_history.assert_called_once_with(mock_reserved_record)

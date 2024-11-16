@@ -56,12 +56,12 @@ def test_update_top_score(
         mock_record_read_service, mock_record_write_service, mock_relative_score_calculator, mock_file_utility
     )
 
-    score_history_id = 1
+    submission_id = 1
 
     test_case = Mock(spec=TestCase)
-    test_case_processor.update_top_score(test_case, score_history_id)
+    test_case_processor.update_top_score(test_case, submission_id)
 
-    mock_record_write_service.update_top_score.assert_called_once_with(test_case, score_history_id)
+    mock_record_write_service.update_top_score.assert_called_once_with(test_case, submission_id)
     mock_file_utility.copy_submit_file_to_leaderboard.assert_called_once_with(test_case)
 
 

@@ -45,15 +45,15 @@ class RecordReadService:
         assert 0 < limit
         return self.score_history_repo.fetch_recent_summary_records(limit)
 
-    def fetch_summary_record_by_submission_id(self, submission_id: int) -> SummaryScoreRecord:
+    def fetch_summary_record_by_id(self, submission_id: int) -> SummaryScoreRecord:
         """指定IDのレコードを取得します。"""
         assert 0 < submission_id
-        return self.score_history_repo.fetch_summary_record_by_submission_id(submission_id)
+        return self.score_history_repo.fetch_summary_record_by_id(submission_id)
 
-    def fetch_detail_records_by_submission_id(self, submission_id: int) -> DetailScoreRecords[DetailScoreRecord]:
+    def fetch_detail_records_by_id(self, submission_id: int) -> DetailScoreRecords[DetailScoreRecord]:
         """指定した提出IDのテストケースレコードを取得します。"""
         assert 0 < submission_id
-        return self.test_case_repo.fetch_records_by_submission_id(submission_id)
+        return self.test_case_repo.fetch_records_by_id(submission_id)
 
     def fetch_absolute_score_for_test_case(self, test_case_name: str, submission_id: int) -> Optional[int]:
         """指定した提出IDの 'test_case_name' のスコアを取得します。"""

@@ -78,53 +78,53 @@ def test_fetch_recent_summary_records_assertions(
 
 
 @pytest.mark.parametrize("submission_id", [1, 10, 100])
-def test_fetch_summary_record_by_submission_id(
+def test_fetch_summary_record_by_id(
     service: RecordReadService, mock_repos: tuple[MagicMock, MagicMock, MagicMock], submission_id: int
 ) -> None:
     score_history_repo, _, _ = mock_repos
     mock_data = Mock(spec=SummaryScoreRecord)
-    score_history_repo.fetch_summary_record_by_submission_id.return_value = mock_data
+    score_history_repo.fetch_summary_record_by_id.return_value = mock_data
 
-    result = service.fetch_summary_record_by_submission_id(submission_id)
+    result = service.fetch_summary_record_by_id(submission_id)
     assert result == mock_data
-    score_history_repo.fetch_summary_record_by_submission_id.assert_called_once_with(submission_id)
+    score_history_repo.fetch_summary_record_by_id.assert_called_once_with(submission_id)
 
 
 @pytest.mark.parametrize("submission_id", [-100, -10, 0])
-def test_fetch_summary_record_by_submission_id_assertions(
+def test_fetch_summary_record_by_id_assertions(
     service: RecordReadService, mock_repos: tuple[MagicMock, MagicMock, MagicMock], submission_id: int
 ) -> None:
     score_history_repo, _, _ = mock_repos
     mock_data = Mock(spec=SummaryScoreRecord)
-    score_history_repo.fetch_summary_record_by_submission_id.return_value = mock_data
+    score_history_repo.fetch_summary_record_by_id.return_value = mock_data
 
     with pytest.raises(AssertionError):
-        service.fetch_summary_record_by_submission_id(submission_id)
+        service.fetch_summary_record_by_id(submission_id)
 
 
 @pytest.mark.parametrize("submission_id", [1, 10, 100])
-def test_fetch_detail_records_by_submission_id(
+def test_fetch_detail_records_by_id(
     service: RecordReadService, mock_repos: tuple[MagicMock, MagicMock, MagicMock], submission_id: int
 ) -> None:
     _, test_case_repo, _ = mock_repos
     mock_data = Mock(spec=DetailScoreRecords)
-    test_case_repo.fetch_records_by_submission_id.return_value = mock_data
+    test_case_repo.fetch_records_by_id.return_value = mock_data
 
-    result = service.fetch_detail_records_by_submission_id(submission_id)
+    result = service.fetch_detail_records_by_id(submission_id)
     assert result == mock_data
-    test_case_repo.fetch_records_by_submission_id.assert_called_once_with(submission_id)
+    test_case_repo.fetch_records_by_id.assert_called_once_with(submission_id)
 
 
 @pytest.mark.parametrize("submission_id", [-100, -10, 0])
-def test_fetch_detail_records_by_submission_id_assertions(
+def test_fetch_detail_records_by_id_assertions(
     service: RecordReadService, mock_repos: tuple[MagicMock, MagicMock, MagicMock], submission_id: int
 ) -> None:
     _, test_case_repo, _ = mock_repos
     mock_data = Mock(spec=DetailScoreRecords)
-    test_case_repo.fetch_records_by_submission_id.return_value = mock_data
+    test_case_repo.fetch_records_by_id.return_value = mock_data
 
     with pytest.raises(AssertionError):
-        service.fetch_detail_records_by_submission_id(submission_id)
+        service.fetch_detail_records_by_id(submission_id)
 
 
 @pytest.mark.parametrize("submission_id", [1, 10, 100])

@@ -103,14 +103,14 @@ def test_update_score_history(score_history_repository: ScoreHistoryRepository) 
     record.relative_rank = 10
     score_history_repository.update_score_history(record)
 
-    updated_record = score_history_repository.fetch_summary_record_by_submission_id(record.id)
+    updated_record = score_history_repository.fetch_summary_record_by_id(record.id)
     assert updated_record.total_absolute_score == 100
     assert updated_record.total_relative_score == 200
     assert updated_record.invalid_score_count == 1
     assert updated_record.relative_rank == 10
 
 
-def test_fetch_summary_record_by_submission_id(score_history_repository: ScoreHistoryRepository) -> None:
+def test_fetch_summary_record_by_id(score_history_repository: ScoreHistoryRepository) -> None:
 
     submission_time = get_now_time()
 
@@ -121,7 +121,7 @@ def test_fetch_summary_record_by_submission_id(score_history_repository: ScoreHi
 
     score_history_repository.update_score_history(record)
 
-    fetched_record = score_history_repository.fetch_summary_record_by_submission_id(record.id)
+    fetched_record = score_history_repository.fetch_summary_record_by_id(record.id)
 
     assert fetched_record.id == record.id
     assert is_same_datetime(fetched_record.submission_time, record.submission_time)
@@ -268,7 +268,7 @@ def test_fetch_absolute_score_for_test_case(test_case_repository: TestCaseReposi
         test_case_repository.fetch_absolute_score_for_test_case("non_existent.txt", score_history_id)
 
 
-def test_fetch_records_by_submission_id(test_case_repository: TestCaseRepository) -> None:
+def test_fetch_records_by_id(test_case_repository: TestCaseRepository) -> None:
 
     test_case1 = generate_mock_test_case("test3.txt", 20)
     test_case2 = generate_mock_test_case("test4.txt", 40)
@@ -277,12 +277,12 @@ def test_fetch_records_by_submission_id(test_case_repository: TestCaseRepository
     test_case_repository.insert_test_case(test_case1, score_history_id)
     test_case_repository.insert_test_case(test_case2, score_history_id)
 
-    records = test_case_repository.fetch_records_by_submission_id(score_history_id)
+    records = test_case_repository.fetch_records_by_id(score_history_id)
 
     assert len(records.records) == 2
-    assert records.records[0].input_test_case == "test3.txt"
+    assert records.records[0].file_name == "test3.txt"
     assert records.records[0].absolute_score == 20
-    assert records.records[1].input_test_case == "test4.txt"
+    assert records.records[1].file_name == "test4.txt"
     assert records.records[1].absolute_score == 40
 
 
@@ -395,7 +395,7 @@ def test_fetch_top_detail_records(top_scores_repository: TopScoresRepository) ->
     detail_records = top_scores_repository.fetch_top_detail_records()
     assert isinstance(detail_records, DetailScoreRecords)
     assert len(detail_records.records) == 2
-    assert detail_records.records[0].input_test_case == "test10.txt"
+    assert detail_records.records[0].file_name == "test10.txt"
     assert detail_records.records[0].top_score == 500
-    assert detail_records.records[1].input_test_case == "test11.txt"
+    assert detail_records.records[1].file_name == "test11.txt"
     assert detail_records.records[1].top_score == 550

@@ -105,7 +105,7 @@ def test_detail_table_builder_insert_record(
     setup_console_handler_mock: None,
     mock_relative_score_calculator: Mock,
 ) -> None:
-    record = DetailScoreRecord(input_test_case=file_name, absolute_score=absolute_score, top_score=top_score)
+    record = DetailScoreRecord(file_name=file_name, absolute_score=absolute_score, top_score=top_score)
 
     mock_relative_score_calculator.return_value = 700
 
@@ -129,7 +129,7 @@ def test_detail_table_builder_insert_record(
 def test_top_detail_table_builder_insert_record(
     file_name: str, top_score: int, submittion_id: int, setup_console_handler_mock: None
 ) -> None:
-    record = TopDetailScoreRecord(input_test_case=file_name, top_score=top_score, submittion_id=submittion_id)
+    record = TopDetailScoreRecord(file_name=file_name, top_score=top_score, submittion_id=submittion_id)
 
     builder = TopDetailTableBuilder("Test Top Detail Table")
     builder.insert_record(record)

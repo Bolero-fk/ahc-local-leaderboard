@@ -118,17 +118,17 @@ def test_show_test_case_table(viewer: Viewer, mock_detail_table_builder_function
 
 @pytest.mark.parametrize("id", [1, 100])
 def test_show_detail(id: int, viewer: Viewer, mock_record_read_service: Mock) -> None:
-    mock_record_read_service.fetch_summary_record_by_submission_id.return_value = MagicMock(spec=SummaryScoreRecord)
-    mock_record_read_service.fetch_detail_records_by_submission_id.return_value = MagicMock(spec=DetailScoreRecords)
+    mock_record_read_service.fetch_summary_record_by_id.return_value = MagicMock(spec=SummaryScoreRecord)
+    mock_record_read_service.fetch_detail_records_by_id.return_value = MagicMock(spec=DetailScoreRecords)
 
     with patch.object(viewer, "show_summary_table") as mock_show_summary_table, patch.object(
         viewer, "show_test_case_table"
     ) as mock_show_test_case_table:
 
         viewer.show_detail(submission_id=id)
-        mock_record_read_service.fetch_summary_record_by_submission_id.assert_called_once_with(id)
+        mock_record_read_service.fetch_summary_record_by_id.assert_called_once_with(id)
         mock_show_summary_table.assert_called_once()
-        mock_record_read_service.fetch_detail_records_by_submission_id.assert_called_once_with(id)
+        mock_record_read_service.fetch_detail_records_by_id.assert_called_once_with(id)
         mock_show_test_case_table.assert_called_once()
 
 
