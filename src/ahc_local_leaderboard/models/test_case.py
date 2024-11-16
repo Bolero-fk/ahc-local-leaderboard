@@ -1,10 +1,11 @@
+from pathlib import Path
 from typing import Iterator, Optional
 
 
 class TestCase:
     __test__ = False  # pytest によるテスト収集を無効化
 
-    def __init__(self, file_name: str, score: Optional[int], submit_file_path: str) -> None:
+    def __init__(self, file_name: str, score: Optional[int], submit_file_path: Path) -> None:
         self.file_name = file_name
         self.score = score
         self.submit_file_path = submit_file_path

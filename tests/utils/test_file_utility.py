@@ -11,10 +11,10 @@ from ahc_local_leaderboard.utils.file_utility import FileUtility
 
 
 @pytest.fixture
-def temp_dir() -> Generator[str, None, None]:
+def temp_dir() -> Generator[Path, None, None]:
     """一時ディレクトリを作成して提供し、テスト後に削除する"""
-    with tempfile.TemporaryDirectory() as temp:
-        yield temp
+    with tempfile.TemporaryDirectory() as temp_dir_path:
+        yield Path(temp_dir_path)
 
 
 @pytest.fixture
@@ -26,17 +26,17 @@ def test_case() -> TestCase:
     return case
 
 
-def test_path_exists(temp_dir: str) -> None:
+def test_path_exists(temp_dir: Path) -> None:
     # 存在するパスのテスト
     assert FileUtility.path_exists(temp_dir) is True
     # 存在しないパスのテスト
-    non_existing_path = os.path.join(temp_dir, "nonexistent")
+    non_existing_path = temp_dir / "nonexistent"
     assert FileUtility.path_exists(non_existing_path) is False
 
 
-def test_try_create_directory(temp_dir: str) -> None:
+def test_try_create_directory(temp_dir: Path) -> None:
     # ディレクトリが存在しない場合の作成テスト
-    new_dir = os.path.join(temp_dir, "new_directory")
+    new_dir = temp_dir / "new_directory"
     assert not os.path.exists(new_dir)
     FileUtility.try_create_directory(new_dir)
     assert os.path.exists(new_dir)
@@ -47,9 +47,9 @@ def test_try_create_directory(temp_dir: str) -> None:
 
 
 @patch("shutil.copy")
-def test_copy_file(mock_copy: Mock, temp_dir: str) -> None:
-    src = os.path.join(temp_dir, "source.txt")
-    dest = os.path.join(temp_dir, "destination.txt")
+def test_copy_file(mock_copy: Mock, temp_dir: Path) -> None:
+    src = temp_dir / "source.txt"
+    dest = temp_dir / "destination.txt"
 
     # 正常にコピーされることをテスト
     FileUtility.copy_file(src, dest)
@@ -69,13 +69,13 @@ def test_get_top_file_path(
 ) -> None:
     # 順位表ディレクトリのパス取得
 
-    test_dir = "test"
-    monkeypatch.setattr("ahc_local_leaderboard.consts.ROOT_DIR", Path(test_dir))
+    test_dir = Path("test")
+    monkeypatch.setattr("ahc_local_leaderboard.consts.ROOT_DIR", test_dir)
 
-    expected_path = f"{test_dir}/leader_board/top/{test_case.file_name}"
+    expected_path = test_dir / "leader_board/top" / test_case.file_name
     result = FileUtility.get_top_file_path(test_case)
     assert result == expected_path
-    mock_check_directory.assert_called_once_with(f"{test_dir}/leader_board/top")
+    mock_check_directory.assert_called_once_with(test_dir / "leader_board/top")
 
     # バリデーションが失敗した場合のエラーハンドリング
     mock_check_directory.return_value = False
@@ -92,14 +92,14 @@ def test_copy_submit_file_to_leaderboard(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
 
-    test_dir = "test"
-    monkeypatch.setattr("ahc_local_leaderboard.consts.ROOT_DIR", Path(test_dir))
+    test_dir = Path("test")
+    monkeypatch.setattr("ahc_local_leaderboard.consts.ROOT_DIR", test_dir)
 
     FileUtility.copy_submit_file_to_leaderboard(test_case)
 
     # 各バリデーションメソッドが正しく呼ばれたか確認
-    mock_check_directory.assert_called_once_with("test/leader_board/top")
+    mock_check_directory.assert_called_once_with(Path("test/leader_board/top"))
 
     # コピーが行われたか確認
-    expected_dest = f"{test_dir}/leader_board/top/{test_case.file_name}"
+    expected_dest = test_dir / "leader_board/top" / test_case.file_name
     mock_copy.assert_called_once_with(test_case.submit_file_path, expected_dest)

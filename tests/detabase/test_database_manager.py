@@ -2,8 +2,8 @@ import sqlite3
 import tempfile
 from datetime import datetime
 from pathlib import Path
-from typing import Generator
-from unittest.mock import patch
+from typing import Generator, Optional
+from unittest.mock import Mock, patch
 
 import pytest
 
@@ -215,9 +215,17 @@ def test_case_repository(temp_database: Generator[None, None, None]) -> TestCase
     return TestCaseRepository()
 
 
+def generate_mock_test_case(file_name: str, score: Optional[int]) -> Mock:
+    mock_test_case = Mock(spec=TestCase)
+    mock_test_case.file_name = file_name
+    mock_test_case.score = score
+    mock_test_case.submit_file_path = Path("out") / file_name
+    return mock_test_case
+
+
 def test_insert_test_case(test_case_repository: TestCaseRepository) -> None:
 
-    test_case = TestCase(file_name="test1.txt", score=50, submit_file_path="out/test1.txt")
+    test_case = generate_mock_test_case("test1.txt", 50)
     score_history_id = 1
 
     test_case_repository.insert_test_case(test_case, score_history_id)
@@ -243,7 +251,7 @@ def test_insert_test_case(test_case_repository: TestCaseRepository) -> None:
 def test_fetch_absolute_score_for_test_case(test_case_repository: TestCaseRepository) -> None:
 
     expected_score = 75
-    test_case = TestCase(file_name="test2.txt", score=expected_score, submit_file_path="out/test2.txt")
+    test_case = generate_mock_test_case("test2.txt", expected_score)
     score_history_id = 1
 
     test_case_repository.insert_test_case(test_case, score_history_id)
@@ -257,8 +265,8 @@ def test_fetch_absolute_score_for_test_case(test_case_repository: TestCaseReposi
 
 def test_fetch_records_by_submission_id(test_case_repository: TestCaseRepository) -> None:
 
-    test_case1 = TestCase(file_name="test3.txt", score=20, submit_file_path="out/test3.txt")
-    test_case2 = TestCase(file_name="test4.txt", score=40, submit_file_path="out/test4.txt")
+    test_case1 = generate_mock_test_case("test3.txt", 20)
+    test_case2 = generate_mock_test_case("test4.txt", 40)
     score_history_id = 1
 
     test_case_repository.insert_test_case(test_case1, score_history_id)
@@ -281,7 +289,7 @@ def top_scores_repository(temp_database: Generator[None, None, None]) -> TopScor
 def test_update_top_score(top_scores_repository: TopScoresRepository) -> None:
 
     top_score = 100
-    test_case = TestCase(file_name="test1.txt", score=top_score, submit_file_path="out/test1.txt")
+    test_case = generate_mock_test_case("test1.txt", top_score)
     score_history_id = 1
 
     top_scores_repository.update_top_score(test_case, score_history_id)
@@ -302,7 +310,7 @@ def test_update_top_score(top_scores_repository: TopScoresRepository) -> None:
 def test_fetch_top_score_for_test_case(top_scores_repository: TopScoresRepository) -> None:
 
     expected_top_score = 150
-    test_case = TestCase(file_name="test2.txt", score=expected_top_score, submit_file_path="out/test2.txt")
+    test_case = generate_mock_test_case(file_name="test2.txt", score=expected_top_score)
     score_history_id = 2
 
     top_scores_repository.update_top_score(test_case, score_history_id)
@@ -313,8 +321,8 @@ def test_fetch_top_score_for_test_case(top_scores_repository: TopScoresRepositor
 
 def test_reset_is_updated_flags(top_scores_repository: TopScoresRepository) -> None:
 
-    test_case1 = TestCase(file_name="test3.txt", score=200, submit_file_path="out/test3.txt")
-    test_case2 = TestCase(file_name="test4.txt", score=250, submit_file_path="out/test4.txt")
+    test_case1 = generate_mock_test_case(file_name="test3.txt", score=200)
+    test_case2 = generate_mock_test_case(file_name="test4.txt", score=250)
     score_history_id = 3
 
     top_scores_repository.update_top_score(test_case1, score_history_id)
@@ -331,8 +339,8 @@ def test_reset_is_updated_flags(top_scores_repository: TopScoresRepository) -> N
 
 def test_fetch_test_case_count(top_scores_repository: TopScoresRepository) -> None:
 
-    test_case1 = TestCase(file_name="test5.txt", score=300, submit_file_path="out/test5.txt")
-    test_case2 = TestCase(file_name="test6.txt", score=350, submit_file_path="out/test6.txt")
+    test_case1 = generate_mock_test_case(file_name="test5.txt", score=300)
+    test_case2 = generate_mock_test_case(file_name="test6.txt", score=350)
     score_history_id = 4
 
     top_scores_repository.update_top_score(test_case1, score_history_id)
@@ -344,7 +352,7 @@ def test_fetch_test_case_count(top_scores_repository: TopScoresRepository) -> No
 
 def test_fetch_recently_updated_top_scores(top_scores_repository: TopScoresRepository) -> None:
 
-    test_case = TestCase(file_name="test7.txt", score=400, submit_file_path="out/test7.txt")
+    test_case = generate_mock_test_case(file_name="test7.txt", score=400)
     score_history_id = 5
 
     top_scores_repository.update_top_score(test_case, score_history_id)
@@ -357,8 +365,8 @@ def test_fetch_recently_updated_top_scores(top_scores_repository: TopScoresRepos
 
 def test_fetch_top_summary_record(top_scores_repository: TopScoresRepository) -> None:
 
-    test_case1 = TestCase(file_name="test8.txt", score=450, submit_file_path="out/test8.txt")
-    test_case2 = TestCase(file_name="test9.txt", score=None, submit_file_path="out/test9.txt")
+    test_case1 = generate_mock_test_case(file_name="test8.txt", score=450)
+    test_case2 = generate_mock_test_case(file_name="test9.txt", score=None)
     score_history_id = 6
 
     top_scores_repository.update_top_score(test_case1, score_history_id)
@@ -372,8 +380,8 @@ def test_fetch_top_summary_record(top_scores_repository: TopScoresRepository) ->
 
 def test_fetch_top_detail_records(top_scores_repository: TopScoresRepository) -> None:
 
-    test_case1 = TestCase(file_name="test10.txt", score=500, submit_file_path="out/test10.txt")
-    test_case2 = TestCase(file_name="test11.txt", score=550, submit_file_path="out/test11.txt")
+    test_case1 = generate_mock_test_case(file_name="test10.txt", score=500)
+    test_case2 = generate_mock_test_case(file_name="test11.txt", score=550)
     score_history_id = 7
 
     top_scores_repository.update_top_score(test_case1, score_history_id)

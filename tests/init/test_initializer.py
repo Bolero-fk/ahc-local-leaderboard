@@ -30,7 +30,7 @@ def test_create_directories(
         initializer.create_directories()
 
         for directory in initializer.leader_board_directoris:
-            mock_file_utility.try_create_directory.assert_any_call(str(directory))
+            mock_file_utility.try_create_directory.assert_any_call(directory)
 
 
 @pytest.mark.parametrize("path_exists", [False, True])

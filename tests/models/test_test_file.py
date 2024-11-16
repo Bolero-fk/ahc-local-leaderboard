@@ -1,4 +1,4 @@
-import os
+from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Generator
 from unittest.mock import patch
@@ -9,19 +9,19 @@ from ahc_local_leaderboard.models.test_file import TestFile, TestFiles
 
 
 @pytest.fixture
-def temp_directories() -> Generator[tuple[str, str], None, None]:
+def temp_directories() -> Generator[tuple[Path, Path], None, None]:
     with TemporaryDirectory() as input_dir, TemporaryDirectory() as submit_dir:
-        yield input_dir, submit_dir
+        yield Path(input_dir), Path(submit_dir)
 
 
-def generate_dummy_file(directory: str, file_name: str) -> str:
-    file_path = os.path.join(directory, file_name)
+def generate_dummy_file(directory: Path, file_name: str) -> Path:
+    file_path = directory / file_name
     with open(file_path, "w") as f:
         f.write("test content")
     return file_path
 
 
-def test_initialization(temp_directories: tuple[str, str]) -> None:
+def test_initialization(temp_directories: tuple[Path, Path]) -> None:
     input_dir, submit_dir = temp_directories
     test_files = TestFiles(input_dir, submit_dir)
     assert test_files.input_dir_path == input_dir
@@ -31,7 +31,7 @@ def test_initialization(temp_directories: tuple[str, str]) -> None:
 
 
 @pytest.mark.parametrize("file_name", ["test_file.txt", "12345.txt", "file_name.in"])
-def test_add_file(temp_directories: tuple[str, str], file_name: str) -> None:
+def test_add_file(temp_directories: tuple[Path, Path], file_name: str) -> None:
     input_dir, submit_dir = temp_directories
     test_files = TestFiles(input_dir, submit_dir)
 
@@ -55,7 +55,7 @@ def test_add_file(temp_directories: tuple[str, str], file_name: str) -> None:
         [],
     ],
 )
-def test_add_all_files(temp_directories: tuple[str, str], file_names: list[str]) -> None:
+def test_add_all_files(temp_directories: tuple[Path, Path], file_names: list[str]) -> None:
     input_dir, submit_dir = temp_directories
     test_files = TestFiles(input_dir, submit_dir)
 
@@ -72,7 +72,7 @@ def test_add_all_files(temp_directories: tuple[str, str], file_names: list[str])
     assert [f.file_name for f in test_files.test_files] == sorted(file_names)
 
 
-def test_iteration(temp_directories: tuple[str, str]) -> None:
+def test_iteration(temp_directories: tuple[Path, Path]) -> None:
     input_dir, submit_dir = temp_directories
     test_files = TestFiles(input_dir, submit_dir)
 

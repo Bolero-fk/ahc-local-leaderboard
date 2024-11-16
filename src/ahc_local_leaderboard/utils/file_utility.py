@@ -1,5 +1,6 @@
 import os
 import shutil
+from pathlib import Path
 
 from ahc_local_leaderboard.consts import get_top_dir
 from ahc_local_leaderboard.models.test_case import TestCase
@@ -9,17 +10,17 @@ from ahc_local_leaderboard.utils.validator import Validator
 class FileUtility:
 
     @staticmethod
-    def path_exists(path: str) -> bool:
+    def path_exists(path: Path) -> bool:
         """指定されたパスが存在するかを確認します"""
         return os.path.exists(path)
 
     @staticmethod
-    def try_create_directory(directory_path: str) -> None:
+    def try_create_directory(directory_path: Path) -> None:
         """指定されたディレクトリが存在しない場合のみディレクトリを作成します"""
         os.makedirs(directory_path, exist_ok=True)
 
     @staticmethod
-    def copy_file(src: str, dest: str) -> None:
+    def copy_file(src: Path, dest: Path) -> None:
         """指定されたファイルをコピーします"""
         try:
             shutil.copy(src, dest)
@@ -27,15 +28,15 @@ class FileUtility:
             raise IOError(f"Failed to copy file from '{src}' to '{dest}': {e}")
 
     @staticmethod
-    def get_top_file_path(test_case: TestCase) -> str:
+    def get_top_file_path(test_case: TestCase) -> Path:
         """test_caseで指定されている提出ファイルのトップケースのパスを取得します"""
-        top_directory_path = str(get_top_dir())
+        top_directory_path = get_top_dir()
         if not Validator.check_directory(top_directory_path):
             raise FileNotFoundError(
                 f"Destination directory '{top_directory_path}' does not exist and could not be validated."
             )
 
-        top_file_path = f"{top_directory_path}/{test_case.file_name}"
+        top_file_path = top_directory_path / test_case.file_name
 
         return top_file_path
 

@@ -1,4 +1,5 @@
 import argparse
+from pathlib import Path
 
 from ahc_local_leaderboard.config import Config
 from ahc_local_leaderboard.consts import (
@@ -33,7 +34,7 @@ def handle_setup(initial_dependencies: PrevDependencies) -> None:
     initializer.execute()
 
 
-def handle_submit(dependencies: Dependencies, in_dir_path: str, submit_dir_path: str) -> None:
+def handle_submit(dependencies: Dependencies, in_dir_path: Path, submit_dir_path: Path) -> None:
     submitter = Submitter(
         dependencies["record_write_service"],
         dependencies["test_files_processor"],
@@ -118,12 +119,12 @@ def main() -> None:
         ConsoleHandler.print_directive("local-leaderboard setup")
         return
 
-    config = Config(str(get_config_path()))
+    config = Config(get_config_path())
 
     dependencies = setup_scoring_dependencies(config, initial_dependencies)
 
     if args.command == "submit":
-        handle_submit(dependencies, str(get_root_dir() / "in"), str(get_root_dir() / args.submit_file))
+        handle_submit(dependencies, get_root_dir() / "in", get_root_dir() / args.submit_file)
 
     elif args.command == "view":
         handle_view(dependencies, args.limit, args.detail)

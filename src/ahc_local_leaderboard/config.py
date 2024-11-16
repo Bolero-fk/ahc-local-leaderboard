@@ -1,3 +1,4 @@
+from pathlib import Path
 from typing import Any, Dict
 
 import yaml
@@ -5,7 +6,7 @@ import yaml
 
 class Config:
 
-    def __init__(self, config_path: str = "leader_board/config.yaml"):
+    def __init__(self, config_path: Path):
         self.config_path = config_path
         self.config_data = self.load()
 

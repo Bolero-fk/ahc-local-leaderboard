@@ -26,11 +26,11 @@ class Initializer:
     def create_directories(self) -> None:
         """順位表用に必要なディレクトリを作成します。"""
         for directory in self.leader_board_directoris:
-            self.file_utility.try_create_directory(str(directory))
+            self.file_utility.try_create_directory(directory)
 
     def initialize_database(self) -> None:
         """データベースが存在しない場合、初期化します。"""
-        if not self.file_utility.path_exists(str(self.db_path)):
+        if not self.file_utility.path_exists(self.db_path):
             self.record_write_service.setup_database()
 
     def prompt_scoring_type(self) -> str:
@@ -52,7 +52,7 @@ class Initializer:
 
     def create_config_file(self) -> None:
         """設定ファイルが存在しない場合、ユーザーに設定を尋ねて作成します。"""
-        if not self.file_utility.path_exists(str(self.config_path)):
+        if not self.file_utility.path_exists(self.config_path):
             scoring_type = self.prompt_scoring_type()
             config_data = {"scoring_type": scoring_type}
             self.write_config_file(config_data)

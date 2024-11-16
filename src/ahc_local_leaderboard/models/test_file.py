@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 from typing import Iterator
 
 
@@ -6,7 +7,7 @@ class TestFile:
     __test__ = False  # pytest によるテスト収集を無効化
 
     # TODO ファイルの存在チェックのバリデーション
-    def __init__(self, file_name: str, input_file_path: str, submit_file_path: str) -> None:
+    def __init__(self, file_name: str, input_file_path: Path, submit_file_path: Path) -> None:
         self.file_name = file_name
         self.input_file_path = input_file_path
         self.submit_file_path = submit_file_path
@@ -15,7 +16,7 @@ class TestFile:
 class TestFiles:
     __test__ = False  # pytest によるテスト収集を無効化
 
-    def __init__(self, input_dir_path: str, submit_dir_path: str) -> None:
+    def __init__(self, input_dir_path: Path, submit_dir_path: Path) -> None:
         self.input_dir_path = input_dir_path
         self.submit_dir_path = submit_dir_path
         self.file_count = 0
@@ -34,8 +35,8 @@ class TestFiles:
     def add_file(self, file_name: str) -> None:
         """指定されたファイルをTestFileオブジェクトとして追加します"""
 
-        input_file_path = os.path.join(self.input_dir_path, file_name)
-        submit_file_path = os.path.join(self.submit_dir_path, file_name)
+        input_file_path = self.input_dir_path / file_name
+        submit_file_path = self.submit_dir_path / file_name
         self.test_files.append(TestFile(file_name, input_file_path, submit_file_path))
         self.file_count += 1
 

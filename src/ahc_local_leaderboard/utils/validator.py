@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 
 from ahc_local_leaderboard.consts import (
     get_config_path,
@@ -16,8 +17,8 @@ class Validator:
     def validate_file_structure() -> bool:
         """ディレクトリとファイルの構造を検証し、問題があれば False を返す"""
 
-        required_derectories = [str(get_leader_board_path()), str(get_top_dir())]
-        required_files = [str(get_database_path()), str(get_config_path())]
+        required_derectories = [get_leader_board_path(), get_top_dir()]
+        required_files = [get_database_path(), get_config_path()]
 
         dirs_ok = Validator.check_directories(required_derectories)
         files_ok = Validator.check_files(required_files)
@@ -25,32 +26,32 @@ class Validator:
         return dirs_ok and files_ok
 
     @staticmethod
-    def check_directory(dirctory_path: str) -> bool:
+    def check_directory(dirctory_path: Path) -> bool:
         if not os.path.isdir(dirctory_path):
             ConsoleHandler.print_error(f"Missing directory: {dirctory_path}")
             return False
         return True
 
     @staticmethod
-    def check_directories(dirctory_paths: list[str]) -> bool:
+    def check_directories(dirctory_paths: list[Path]) -> bool:
         missing_dirs = [d for d in dirctory_paths if not os.path.isdir(d)]
         if missing_dirs:
-            ConsoleHandler.print_error(f"Missing directories: {', '.join(missing_dirs)}")
+            ConsoleHandler.print_error(f"Missing directories: {', '.join(str( missing_dirs))}")
             return False
         return True
 
     @staticmethod
-    def check_file(file_path: str) -> bool:
+    def check_file(file_path: Path) -> bool:
         if not os.path.isfile(file_path):
             ConsoleHandler.print_error(f"Missing file: {file_path}")
             return False
         return True
 
     @staticmethod
-    def check_files(file_paths: list[str]) -> bool:
+    def check_files(file_paths: list[Path]) -> bool:
         missing_files = [f for f in file_paths if not os.path.isfile(f)]
         if missing_files:
-            ConsoleHandler.print_error(f"Missing files: {', '.join(missing_files)}")
+            ConsoleHandler.print_error(f"Missing files: {', '.join(str(missing_files))}")
             return False
         return True
 

@@ -7,6 +7,7 @@ from ahc_local_leaderboard.utils.relative_score_calculater import (
 
 class DetailScoreRecord:
 
+    # TODO input_test_case はfile nameに統一する
     def __init__(self, input_test_case: str, absolute_score: Optional[int], top_score: Optional[int]) -> None:
         self.input_test_case = input_test_case
         self.absolute_score = absolute_score
