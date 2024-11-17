@@ -1,4 +1,3 @@
-import os
 from pathlib import Path
 from typing import Iterator
 
@@ -26,14 +25,18 @@ class TestFiles:
         self.file_count = 0
         self.test_files: list[TestFile] = []
 
+    def fetch_file_names_from_directory(self) -> list[str]:
+        """入力ディレクトリ内のすべてのファイル名を取得します。"""
+        return [file.name for file in self.input_dir_path.iterdir() if file.is_file()]
+
     def add_all_files(self) -> None:
         """入力ディレクトリ内のすべてのファイルをTestFileとして追加します。"""
         assert self.file_count == 0  # 呼び出すのは一回だけ
 
-        input_file_names = os.listdir(self.input_dir_path)
-        input_file_names.sort()
-        for input_file_name in input_file_names:
-            self.add_file(input_file_name)
+        test_file_names = self.fetch_file_names_from_directory()
+        test_file_names.sort()
+        for test_file_name in test_file_names:
+            self.add_file(test_file_name)
 
     # TODO ファイル重複チェックのvalidation
     def add_file(self, file_name: str) -> None:

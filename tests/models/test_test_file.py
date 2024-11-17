@@ -55,9 +55,30 @@ def test_add_file(temp_directories: tuple[Path, Path], file_name: str) -> None:
         [],
     ],
 )
+def test_fetch_file_names_from_directory(temp_directories: tuple[Path, Path], file_names: list[str]) -> None:
+    input_dir, submit_dir = temp_directories
+
+    for file_name in file_names:
+        generate_dummy_file(input_dir, file_name)
+        generate_dummy_file(submit_dir, file_name)
+
+    test_files = TestFiles(input_dir, submit_dir)
+    test_file_names = test_files.fetch_file_names_from_directory()
+
+    assert len(test_file_names) == len(file_names)
+    assert all(test_file_name in file_names for test_file_name in test_file_names)
+
+
+@pytest.mark.parametrize(
+    "file_names",
+    [
+        ["file1.txt", "file2.txt", "file3.txt"],
+        ["_very_long_file_name_to_test_limits.txt"],
+        [],
+    ],
+)
 def test_add_all_files(temp_directories: tuple[Path, Path], file_names: list[str]) -> None:
     input_dir, submit_dir = temp_directories
-    test_files = TestFiles(input_dir, submit_dir)
 
     for file_name in file_names:
         generate_dummy_file(input_dir, file_name)
