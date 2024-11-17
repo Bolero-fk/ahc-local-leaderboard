@@ -7,7 +7,7 @@ from ahc_local_leaderboard.consts import (
     get_leader_board_path,
     get_top_dir,
 )
-from ahc_local_leaderboard.database.database_manager import ScoreHistoryRepository
+from ahc_local_leaderboard.database.record_read_service import RecordReadService
 from ahc_local_leaderboard.utils.console_handler import ConsoleHandler
 
 
@@ -44,6 +44,6 @@ class Validator:
         return True
 
     @staticmethod
-    def validate_id_exists(id: int) -> bool:
+    def validate_id_exists(record_read_service: RecordReadService, id: int) -> bool:
         """指定されたsubmission_idがscore_historyテーブルに存在するか確認します。"""
-        return ScoreHistoryRepository().exists_id(id)
+        return record_read_service.exists_id(id)

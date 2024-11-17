@@ -50,6 +50,10 @@ class RecordReadService:
         assert 0 < submission_id
         return self.score_history_repo.fetch_summary_record_by_id(submission_id)
 
+    def exists_id(self, id: int) -> bool:
+        """指定したidがデータベースに存在しているかを返します。"""
+        return self.score_history_repo.exists_id(id)
+
     def fetch_detail_records_by_id(self, submission_id: int) -> DetailScoreRecords[DetailScoreRecord]:
         """指定した提出IDのテストケースレコードを取得します。"""
         assert 0 < submission_id

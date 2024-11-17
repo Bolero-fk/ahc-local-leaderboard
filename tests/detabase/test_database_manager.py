@@ -23,12 +23,15 @@ from ahc_local_leaderboard.models.test_case import TestCase
 
 
 @pytest.fixture
-def temp_database() -> Generator[None, None, None]:
+def temp_database() -> Generator[DatabaseManager, None, None]:
 
     with tempfile.TemporaryDirectory() as temp_dir, patch("ahc_local_leaderboard.consts.ROOT_DIR", Path(temp_dir)):
         (Path(temp_dir) / "leader_board").mkdir(parents=True, exist_ok=True)
-        DatabaseManager.setup()
-        yield
+        db_manager = DatabaseManager()
+        db_manager.setup()
+        db_manager.begin_transaction()
+        yield db_manager
+        db_manager.rollback()
 
 
 def get_temp_summary_record() -> SummaryScoreRecord:
@@ -43,12 +46,12 @@ def is_same_datetime(time1: datetime, time2: datetime) -> bool:
     return time1.strftime(get_datetime_format()) == time2.strftime(get_datetime_format())
 
 
-def test_database_connection(temp_database: Generator[None, None, None]) -> None:
+def test_database_connection(temp_database: Generator[DatabaseManager, None, None]) -> None:
     with DatabaseManager() as conn:
         assert isinstance(conn, sqlite3.Connection)
 
 
-def test_score_history_table_exists(temp_database: Generator[None, None, None]) -> None:
+def test_score_history_table_exists(temp_database: Generator[DatabaseManager, None, None]) -> None:
 
     with DatabaseManager() as conn:
         cursor = conn.cursor()
@@ -57,7 +60,7 @@ def test_score_history_table_exists(temp_database: Generator[None, None, None]) 
         assert result is not None
 
 
-def test_test_cases_table_exists(temp_database: Generator[None, None, None]) -> None:
+def test_test_cases_table_exists(temp_database: Generator[DatabaseManager, None, None]) -> None:
 
     with DatabaseManager() as conn:
         cursor = conn.cursor()
@@ -66,7 +69,7 @@ def test_test_cases_table_exists(temp_database: Generator[None, None, None]) -> 
         assert result is not None
 
 
-def test_top_scores_table_exists(temp_database: Generator[None, None, None]) -> None:
+def test_top_scores_table_exists(temp_database: Generator[DatabaseManager, None, None]) -> None:
     with DatabaseManager() as conn:
         cursor = conn.cursor()
         cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='top_scores'")
@@ -75,8 +78,8 @@ def test_top_scores_table_exists(temp_database: Generator[None, None, None]) -> 
 
 
 @pytest.fixture
-def score_history_repository(temp_database: Generator[None, None, None]) -> ScoreHistoryRepository:
-    return ScoreHistoryRepository()
+def score_history_repository(temp_database: DatabaseManager) -> ScoreHistoryRepository:
+    return ScoreHistoryRepository(temp_database)
 
 
 def test_reserve_empty_score_history_record(score_history_repository: ScoreHistoryRepository) -> None:
@@ -216,8 +219,8 @@ def test_exists_id(score_history_repository: ScoreHistoryRepository) -> None:
 
 
 @pytest.fixture
-def test_case_repository(temp_database: Generator[None, None, None]) -> TestCaseRepository:
-    return TestCaseRepository()
+def test_case_repository(temp_database: DatabaseManager) -> TestCaseRepository:
+    return TestCaseRepository(temp_database)
 
 
 def generate_mock_test_case(file_name: str, score: Optional[int]) -> Mock:
@@ -235,7 +238,7 @@ def test_insert_test_case(test_case_repository: TestCaseRepository) -> None:
 
     test_case_repository.insert_test_case(test_case, score_history_id)
 
-    with DatabaseManager() as conn:
+    with test_case_repository.db_manager as conn:
         cursor = conn.cursor()
         cursor.execute(
             """
@@ -287,8 +290,8 @@ def test_fetch_records_by_id(test_case_repository: TestCaseRepository) -> None:
 
 
 @pytest.fixture
-def top_scores_repository(temp_database: Generator[None, None, None]) -> TopScoresRepository:
-    return TopScoresRepository()
+def top_scores_repository(temp_database: DatabaseManager) -> TopScoresRepository:
+    return TopScoresRepository(temp_database)
 
 
 def test_update_top_score(top_scores_repository: TopScoresRepository) -> None:
@@ -299,7 +302,7 @@ def test_update_top_score(top_scores_repository: TopScoresRepository) -> None:
 
     top_scores_repository.update_top_score(test_case, score_history_id)
 
-    with DatabaseManager() as conn:
+    with top_scores_repository.db_manager as conn:
         cursor = conn.cursor()
         cursor.execute(
             "SELECT top_absolute_score, score_history_id FROM top_scores WHERE test_case_input = ?",

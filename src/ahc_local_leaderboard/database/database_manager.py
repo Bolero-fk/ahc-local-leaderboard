@@ -23,13 +23,27 @@ class DatabaseManager:
 
     def __init__(self) -> None:
         self.connection: Optional[sqlite3.Connection] = None
+        self.transaction_mode = False
+
+    def open(self) -> sqlite3.Connection:
+        if not self.connection:
+            self._db_path = str(get_database_path())
+            self.connection = sqlite3.connect(self._db_path)
+            self.connection.isolation_level = None
+
+        return self.connection
 
     def __enter__(self) -> sqlite3.Connection:
         """with 文の開始時にデータベースに接続します。"""
 
-        self._db_path = str(get_database_path())
-        self.connection = sqlite3.connect(self._db_path)
-        return self.connection
+        return self.open()
+
+    def close(self) -> None:
+        if self.connection:
+            if not self.transaction_mode:
+                self.connection.commit()
+                self.connection.close()
+                self.connection = None
 
     def __exit__(
         self,
@@ -38,10 +52,30 @@ class DatabaseManager:
         traceback: Optional[traceback.TracebackException],
     ) -> None:
         """with 文の終了時にデータベース接続を閉じます。"""
-        if self.connection:
-            self.connection.commit()
-            self.connection.close()
-            self.connection = None
+        self.close()
+
+    def begin_transaction(self) -> None:
+        assert not self.transaction_mode
+
+        conn = self.open()
+        conn.execute("BEGIN")
+        self.transaction_mode = True
+
+    def commit(self) -> None:
+        assert self.transaction_mode
+
+        conn = self.open()
+        conn.commit()
+        self.transaction_mode = False
+        self.close()
+
+    def rollback(self) -> None:
+        assert self.transaction_mode
+
+        conn = self.open()
+        conn.rollback()
+        self.transaction_mode = False
+        self.close()
 
     SCORE_HISTORY_TABLE = """
     CREATE TABLE IF NOT EXISTS score_history (
@@ -90,9 +124,12 @@ class DatabaseManager:
 class ScoreHistoryRepository:
     """スコア履歴テーブルへの操作を提供するクラス。"""
 
+    def __init__(self, db_manager: DatabaseManager) -> None:
+        self.db_manager = db_manager
+
     def reserve_empty_score_history_record(self, submission_time: datetime) -> SummaryScoreRecord:
         """指定された日時で空のスコア履歴レコードを作成し、そのレコードを返します。"""
-        with DatabaseManager() as conn:
+        with self.db_manager as conn:
             cursor = conn.cursor()
             cursor.execute(
                 """
@@ -110,7 +147,7 @@ class ScoreHistoryRepository:
 
     def update_score_history(self, record: SummaryScoreRecord) -> None:
         """指定されたスコア履歴レコードの内容でデータベースを更新します。"""
-        with DatabaseManager() as conn:
+        with self.db_manager as conn:
             cursor = conn.cursor()
             cursor.execute(
                 """
@@ -129,7 +166,7 @@ class ScoreHistoryRepository:
 
     def fetch_summary_record_by_id(self, id: int) -> SummaryScoreRecord:
         """指定されたIDのスコア履歴レコードを取得し、返します。"""
-        with DatabaseManager() as conn:
+        with self.db_manager as conn:
             cursor = conn.cursor()
             cursor.execute(
                 """
@@ -149,7 +186,7 @@ class ScoreHistoryRepository:
 
     def fetch_all_records(self) -> SummaryScoreRecords:
         """すべてのスコア履歴レコードを取得し、返します。"""
-        with DatabaseManager() as conn:
+        with self.db_manager as conn:
             cursor = conn.cursor()
             cursor.execute(
                 """
@@ -166,7 +203,7 @@ class ScoreHistoryRepository:
 
     def fetch_latest_id(self) -> int:
         """最新のスコア履歴レコードのIDを取得して返します。"""
-        with DatabaseManager() as conn:
+        with self.db_manager as conn:
             cursor = conn.cursor()
             cursor.execute("SELECT id FROM score_history ORDER BY submission_time DESC LIMIT 1")
             result: Optional[tuple[int]] = cursor.fetchone()
@@ -178,7 +215,7 @@ class ScoreHistoryRepository:
 
     def fetch_recent_summary_records(self, limit: int) -> SummaryScoreRecords:
         """指定した数の最新スコア履歴レコードを取得し、返します。"""
-        with DatabaseManager() as conn:
+        with self.db_manager as conn:
             cursor = conn.cursor()
             cursor.execute(
                 """
@@ -197,7 +234,7 @@ class ScoreHistoryRepository:
 
     def exists_id(self, id: int) -> bool:
         """指定したIDのスコア履歴レコードが存在するかを確認します。"""
-        with DatabaseManager() as conn:
+        with self.db_manager as conn:
             cursor = conn.cursor()
             cursor.execute(
                 """
@@ -216,9 +253,14 @@ class ScoreHistoryRepository:
 class TestCaseRepository:
     """テストケーステーブルへの操作を提供するクラス。"""
 
+    __test__ = False  # pytest によるテスト収集を無効化
+
+    def __init__(self, db_manager: DatabaseManager) -> None:
+        self.db_manager = db_manager
+
     def insert_test_case(self, test_case: TestCase, score_history_id: int) -> None:
         """指定されたテストケース情報をテストケーステーブルに挿入します。"""
-        with DatabaseManager() as conn:
+        with self.db_manager as conn:
             cursor = conn.cursor()
             cursor.execute(
                 """
@@ -230,7 +272,7 @@ class TestCaseRepository:
 
     def fetch_absolute_score_for_test_case(self, test_case_input: str, score_history_id: int) -> Optional[int]:
         """指定されたテストケースとスコア履歴IDの絶対スコアを取得します。"""
-        with DatabaseManager() as conn:
+        with self.db_manager as conn:
             cursor = conn.cursor()
             cursor.execute(
                 """
@@ -250,7 +292,7 @@ class TestCaseRepository:
     def fetch_records_by_id(self, submission_id: int) -> DetailScoreRecords[DetailScoreRecord]:
         """指定された提出IDに関連するすべてのテストケースレコードを取得します。"""
 
-        with DatabaseManager() as conn:
+        with self.db_manager as conn:
             cursor = conn.cursor()
             cursor.execute(
                 """
@@ -270,9 +312,12 @@ class TestCaseRepository:
 class TopScoresRepository:
     """トップスコアテーブルへの操作を提供するクラス。"""
 
+    def __init__(self, db_manager: DatabaseManager) -> None:
+        self.db_manager = db_manager
+
     def update_top_score(self, test_case: TestCase, score_history_id: int) -> None:
         """指定テストケースのスコアをもとにトップスコアを更新します。"""
-        with DatabaseManager() as conn:
+        with self.db_manager as conn:
             cursor = conn.cursor()
             cursor.execute(
                 "SELECT top_absolute_score FROM top_scores WHERE test_case_input = ?", (test_case.file_name,)
@@ -290,7 +335,7 @@ class TopScoresRepository:
 
     def fetch_top_score_for_test_case(self, test_case: TestCase) -> Optional[int]:
         """指定テストケースのトップスコアを取得します。"""
-        with DatabaseManager() as conn:
+        with self.db_manager as conn:
             cursor = conn.cursor()
             cursor.execute(
                 "SELECT top_absolute_score FROM top_scores WHERE test_case_input = ?", (test_case.file_name,)
@@ -300,7 +345,7 @@ class TopScoresRepository:
 
     def reset_is_updated_flags(self) -> None:
         """トップスコアテーブルのすべてのis_updatedフラグをリセットします。"""
-        with DatabaseManager() as conn:
+        with self.db_manager as conn:
             cursor = conn.cursor()
             cursor.execute(
                 """
@@ -312,7 +357,7 @@ class TopScoresRepository:
 
     def fetch_test_case_count(self) -> int:
         """トップスコアテーブルに登録されたテストケース数を取得します。"""
-        with DatabaseManager() as conn:
+        with self.db_manager as conn:
             cursor = conn.cursor()
             cursor.execute("SELECT COUNT(*) FROM top_scores")
             result: tuple[int] = cursor.fetchone()
@@ -320,7 +365,7 @@ class TopScoresRepository:
 
     def fetch_recently_updated_top_scores(self) -> list[UpdatedTopScore]:
         """is_updatedがTRUEのテストケースのトップスコアとセカンドトップスコアを取得します。"""
-        with DatabaseManager() as conn:
+        with self.db_manager as conn:
             cursor = conn.cursor()
             cursor.execute(
                 """
@@ -336,7 +381,7 @@ class TopScoresRepository:
 
     def fetch_top_summary_record(self) -> TopSummaryScoreRecord:
         """トップスコアテーブルのトップスコア情報を集計し、概要レコードを返します。"""
-        with DatabaseManager() as conn:
+        with self.db_manager as conn:
             cursor = conn.cursor()
             cursor.execute(
                 """
@@ -354,7 +399,7 @@ class TopScoresRepository:
 
     def fetch_top_detail_records(self) -> DetailScoreRecords[TopDetailScoreRecord]:
         """トップスコアテーブルのトップスコア詳細レコードを取得します。"""
-        with DatabaseManager() as conn:
+        with self.db_manager as conn:
             cursor = conn.cursor()
             cursor.execute(
                 """

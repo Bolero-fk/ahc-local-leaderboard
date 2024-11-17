@@ -61,7 +61,7 @@ def handle_view(dependencies: Dependencies, limit: int, detail: str) -> None:
         dependencies["relative_score_calculator"],
     )
     if detail:
-        if detail.isdigit() and Validator.validate_id_exists(int(detail)):
+        if detail.isdigit() and Validator.validate_id_exists(dependencies["record_read_service"], int(detail)):
             viewer.show_detail(int(detail))
         elif detail == "latest":
             viewer.show_latest_detail()
@@ -127,7 +127,14 @@ def main() -> None:
     dependencies = setup_scoring_dependencies(config, initial_dependencies)
 
     if args.command == "submit":
-        handle_submit(dependencies, get_root_dir() / "in", get_root_dir() / args.submit_file)
+        try:
+            dependencies["db_manager"].begin_transaction()
+            handle_submit(dependencies, get_root_dir() / "in", get_root_dir() / args.submit_file)
+            dependencies["db_manager"].commit()
+        except Exception as e:
+            dependencies["db_manager"].rollback()
+            print(e)
+            ConsoleHandler.print_error("An error occurred. Please try again.")
 
     elif args.command == "view":
         handle_view(dependencies, args.limit, args.detail)

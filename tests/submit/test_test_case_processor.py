@@ -81,19 +81,19 @@ def test_try_update_top_score(
     test_case = Mock(spec=TestCase)
     test_case.score = 100
     top_score = 90
-    score_history_id = 1
+    submission_id = 1
 
     mock_record_read_service.fetch_top_score_for_test_case.return_value = top_score
     mock_relative_score_calculator.is_better_score.return_value = is_better
 
     with patch.object(TestCaseProcessor, "update_top_score") as mock_update_top_score:
-        test_case_processor.try_update_top_score(test_case, score_history_id)
+        test_case_processor.try_update_top_score(test_case, submission_id)
 
         mock_record_read_service.fetch_top_score_for_test_case.assert_called_once_with(test_case)
         mock_relative_score_calculator.is_better_score.assert_called_once_with(test_case.score, top_score)
 
         if is_better:
-            mock_update_top_score.assert_called_once_with(test_case, score_history_id)
+            mock_update_top_score.assert_called_once_with(test_case, submission_id)
         else:
             mock_update_top_score.assert_not_called()
 
@@ -110,14 +110,14 @@ def test_process_test_case(
     )
 
     test_case = Mock(spec=TestCase)
-    score_history_id = 1
+    submission_id = 1
 
     with patch.object(TestCaseProcessor, "try_update_top_score") as mock_try_update_top_score:
 
-        test_case_processor.process_test_case(test_case, score_history_id)
+        test_case_processor.process_test_case(test_case, submission_id)
 
         mock_try_update_top_score.assert_called_once()
-        mock_record_write_service.insert_test_case.assert_called_once_with(test_case, score_history_id)
+        mock_record_write_service.insert_test_case.assert_called_once_with(test_case, submission_id)
 
 
 @pytest.mark.parametrize("test_case_count", [0, 1, 100])
@@ -125,8 +125,8 @@ def test_process_test_cases(mock_test_case_processor: Mock, mock_test_cases: Moc
     test_cases_processor = TestCasesProcessor(mock_test_case_processor)
 
     mock_test_cases.__iter__ = Mock(return_value=iter([Mock(spec=TestCase) for _ in range(test_case_count)]))
-    score_history_id = 1
+    submission_id = 1
 
-    test_cases_processor.process_test_cases(mock_test_cases, score_history_id)
+    test_cases_processor.process_test_cases(mock_test_cases, submission_id)
 
     assert mock_test_case_processor.process_test_case.call_count == test_case_count

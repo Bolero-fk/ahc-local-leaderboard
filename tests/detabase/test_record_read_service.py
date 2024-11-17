@@ -102,6 +102,18 @@ def test_fetch_summary_record_by_id_assertions(
         service.fetch_summary_record_by_id(submission_id)
 
 
+@pytest.mark.parametrize("result", [False, True])
+def test_exists_id(
+    service: RecordReadService, mock_repos: tuple[MagicMock, MagicMock, MagicMock], result: bool
+) -> None:
+
+    score_history_repo, _, _ = mock_repos
+    score_history_repo.exists_id.return_value = result
+    temp_id = 1
+
+    assert service.exists_id(temp_id) == result
+
+
 @pytest.mark.parametrize("submission_id", [1, 10, 100])
 def test_fetch_detail_records_by_id(
     service: RecordReadService, mock_repos: tuple[MagicMock, MagicMock, MagicMock], submission_id: int

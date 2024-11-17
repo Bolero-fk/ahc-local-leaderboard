@@ -52,10 +52,12 @@ class Dependencies(TypedDict):
 def setup_initial_dependencies() -> PrevDependencies:
     """scoring_type に依存しない初期依存関係を生成します。"""
     db_manager = DatabaseManager()
-    record_read_service = RecordReadService(ScoreHistoryRepository(), TestCaseRepository(), TopScoresRepository())
-    record_write_service = RecordWriteService(
-        db_manager, ScoreHistoryRepository(), TestCaseRepository(), TopScoresRepository()
-    )
+    score_history_repo = ScoreHistoryRepository(db_manager)
+    tese_case_repo = TestCaseRepository(db_manager)
+    top_scores_repo = TopScoresRepository(db_manager)
+
+    record_read_service = RecordReadService(score_history_repo, tese_case_repo, top_scores_repo)
+    record_write_service = RecordWriteService(db_manager, score_history_repo, tese_case_repo, top_scores_repo)
     file_utility = FileUtility()
 
     return {
