@@ -1,5 +1,4 @@
 import argparse
-from pathlib import Path
 
 from ahc_local_leaderboard.config import Config
 from ahc_local_leaderboard.consts import (
@@ -19,7 +18,11 @@ from ahc_local_leaderboard.init.initializer import Initializer
 from ahc_local_leaderboard.models.test_file import TestFiles
 from ahc_local_leaderboard.submit.submitter import Submitter
 from ahc_local_leaderboard.utils.console_handler import ConsoleHandler
-from ahc_local_leaderboard.utils.validator import Validator
+from ahc_local_leaderboard.utils.validator import (
+    InitValidator,
+    SubmitValidator,
+    ViewValidator,
+)
 from ahc_local_leaderboard.view.viewer import Viewer
 
 
@@ -35,7 +38,7 @@ def handle_setup(initial_dependencies: PrevDependencies) -> None:
     initializer.execute()
 
 
-def handle_submit(dependencies: Dependencies, in_dir_path: Path, submit_dir_path: Path) -> None:
+def handle_submit(dependencies: Dependencies, test_files: TestFiles) -> None:
     """指定した出力をローカル順位表に送信します。"""
     submitter = Submitter(
         dependencies["record_write_service"],
@@ -44,7 +47,7 @@ def handle_submit(dependencies: Dependencies, in_dir_path: Path, submit_dir_path
         dependencies["reserved_record_updater"],
         dependencies["relative_score_updater"],
     )
-    test_files = TestFiles(in_dir_path, submit_dir_path)
+
     submitter.execute(test_files)
 
     viewer = Viewer(
@@ -61,7 +64,7 @@ def handle_view(dependencies: Dependencies, limit: int, detail: str) -> None:
         dependencies["relative_score_calculator"],
     )
     if detail:
-        if detail.isdigit() and Validator.validate_id_exists(dependencies["record_read_service"], int(detail)):
+        if detail.isdigit():
             viewer.show_detail(int(detail))
         elif detail == "latest":
             viewer.show_latest_detail()
@@ -111,14 +114,19 @@ def main() -> None:
 
     args = parser.parse_args()
 
-    initial_dependencies = setup_initial_dependencies()
+    if not args.command:
+        parser.print_help()
+        return
 
+    initial_dependencies = setup_initial_dependencies()
     if args.command == "setup":
         handle_setup(initial_dependencies)
         return
 
-    if not Validator.validate_file_structure():
-        ConsoleHandler.print_error("Structure validation failed.")
+    init_validator = InitValidator()
+
+    if not init_validator.validate(args):
+        init_validator.print_errors()
         ConsoleHandler.print_directive("local-leaderboard setup")
         return
 
@@ -127,16 +135,27 @@ def main() -> None:
     dependencies = setup_scoring_dependencies(config, initial_dependencies)
 
     if args.command == "submit":
+
+        test_files = TestFiles(get_root_dir() / "in", get_root_dir() / args.submit_file)
+        submit_validator = SubmitValidator(test_files)
+        if not submit_validator.validate(args):
+            submit_validator.print_errors()
+            return
+
         try:
             dependencies["db_manager"].begin_transaction()
-            handle_submit(dependencies, get_root_dir() / "in", get_root_dir() / args.submit_file)
+            handle_submit(dependencies, test_files)
             dependencies["db_manager"].commit()
         except Exception as e:
             dependencies["db_manager"].rollback()
-            print(e)
-            ConsoleHandler.print_error("An error occurred. Please try again.")
+            ConsoleHandler.print_error(f"Faild to submit file: {e}")
 
     elif args.command == "view":
+        view_validator = ViewValidator(dependencies["record_read_service"])
+        if not view_validator.validate(args):
+            view_validator.print_errors()
+            return
+
         handle_view(dependencies, args.limit, args.detail)
 
     else:
