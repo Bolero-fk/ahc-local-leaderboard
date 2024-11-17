@@ -7,7 +7,6 @@ class TestFile:
 
     __test__ = False  # pytest によるテスト収集を無効化
 
-    # TODO ファイルの存在チェックのバリデーション
     def __init__(self, file_name: str, input_file_path: Path, submit_file_path: Path) -> None:
         self.file_name = file_name
         self.input_file_path = input_file_path
@@ -38,7 +37,6 @@ class TestFiles:
         for test_file_name in test_file_names:
             self.add_file(test_file_name)
 
-    # TODO ファイル重複チェックのvalidation
     def add_file(self, file_name: str) -> None:
         """指定されたファイルをTestFileオブジェクトとして追加します。"""
 

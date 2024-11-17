@@ -1,5 +1,6 @@
 import argparse
 from pathlib import Path
+from typing import Optional
 from unittest.mock import Mock
 
 import pytest
@@ -90,10 +91,11 @@ def test_submit_validator_missing_files(mock_test_files: Mock, monkeypatch: pyte
     assert "Missing files" in validator.errors[0]
 
 
-def test_view_validator_valid(mock_record_read_service: Mock) -> None:
+@pytest.mark.parametrize("detail", ["1", "latest", "top", None])
+def test_view_validator(mock_record_read_service: Mock, detail: Optional[str]) -> None:
 
     validator = ViewValidator(mock_record_read_service)
-    args = argparse.Namespace(command="view", detail="1")  # ID 1は存在すると仮定
+    args = argparse.Namespace(command="view", detail=detail)  # ID 1は存在すると仮定
 
     assert validator.validate(args) is True
     assert validator.errors == []
@@ -117,3 +119,15 @@ def test_view_validator_invalid_option(mock_record_read_service: Mock) -> None:
     assert validator.validate(args) is False
     assert len(validator.errors) > 0
     assert "Invalid argument for 'view --detail' option: invalid_option" in validator.errors[0]
+
+
+def test_view_validator_invalid_latest_option(mock_record_read_service: Mock) -> None:
+
+    validator = ViewValidator(mock_record_read_service)
+    args = argparse.Namespace(command="view", detail="latest")
+
+    mock_record_read_service.fetch_total_record_count.return_value = 0
+
+    assert validator.validate(args) is False
+    assert len(validator.errors) > 0
+    assert "No records found in the database" in validator.errors[0]

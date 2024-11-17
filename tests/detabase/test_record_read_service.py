@@ -114,6 +114,17 @@ def test_exists_id(
     assert service.exists_id(temp_id) == result
 
 
+@pytest.mark.parametrize("total_record_count", [0, 1, 100])
+def test_fetch_total_record_count(
+    service: RecordReadService, mock_repos: tuple[MagicMock, MagicMock, MagicMock], total_record_count: int
+) -> None:
+
+    score_history_repo, _, _ = mock_repos
+    score_history_repo.fetch_total_record_count.return_value = total_record_count
+
+    assert service.fetch_total_record_count() == total_record_count
+
+
 @pytest.mark.parametrize("submission_id", [1, 10, 100])
 def test_fetch_detail_records_by_id(
     service: RecordReadService, mock_repos: tuple[MagicMock, MagicMock, MagicMock], submission_id: int

@@ -109,8 +109,17 @@ class ViewValidator(CommandValidatorBase):
 
             if args.detail.isdigit():
                 self.check_id_exists(int(args.detail))
+            elif args.detail == "latest":
+                self.check_latest_exists()
 
         return self.is_valid()
+
+    def check_latest_exists(self) -> bool:
+        """提出記録が一つでも存在するかを確認します。存在しない場合、エラーメッセージを追加します。"""
+        if self.record_read_service.fetch_total_record_count() == 0:
+            self.errors.append("No records found in the database")
+            return False
+        return True
 
     def check_id_exists(self, id: int) -> bool:
         """指定された submission_id がデータベースに存在するかを確認します。存在しない場合、エラーメッセージを追加します。"""

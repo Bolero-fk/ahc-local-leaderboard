@@ -249,6 +249,20 @@ class ScoreHistoryRepository:
             result: int = cursor.fetchone()[0]
             return result > 0
 
+    def fetch_total_record_count(self) -> int:
+        """スコア履歴レコードに登録されたレコードの総数を返します。"""
+        with self.db_manager as conn:
+            cursor = conn.cursor()
+            cursor.execute(
+                """
+                SELECT COUNT(*)
+                FROM score_history
+            """,
+            )
+
+            result: int = cursor.fetchone()[0]
+            return result
+
 
 class TestCaseRepository:
     """テストケーステーブルへの操作を提供するクラス。"""

@@ -54,6 +54,10 @@ class RecordReadService:
         """指定したidがデータベースに存在しているかを返します。"""
         return self.score_history_repo.exists_id(id)
 
+    def fetch_total_record_count(self) -> int:
+        """データベースに存在する提出記録の総数を返します。"""
+        return self.score_history_repo.fetch_total_record_count()
+
     def fetch_detail_records_by_id(self, submission_id: int) -> DetailScoreRecords[DetailScoreRecord]:
         """指定した提出IDのテストケースレコードを取得します。"""
         assert 0 < submission_id

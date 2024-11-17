@@ -218,6 +218,16 @@ def test_exists_id(score_history_repository: ScoreHistoryRepository) -> None:
     assert score_history_repository.exists_id(record.id + 1) is False
 
 
+@pytest.mark.parametrize("total_record_count", [0, 1, 100])
+def test_fetch_total_record_count(score_history_repository: ScoreHistoryRepository, total_record_count: int) -> None:
+
+    for i in range(total_record_count):
+        submission_time = get_now_time() + timedelta(seconds=i)
+        score_history_repository.reserve_empty_score_history_record(submission_time)
+
+    assert score_history_repository.fetch_total_record_count() == total_record_count
+
+
 @pytest.fixture
 def test_case_repository(temp_database: DatabaseManager) -> TestCaseRepository:
     return TestCaseRepository(temp_database)
