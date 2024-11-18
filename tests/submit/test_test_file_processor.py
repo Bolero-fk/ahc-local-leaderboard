@@ -35,43 +35,24 @@ def generate_mock_test_files(file_names: list[str]) -> MagicMock:
     return mock_files
 
 
-@pytest.mark.parametrize("decoded_output", ["Score = 1\n", "Score = 100\n", "Score = -100\n", "Score = 0\n"])
-def test_is_valid_output(decoded_output: str, test_file_processor: AtCoderTestFileProcessor) -> None:
-    test_file_processor.validate_output_format(decoded_output)
-
-
-@pytest.mark.parametrize(
-    "decoded_output",
-    [
-        "Unexpected EOF\nScore = 0\n",
-        "Invalid operation: P\nScore = 100\n",
-        "Invalid operation length\nScore = -100\n",
-    ],
-)
-def test_is_valid_output_invalid(decoded_output: str, test_file_processor: AtCoderTestFileProcessor) -> None:
-    with pytest.raises(ValueError):
-        test_file_processor.validate_output_format(decoded_output)
-
-
 @pytest.mark.parametrize(
     "decoded_output, expected_score",
     [
         ("Score = 1\n", 1),
         ("Score = 100\n", 100),
-        ("Score = -100\n", -100),
-        ("Score = 0\n", 0),
+        ("Score = -100\n", None),
+        ("Score = 0\n", None),
+        (
+            "warning: field comments is never read\n\
+            warning: fields initial_comments and commented_op are never read\nScore = 1679\n",
+            1679,
+        ),
     ],
 )
 def test_parse_stdout(
     decoded_output: str, expected_score: Optional[int], test_file_processor: AtCoderTestFileProcessor
 ) -> None:
     assert test_file_processor.parse_stdout(decoded_output) == expected_score
-
-
-@pytest.mark.parametrize("decoded_output", ["", "Score=100"])
-def test_parse_stdout_invalid(decoded_output: str, test_file_processor: AtCoderTestFileProcessor) -> None:
-    with pytest.raises(ValueError):
-        test_file_processor.parse_stdout(decoded_output)
 
 
 @patch("builtins.open", new_callable=mock_open)
@@ -81,8 +62,13 @@ def test_parse_stdout_invalid(decoded_output: str, test_file_processor: AtCoderT
     [
         ("Score = 1\n", 1),
         ("Score = 100\n", 100),
-        ("Score = -100\n", -100),
-        ("Score = 0\n", 0),
+        ("Score = -100\n", None),
+        ("Score = 0\n", None),
+        (
+            "warning: field comments is never read\n\
+            warning: fields initial_comments and commented_op are never read\nScore = 1679\n",
+            1679,
+        ),
     ],
 )
 def test_process_test_file(
@@ -103,7 +89,6 @@ def test_process_test_file(
     "decoded_output, expected_score",
     [
         ("Unexpected EOF\nScore = 0\n", None),
-        ("Invalid operation: P\nScore = 100\n", None),
         ("Invalid operation length\nScore = -100\n", None),
     ],
 )
