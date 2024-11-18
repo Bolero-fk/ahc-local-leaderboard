@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ahc-local-leaderboard"
-version = "1.0.0"
+version = "1.0.1"
 description = "Manages a local leaderboard for AHC, enabling you to view relative scores based on your own submission files."
 authors = ["bolero"]
 license = "MIT"
