@@ -42,7 +42,7 @@ class AtCoderTestFileProcessor(TestFileProcessorInterface):
                 score_process = subprocess.run(
                     ["cargo", "run", "-r", "--bin", "vis", fin.name, fout.name],
                     stdout=subprocess.PIPE,
-                    stderr=subprocess.DEVNULL,
+                    stderr=subprocess.STDOUT,
                 )
 
                 decoded_output = score_process.stdout.decode("utf-8")
