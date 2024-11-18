@@ -2,7 +2,7 @@
 name = "ahc-local-leaderboard"
 version = "0.1.0"
 description = "Manages a local leaderboard for AHC, enabling you to view relative scores based on your own submission files."
-authors = ["Bolero"]
+authors = ["bolero"]
 license = "MIT"
 readme = "README.md"
 
@@ -14,8 +14,6 @@ packages = [
 python = "^3.10"
 pyyaml = "^6.0.2"
 rich = "^13.9.4"
-pytest = "^8.3.3"
-mypy = "^1.13.0"
 
 [build-system]
 requires = ["poetry-core"]
@@ -32,6 +30,8 @@ poethepoet = "^0.29.0"
 
 flake8 = { version = "^7.0.0", extras = ["lint"] }
 pyproject-flake8 = { version = "^7.0.0", extras = ["lint"] }
+pytest = "^8.3.3"
+mypy = "^1.13.0"
 
 [tool.poe.tasks]
 flake8 = "pflake8 --extend-ignore=E203,E701 --max-line-length=119 src/ahc_local_leaderboard tests"
@@ -43,3 +43,5 @@ format = ["isort", "black", "mypy", "flake8"]
 "lint:isort" = "isort --profile black --check-only --diff src/ahc_local_leaderboard tests"
 "lint:black" = "black --line-length=119 --diff --check src/ahc_local_leaderboard tests"
 lint = ["lint:isort", "lint:black", "mypy", "flake8"]
+
+test = "pytest"
