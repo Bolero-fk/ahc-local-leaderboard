@@ -1,0 +1,32 @@
+6
+0 6
+1 1
+2 2
+2 3
+2 4
+7 7
+.LR.R....PPP
+.LR..R...PPP
+L.L..L...PPP
+UL.LR....PPP
+RLLL.L...PPP
+LR.LL....PP.
+.LRLR....PP.
+.L.R.L...PP.
+D.R.LL...PPP
+ULL......PPP
+DRL..R...P.P
+RRL.LR....PP
+LRR.R....PPP
+LLL.R.....P.
+LLR.R....PPP
+DR........P.
+.RLLLL...PPP
+ULL.L....PP.
+LLL.......PP
+R...L.....P.
+.L..RL....PP
+R.RL.....P..
+DR........P.
+RRL......P..
+UR.LR....PP.

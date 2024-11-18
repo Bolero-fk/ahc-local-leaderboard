@@ -1,0 +1,30 @@
+11
+0 4
+1 2
+2 3
+2 4
+2 5
+2 6
+2 7
+2 8
+2 9
+2 10
+10 12
+URL..LLL..L.....PPP..P
+L.L..R.R......P.PPPPP.
+UL..LR.L......PPPP....
+L.RLLL.LLL.....PPPPPP.
+UR.LRL........PPPP...P
+..R.LLL.LL.....P.P..P.
+L.R..L..L.......PPPP..
+DL...R.L.L....PPP.P.P.
+URL.......L....PP....P
+LRLL.L.RR.....P...PP..
+UR...L....R.....PPP..P
+R....LR.........PP....
+URLRLR.R......PPP.P...
+RRLRR.........PP....P.
+L.RL..........P.......
+RLL....L..........P.P.
+DLR....L..........P...
+RLR..L..........PP....
