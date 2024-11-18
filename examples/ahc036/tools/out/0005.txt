@@ -1,0 +1,11325 @@
+# Add 471
+# dig 3 path skip 2 steps
+# dig 4 path skip 2 steps
+# dig 7 path skip 2 steps
+# dig 8 path skip 2 steps
+# dig 9 path skip 2 steps
+# dig 11 path skip 2 steps
+# rest A: 6
+# rest A: 8
+# rest A: 337 17
+# rest A: 115 18
+# rest A: 23
+# rest A: 270 28
+# rest A: 30
+# rest A: 32
+# rest A: 534 38
+# rest A: 42
+# rest A: 43
+# rest A: 44
+# rest A: 264 50
+# rest A: 51
+# rest A: 466 54
+# rest A: 58
+# rest A: 244 63
+# rest A: 422 70
+# rest A: 73
+# rest A: 78
+# rest A: 81
+# rest A: 87
+# rest A: 96
+# rest A: 98
+# rest A: 101
+# rest A: 104
+# rest A: 107
+# rest A: 112
+# rest A: 114
+# rest A: 119
+# rest A: 140
+# rest A: 150
+# rest A: 151
+# rest A: 157
+# rest A: 158
+# rest A: 169
+# rest A: 171
+# rest A: 521 182
+# rest A: 272 184
+# rest A: 187
+# rest A: 462 203
+# rest A: 205
+# rest A: 206
+# rest A: 213
+# rest A: 216
+# rest A: 218
+# rest A: 220
+# rest A: 223
+# rest A: 229
+# rest A: 230
+# rest A: 247
+# rest A: 547 249
+# rest A: 257
+# rest A: 354 483 277
+# rest A: 284
+# rest A: 285
+# rest A: 291
+# rest A: 294
+# rest A: 298
+# rest A: 303
+# rest A: 304
+# rest A: 308
+# rest A: 309
+# rest A: 315
+# rest A: 321
+# rest A: 324
+# rest A: 333
+# rest A: 341
+# rest A: 343
+# rest A: 344
+# rest A: 345
+# rest A: 351
+# rest A: 352
+# rest A: 355
+# rest A: 357
+# rest A: 358
+# rest A: 368
+# rest A: 374
+# rest A: 375
+# rest A: 378
+# rest A: 379
+# rest A: 393
+# rest A: 403
+# rest A: 413
+# rest A: 437
+# rest A: 448
+# rest A: 449
+# rest A: 450
+# rest A: 454
+# rest A: 456
+# rest A: 472
+# rest A: 494
+# rest A: 496
+# rest A: 504
+# rest A: 514
+# rest A: 517
+# rest A: 530
+# rest A: 531
+# rest A: 542
+# rest A: 549
+# rest A: 551
+# rest A: 559
+# rest A: 561
+# rest A: 562
+# rest A: 563
+# rest A: 567
+# rest A: 569
+# rest A: 572
+# rest A: 574
+# rest A: 575
+# rest A: 578
+# rest A: 579
+# rest A: 585
+# rest A: 593
+# min size = 721
+# space size 0
+# dist = 1193
+# 193 / 193
+# min size = 721
+# min size = 719
+# check query: A size = 719
+# final merge 0.398485
+# space size0
+# 721 == LA: 726
+# dist = 1193
+# 193 / 193
+# min size = 724
+# min size = 732
+# min size = 727
+# min size = 729
+# min size = 729
+# min size = 728
+# min size = 728
+# min size = 728
+# min size = 727
+# min size = 733
+# min size = 729
+# min size = 729
+# min size = 732
+# min size = 733
+# min size = 726
+# min size = 729
+# min size = 730
+# min size = 735
+# min size = 740
+# min size = 730
+# min size = 739
+# min size = 736
+# min size = 730
+# min size = 737
+# min size = 733
+# min size = 734
+# min size = 728
+# min size = 732
+# min size = 730
+# min size = 735
+# min size = 736
+# min size = 732
+# min size = 731
+# min size = 731
+# min size = 731
+# min size = 738
+# min size = 724
+# min size = 735
+# min size = 727
+# min size = 727
+# min size = 736
+# min size = 733
+# min size = 728
+# min size = 731
+# min size = 729
+# min size = 733
+# min size = 728
+# min size = 728
+# min size = 743
+# min size = 733
+# min size = 728
+# min size = 730
+# min size = 732
+# min size = 734
+# min size = 740
+# min size = 726
+# min size = 735
+# min size = 730
+# min size = 733
+# min size = 731
+# min size = 732
+# min size = 735
+# min size = 733
+# min size = 736
+# min size = 734
+# min size = 735
+# min size = 732
+# min size = 732
+# min size = 727
+# min size = 729
+# min size = 741
+# min size = 726
+# min size = 731
+# min size = 731
+# min size = 738
+# min size = 735
+# min size = 724
+# min size = 738
+# min size = 739
+# min size = 744
+# min size = 727
+# min size = 733
+# min size = 734
+# min size = 738
+# min size = 732
+# min size = 727
+# min size = 738
+# min size = 730
+# min size = 742
+# min size = 739
+# min size = 741
+# min size = 730
+# min size = 734
+# min size = 735
+# min size = 739
+# min size = 739
+# min size = 736
+# min size = 730
+# min size = 742
+# min size = 743
+# min size = 731
+# min size = 734
+# min size = 728
+# min size = 742
+# min size = 740
+# min size = 727
+# min size = 737
+# min size = 732
+# min size = 736
+# min size = 736
+# min size = 741
+# min size = 741
+# min size = 735
+# min size = 735
+# min size = 727
+# min size = 736
+# min size = 741
+# min size = 732
+# min size = 736
+# min size = 740
+# min size = 739
+# min size = 735
+# min size = 736
+# min size = 737
+# min size = 732
+# min size = 737
+# min size = 735
+# min size = 729
+# min size = 737
+# min size = 737
+# min size = 731
+# min size = 743
+# min size = 742
+# min size = 737
+# min size = 734
+# min size = 730
+# min size = 735
+# min size = 739
+# min size = 736
+# min size = 736
+# min size = 733
+# min size = 739
+# min size = 739
+# min size = 732
+# min size = 735
+# min size = 733
+# min size = 734
+# min size = 733
+# min size = 737
+# min size = 727
+# min size = 729
+# min size = 739
+# min size = 729
+# min size = 736
+# min size = 733
+# min size = 741
+# min size = 734
+# min size = 732
+# min size = 738
+# min size = 736
+# min size = 731
+# min size = 730
+# min size = 730
+# min size = 730
+# min size = 738
+# min size = 740
+# min size = 738
+# min size = 729
+# min size = 737
+# min size = 740
+# min size = 733
+# min size = 737
+# min size = 734
+# min size = 734
+# min size = 736
+# min size = 728
+# min size = 732
+# min size = 740
+# min size = 733
+# min size = 731
+# min size = 738
+# min size = 731
+# min size = 736
+# min size = 732
+# min size = 731
+# min size = 740
+# min size = 726
+# min size = 737
+# min size = 735
+# min size = 734
+# min size = 735
+# min size = 732
+# min size = 727
+# min size = 740
+# min size = 741
+# min size = 728
+# min size = 738
+# min size = 739
+# min size = 738
+# min size = 741
+# min size = 736
+# min size = 739
+# min size = 734
+# min size = 728
+# min size = 739
+# min size = 732
+# min size = 733
+# min size = 738
+# min size = 731
+# min size = 736
+# min size = 738
+# min size = 735
+# min size = 726
+# min size = 734
+# min size = 733
+# min size = 744
+# min size = 743
+# min size = 734
+# min size = 732
+# min size = 734
+# min size = 737
+# min size = 740
+# min size = 730
+# min size = 740
+# min size = 737
+# min size = 737
+# min size = 740
+# min size = 725
+# min size = 737
+# min size = 734
+# min size = 739
+# min size = 748
+# min size = 742
+# min size = 734
+# min size = 732
+# min size = 730
+# min size = 740
+# min size = 734
+# min size = 733
+# min size = 737
+# min size = 736
+# min size = 741
+# min size = 734
+# min size = 737
+# min size = 742
+# min size = 728
+# min size = 729
+# min size = 744
+# min size = 743
+# min size = 741
+# min size = 734
+# min size = 740
+# min size = 742
+# min size = 745
+# min size = 736
+# min size = 729
+# min size = 741
+# min size = 735
+# min size = 734
+# min size = 730
+# min size = 744
+# min size = 735
+# min size = 738
+# min size = 733
+# min size = 731
+# min size = 741
+# min size = 733
+# min size = 738
+# min size = 735
+# min size = 736
+# min size = 737
+# min size = 742
+# min size = 733
+# min size = 736
+# min size = 737
+# min size = 733
+# min size = 736
+# min size = 741
+# min size = 733
+# min size = 741
+# min size = 738
+# min size = 735
+# min size = 733
+# min size = 737
+# min size = 737
+# min size = 740
+# min size = 737
+# min size = 732
+# min size = 737
+# min size = 747
+# min size = 731
+# min size = 729
+# min size = 731
+# min size = 735
+# min size = 738
+# min size = 735
+# min size = 746
+# min size = 735
+# min size = 740
+# min size = 741
+# min size = 725
+# min size = 750
+# min size = 733
+# min size = 744
+# min size = 736
+# min size = 740
+# min size = 737
+# min size = 743
+# min size = 727
+# min size = 738
+# min size = 736
+# min size = 740
+# min size = 727
+# min size = 737
+# min size = 731
+# min size = 736
+# min size = 730
+# min size = 737
+# min size = 730
+# min size = 733
+# min size = 731
+# min size = 737
+# min size = 731
+# min size = 732
+# min size = 737
+# min size = 755
+# min size = 726
+# dist = 1191
+# 197 / 200
+# pop 196th subA
+# pop 199th subA
+# min size = 729
+# min size = 735
+# min size = 732
+# min size = 738
+# min size = 728
+# min size = 735
+# min size = 730
+# min size = 735
+# min size = 734
+# min size = 740
+# min size = 743
+# min size = 723
+# min size = 736
+# min size = 728
+# min size = 724
+# min size = 733
+# min size = 728
+# min size = 733
+# min size = 743
+# min size = 732
+# min size = 737
+# min size = 734
+# min size = 738
+# min size = 733
+# min size = 731
+# min size = 734
+# min size = 729
+# min size = 734
+# min size = 728
+# min size = 735
+# min size = 737
+# min size = 726
+# min size = 739
+# min size = 730
+# min size = 739
+# min size = 743
+# min size = 726
+# min size = 738
+# min size = 732
+# min size = 729
+# min size = 737
+# min size = 734
+# min size = 730
+# min size = 740
+# min size = 740
+# min size = 738
+# min size = 731
+# min size = 740
+# min size = 746
+# min size = 739
+# min size = 731
+# min size = 733
+# min size = 737
+# min size = 733
+# min size = 741
+# min size = 728
+# min size = 736
+# min size = 730
+# min size = 739
+# min size = 733
+# min size = 740
+# min size = 739
+# min size = 734
+# min size = 741
+# min size = 736
+# min size = 739
+# min size = 739
+# min size = 732
+# min size = 729
+# min size = 734
+# min size = 738
+# min size = 724
+# min size = 731
+# min size = 733
+# min size = 742
+# min size = 732
+# min size = 727
+# min size = 738
+# min size = 731
+# min size = 746
+# min size = 728
+# min size = 732
+# min size = 734
+# min size = 739
+# min size = 730
+# min size = 726
+# min size = 740
+# min size = 729
+# min size = 740
+# min size = 747
+# min size = 742
+# min size = 731
+# min size = 731
+# min size = 734
+# min size = 732
+# min size = 743
+# min size = 734
+# min size = 734
+# min size = 735
+# min size = 743
+# min size = 730
+# min size = 735
+# min size = 727
+# min size = 738
+# min size = 740
+# min size = 726
+# min size = 736
+# min size = 730
+# min size = 737
+# min size = 732
+# min size = 732
+# min size = 741
+# min size = 734
+# min size = 736
+# min size = 726
+# min size = 735
+# min size = 738
+# min size = 734
+# min size = 738
+# min size = 730
+# min size = 737
+# min size = 740
+# min size = 739
+# min size = 736
+# min size = 740
+# min size = 733
+# min size = 729
+# min size = 739
+# min size = 736
+# min size = 743
+# min size = 742
+# min size = 743
+# min size = 738
+# min size = 739
+# min size = 730
+# min size = 734
+# min size = 741
+# min size = 738
+# min size = 736
+# min size = 733
+# min size = 739
+# min size = 739
+# min size = 732
+# min size = 739
+# min size = 739
+# min size = 736
+# min size = 732
+# min size = 739
+# min size = 727
+# min size = 731
+# min size = 738
+# min size = 734
+# min size = 742
+# min size = 738
+# min size = 740
+# min size = 737
+# min size = 733
+# min size = 735
+# min size = 738
+# min size = 737
+# min size = 730
+# min size = 732
+# min size = 733
+# min size = 732
+# min size = 732
+# min size = 734
+# min size = 731
+# min size = 738
+# min size = 737
+# min size = 733
+# min size = 736
+# min size = 737
+# min size = 731
+# min size = 738
+# min size = 735
+# min size = 732
+# min size = 736
+# min size = 735
+# min size = 731
+# min size = 740
+# min size = 731
+# min size = 737
+# min size = 735
+# min size = 733
+# min size = 739
+# min size = 726
+# min size = 740
+# min size = 737
+# min size = 733
+# min size = 739
+# min size = 732
+# min size = 727
+# min size = 733
+# min size = 738
+# min size = 732
+# min size = 739
+# min size = 736
+# min size = 740
+# min size = 740
+# min size = 738
+# min size = 741
+# min size = 736
+# min size = 728
+# min size = 740
+# min size = 732
+# min size = 729
+# min size = 737
+# min size = 735
+# min size = 726
+# min size = 742
+# min size = 740
+# min size = 739
+# min size = 734
+# min size = 746
+# min size = 748
+# min size = 747
+# min size = 747
+# min size = 743
+# min size = 745
+# min size = 742
+# min size = 738
+# min size = 742
+# min size = 747
+# min size = 733
+# min size = 741
+# min size = 743
+# min size = 738
+# min size = 744
+# min size = 742
+# min size = 744
+# min size = 742
+# min size = 746
+# min size = 742
+# min size = 731
+# min size = 736
+# min size = 741
+# min size = 745
+# min size = 745
+# min size = 741
+# min size = 740
+# min size = 735
+# min size = 741
+# min size = 743
+# min size = 742
+# min size = 739
+# min size = 740
+# min size = 744
+# min size = 745
+# min size = 737
+# min size = 745
+# min size = 744
+# min size = 745
+# min size = 739
+# min size = 743
+# min size = 732
+# min size = 738
+# min size = 745
+# min size = 745
+# min size = 742
+# min size = 739
+# min size = 736
+# min size = 739
+# min size = 745
+# min size = 742
+# min size = 739
+# min size = 736
+# min size = 742
+# min size = 739
+# min size = 744
+# min size = 741
+# min size = 740
+# min size = 735
+# min size = 743
+# min size = 739
+# min size = 741
+# min size = 744
+# min size = 742
+# min size = 745
+# min size = 743
+# min size = 744
+# min size = 743
+# min size = 739
+# min size = 741
+# min size = 743
+# min size = 745
+# min size = 737
+# min size = 734
+# min size = 739
+# min size = 742
+# min size = 738
+# min size = 738
+# min size = 746
+# min size = 744
+# min size = 741
+# min size = 740
+# min size = 742
+# min size = 747
+# min size = 745
+# min size = 731
+# min size = 744
+# min size = 730
+# min size = 744
+# min size = 736
+# min size = 740
+# min size = 736
+# min size = 738
+# min size = 725
+# min size = 734
+# min size = 738
+# min size = 734
+# min size = 737
+# min size = 738
+# min size = 740
+# min size = 738
+# min size = 727
+# min size = 730
+# min size = 727
+# min size = 733
+# min size = 735
+# min size = 735
+# min size = 733
+# min size = 730
+# min size = 734
+# min size = 741
+# min size = 726
+# dist = 1190
+# 200 / 201
+# min size = 734
+# min size = 740
+# min size = 735
+# min size = 740
+# min size = 730
+# min size = 740
+# min size = 732
+# min size = 737
+# min size = 735
+# min size = 742
+# min size = 742
+# min size = 725
+# min size = 733
+# min size = 730
+# min size = 726
+# min size = 732
+# min size = 740
+# min size = 730
+# min size = 738
+# min size = 745
+# min size = 739
+# min size = 741
+# min size = 742
+# min size = 736
+# min size = 739
+# min size = 738
+# min size = 731
+# min size = 735
+# min size = 727
+# min size = 738
+# min size = 732
+# min size = 726
+# min size = 739
+# min size = 730
+# min size = 741
+# min size = 744
+# min size = 726
+# min size = 738
+# min size = 732
+# min size = 729
+# min size = 747
+# min size = 734
+# min size = 738
+# min size = 740
+# min size = 740
+# min size = 738
+# min size = 726
+# min size = 734
+# min size = 751
+# min size = 732
+# min size = 737
+# min size = 738
+# min size = 732
+# min size = 731
+# min size = 736
+# min size = 731
+# min size = 728
+# min size = 742
+# min size = 730
+# min size = 739
+# min size = 738
+# min size = 745
+# min size = 741
+# min size = 739
+# min size = 749
+# min size = 737
+# min size = 745
+# min size = 740
+# min size = 732
+# min size = 729
+# min size = 734
+# min size = 745
+# min size = 726
+# min size = 736
+# min size = 743
+# min size = 737
+# min size = 727
+# min size = 743
+# min size = 743
+# min size = 752
+# min size = 728
+# min size = 732
+# min size = 742
+# min size = 744
+# min size = 730
+# min size = 726
+# min size = 742
+# min size = 729
+# min size = 740
+# min size = 745
+# min size = 747
+# min size = 738
+# min size = 733
+# min size = 741
+# min size = 735
+# min size = 748
+# min size = 739
+# min size = 737
+# min size = 750
+# min size = 730
+# min size = 740
+# min size = 727
+# min size = 740
+# min size = 736
+# min size = 726
+# min size = 741
+# min size = 730
+# min size = 742
+# min size = 739
+# min size = 732
+# min size = 746
+# min size = 734
+# min size = 736
+# min size = 724
+# min size = 736
+# min size = 743
+# min size = 739
+# min size = 738
+# min size = 736
+# min size = 742
+# min size = 743
+# min size = 736
+# min size = 737
+# min size = 731
+# min size = 734
+# min size = 729
+# min size = 729
+# min size = 736
+# min size = 745
+# min size = 747
+# min size = 748
+# min size = 745
+# min size = 748
+# min size = 735
+# min size = 740
+# min size = 753
+# min size = 743
+# min size = 740
+# min size = 733
+# min size = 744
+# min size = 746
+# min size = 732
+# min size = 744
+# min size = 746
+# min size = 741
+# min size = 739
+# min size = 744
+# min size = 727
+# min size = 736
+# min size = 742
+# min size = 740
+# min size = 748
+# min size = 738
+# min size = 742
+# min size = 741
+# min size = 733
+# min size = 738
+# min size = 741
+# min size = 743
+# min size = 730
+# min size = 737
+# min size = 733
+# min size = 732
+# min size = 738
+# min size = 743
+# min size = 740
+# min size = 744
+# min size = 730
+# min size = 733
+# min size = 742
+# min size = 734
+# min size = 731
+# min size = 743
+# min size = 740
+# min size = 732
+# min size = 745
+# min size = 737
+# min size = 731
+# min size = 745
+# min size = 731
+# min size = 742
+# min size = 735
+# min size = 738
+# min size = 745
+# min size = 726
+# min size = 743
+# min size = 737
+# min size = 739
+# min size = 746
+# min size = 732
+# min size = 727
+# min size = 733
+# min size = 745
+# min size = 736
+# min size = 744
+# min size = 736
+# min size = 742
+# min size = 746
+# min size = 741
+# min size = 745
+# min size = 733
+# min size = 728
+# min size = 747
+# min size = 732
+# min size = 736
+# min size = 742
+# min size = 739
+# min size = 747
+# min size = 743
+# min size = 732
+# min size = 726
+# min size = 745
+# min size = 740
+# min size = 737
+# min size = 744
+# min size = 744
+# min size = 730
+# min size = 740
+# min size = 746
+# min size = 737
+# min size = 730
+# min size = 741
+# min size = 742
+# min size = 743
+# min size = 740
+# min size = 725
+# min size = 745
+# min size = 742
+# min size = 748
+# min size = 754
+# min size = 742
+# min size = 734
+# min size = 737
+# min size = 728
+# min size = 750
+# min size = 734
+# min size = 734
+# min size = 747
+# min size = 736
+# min size = 731
+# min size = 743
+# min size = 740
+# min size = 745
+# min size = 728
+# min size = 729
+# min size = 747
+# min size = 742
+# min size = 738
+# min size = 734
+# min size = 744
+# min size = 743
+# min size = 749
+# min size = 744
+# min size = 729
+# min size = 747
+# min size = 735
+# min size = 747
+# min size = 734
+# min size = 730
+# min size = 741
+# min size = 733
+# min size = 745
+# min size = 733
+# min size = 731
+# min size = 743
+# min size = 742
+# min size = 741
+# min size = 735
+# min size = 736
+# min size = 741
+# min size = 732
+# min size = 741
+# min size = 743
+# min size = 743
+# min size = 733
+# min size = 740
+# min size = 753
+# min size = 732
+# min size = 748
+# min size = 742
+# min size = 741
+# min size = 735
+# min size = 746
+# min size = 742
+# min size = 747
+# min size = 747
+# min size = 737
+# min size = 744
+# min size = 751
+# min size = 738
+# min size = 745
+# min size = 731
+# min size = 746
+# min size = 742
+# min size = 746
+# min size = 735
+# min size = 740
+# min size = 744
+# min size = 725
+# min size = 754
+# min size = 740
+# min size = 732
+# min size = 745
+# min size = 743
+# min size = 742
+# min size = 743
+# min size = 748
+# min size = 727
+# min size = 743
+# min size = 744
+# min size = 741
+# min size = 735
+# min size = 745
+# min size = 731
+# min size = 736
+# min size = 730
+# min size = 740
+# min size = 730
+# min size = 741
+# min size = 731
+# min size = 751
+# min size = 744
+# min size = 740
+# min size = 740
+# min size = 754
+# min size = 726
+# dist = 1189
+# 201 / 203
+# pop 202th subA
+# min size = 734
+# min size = 750
+# min size = 740
+# min size = 745
+# min size = 730
+# min size = 745
+# min size = 732
+# min size = 741
+# min size = 741
+# min size = 747
+# min size = 739
+# min size = 726
+# min size = 738
+# min size = 730
+# min size = 726
+# min size = 732
+# min size = 745
+# min size = 730
+# min size = 745
+# min size = 751
+# min size = 735
+# min size = 744
+# min size = 751
+# min size = 742
+# min size = 745
+# min size = 738
+# min size = 731
+# min size = 741
+# min size = 726
+33 68 77 127 135 286 350 424 471 477 501 118 398 427 84 88 91 99 263 312 432 555 342 356 373 6 8 17 337 18 115 23 28 270 30 32 38 534 42 43 44 50 264 51 54 466 58 63 244 70 422 73 78 81 87 96 98 101 104 107 112 114 119 140 150 151 157 158 169 171 182 521 184 272 187 203 462 205 206 213 216 218 220 223 229 230 247 249 547 257 277 354 483 284 285 291 294 298 303 304 308 309 315 321 324 333 341 343 344 345 351 352 355 357 358 368 374 375 378 379 393 403 413 437 448 449 450 454 456 472 494 496 504 514 517 530 531 542 549 551 559 561 563 567 569 572 574 575 578 579 585 593 56 85 121 142 175 180 217 353 419 512 509 86 439 121 143 217 289 335 362 460 571 3 75 97 103 128 388 401 511 539 339 347 501 528 554 97 160 228 258 268 389 15 139 470 506 179 77 105 241 426 555 556 46 139 160 470 278 332 367 383 179 369 555 21 29 49 159 191 330 429 241 13 123 144 299 503 83 194 267 330 421 408 491 12 13 123 327 14 243 535 83 194 267 508 172 226 548 123 241 330 421 86 190 207 300 465 535 132 543 597 56 121 180 217 353 419 509 86 66 434 515 210 290 485 20 132 179 241 67 318 340 552 45 430 498 492 86 121 132 217 335 509 571 513 241 253 49 129 262 283 295 381 461 560 588 592 384 152 214 254 274 276 297 301 397 414 399 40 109 296 322 455 475 507 49 297 384 0 95 124 188 394 94 399 591 16 40 181 457 502 0 188 297 149 161 553 94 167 174 208 591 49 183 438 297 384 399 122 227 366 0 94 188 447 591 349 390 464 565 297 499 233 380 529 540 0 94 188 447 591 72 130 131 222 499 565 164 233 246 529 377 401 1 302 338 160 228 258 268 476 539 259 545 587 302 338 128 193 139 160 228 258 268 470 476 49 469 179 241 69 154 156 211 372 532 66 86 132 62 479 210 241 290 434 485 515 305 316 66 86 132 94 208 49 241 297 384 399 591 34 57 82 576 212 426 467 49 152 204 276 297 384 397 399 179 293 241 56 281 86 121 132 180 217 353 419 509 387 458 241 93 404 0 49 94 188 297 384 399 591 161 489 241 311 546 49 64 262 283 384 461 560 588 325 330 474 45 49 132 241 60 402 430 47 170 492 498 239 275 411 444 497 9 236 10 162 47 170 239 411 430 492 498 4 292 441 9 5 113 406 420 490 558 598 363 415 590 435 451 584 5 406 425 490 598 417 420 538 84 263 555 369 5 406 418 420 425 490 598 2 26 27 79 106 202 313 482 526 599 76 110 120 252 279 370 2 26 100 436 482 129 269 134 176 279 433 111 202 381 487 566 129 269 177 296 371 463 90 109 287 322 423 53 186 407 541 594 256 39 165 251 148 201 225 252 279 370 486 34 49 212 241 65 231 515 66 86 132 25 116 520 14 123 241 330 421 27 105 307 426 137 526 36 108 328 365 391 478 488 27 307 106 146 319 320 533 392 478 488 526 48 163 331 431 27 137 307 22 493 105 108 241 391 426 526 155 385 27 137 307 106 111 279 313 480 173 256 526 198 495 523 106 111 279 313 480 252 319 320 557 201 370 141 410 53 252 256 279 287 407 594 379 423 562 
+s 11 356 0
+m 94
+m 591
+m 297
+m 399
+m 122
+s 9 187 0
+m 470
+m 160
+m 258
+m 228
+m 268
+m 389
+m 97
+s 1 75 9
+m 203
+m 97
+m 389
+m 268
+m 228
+m 258
+m 160
+m 470
+m 139
+s 11 277 0
+m 179
+m 241
+m 132
+m 45
+m 430
+m 498
+m 492
+s 9 508 0
+m 47
+m 170
+m 402
+m 170
+m 47
+m 492
+m 498
+m 430
+m 45
+m 132
+m 241
+m 49
+s 11 318 0
+m 384
+m 399
+m 297
+m 40
+m 455
+m 507
+m 475
+m 296
+m 322
+m 109
+s 11 603 0
+m 90
+m 423
+m 287
+m 177
+m 129
+m 269
+m 371
+m 269
+m 129
+m 177
+m 287
+m 423
+m 90
+m 109
+m 322
+m 296
+s 11 318 0
+m 475
+m 507
+m 455
+m 40
+m 297
+m 399
+m 384
+m 49
+s 11 275 0
+m 241
+m 132
+m 45
+m 430
+s 11 427 0
+m 86
+m 66
+m 515
+m 434
+m 290
+m 210
+m 485
+m 479
+m 62
+m 479
+m 485
+m 210
+m 290
+m 434
+m 515
+m 66
+m 86
+m 132
+m 241
+s 10 188 0
+m 179
+m 139
+m 470
+m 160
+m 258
+m 228
+m 268
+m 389
+s 1 147 8
+m 575
+m 389
+m 268
+m 228
+m 258
+m 160
+m 470
+m 139
+m 179
+s 11 623 0
+m 241
+m 49
+m 212
+m 34
+m 486
+m 148
+m 225
+m 201
+m 370
+m 252
+m 279
+s 10 593 1
+m 111
+m 202
+m 487
+m 566
+m 487
+m 202
+m 111
+m 279
+m 433
+m 134
+m 176
+m 269
+m 176
+m 134
+m 433
+m 279
+s 10 624 1
+m 252
+m 370
+m 201
+m 225
+m 148
+m 486
+m 34
+m 212
+m 49
+m 241
+s 6 197 0
+m 179
+m 555
+s 3 560 5
+m 263
+m 84
+m 263
+m 555
+m 179
+m 241
+m 426
+m 105
+s 11 685 0
+m 137
+m 307
+m 27
+m 526
+m 106
+m 313
+s 2 579 1
+m 599
+m 313
+m 106
+m 526
+m 27
+m 307
+m 137
+s 7 645 1
+m 105
+m 426
+m 241
+s 8 458 3
+m 49
+m 384
+m 399
+m 297
+m 276
+m 152
+m 397
+m 152
+m 276
+m 297
+s 2 318 4
+m 40
+s 1 61 4
+m 114
+m 40
+m 297
+m 399
+m 384
+m 49
+m 241
+m 330
+s 11 501 0
+m 325
+m 330
+m 241
+m 49
+m 384
+m 588
+m 461
+m 560
+m 474
+m 560
+m 461
+m 588
+m 384
+m 49
+m 241
+m 132
+m 45
+s 11 524 0
+m 430
+m 498
+m 492
+m 47
+m 170
+m 239
+m 411
+m 9
+m 236
+m 162
+m 10
+m 162
+m 236
+m 9
+m 411
+m 239
+m 170
+m 47
+m 492
+m 498
+m 430
+s 10 441 1
+m 86
+m 132
+m 241
+m 49
+m 384
+m 399
+m 297
+m 591
+m 94
+s 11 377 0
+m 0
+m 188
+m 447
+m 499
+m 565
+m 222
+m 130
+m 131
+s 2 70 1
+m 521
+m 182
+s 9 388 0
+m 164
+m 1
+m 377
+m 401
+s 8 395 1
+m 539
+m 338
+m 302
+m 476
+m 268
+m 228
+m 258
+m 160
+s 11 197 0
+m 470
+m 139
+m 179
+m 241
+s 11 242 0
+m 330
+m 421
+m 123
+m 267
+m 194
+m 83
+m 508
+m 548
+m 172
+m 226
+s 1 46 1
+m 58
+s 9 668 1
+m 331
+m 431
+m 392
+m 478
+m 488
+m 27
+m 526
+s 10 698 0
+m 106
+m 313
+m 480
+m 111
+m 279
+m 256
+s 9 622 2
+m 251
+m 256
+m 279
+m 252
+m 370
+m 201
+m 225
+m 148
+m 486
+m 34
+s 10 446 0
+m 212
+m 384
+m 399
+m 297
+m 591
+s 10 441 0
+m 94
+s 1 38 10
+m 42
+m 94
+m 591
+m 297
+m 399
+m 384
+m 49
+m 241
+m 132
+m 86
+s 10 472 1
+m 509
+m 121
+m 217
+m 419
+m 353
+m 180
+m 387
+s 1 82 9
+m 220
+m 387
+m 180
+m 353
+m 419
+m 217
+m 121
+m 509
+m 86
+m 132
+m 241
+s 10 410 0
+m 179
+m 139
+m 470
+m 160
+m 258
+m 228
+m 268
+m 476
+m 268
+m 228
+m 258
+m 160
+m 470
+m 139
+m 179
+m 241
+s 9 285 0
+m 132
+m 86
+m 509
+m 121
+s 1 96 6
+m 294
+m 121
+m 509
+m 86
+m 430
+m 498
+m 492
+s 11 515 0
+m 47
+m 170
+m 239
+m 411
+m 9
+m 236
+m 275
+m 236
+m 9
+m 411
+m 239
+m 170
+m 47
+m 492
+m 498
+s 7 508 0
+m 430
+m 45
+m 132
+m 241
+m 49
+s 11 318 0
+m 384
+m 399
+m 297
+m 40
+m 297
+m 399
+m 384
+m 49
+s 6 197 0
+m 241
+m 179
+m 555
+s 11 552 0
+m 263
+m 84
+m 425
+m 490
+m 5
+m 406
+m 598
+m 420
+m 598
+m 406
+m 5
+m 490
+m 425
+m 84
+m 263
+m 555
+s 11 212 0
+m 179
+m 241
+m 49
+s 10 623 1
+m 212
+m 34
+m 486
+m 148
+m 225
+m 201
+m 370
+m 252
+m 279
+s 4 697 7
+m 256
+m 173
+m 198
+m 173
+m 256
+m 279
+m 252
+m 370
+m 201
+m 225
+m 148
+s 11 629 0
+m 486
+m 34
+m 212
+m 49
+m 241
+m 132
+s 11 508 0
+m 45
+m 430
+m 498
+m 492
+m 47
+m 170
+s 11 528 0
+m 239
+m 411
+m 9
+m 292
+m 4
+m 292
+m 9
+m 411
+m 239
+m 170
+m 47
+m 492
+m 498
+m 430
+s 10 420 1
+m 86
+m 66
+m 372
+m 69
+s 1 133 3
+m 514
+m 69
+m 372
+m 66
+m 86
+m 132
+m 241
+s 11 648 0
+m 426
+m 105
+m 137
+m 307
+m 27
+m 526
+m 391
+m 108
+m 328
+m 365
+m 36
+m 365
+m 328
+m 108
+m 391
+m 526
+m 27
+m 307
+m 137
+m 105
+m 426
+s 11 508 0
+m 241
+m 132
+m 45
+m 430
+m 498
+m 492
+m 47
+m 170
+s 7 519 0
+m 239
+m 411
+m 9
+m 236
+m 497
+m 444
+m 497
+m 236
+m 9
+m 411
+m 239
+m 170
+m 47
+m 492
+m 498
+s 7 508 1
+m 430
+m 45
+m 132
+m 241
+m 49
+s 11 356 0
+m 384
+m 399
+m 297
+m 591
+m 94
+m 0
+m 188
+m 447
+s 11 371 0
+m 499
+m 233
+m 529
+m 380
+m 540
+m 380
+m 529
+m 233
+m 499
+m 447
+m 188
+m 0
+m 94
+m 591
+m 297
+s 11 455 0
+m 399
+m 384
+m 212
+m 467
+m 212
+m 384
+m 399
+m 297
+m 276
+m 152
+m 397
+m 204
+m 397
+m 152
+m 276
+m 297
+m 399
+m 384
+m 49
+s 6 197 0
+m 241
+m 179
+m 555
+s 10 552 1
+m 263
+m 84
+m 425
+m 490
+m 5
+m 406
+m 598
+m 420
+m 538
+m 417
+m 538
+m 420
+s 9 562 0
+m 418
+m 420
+m 598
+m 406
+m 5
+m 490
+m 425
+m 84
+m 263
+m 555
+s 11 458 0
+m 179
+m 241
+m 49
+m 384
+m 399
+m 297
+s 10 348 0
+m 591
+m 94
+m 208
+m 174
+m 167
+m 438
+s 1 56 6
+m 98
+m 438
+m 167
+m 174
+m 208
+m 94
+m 591
+m 297
+s 10 485 0
+m 399
+m 384
+m 49
+m 241
+s 11 242 0
+m 330
+m 421
+m 123
+m 267
+m 194
+m 83
+m 508
+m 548
+s 1 68 3
+m 169
+s 3 236 4
+m 327
+m 13
+m 83
+m 194
+m 267
+m 123
+m 421
+m 330
+m 241
+s 8 458 0
+m 49
+m 384
+m 399
+m 297
+m 276
+m 152
+m 397
+s 11 308 0
+m 214
+m 301
+m 214
+m 397
+m 152
+m 276
+m 297
+m 399
+m 384
+s 10 623 1
+m 212
+m 34
+m 486
+m 148
+m 225
+m 201
+m 370
+m 252
+m 279
+s 8 584 3
+m 436
+m 26
+m 482
+m 2
+m 100
+m 2
+m 482
+m 26
+m 436
+m 279
+m 252
+m 370
+m 201
+s 9 625 2
+m 225
+m 148
+m 486
+m 34
+m 212
+m 49
+m 241
+s 9 288 1
+m 132
+m 86
+m 509
+m 121
+m 217
+m 571
+m 335
+s 2 168 8
+m 289
+s 1 725 5
+m 562
+m 289
+m 335
+m 571
+m 217
+m 121
+m 509
+m 86
+m 132
+m 241
+s 10 410 0
+m 179
+m 139
+m 470
+m 160
+m 258
+m 228
+m 268
+m 476
+s 11 406 0
+m 302
+m 338
+m 193
+m 128
+m 193
+m 338
+m 302
+m 476
+m 268
+m 228
+m 258
+m 160
+m 470
+m 139
+s 11 458 0
+m 179
+m 241
+m 49
+m 384
+s 11 298 0
+m 588
+m 461
+m 560
+m 262
+m 283
+m 592
+m 295
+m 381
+m 129
+m 381
+m 295
+m 592
+m 283
+m 262
+m 560
+m 461
+m 588
+m 384
+m 49
+s 11 222 0
+m 241
+m 330
+m 421
+m 123
+m 267
+m 194
+m 83
+m 13
+s 11 228 0
+m 327
+m 12
+m 491
+s 1 103 5
+m 321
+m 491
+m 12
+m 327
+m 13
+m 83
+m 194
+m 267
+m 123
+m 421
+m 330
+s 8 443 1
+m 241
+m 49
+m 384
+m 399
+m 297
+m 591
+m 94
+m 208
+s 8 348 0
+m 174
+m 167
+m 438
+m 167
+m 174
+m 208
+m 94
+s 11 362 0
+m 0
+m 188
+m 447
+m 499
+m 565
+m 464
+m 565
+m 499
+m 447
+m 188
+m 0
+m 94
+m 591
+m 297
+s 10 440 1
+m 399
+m 384
+m 49
+m 241
+m 132
+m 86
+s 5 514 4
+m 430
+m 498
+m 492
+m 498
+m 430
+m 86
+m 66
+s 11 427 0
+m 515
+m 434
+m 290
+m 210
+m 485
+s 1 141 4
+m 561
+m 485
+m 210
+m 290
+m 434
+m 515
+m 66
+m 86
+m 132
+m 241
+s 11 348 0
+m 49
+m 384
+m 399
+m 297
+m 591
+m 94
+m 208
+m 174
+m 167
+s 6 347 0
+m 553
+m 167
+m 174
+m 208
+m 94
+m 591
+m 297
+m 399
+m 384
+s 10 623 1
+m 212
+m 34
+m 486
+m 148
+m 225
+m 201
+m 370
+m 252
+m 279
+s 11 587 0
+m 436
+m 26
+m 482
+m 2
+m 100
+m 2
+m 482
+m 26
+m 436
+m 279
+m 433
+m 134
+m 176
+m 269
+m 129
+s 8 300 1
+m 381
+m 295
+m 592
+m 283
+m 262
+m 560
+m 461
+m 588
+s 8 623 1
+m 34
+m 486
+m 148
+m 225
+m 201
+m 370
+m 252
+m 279
+s 11 689 0
+m 256
+m 279
+m 111
+m 480
+m 313
+m 106
+m 526
+m 27
+m 307
+m 137
+s 10 638 1
+m 14
+m 123
+m 421
+m 330
+m 132
+m 86
+s 11 162 0
+m 509
+m 121
+m 217
+m 571
+m 335
+m 289
+m 460
+m 362
+m 460
+m 289
+m 335
+m 571
+m 217
+m 121
+m 509
+m 86
+s 9 442 1
+m 132
+m 241
+m 49
+m 384
+m 399
+m 297
+m 591
+m 94
+s 11 371 0
+m 0
+m 188
+m 447
+m 499
+m 233
+m 499
+m 447
+m 188
+m 0
+m 94
+m 591
+m 297
+s 10 485 0
+m 399
+m 384
+m 49
+m 241
+s 9 677 0
+m 426
+m 105
+m 137
+m 307
+m 137
+m 105
+m 426
+m 241
+s 10 410 0
+m 179
+m 139
+m 179
+s 8 276 1
+m 20
+m 340
+m 318
+m 552
+m 318
+m 340
+m 20
+m 179
+m 241
+s 11 481 0
+m 49
+m 384
+m 399
+m 297
+m 591
+m 94
+m 0
+m 188
+m 93
+m 404
+m 93
+m 188
+m 0
+m 94
+m 591
+m 297
+m 399
+m 384
+m 49
+m 241
+s 9 288 1
+m 132
+m 86
+m 509
+m 121
+m 217
+m 571
+m 335
+m 513
+m 335
+m 571
+m 217
+m 121
+m 509
+m 86
+m 132
+m 241
+s 11 676 0
+m 426
+m 105
+m 137
+m 307
+m 27
+m 526
+m 391
+m 108
+m 22
+m 493
+m 22
+m 108
+m 391
+m 526
+m 27
+m 307
+m 137
+m 105
+m 426
+m 241
+s 9 204 1
+m 179
+m 139
+m 470
+m 160
+m 46
+m 383
+m 332
+m 383
+m 46
+m 160
+m 470
+m 139
+m 179
+s 11 623 0
+m 241
+m 49
+m 212
+m 34
+m 486
+m 148
+m 225
+m 201
+m 370
+m 252
+m 279
+s 8 703 0
+m 111
+m 480
+m 313
+m 106
+m 320
+m 319
+s 1 114 1
+m 358
+s 7 573 1
+m 202
+m 79
+m 313
+m 106
+m 526
+m 27
+s 4 649 0
+m 307
+m 137
+m 105
+m 426
+m 212
+s 9 447 1
+m 34
+m 57
+m 34
+m 212
+m 384
+m 399
+m 297
+s 9 308 0
+m 276
+m 152
+m 397
+m 214
+m 301
+m 274
+s 1 109 3
+m 345
+m 274
+m 301
+m 214
+m 397
+m 152
+m 276
+m 297
+s 8 448 1
+m 399
+m 384
+m 212
+m 34
+s 10 623 1
+m 486
+m 148
+m 225
+m 201
+m 370
+m 252
+m 279
+s 2 598 9
+m 111
+m 202
+m 111
+m 279
+m 252
+m 370
+m 201
+m 225
+m 148
+m 486
+m 34
+s 3 631 0
+m 212
+m 49
+m 241
+s 11 187 0
+m 179
+m 139
+m 470
+m 160
+m 258
+m 228
+m 268
+m 389
+m 97
+m 506
+m 15
+s 10 0 1
+m 424
+m 477
+m 286
+m 471
+m 135
+m 33
+m 350
+m 33
+m 135
+m 471
+m 286
+m 477
+m 424
+s 10 187 1
+m 15
+m 506
+m 97
+m 389
+s 11 395 0
+m 476
+m 302
+m 338
+m 539
+m 259
+m 587
+m 545
+m 587
+m 259
+m 539
+m 338
+m 302
+m 476
+m 268
+m 228
+m 258
+m 160
+s 11 197 0
+m 470
+m 139
+m 179
+m 241
+s 11 249 0
+m 330
+m 421
+m 123
+m 535
+m 207
+m 300
+m 190
+m 465
+m 190
+m 300
+m 207
+m 535
+m 123
+m 421
+m 330
+m 132
+m 86
+s 10 420 1
+m 66
+m 372
+m 69
+m 532
+m 154
+m 211
+m 154
+m 532
+m 69
+m 372
+m 66
+m 86
+m 132
+m 241
+s 11 298 0
+m 49
+m 384
+m 588
+m 461
+m 560
+m 262
+m 283
+m 592
+m 283
+m 262
+m 560
+m 461
+m 588
+m 384
+m 49
+s 11 410 0
+m 241
+m 179
+m 139
+m 470
+m 160
+m 258
+m 228
+m 268
+m 476
+s 2 395 7
+m 302
+m 338
+s 1 69 10
+m 171
+m 338
+m 302
+m 476
+m 268
+m 228
+m 258
+m 160
+m 470
+m 139
+m 179
+s 11 276 0
+m 20
+m 340
+m 318
+m 498
+s 10 524 0
+m 492
+m 47
+m 170
+m 239
+m 411
+m 9
+m 236
+m 162
+m 236
+m 9
+m 411
+m 239
+m 170
+m 47
+m 492
+m 498
+m 430
+s 8 277 1
+m 45
+m 132
+m 241
+m 179
+s 11 14 0
+m 555
+m 263
+m 84
+m 312
+m 91
+m 99
+m 432
+m 88
+m 356
+m 342
+m 373
+m 342
+m 356
+m 88
+m 432
+m 99
+m 91
+m 312
+m 84
+m 263
+m 555
+s 10 466 0
+m 179
+m 241
+m 132
+m 86
+s 11 259 0
+m 509
+m 121
+m 217
+m 419
+m 353
+m 180
+m 56
+m 543
+m 56
+m 180
+m 353
+m 419
+m 217
+m 121
+m 509
+m 86
+m 132
+s 8 276 1
+m 241
+m 179
+m 20
+m 340
+m 318
+m 552
+m 318
+m 340
+m 20
+m 179
+m 241
+s 11 676 0
+m 426
+m 105
+m 137
+m 307
+m 27
+m 526
+m 391
+m 108
+m 22
+m 108
+m 391
+m 526
+m 27
+m 307
+m 137
+m 105
+m 426
+m 241
+s 8 276 1
+m 179
+m 20
+m 340
+m 318
+m 552
+m 67
+s 1 113 2
+m 357
+m 67
+m 552
+m 318
+m 340
+m 20
+m 179
+s 10 186 1
+m 139
+m 470
+m 160
+m 258
+m 228
+m 268
+m 389
+m 97
+s 1 182 0
+m 339
+m 97
+m 389
+m 268
+m 228
+m 554
+s 1 122 1
+m 413
+s 8 352 0
+m 122
+m 399
+m 297
+m 591
+m 297
+m 399
+m 384
+s 10 495 1
+m 588
+m 461
+m 560
+m 262
+m 283
+m 64
+m 311
+m 546
+s 10 592 1
+m 129
+m 269
+m 176
+m 134
+m 433
+m 279
+m 111
+m 202
+m 487
+m 202
+m 111
+m 279
+s 11 623 0
+m 252
+m 370
+m 201
+m 225
+m 148
+m 486
+m 34
+m 212
+m 49
+m 241
+s 10 276 0
+m 132
+m 45
+m 430
+m 318
+m 552
+s 1 80 3
+m 216
+m 552
+m 318
+m 340
+m 20
+m 179
+m 241
+s 10 484 1
+m 49
+m 384
+m 399
+m 297
+m 591
+m 94
+m 0
+m 188
+m 161
+m 489
+s 11 318 0
+m 322
+m 109
+m 322
+m 296
+m 475
+m 507
+m 455
+m 40
+m 297
+m 399
+m 384
+m 49
+s 11 222 0
+m 241
+m 330
+m 421
+m 123
+m 267
+m 194
+m 83
+m 13
+s 3 236 2
+m 327
+m 13
+m 83
+m 194
+m 267
+m 123
+m 421
+m 330
+m 241
+s 3 454 1
+m 576
+s 10 203 1
+m 179
+m 139
+m 470
+m 160
+m 46
+m 556
+s 1 65 7
+m 151
+m 556
+m 46
+m 160
+m 470
+m 139
+m 179
+m 241
+s 8 451 1
+m 426
+m 212
+m 34
+s 10 623 1
+m 486
+m 148
+m 225
+m 201
+s 1 67 5
+m 158
+m 201
+m 225
+m 148
+m 486
+m 34
+m 212
+m 49
+m 241
+s 11 508 0
+m 132
+m 45
+m 430
+m 498
+m 492
+m 47
+m 170
+m 402
+m 60
+m 402
+m 170
+m 47
+m 492
+m 498
+m 430
+s 10 420 0
+m 86
+m 66
+m 372
+m 69
+m 372
+m 66
+m 86
+m 132
+m 241
+s 11 318 0
+m 49
+m 384
+m 399
+m 297
+m 40
+m 455
+m 507
+m 475
+m 296
+m 322
+s 2 27 8
+m 337
+m 17
+m 296
+m 475
+m 507
+m 455
+m 40
+s 10 488 0
+m 297
+m 399
+m 384
+m 49
+m 241
+s 10 676 0
+m 426
+m 105
+m 137
+m 307
+m 27
+s 3 668 6
+m 488
+m 478
+m 392
+m 478
+m 488
+m 27
+m 307
+m 137
+m 105
+m 426
+s 11 458 0
+m 241
+m 179
+s 1 74 2
+m 187
+m 179
+m 241
+m 49
+m 384
+m 399
+m 297
+s 11 481 0
+m 591
+m 94
+m 0
+m 188
+m 93
+m 404
+m 93
+m 188
+m 0
+m 94
+m 591
+m 297
+m 399
+m 384
+m 49
+m 241
+s 6 197 0
+m 179
+m 555
+s 11 552 0
+m 263
+m 84
+m 425
+m 490
+m 5
+m 406
+m 598
+m 406
+m 5
+m 490
+m 425
+m 84
+m 263
+m 555
+s 11 194 0
+m 179
+m 241
+m 426
+m 105
+s 2 36 9
+m 38
+m 534
+m 38
+m 105
+m 426
+m 241
+m 179
+m 139
+m 470
+s 5 203 5
+m 160
+m 46
+m 556
+m 77
+s 9 0 2
+m 471
+m 135
+m 33
+s 1 107 3
+m 343
+m 33
+m 135
+m 471
+m 77
+s 11 197 0
+m 556
+m 46
+m 160
+m 470
+m 139
+m 179
+m 241
+m 426
+m 105
+m 426
+m 241
+s 11 318 0
+m 49
+m 384
+m 399
+m 297
+m 40
+m 455
+m 507
+m 475
+m 296
+m 322
+m 109
+m 322
+m 296
+m 475
+m 507
+m 455
+m 40
+m 297
+m 399
+m 384
+m 49
+s 10 676 0
+m 241
+m 426
+m 105
+m 137
+m 307
+m 27
+m 307
+m 137
+m 105
+m 426
+m 241
+s 11 187 0
+m 179
+m 139
+m 470
+m 160
+m 258
+m 228
+m 268
+m 389
+m 97
+s 6 178 5
+m 339
+m 347
+m 388
+m 347
+m 339
+m 97
+s 10 188 1
+m 389
+m 268
+m 228
+m 258
+m 160
+m 470
+m 139
+m 179
+s 11 508 0
+m 241
+m 132
+m 45
+m 430
+m 498
+m 492
+m 47
+m 492
+m 498
+m 430
+m 45
+m 132
+s 10 223 1
+m 330
+m 421
+m 123
+m 267
+m 194
+m 83
+m 13
+m 503
+m 144
+m 299
+s 2 29 2
+m 115
+m 18
+s 9 236 1
+m 327
+m 13
+m 83
+m 194
+m 267
+m 14
+s 11 689 0
+m 137
+m 307
+m 27
+m 526
+m 106
+m 313
+m 480
+m 111
+m 279
+m 256
+m 173
+m 256
+m 279
+m 111
+m 480
+m 313
+m 106
+m 526
+m 27
+m 307
+m 137
+s 11 197 0
+m 105
+m 426
+m 241
+m 179
+m 139
+m 470
+m 160
+m 46
+m 556
+s 1 79 2
+m 213
+m 556
+m 46
+m 160
+m 470
+m 139
+m 179
+m 241
+s 11 228 0
+m 330
+m 421
+m 123
+m 267
+m 194
+m 83
+m 13
+m 327
+m 12
+s 1 102 6
+m 315
+m 12
+m 327
+m 13
+m 83
+m 194
+m 267
+m 123
+m 421
+m 330
+s 11 494 0
+m 241
+m 49
+m 384
+m 588
+m 461
+m 560
+m 262
+s 1 59 1
+m 107
+s 11 318 0
+m 455
+m 40
+m 297
+m 399
+m 384
+m 49
+s 8 645 0
+m 241
+m 426
+m 105
+m 137
+m 307
+m 27
+s 1 143 2
+m 567
+m 27
+m 307
+m 137
+m 105
+m 426
+m 241
+m 49
+m 384
+s 10 623 1
+m 212
+m 34
+m 486
+m 148
+m 225
+m 201
+m 225
+m 148
+m 486
+m 34
+m 212
+m 49
+m 241
+s 11 228 0
+m 330
+m 421
+m 123
+m 267
+m 194
+m 83
+m 13
+m 327
+m 12
+m 491
+m 408
+m 491
+m 12
+m 327
+m 13
+m 83
+m 194
+m 267
+m 123
+m 421
+m 330
+s 11 269 0
+m 241
+m 179
+m 20
+s 9 85 1
+m 230
+s 4 508 2
+m 45
+m 86
+m 284
+m 86
+m 132
+m 241
+m 49
+s 10 458 0
+m 384
+m 399
+m 297
+m 276
+m 152
+m 397
+m 204
+m 293
+m 204
+m 397
+m 152
+m 276
+m 297
+m 399
+m 384
+m 49
+m 241
+s 11 222 0
+m 330
+m 421
+m 123
+m 267
+m 194
+m 83
+m 13
+m 503
+m 144
+m 299
+m 144
+m 503
+m 13
+m 83
+m 194
+m 267
+m 123
+m 421
+m 330
+m 241
+s 11 481 0
+m 49
+m 384
+m 399
+m 297
+m 591
+m 94
+m 0
+m 94
+m 591
+s 6 353 2
+m 183
+m 297
+m 399
+m 384
+m 49
+m 241
+s 10 469 0
+m 132
+m 86
+m 509
+m 121
+m 217
+m 419
+m 353
+m 180
+m 56
+s 11 152 0
+m 175
+m 142
+m 85
+m 512
+m 85
+m 142
+m 175
+m 56
+m 180
+m 353
+m 419
+m 217
+m 121
+m 509
+s 11 269 0
+m 86
+m 132
+m 241
+m 179
+s 8 14 1
+m 555
+m 263
+m 84
+m 312
+m 91
+m 99
+m 432
+m 88
+m 432
+m 99
+m 91
+m 312
+m 84
+m 263
+m 555
+m 179
+m 241
+s 8 484 0
+m 49
+m 384
+m 399
+m 297
+m 591
+m 94
+m 0
+m 188
+s 10 378 1
+m 447
+m 499
+m 565
+m 222
+m 565
+m 499
+m 447
+m 188
+m 0
+m 94
+m 591
+s 11 458 0
+m 297
+m 399
+m 384
+m 49
+m 241
+m 179
+s 8 14 0
+m 555
+m 263
+m 84
+m 312
+m 91
+m 99
+m 432
+m 99
+m 91
+m 312
+m 84
+m 263
+m 555
+m 179
+s 10 410 0
+m 139
+m 470
+m 160
+m 258
+m 160
+m 470
+m 139
+m 179
+m 241
+m 49
+s 10 623 1
+m 212
+m 34
+m 486
+m 148
+m 225
+m 201
+m 370
+m 252
+m 279
+s 8 584 3
+m 436
+m 26
+m 482
+m 2
+m 100
+s 1 137 1
+m 542
+m 100
+m 2
+m 482
+m 26
+m 436
+m 279
+m 252
+m 370
+m 201
+s 10 623 1
+m 225
+m 148
+m 486
+m 34
+m 212
+s 11 356 0
+m 384
+m 399
+m 297
+m 591
+m 94
+m 0
+m 188
+m 447
+s 1 101 1
+m 309
+m 447
+s 5 383 1
+m 499
+m 565
+m 222
+m 130
+s 1 116 2
+m 374
+m 130
+m 222
+m 565
+m 499
+m 447
+m 188
+m 0
+m 94
+m 591
+m 297
+s 11 458 0
+m 399
+m 384
+m 49
+m 241
+m 179
+s 10 560 0
+m 555
+m 263
+m 84
+m 425
+m 490
+m 5
+s 1 134 5
+m 517
+m 5
+m 490
+m 425
+m 84
+m 263
+m 555
+s 11 212 0
+m 179
+m 241
+m 49
+s 10 623 1
+m 212
+m 34
+m 486
+m 148
+m 225
+m 201
+m 370
+m 252
+m 279
+s 4 594 7
+m 433
+m 134
+m 433
+m 279
+m 252
+m 370
+m 201
+m 225
+m 148
+s 5 629 2
+m 486
+m 34
+m 212
+m 49
+m 241
+m 179
+s 10 410 0
+m 139
+m 470
+m 160
+m 258
+m 228
+s 1 54 6
+m 87
+m 228
+m 258
+m 160
+m 470
+m 139
+m 179
+s 11 222 0
+m 241
+m 330
+m 421
+m 123
+m 267
+m 194
+m 83
+m 13
+s 3 236 2
+m 327
+m 13
+m 83
+m 194
+m 267
+m 123
+m 421
+m 330
+m 241
+s 10 410 1
+m 179
+m 139
+m 470
+m 160
+m 258
+m 228
+m 268
+m 476
+s 11 392 0
+m 302
+m 338
+m 539
+m 401
+m 377
+m 1
+m 377
+m 401
+m 539
+m 338
+m 302
+m 476
+m 268
+m 228
+m 258
+m 160
+s 8 194 0
+m 470
+m 139
+m 179
+m 241
+m 426
+m 105
+s 11 685 0
+m 137
+m 307
+m 27
+m 526
+m 106
+m 313
+s 2 579 1
+m 599
+m 313
+m 106
+m 526
+m 27
+m 307
+m 137
+s 6 197 1
+m 105
+m 426
+m 241
+m 179
+m 555
+s 10 11 1
+m 263
+m 84
+m 312
+m 91
+m 99
+m 432
+m 88
+m 427
+m 118
+m 398
+s 2 47 8
+m 63
+m 244
+m 118
+m 427
+m 88
+m 432
+m 99
+m 91
+s 8 14 1
+m 312
+m 84
+m 263
+m 555
+s 11 212 0
+m 179
+m 241
+m 49
+s 10 623 0
+m 212
+m 34
+m 486
+m 148
+m 225
+m 201
+m 370
+m 252
+s 1 64 4
+m 150
+m 252
+m 370
+m 201
+m 225
+m 148
+m 486
+m 34
+m 212
+m 49
+m 241
+s 10 223 0
+m 330
+m 421
+m 123
+m 267
+m 194
+m 83
+m 13
+m 503
+m 13
+m 83
+m 194
+m 267
+m 123
+m 421
+m 330
+m 241
+s 11 187 0
+m 179
+m 139
+m 470
+m 160
+m 258
+m 228
+m 268
+m 389
+m 97
+s 8 173 3
+m 103
+m 3
+m 511
+m 3
+m 103
+m 97
+s 10 188 1
+m 389
+m 268
+m 228
+m 258
+m 160
+m 470
+m 139
+m 179
+s 11 494 0
+m 241
+m 49
+m 384
+m 588
+m 461
+m 560
+m 262
+m 283
+m 64
+m 311
+m 546
+s 11 603 0
+m 129
+m 269
+m 129
+m 177
+m 287
+m 423
+m 90
+m 109
+m 322
+m 296
+s 10 318 1
+m 475
+m 507
+m 455
+m 40
+m 297
+s 10 458 1
+m 276
+m 152
+m 397
+m 204
+m 293
+m 204
+m 397
+m 152
+m 276
+m 297
+m 399
+m 384
+s 4 630 1
+m 212
+m 34
+m 212
+m 49
+m 241
+m 179
+s 10 186 0
+m 139
+m 470
+m 160
+m 554
+m 160
+m 470
+m 139
+s 6 212 0
+m 179
+m 555
+s 8 14 2
+m 263
+m 84
+m 312
+m 91
+m 312
+m 84
+m 263
+m 555
+m 179
+s 11 458 0
+m 241
+m 49
+m 384
+m 399
+m 297
+m 276
+m 152
+m 397
+s 11 308 0
+m 214
+m 301
+m 274
+m 254
+m 414
+m 254
+m 274
+m 301
+m 214
+m 397
+m 152
+m 276
+m 297
+m 399
+m 384
+s 9 217 0
+m 49
+m 241
+m 330
+s 11 222 0
+m 421
+m 123
+m 267
+m 194
+m 83
+m 13
+m 503
+m 144
+m 299
+m 144
+m 503
+m 13
+m 83
+m 194
+m 267
+m 123
+m 421
+m 330
+m 241
+s 11 187 0
+m 179
+m 139
+m 470
+m 160
+m 258
+m 228
+m 268
+m 389
+m 97
+m 506
+m 15
+s 7 4 1
+m 424
+m 477
+m 286
+m 471
+m 135
+m 471
+m 286
+m 477
+m 424
+m 501
+s 11 182 0
+m 347
+m 339
+m 97
+m 389
+m 268
+m 228
+m 258
+m 160
+s 11 197 0
+m 470
+m 139
+m 179
+s 8 276 1
+m 20
+m 340
+m 318
+m 552
+m 318
+m 340
+s 11 11 0
+m 555
+m 263
+m 84
+m 312
+m 91
+m 99
+m 432
+m 88
+m 427
+m 118
+m 398
+s 1 57 10
+m 101
+m 398
+m 118
+m 427
+m 88
+m 432
+m 99
+m 91
+m 312
+m 84
+m 263
+s 11 212 0
+m 555
+m 179
+m 241
+m 49
+s 11 356 0
+m 384
+m 399
+m 297
+m 591
+m 94
+m 0
+m 188
+m 447
+s 11 377 0
+m 499
+m 565
+m 222
+m 130
+m 131
+m 72
+m 131
+m 130
+m 222
+m 565
+m 499
+m 447
+m 188
+m 0
+m 94
+m 591
+s 11 458 0
+m 297
+m 399
+m 384
+m 49
+m 241
+m 179
+s 10 410 0
+m 139
+m 470
+m 160
+m 258
+m 228
+m 268
+m 476
+m 469
+m 476
+m 268
+m 228
+m 258
+m 160
+m 470
+m 139
+m 179
+m 241
+s 11 508 0
+m 132
+m 45
+m 430
+m 498
+m 492
+m 47
+m 170
+s 11 524 0
+m 239
+m 411
+m 9
+m 236
+m 162
+m 10
+m 162
+m 236
+m 9
+m 411
+m 239
+m 170
+m 47
+m 492
+m 498
+m 430
+s 11 262 0
+m 86
+m 509
+m 121
+m 217
+m 419
+m 353
+m 180
+m 56
+m 180
+m 353
+m 419
+m 217
+m 121
+m 509
+m 66
+m 515
+m 434
+s 11 432 0
+m 290
+m 210
+m 485
+m 305
+m 485
+m 210
+m 290
+m 434
+m 515
+m 66
+m 86
+m 132
+m 241
+s 10 623 1
+m 49
+m 212
+m 34
+m 486
+m 148
+m 225
+m 201
+m 370
+m 252
+m 279
+s 9 588 0
+m 436
+m 26
+s 1 86 1
+m 247
+s 11 689 0
+m 173
+m 256
+m 279
+m 111
+m 480
+m 313
+m 106
+m 526
+m 27
+m 307
+m 137
+s 11 197 0
+m 105
+m 426
+m 241
+m 179
+m 139
+m 470
+m 160
+m 46
+m 556
+m 77
+s 4 2 1
+m 127
+m 286
+s 1 43 5
+m 51
+m 286
+m 127
+m 77
+m 556
+m 46
+m 160
+m 470
+m 139
+m 179
+s 11 468 0
+m 241
+m 132
+m 86
+m 509
+m 121
+m 217
+m 419
+m 353
+m 419
+m 217
+m 121
+m 509
+m 86
+m 132
+m 241
+s 8 484 0
+m 49
+m 384
+m 399
+m 297
+m 591
+m 94
+m 0
+m 188
+s 11 362 0
+m 447
+m 499
+m 447
+m 188
+m 0
+m 94
+m 591
+m 297
+s 11 445 0
+m 399
+m 384
+m 212
+m 34
+s 6 629 1
+m 486
+m 65
+m 486
+m 34
+m 212
+m 49
+m 241
+s 10 410 0
+m 179
+m 139
+m 470
+m 160
+m 258
+m 228
+m 268
+m 476
+m 469
+s 1 58 10
+m 104
+m 469
+m 476
+m 268
+m 228
+m 258
+m 160
+m 470
+m 139
+m 179
+s 11 676 0
+m 241
+m 426
+m 105
+m 137
+m 307
+m 27
+m 526
+m 391
+m 108
+m 22
+m 493
+m 22
+m 108
+m 391
+m 526
+m 27
+m 307
+m 137
+m 105
+m 426
+m 241
+s 11 288 0
+m 132
+m 86
+m 509
+m 121
+m 217
+s 1 131 6
+m 496
+m 217
+m 121
+m 509
+m 86
+m 132
+m 241
+m 49
+s 10 623 0
+m 212
+m 34
+m 486
+m 148
+m 225
+m 201
+s 2 711 4
+m 557
+m 201
+m 225
+m 148
+m 486
+m 34
+m 212
+m 49
+s 11 222 0
+m 241
+m 330
+m 421
+m 123
+m 267
+m 194
+m 83
+m 13
+s 1 111 4
+m 352
+m 13
+m 83
+m 194
+m 267
+m 123
+m 421
+m 330
+m 241
+s 11 187 0
+m 179
+m 139
+m 470
+m 160
+m 258
+m 228
+m 268
+m 389
+m 97
+m 506
+m 15
+s 10 0 1
+m 424
+m 477
+m 286
+m 471
+m 135
+m 33
+m 350
+m 33
+m 135
+m 471
+m 286
+m 477
+m 424
+s 11 187 0
+m 15
+m 506
+m 97
+m 389
+m 268
+m 228
+m 258
+m 160
+m 470
+m 139
+m 179
+s 9 288 1
+m 241
+m 132
+m 86
+m 509
+m 121
+m 217
+m 571
+m 335
+s 6 167 3
+m 289
+m 460
+s 1 146 6
+m 574
+m 460
+m 289
+m 335
+m 571
+m 217
+m 121
+s 9 290 2
+m 509
+m 86
+m 132
+m 241
+m 49
+s 6 629 1
+m 212
+m 34
+m 486
+m 65
+s 1 34 1
+m 30
+s 10 676 0
+m 27
+m 307
+m 137
+m 105
+m 426
+m 241
+s 11 468 0
+m 132
+m 86
+m 509
+m 121
+m 217
+m 419
+m 353
+m 180
+m 56
+m 281
+m 56
+m 180
+m 353
+m 419
+m 217
+m 121
+m 509
+m 86
+m 132
+m 241
+s 11 681 0
+m 426
+m 105
+m 137
+m 307
+m 27
+m 526
+m 391
+m 108
+m 385
+m 108
+m 391
+s 11 698 0
+m 106
+m 313
+m 480
+m 111
+m 279
+m 256
+m 279
+m 252
+s 10 624 0
+m 370
+m 201
+s 1 151 2
+m 593
+m 225
+s 1 623 0
+m 148
+m 486
+m 34
+m 212
+m 49
+m 241
+s 11 468 0
+m 132
+m 86
+m 509
+m 121
+s 1 96 2
+m 294
+m 121
+m 509
+m 86
+m 132
+m 241
+s 10 410 1
+m 179
+m 139
+m 470
+m 160
+m 258
+m 228
+m 268
+m 476
+s 2 395 8
+m 302
+m 338
+s 1 69 0
+m 171
+m 338
+m 302
+m 476
+m 268
+m 228
+m 258
+m 160
+m 470
+m 139
+m 179
+s 11 676 0
+m 241
+m 426
+m 105
+m 137
+m 307
+m 27
+m 526
+s 7 573 0
+m 106
+m 313
+m 79
+m 202
+s 8 689 0
+m 111
+m 279
+m 111
+m 480
+m 313
+m 106
+m 526
+m 27
+m 307
+m 137
+s 6 197 1
+m 105
+m 426
+m 241
+m 179
+m 555
+s 10 552 0
+m 263
+m 84
+m 425
+m 490
+s 1 66 5
+m 157
+m 490
+m 5
+m 406
+m 598
+m 420
+s 7 538 0
+m 558
+m 9
+s 11 515 0
+m 236
+m 497
+m 444
+m 497
+m 236
+m 9
+m 411
+m 239
+m 170
+m 47
+m 492
+m 498
+s 7 508 1
+m 430
+m 45
+m 132
+m 241
+m 49
+s 11 318 0
+m 384
+m 399
+m 297
+m 40
+m 455
+m 40
+m 297
+m 399
+m 384
+s 11 629 0
+m 212
+m 34
+m 486
+m 65
+m 231
+m 65
+m 486
+m 34
+m 212
+m 49
+m 241
+m 132
+m 86
+m 66
+m 515
+s 10 432 0
+m 434
+m 290
+m 210
+m 485
+m 305
+s 2 32 6
+m 28
+m 270
+m 210
+m 290
+m 434
+m 515
+m 66
+m 86
+m 132
+s 6 505 0
+m 330
+m 325
+s 10 249 0
+m 421
+m 123
+m 535
+m 123
+m 421
+m 330
+m 132
+m 86
+s 11 468 0
+m 509
+m 121
+m 217
+m 419
+m 217
+m 121
+m 509
+m 86
+m 132
+m 241
+s 10 410 1
+m 179
+m 139
+m 470
+m 160
+m 258
+m 228
+m 268
+m 476
+s 2 395 8
+m 302
+m 338
+s 1 69 0
+m 171
+m 338
+m 302
+m 476
+m 268
+m 228
+m 258
+m 160
+m 470
+m 139
+m 179
+s 10 420 0
+m 241
+m 132
+m 86
+m 66
+m 372
+m 69
+m 532
+m 69
+m 372
+m 66
+m 86
+m 132
+m 241
+m 179
+s 10 410 1
+m 139
+m 470
+m 160
+m 258
+m 228
+m 268
+s 1 139 8
+m 551
+m 268
+m 228
+m 258
+m 160
+m 470
+m 139
+m 179
+m 241
+s 10 249 0
+m 330
+m 421
+m 123
+m 535
+m 123
+m 421
+m 330
+m 241
+m 179
+s 8 410 2
+m 139
+m 470
+m 160
+m 258
+m 228
+m 268
+m 228
+m 258
+m 160
+m 470
+m 139
+m 179
+m 241
+m 49
+s 11 348 0
+m 384
+m 399
+m 297
+m 591
+m 94
+m 208
+m 174
+m 167
+m 438
+m 167
+m 174
+m 208
+m 94
+m 591
+m 183
+m 297
+m 399
+m 384
+m 49
+s 11 676 0
+m 241
+m 426
+m 105
+m 137
+m 307
+m 27
+m 526
+s 1 672 1
+m 48
+m 391
+m 108
+s 2 656 1
+m 328
+m 365
+s 1 35 1
+m 32
+s 11 592 0
+m 566
+m 487
+m 202
+m 111
+m 279
+m 433
+m 134
+m 176
+m 269
+m 129
+m 381
+s 11 298 0
+m 295
+m 592
+m 283
+m 262
+m 560
+m 461
+m 588
+m 384
+m 49
+s 11 427 0
+m 241
+m 132
+m 86
+m 66
+m 515
+m 434
+m 290
+m 210
+m 485
+m 479
+s 11 538 0
+m 9
+m 558
+m 420
+m 598
+m 590
+m 363
+m 415
+m 113
+s 1 77 4
+m 205
+m 113
+m 415
+m 363
+m 590
+m 598
+m 406
+m 5
+m 490
+s 9 560 1
+m 425
+m 84
+m 263
+m 555
+s 11 197 0
+m 179
+m 139
+m 470
+m 160
+m 46
+m 160
+m 470
+m 139
+m 179
+m 241
+s 11 448 0
+m 49
+m 384
+m 399
+s 1 99 1
+m 304
+s 9 299 1
+m 588
+m 461
+m 560
+m 262
+m 283
+m 592
+m 295
+m 381
+m 129
+s 8 590 1
+m 269
+m 176
+m 134
+m 433
+m 279
+m 436
+m 279
+s 11 623 0
+m 252
+m 370
+m 201
+m 225
+m 148
+m 486
+m 34
+m 212
+m 49
+m 241
+s 10 410 0
+m 179
+m 139
+m 470
+m 160
+m 258
+m 228
+m 268
+m 228
+m 258
+m 160
+m 470
+m 139
+m 179
+m 241
+s 11 212 0
+m 330
+m 21
+m 29
+m 21
+m 330
+m 241
+m 179
+m 555
+m 369
+m 191
+m 429
+m 159
+m 429
+m 191
+m 369
+m 555
+m 179
+m 241
+m 49
+s 11 494 0
+m 384
+m 588
+m 461
+m 560
+m 461
+m 588
+m 384
+m 49
+m 241
+s 11 676 0
+m 426
+m 105
+m 137
+m 307
+m 27
+s 9 668 0
+m 488
+m 478
+m 392
+m 431
+m 392
+m 478
+m 488
+m 27
+m 526
+s 8 574 0
+m 106
+m 313
+m 79
+m 202
+m 76
+s 8 590 0
+m 436
+m 279
+m 433
+m 134
+m 176
+m 134
+m 433
+m 279
+s 11 623 0
+m 252
+m 370
+m 201
+m 225
+m 148
+m 486
+m 34
+m 212
+m 49
+m 241
+s 6 197 0
+m 179
+m 555
+s 11 14 0
+m 263
+m 84
+m 312
+m 91
+m 99
+m 432
+m 88
+m 356
+m 342
+m 373
+m 342
+m 356
+m 88
+m 432
+m 99
+m 91
+m 312
+m 84
+m 263
+m 555
+s 11 212 0
+m 179
+m 241
+m 330
+s 10 249 1
+m 421
+m 123
+m 535
+m 123
+m 421
+m 330
+m 241
+s 11 298 0
+m 49
+m 384
+m 588
+m 461
+m 560
+m 262
+m 283
+m 592
+m 295
+m 381
+m 129
+s 1 129 0
+m 472
+m 129
+m 381
+m 295
+m 592
+m 283
+m 262
+m 560
+m 461
+m 588
+m 384
+s 11 356 0
+m 227
+m 399
+m 297
+m 591
+m 94
+m 0
+m 188
+m 447
+s 10 372 1
+m 499
+m 233
+m 529
+m 380
+m 529
+m 233
+m 499
+m 447
+m 188
+s 1 140 2
+m 559
+m 188
+m 0
+m 94
+m 591
+m 297
+s 9 441 1
+m 399
+m 384
+m 49
+m 241
+m 132
+m 86
+s 11 162 0
+m 509
+m 121
+m 217
+m 571
+m 335
+m 289
+m 460
+s 1 146 4
+m 574
+m 460
+m 289
+m 335
+m 571
+m 217
+m 121
+m 509
+m 86
+s 10 639 1
+m 132
+m 330
+m 421
+m 123
+m 14
+m 520
+m 116
+s 11 653 0
+m 488
+m 27
+m 526
+m 391
+m 108
+m 328
+m 365
+m 36
+m 365
+m 328
+m 108
+m 391
+m 106
+s 10 572 1
+m 313
+m 79
+m 202
+m 76
+m 26
+m 76
+m 202
+m 79
+m 313
+m 106
+m 526
+m 27
+s 11 643 0
+m 307
+m 137
+m 14
+m 137
+m 307
+m 27
+m 526
+s 10 703 0
+m 106
+m 313
+m 480
+m 111
+s 5 598 6
+m 202
+m 487
+m 566
+m 487
+m 202
+m 111
+m 279
+m 252
+s 10 623 1
+m 370
+m 201
+m 225
+m 148
+m 486
+m 34
+m 212
+s 3 356 3
+m 384
+m 399
+m 297
+s 1 150 9
+m 585
+m 297
+m 399
+m 384
+m 212
+m 34
+m 486
+m 148
+s 10 624 0
+m 225
+m 201
+m 370
+m 252
+s 1 64 8
+m 150
+m 252
+m 370
+m 201
+m 225
+s 9 623 0
+m 148
+m 486
+m 34
+m 212
+m 49
+m 241
+s 11 187 0
+m 179
+m 139
+m 470
+m 160
+m 258
+m 228
+m 268
+m 389
+m 97
+m 506
+m 97
+s 2 182 9
+m 339
+m 347
+m 339
+m 97
+m 389
+m 268
+m 228
+m 258
+m 160
+m 470
+m 139
+s 11 458 0
+m 179
+m 241
+m 49
+m 384
+m 399
+m 297
+s 7 319 1
+m 40
+m 455
+m 507
+m 475
+m 296
+m 322
+m 109
+s 11 603 0
+m 90
+m 423
+m 287
+m 177
+m 129
+m 269
+m 371
+m 269
+m 129
+m 177
+m 287
+m 423
+m 90
+m 109
+m 322
+m 296
+s 11 318 0
+m 475
+m 507
+m 455
+m 40
+m 297
+m 399
+m 384
+m 49
+s 11 419 0
+m 241
+m 132
+m 86
+m 66
+m 372
+m 69
+m 532
+m 69
+m 372
+m 66
+m 86
+m 132
+m 241
+m 179
+s 9 187 1
+m 139
+m 470
+m 160
+m 258
+m 228
+m 268
+m 389
+m 97
+s 2 75 7
+m 203
+m 462
+m 203
+m 97
+m 389
+m 268
+m 228
+m 258
+m 160
+m 470
+s 9 197 1
+m 139
+m 179
+m 241
+m 132
+s 11 427 0
+m 86
+m 66
+m 515
+m 434
+m 290
+m 210
+m 485
+m 479
+m 62
+m 479
+m 485
+m 210
+m 290
+m 434
+m 515
+m 66
+m 86
+m 132
+m 241
+s 10 623 1
+m 49
+m 212
+m 34
+m 486
+m 148
+m 225
+m 201
+m 370
+m 252
+m 279
+s 4 598 7
+m 111
+m 202
+m 487
+s 1 78 9
+m 206
+m 487
+m 202
+m 111
+m 279
+m 252
+m 370
+m 201
+m 225
+m 148
+s 11 629 0
+m 486
+m 34
+m 212
+m 49
+m 241
+m 132
+m 86
+m 66
+m 515
+s 11 427 0
+m 434
+m 290
+m 210
+m 485
+s 1 121 4
+m 403
+m 485
+m 210
+m 290
+m 434
+m 515
+m 66
+m 86
+m 132
+m 241
+s 11 440 0
+m 49
+m 384
+m 399
+m 297
+m 591
+m 94
+m 208
+m 94
+m 591
+m 297
+m 399
+m 384
+m 49
+m 241
+m 132
+m 86
+m 66
+s 10 420 0
+m 372
+m 69
+m 532
+s 1 127 3
+m 454
+m 532
+m 69
+m 372
+m 66
+m 86
+m 132
+m 241
+s 10 623 1
+m 49
+m 212
+m 34
+m 486
+m 148
+m 225
+m 201
+m 370
+m 252
+m 279
+s 11 712 0
+m 256
+m 53
+m 407
+m 594
+m 287
+m 594
+m 407
+m 53
+m 256
+m 279
+m 252
+m 370
+m 201
+s 11 623 0
+m 225
+m 148
+m 486
+m 34
+m 212
+m 49
+m 241
+s 11 187 0
+m 179
+m 139
+m 470
+m 160
+m 258
+m 228
+m 268
+m 389
+m 97
+m 506
+m 15
+s 10 1 1
+m 424
+m 68
+m 501
+s 11 182 0
+m 347
+m 339
+m 97
+m 389
+s 11 395 0
+m 476
+m 302
+m 338
+m 539
+m 259
+m 587
+m 259
+m 539
+m 338
+m 302
+m 476
+m 268
+m 228
+m 258
+m 160
+s 11 197 0
+m 470
+m 139
+m 179
+m 241
+s 6 288 1
+m 132
+m 86
+m 509
+m 121
+s 1 96 4
+m 294
+m 121
+m 509
+m 86
+m 132
+s 10 198 1
+m 241
+m 179
+m 139
+m 470
+m 160
+m 46
+m 556
+m 77
+s 10 0 1
+m 471
+m 135
+m 33
+m 135
+m 471
+m 286
+m 477
+m 424
+s 11 187 0
+m 15
+m 506
+m 97
+m 389
+m 268
+m 228
+m 258
+m 160
+m 470
+m 139
+m 179
+s 1 118 1
+m 378
+s 8 442 0
+m 241
+m 49
+m 384
+m 399
+m 297
+s 2 318 1
+m 40
+m 297
+m 399
+m 384
+m 49
+m 241
+m 132
+s 11 508 0
+m 45
+m 430
+m 498
+m 492
+m 47
+m 170
+s 10 524 0
+m 239
+m 411
+m 9
+m 236
+m 162
+s 1 60 2
+m 112
+m 162
+m 236
+m 9
+m 411
+m 239
+m 170
+m 47
+m 492
+m 498
+m 430
+s 11 501 0
+m 45
+m 132
+m 241
+m 49
+m 384
+s 10 318 1
+m 399
+m 297
+m 40
+m 455
+m 507
+m 475
+m 296
+m 322
+m 296
+m 475
+m 507
+m 455
+m 40
+m 297
+m 399
+m 384
+m 49
+s 11 269 0
+m 241
+m 132
+m 86
+m 66
+m 515
+m 434
+m 290
+m 210
+m 485
+m 210
+m 290
+m 434
+m 515
+m 66
+m 86
+m 132
+m 241
+m 179
+m 20
+s 1 94 1
+m 285
+m 20
+m 179
+m 241
+s 8 458 0
+m 49
+m 384
+m 399
+m 297
+m 276
+s 1 83 1
+m 223
+m 276
+m 297
+s 7 319 1
+m 40
+m 455
+m 507
+m 475
+m 296
+m 322
+m 109
+s 11 609 0
+m 90
+m 423
+m 287
+m 594
+m 407
+m 53
+m 256
+s 11 623 0
+m 279
+m 252
+m 370
+m 201
+m 225
+m 148
+m 486
+m 34
+m 212
+m 49
+m 241
+s 6 212 0
+m 179
+m 555
+s 11 552 0
+m 263
+m 84
+m 425
+m 490
+m 5
+m 406
+m 598
+m 406
+m 5
+m 490
+m 425
+m 84
+m 263
+m 555
+s 11 212 0
+m 179
+m 241
+m 49
+s 10 623 1
+m 212
+m 34
+m 486
+m 148
+m 225
+m 201
+m 370
+m 252
+m 279
+s 11 703 0
+m 111
+m 480
+m 313
+m 106
+m 320
+m 106
+m 313
+m 480
+m 111
+m 279
+m 252
+m 370
+m 201
+s 11 623 0
+m 225
+m 148
+m 486
+m 34
+m 212
+m 49
+m 241
+s 11 228 0
+m 330
+m 421
+m 123
+m 267
+m 194
+m 83
+m 13
+m 327
+m 12
+m 491
+m 408
+m 491
+m 12
+m 327
+m 13
+m 83
+m 194
+m 267
+m 123
+m 421
+m 330
+s 10 681 0
+m 241
+m 426
+m 105
+m 137
+m 105
+m 426
+m 241
+s 11 259 0
+m 132
+m 86
+m 509
+m 121
+m 217
+m 597
+m 217
+m 121
+m 509
+m 86
+m 132
+s 7 645 0
+m 241
+m 426
+s 11 447 0
+m 467
+m 212
+m 384
+m 399
+m 297
+s 9 318 2
+m 40
+m 455
+m 507
+m 475
+m 296
+s 1 138 6
+m 549
+m 296
+m 475
+m 507
+m 455
+m 40
+m 297
+m 399
+m 384
+m 49
+s 11 427 0
+m 241
+m 132
+m 86
+m 66
+m 515
+m 434
+m 290
+m 210
+m 485
+m 479
+s 8 538 1
+m 9
+m 558
+m 420
+m 598
+m 406
+m 5
+m 490
+s 8 14 1
+m 91
+m 99
+m 432
+m 99
+m 91
+m 312
+m 84
+m 263
+m 555
+s 11 212 0
+m 179
+m 241
+m 49
+s 10 623 1
+m 212
+m 34
+m 486
+m 148
+m 225
+m 201
+m 370
+s 1 125 4
+m 449
+m 370
+m 201
+m 225
+m 148
+m 486
+m 34
+m 212
+s 11 318 0
+m 384
+m 399
+m 297
+m 40
+m 455
+m 507
+m 475
+m 296
+m 322
+m 109
+s 11 334 0
+m 181
+m 457
+m 502
+m 188
+m 0
+m 94
+m 591
+m 297
+m 399
+s 11 445 0
+m 384
+m 212
+m 34
+s 8 623 2
+m 486
+m 148
+m 225
+s 1 142 5
+m 563
+m 225
+m 148
+m 486
+m 34
+m 212
+m 49
+m 241
+s 11 419 0
+m 132
+m 86
+m 66
+m 372
+m 66
+m 86
+m 132
+m 241
+m 179
+s 11 406 0
+m 139
+m 470
+m 160
+m 258
+m 228
+m 268
+m 476
+m 302
+s 1 123 2
+m 437
+m 302
+m 476
+m 268
+m 228
+m 258
+m 160
+m 470
+m 139
+s 11 212 0
+m 179
+m 241
+m 330
+s 11 228 0
+m 421
+m 123
+m 267
+m 194
+m 83
+m 13
+m 327
+m 12
+m 491
+m 12
+m 327
+m 13
+m 83
+m 194
+m 267
+m 123
+m 421
+m 330
+s 11 481 0
+m 241
+m 49
+m 384
+m 399
+m 297
+m 591
+m 94
+m 0
+m 188
+s 10 378 0
+m 447
+m 499
+m 565
+m 222
+m 130
+m 131
+m 72
+s 1 144 3
+m 569
+m 72
+m 131
+m 130
+m 222
+m 565
+m 499
+m 447
+m 188
+s 11 481 0
+m 0
+m 94
+m 591
+m 297
+m 399
+m 384
+m 49
+m 241
+s 10 420 1
+m 132
+m 86
+m 66
+m 372
+m 69
+m 532
+m 154
+m 211
+s 1 62 1
+m 119
+m 211
+m 154
+m 532
+m 69
+m 372
+m 66
+m 86
+m 132
+m 241
+s 10 623 1
+m 49
+m 212
+m 34
+m 486
+m 148
+m 225
+m 201
+m 370
+m 252
+m 279
+s 11 703 0
+m 111
+m 480
+m 313
+m 106
+m 320
+m 319
+m 320
+m 106
+m 313
+m 480
+m 111
+m 279
+m 252
+m 370
+m 201
+s 11 623 0
+m 225
+m 148
+m 486
+m 34
+m 212
+m 49
+m 241
+s 8 212 1
+m 179
+m 555
+m 369
+m 191
+m 369
+m 555
+m 179
+m 241
+m 49
+m 212
+s 8 623 1
+m 34
+m 486
+m 148
+m 225
+m 201
+m 370
+m 252
+m 279
+s 11 686 0
+m 111
+m 480
+m 313
+m 106
+m 526
+m 27
+m 307
+m 137
+s 11 197 0
+m 105
+m 426
+m 241
+m 179
+m 139
+m 470
+m 160
+m 46
+m 556
+m 77
+s 9 1 1
+m 127
+m 286
+m 477
+m 424
+m 68
+m 424
+s 11 187 0
+m 15
+m 506
+m 97
+m 389
+m 268
+m 228
+m 258
+m 160
+m 470
+m 139
+m 179
+s 11 501 0
+m 241
+m 132
+m 45
+m 132
+m 241
+m 49
+m 384
+s 10 309 1
+m 399
+m 297
+m 276
+m 152
+m 397
+m 214
+m 301
+m 274
+m 254
+m 274
+m 301
+m 214
+m 397
+m 152
+m 276
+m 297
+m 399
+m 384
+s 9 631 0
+m 49
+m 241
+m 132
+m 86
+s 11 277 0
+m 430
+m 498
+m 492
+s 1 80 2
+m 216
+m 552
+m 318
+m 430
+m 45
+m 132
+s 10 228 1
+m 330
+m 421
+m 123
+m 267
+m 194
+m 83
+m 13
+s 1 111 6
+m 352
+m 13
+m 83
+m 194
+m 267
+m 123
+m 421
+m 330
+s 11 277 0
+m 241
+m 132
+m 45
+m 430
+m 498
+m 492
+s 1 84 1
+m 229
+m 492
+s 11 521 0
+m 47
+m 170
+m 239
+m 411
+m 9
+s 7 542 1
+m 558
+m 420
+m 598
+m 590
+m 363
+s 1 48 1
+m 244
+s 11 11 0
+m 118
+m 427
+m 88
+m 432
+m 99
+m 91
+m 312
+m 84
+m 263
+m 555
+s 11 458 0
+m 179
+m 241
+m 49
+m 384
+m 399
+m 297
+s 7 319 0
+m 40
+m 455
+m 507
+m 475
+m 296
+s 1 27 1
+m 17
+m 296
+s 11 362 0
+m 390
+m 0
+m 188
+m 447
+m 499
+m 565
+m 464
+m 349
+m 464
+m 565
+m 499
+m 447
+m 188
+m 0
+m 94
+m 591
+m 297
+s 8 442 1
+m 399
+m 384
+m 49
+m 241
+m 132
+s 11 508 0
+m 45
+m 430
+m 498
+m 492
+m 47
+m 170
+s 2 44 4
+m 466
+m 54
+m 466
+m 170
+m 47
+m 492
+m 498
+m 430
+m 45
+m 132
+m 241
+s 11 187 0
+m 179
+m 139
+m 470
+m 160
+m 258
+m 228
+m 268
+m 389
+m 97
+m 506
+m 15
+s 10 0 1
+m 424
+m 477
+m 286
+m 471
+m 135
+m 33
+m 350
+s 1 55 1
+m 96
+s 10 14 1
+m 342
+m 356
+m 88
+m 432
+m 99
+m 91
+m 312
+m 84
+m 263
+m 555
+s 11 419 0
+m 179
+m 241
+m 132
+m 86
+m 66
+m 372
+s 1 135 1
+m 530
+m 372
+m 66
+m 86
+m 132
+s 11 222 0
+m 330
+m 421
+m 123
+m 267
+m 194
+m 83
+m 13
+m 503
+m 13
+m 83
+m 194
+m 267
+m 123
+m 421
+m 330
+m 241
+s 8 353 0
+m 49
+m 384
+m 227
+s 9 194 0
+m 470
+m 139
+m 179
+m 241
+m 426
+m 105
+s 1 36 1
+m 38
+m 105
+m 426
+m 241
+m 179
+m 555
+s 3 561 4
+m 263
+m 369
+s 7 276 2
+m 340
+m 20
+m 179
+m 139
+s 10 411 1
+m 470
+m 160
+m 258
+m 228
+m 268
+m 476
+m 469
+m 476
+m 268
+m 228
+m 258
+m 160
+m 470
+m 139
+m 179
+m 241
+s 11 259 0
+m 132
+m 86
+m 509
+m 121
+m 217
+m 419
+m 353
+m 180
+m 56
+m 543
+m 56
+m 180
+m 353
+m 597
+m 217
+m 121
+m 509
+m 86
+m 132
+s 10 249 1
+m 330
+m 421
+m 123
+m 535
+m 207
+m 300
+m 190
+m 300
+m 207
+m 535
+m 123
+m 421
+m 330
+m 241
+s 11 298 0
+m 49
+m 384
+m 588
+m 461
+m 560
+m 262
+m 283
+m 592
+m 295
+m 381
+m 295
+m 592
+m 283
+m 262
+m 560
+m 461
+m 588
+m 384
+s 8 443 1
+m 399
+m 297
+m 591
+m 94
+m 208
+m 94
+m 591
+m 297
+m 399
+m 384
+m 49
+m 241
+s 6 197 0
+m 179
+m 555
+s 11 11 0
+m 263
+m 84
+m 312
+m 91
+m 99
+m 432
+m 88
+m 427
+m 118
+m 398
+m 118
+m 427
+m 88
+m 432
+m 99
+m 91
+m 312
+m 84
+m 263
+m 555
+s 11 212 0
+m 179
+m 241
+m 330
+s 9 244 0
+m 421
+m 123
+m 267
+m 123
+m 421
+m 330
+m 241
+s 10 623 0
+m 49
+m 212
+m 34
+m 486
+m 148
+m 225
+m 201
+s 2 711 4
+m 557
+m 201
+m 225
+m 148
+m 486
+m 34
+m 212
+m 49
+m 241
+s 11 187 0
+m 179
+m 139
+m 470
+m 160
+m 258
+m 228
+m 268
+m 389
+m 97
+s 11 173 0
+m 103
+m 3
+m 511
+m 347
+m 388
+m 128
+m 75
+m 539
+m 401
+s 6 388 2
+m 377
+m 164
+m 246
+m 164
+m 377
+m 401
+m 539
+m 75
+s 10 175 0
+m 128
+m 388
+m 347
+m 501
+s 7 1 1
+m 68
+m 424
+s 10 187 1
+m 15
+m 506
+m 97
+m 389
+m 268
+m 228
+m 258
+m 160
+m 470
+s 11 356 0
+m 227
+m 399
+m 297
+m 591
+m 94
+s 1 73 4
+m 272
+m 94
+m 591
+m 297
+m 399
+m 384
+s 11 458 0
+m 49
+m 241
+s 4 649 0
+m 426
+m 105
+m 137
+m 307
+s 1 145 6
+m 572
+m 307
+m 137
+m 105
+m 426
+m 241
+s 11 318 0
+m 49
+m 384
+m 399
+m 297
+m 40
+m 455
+m 507
+m 475
+m 296
+m 322
+m 109
+s 11 334 0
+m 181
+m 457
+m 502
+m 188
+m 0
+m 94
+m 591
+m 297
+m 399
+s 11 501 0
+m 384
+m 49
+m 241
+m 132
+m 45
+s 11 524 0
+m 430
+m 498
+m 492
+m 47
+m 170
+m 239
+m 411
+m 9
+m 411
+m 239
+m 170
+m 47
+m 492
+m 498
+m 430
+s 4 508 0
+m 45
+m 132
+m 241
+s 9 447 2
+m 576
+m 82
+m 49
+m 212
+m 34
+m 57
+m 34
+m 212
+m 384
+m 399
+m 297
+m 591
+s 11 440 0
+m 94
+m 591
+m 297
+m 399
+m 384
+m 49
+m 241
+m 132
+m 86
+m 66
+s 11 432 0
+m 515
+m 434
+m 290
+m 210
+m 485
+m 305
+m 316
+m 305
+m 485
+m 210
+m 290
+m 434
+m 515
+m 66
+m 86
+m 132
+m 241
+s 11 681 0
+m 426
+m 105
+m 137
+m 307
+m 27
+m 526
+m 391
+m 108
+m 385
+m 108
+m 391
+m 526
+m 27
+m 307
+m 137
+m 105
+m 426
+m 241
+s 11 484 0
+m 49
+m 384
+m 399
+m 297
+m 591
+m 94
+m 0
+m 188
+m 161
+m 489
+m 161
+m 188
+m 0
+m 94
+m 591
+m 297
+m 399
+m 384
+m 49
+m 241
+s 10 676 0
+m 426
+m 105
+m 137
+m 307
+m 27
+s 3 668 6
+m 488
+m 478
+m 392
+m 478
+m 488
+m 27
+m 307
+m 137
+m 105
+m 426
+m 241
+s 10 471 1
+m 132
+m 86
+m 509
+m 121
+m 217
+m 419
+m 353
+m 180
+m 387
+m 458
+s 1 40 0
+m 44
+m 458
+m 387
+m 180
+m 353
+m 419
+m 217
+m 121
+m 509
+m 86
+m 132
+s 11 410 0
+m 241
+m 179
+m 139
+m 470
+m 160
+m 258
+m 228
+m 268
+s 1 192 8
+m 389
+m 268
+m 228
+m 258
+m 160
+m 470
+m 139
+m 179
+m 241
+m 49
+s 11 327 0
+m 384
+m 399
+m 297
+m 591
+m 94
+m 0
+m 188
+s 10 334 1
+m 502
+m 457
+m 181
+m 457
+m 502
+m 188
+m 0
+m 94
+m 16
+m 40
+m 297
+m 399
+s 9 440 1
+m 384
+m 49
+m 241
+m 132
+m 86
+m 66
+s 7 431 1
+m 515
+m 434
+m 290
+m 210
+m 485
+m 479
+s 8 538 1
+m 9
+m 558
+m 420
+m 598
+m 406
+m 5
+m 490
+s 9 560 1
+m 425
+m 84
+m 263
+m 555
+s 9 204 1
+m 179
+m 139
+m 470
+m 160
+m 46
+m 383
+m 332
+m 278
+m 332
+m 383
+m 46
+m 160
+m 470
+m 139
+m 179
+s 11 458 0
+m 241
+m 49
+m 384
+m 399
+m 297
+m 276
+s 1 83 2
+m 223
+m 276
+m 297
+m 399
+m 384
+m 49
+m 241
+m 179
+s 11 560 0
+m 555
+m 263
+m 84
+m 425
+m 490
+m 5
+m 406
+m 598
+m 420
+m 418
+s 2 87 2
+m 547
+m 249
+m 547
+m 418
+m 420
+m 598
+m 406
+m 5
+m 490
+m 425
+m 84
+m 263
+s 11 212 0
+m 555
+m 179
+m 241
+m 49
+s 10 623 0
+m 212
+m 34
+m 486
+m 148
+m 225
+s 1 151 3
+m 593
+m 225
+m 148
+m 486
+s 8 451 0
+m 57
+m 34
+m 212
+m 49
+m 241
+s 6 197 0
+m 179
+m 555
+s 11 552 0
+m 263
+m 84
+m 425
+m 490
+m 5
+s 1 134 4
+m 517
+m 5
+m 490
+m 425
+m 84
+m 263
+m 555
+m 263
+m 84
+s 10 11 1
+m 312
+m 91
+m 99
+m 432
+m 88
+m 427
+m 118
+m 398
+s 1 57 1
+m 101
+s 10 0 1
+m 350
+m 33
+m 135
+m 471
+m 286
+m 477
+m 424
+s 11 187 0
+m 15
+m 506
+m 97
+m 389
+m 268
+m 228
+m 258
+m 160
+m 470
+m 139
+m 179
+s 11 468 0
+m 241
+m 132
+m 86
+m 509
+m 121
+m 217
+m 419
+m 353
+m 180
+m 56
+m 281
+m 56
+m 180
+m 353
+m 419
+m 217
+m 121
+m 509
+m 86
+m 132
+m 241
+s 3 276 0
+m 179
+m 20
+m 179
+s 9 187 0
+m 139
+m 470
+m 160
+m 258
+m 228
+m 268
+m 389
+m 97
+s 1 97 9
+m 298
+m 97
+m 389
+m 268
+m 228
+m 258
+m 160
+m 470
+m 139
+s 11 458 0
+m 179
+m 241
+m 49
+m 384
+m 399
+m 297
+m 276
+m 152
+m 397
+s 11 308 0
+m 214
+m 301
+m 274
+m 254
+m 274
+m 301
+m 214
+m 397
+m 152
+m 276
+m 297
+m 399
+m 384
+s 10 623 0
+m 212
+m 34
+m 486
+m 148
+m 225
+m 201
+m 370
+m 252
+m 279
+s 10 619 1
+m 256
+m 251
+m 39
+m 165
+m 39
+m 251
+m 256
+m 279
+m 252
+m 370
+m 201
+m 225
+m 148
+s 11 501 0
+m 474
+m 560
+m 461
+m 588
+m 384
+m 49
+m 241
+m 132
+m 45
+s 11 524 0
+m 430
+m 498
+m 492
+m 47
+m 170
+m 239
+m 411
+m 9
+s 7 539 1
+m 558
+m 420
+m 598
+m 406
+m 5
+m 490
+s 9 560 1
+m 425
+m 84
+m 263
+m 555
+s 11 458 0
+m 179
+m 241
+m 49
+m 384
+m 399
+m 297
+m 276
+m 152
+m 397
+m 204
+m 397
+m 152
+m 276
+m 297
+m 399
+m 384
+m 49
+m 241
+s 11 508 0
+m 132
+m 45
+m 430
+m 498
+m 492
+m 47
+m 170
+m 402
+s 11 521 0
+m 239
+m 411
+m 9
+s 10 539 1
+m 558
+m 420
+m 598
+m 590
+m 363
+m 415
+m 113
+m 415
+m 363
+m 590
+m 598
+m 406
+m 5
+m 490
+s 9 560 1
+m 425
+m 84
+m 263
+m 555
+s 5 197 0
+m 179
+m 241
+m 426
+m 105
+s 10 669 0
+m 137
+m 307
+m 27
+m 488
+m 478
+m 488
+m 27
+m 307
+m 137
+s 7 645 1
+m 105
+m 426
+m 241
+s 11 508 0
+m 132
+m 45
+m 430
+m 498
+m 492
+m 47
+m 170
+s 11 515 0
+m 239
+m 411
+m 9
+m 236
+m 275
+m 236
+m 497
+m 444
+m 497
+m 236
+m 9
+m 411
+m 239
+m 170
+m 47
+m 492
+m 498
+s 9 506 1
+m 430
+m 45
+m 132
+m 330
+s 10 243 0
+m 421
+m 123
+m 267
+m 194
+s 2 49 3
+m 70
+m 422
+m 267
+m 123
+m 421
+m 330
+m 241
+s 6 197 0
+m 179
+m 555
+s 9 554 1
+m 263
+m 84
+m 425
+m 490
+m 425
+m 84
+m 263
+m 555
+m 179
+s 11 675 0
+m 241
+m 426
+m 105
+m 137
+m 307
+m 27
+s 7 668 4
+m 488
+m 478
+m 392
+m 431
+m 331
+m 163
+m 331
+m 431
+m 392
+m 478
+m 488
+m 27
+m 307
+m 137
+s 11 194 0
+m 105
+m 426
+m 241
+m 179
+m 139
+m 470
+s 1 360 2
+m 227
+m 470
+s 9 204 1
+m 160
+m 46
+m 383
+m 332
+m 278
+m 367
+s 1 124 1
+m 448
+m 367
+m 278
+m 332
+m 383
+m 46
+m 160
+m 470
+m 139
+m 179
+s 10 420 0
+m 241
+m 132
+m 86
+m 66
+m 372
+m 69
+s 1 25 3
+m 6
+m 69
+m 372
+m 66
+m 86
+m 132
+m 241
+s 11 455 0
+m 49
+m 384
+m 399
+m 297
+m 276
+m 152
+m 397
+m 204
+m 397
+m 152
+m 276
+m 297
+m 399
+m 384
+m 212
+s 8 623 1
+m 34
+m 486
+m 148
+m 225
+m 201
+m 370
+m 252
+m 279
+s 5 598 0
+m 111
+m 202
+m 487
+m 566
+s 1 35 1
+m 32
+s 11 648 0
+m 365
+m 328
+m 108
+m 391
+m 526
+m 27
+m 307
+m 137
+m 105
+m 426
+s 11 197 0
+m 241
+m 179
+m 139
+m 470
+m 160
+m 46
+m 556
+s 11 11 0
+m 91
+m 99
+m 432
+m 88
+m 427
+m 118
+m 398
+m 118
+m 427
+m 88
+m 432
+m 99
+m 91
+m 312
+m 84
+m 263
+m 555
+s 11 458 0
+m 179
+m 241
+m 49
+m 384
+m 399
+m 297
+s 11 342 0
+m 591
+m 94
+m 208
+m 174
+m 167
+m 553
+m 149
+m 553
+m 167
+m 174
+m 208
+m 94
+m 0
+m 188
+m 161
+m 188
+m 0
+m 94
+m 591
+m 297
+s 8 448 1
+m 399
+m 384
+m 212
+m 34
+s 10 623 1
+m 486
+m 148
+m 225
+s 1 151 9
+m 593
+m 201
+m 370
+m 252
+m 279
+s 1 598 9
+m 111
+m 279
+m 252
+m 370
+m 201
+m 225
+m 148
+m 486
+m 34
+m 212
+s 11 212 0
+m 49
+m 241
+m 179
+s 10 276 1
+m 20
+m 340
+m 318
+m 430
+m 45
+m 132
+s 11 637 0
+m 330
+m 421
+m 123
+m 14
+m 520
+m 116
+m 25
+m 116
+m 520
+m 14
+m 123
+m 421
+m 330
+m 132
+m 86
+m 66
+s 11 419 0
+m 372
+m 69
+m 532
+m 154
+m 211
+m 156
+m 211
+m 154
+m 532
+m 69
+m 372
+m 66
+m 86
+m 132
+m 241
+m 179
+s 9 187 1
+m 139
+m 470
+m 160
+m 258
+m 228
+m 268
+m 389
+m 97
+s 11 173 0
+m 103
+m 3
+m 511
+m 347
+m 388
+m 128
+m 75
+m 539
+m 401
+s 11 383 0
+m 377
+m 164
+m 246
+m 131
+m 130
+m 222
+m 565
+m 499
+m 233
+m 529
+m 233
+m 499
+m 565
+m 222
+m 130
+m 131
+m 246
+m 164
+m 377
+m 401
+s 8 395 1
+m 539
+m 338
+m 302
+m 476
+m 268
+m 228
+m 258
+m 160
+s 11 410 0
+m 470
+m 139
+m 179
+m 241
+m 49
+s 10 623 1
+m 212
+m 34
+m 486
+m 148
+m 225
+m 201
+m 370
+m 252
+m 279
+s 5 594 5
+m 433
+m 134
+s 1 95 1
+m 291
+m 134
+m 433
+s 1 64 1
+m 150
+s 1 132 1
+m 504
+s 11 704 0
+m 141
+m 201
+m 370
+m 252
+m 279
+m 111
+m 480
+m 313
+s 7 686 0
+m 106
+m 526
+m 27
+m 307
+m 137
+s 9 236 1
+m 14
+m 267
+m 194
+m 83
+m 13
+m 327
+m 13
+m 83
+m 194
+m 267
+m 14
+s 10 681 1
+m 137
+m 105
+m 426
+m 241
+s 11 318 0
+m 49
+m 384
+m 399
+m 297
+m 40
+m 455
+m 507
+m 475
+m 296
+m 322
+m 296
+m 475
+m 507
+m 455
+m 40
+m 297
+m 399
+m 384
+m 49
+s 11 288 0
+m 241
+m 132
+m 86
+m 509
+m 121
+m 217
+m 571
+m 335
+m 513
+m 253
+m 513
+m 335
+m 571
+m 217
+m 121
+m 509
+m 86
+m 132
+m 241
+m 49
+s 4 357 1
+m 384
+m 227
+m 122
+s 1 105 1
+m 333
+m 122
+s 11 197 0
+m 470
+m 160
+m 46
+m 556
+m 77
+m 556
+m 46
+m 160
+m 470
+m 139
+m 179
+m 241
+m 426
+m 105
+m 426
+m 241
+m 179
+m 555
+s 11 560 0
+m 263
+m 84
+m 425
+m 490
+m 5
+m 406
+m 598
+m 420
+m 418
+s 1 88 3
+m 547
+m 418
+m 420
+m 598
+m 406
+m 5
+m 490
+m 425
+m 84
+m 263
+m 555
+s 11 212 0
+m 179
+m 241
+m 49
+s 10 623 1
+m 212
+m 34
+m 486
+m 148
+m 225
+m 201
+m 370
+m 252
+m 279
+s 11 609 0
+m 256
+m 53
+m 407
+m 594
+m 287
+m 423
+m 90
+m 109
+m 90
+m 423
+m 287
+m 594
+m 407
+m 53
+m 256
+s 11 619 0
+m 251
+m 39
+m 165
+m 39
+m 251
+m 256
+m 279
+m 252
+m 370
+m 201
+m 225
+m 148
+m 486
+s 4 630 0
+m 34
+m 212
+m 49
+m 241
+s 11 276 0
+m 179
+m 20
+m 340
+m 318
+m 498
+s 11 515 0
+m 492
+m 47
+m 170
+m 239
+m 411
+m 9
+m 236
+m 497
+m 444
+s 1 148 1
+m 578
+s 9 540 0
+m 113
+m 415
+m 363
+m 590
+m 598
+m 420
+m 558
+m 9
+s 11 427 0
+m 479
+m 485
+m 210
+m 290
+m 434
+m 515
+m 66
+m 86
+m 132
+m 241
+s 11 318 0
+m 49
+m 384
+m 399
+m 297
+m 40
+m 455
+m 507
+m 475
+m 296
+m 322
+m 109
+s 9 605 2
+m 90
+m 423
+m 287
+m 177
+m 287
+m 423
+m 90
+m 109
+m 322
+m 296
+s 10 319 1
+m 475
+m 507
+m 455
+m 40
+m 297
+m 399
+m 384
+s 10 623 0
+m 212
+m 34
+m 486
+m 148
+m 225
+m 201
+m 370
+m 201
+m 225
+m 148
+m 486
+m 34
+m 212
+m 384
+s 11 356 0
+m 399
+m 297
+m 591
+m 94
+m 0
+m 188
+m 447
+s 3 385 3
+m 499
+m 565
+m 222
+m 565
+m 499
+m 447
+m 188
+m 0
+m 94
+m 591
+m 297
+m 399
+m 384
+s 10 623 1
+m 212
+m 34
+m 486
+m 148
+m 225
+m 201
+m 370
+m 252
+m 370
+m 201
+m 225
+m 148
+m 486
+m 34
+m 212
+s 11 443 0
+m 384
+m 399
+m 297
+m 591
+m 94
+s 2 72 9
+m 272
+m 184
+m 272
+m 94
+m 591
+m 297
+m 399
+m 384
+m 49
+m 241
+s 8 466 3
+m 179
+m 241
+m 49
+s 2 453 1
+m 82
+m 576
+m 241
+m 132
+m 86
+s 11 162 0
+m 509
+m 121
+m 217
+m 571
+m 335
+m 289
+m 460
+m 362
+m 143
+m 439
+m 143
+m 362
+m 460
+m 289
+m 335
+m 571
+m 217
+m 121
+m 509
+m 86
+s 11 629 0
+m 132
+m 241
+m 49
+m 212
+m 34
+m 486
+s 7 623 1
+m 148
+m 225
+m 201
+m 370
+m 252
+m 279
+s 10 582 1
+m 436
+m 26
+m 482
+m 110
+m 482
+m 26
+m 436
+m 279
+m 252
+m 370
+s 11 623 0
+m 201
+m 225
+m 148
+m 486
+m 34
+m 212
+m 49
+m 241
+s 11 222 0
+m 330
+m 421
+m 123
+m 267
+m 194
+m 83
+m 13
+m 503
+m 144
+m 299
+m 144
+m 503
+m 13
+m 83
+m 194
+m 267
+m 123
+m 421
+m 330
+m 241
+s 10 623 1
+m 49
+m 212
+m 34
+m 486
+m 148
+m 225
+m 201
+m 370
+m 252
+m 279
+s 11 609 0
+m 256
+m 53
+m 407
+m 594
+m 287
+m 423
+m 90
+m 109
+m 90
+m 423
+m 287
+m 594
+m 407
+m 53
+m 256
+s 11 712 0
+m 279
+m 252
+m 370
+m 201
+m 141
+m 410
+m 141
+m 201
+m 370
+m 252
+m 279
+m 256
+m 53
+m 407
+m 594
+m 287
+s 2 723 2
+m 423
+m 379
+m 423
+m 287
+m 594
+m 407
+m 53
+m 256
+m 279
+m 252
+m 370
+m 201
+s 11 623 0
+m 225
+m 148
+m 486
+m 34
+m 212
+m 49
+m 241
+s 6 197 0
+m 179
+m 555
+s 10 560 0
+m 263
+m 84
+m 425
+m 490
+m 5
+s 1 89 5
+m 257
+m 5
+m 490
+m 425
+m 84
+m 263
+m 555
+s 5 197 0
+m 179
+m 241
+m 426
+m 105
+s 11 681 0
+m 137
+m 307
+m 27
+m 526
+s 1 108 3
+m 344
+m 526
+m 27
+m 307
+m 137
+m 105
+m 426
+m 241
+s 11 269 0
+m 132
+m 86
+m 66
+m 515
+m 434
+m 290
+m 434
+m 515
+m 66
+m 86
+m 132
+m 241
+s 10 482 0
+m 49
+m 384
+m 399
+m 297
+m 591
+m 94
+m 0
+m 188
+m 93
+m 188
+m 0
+m 94
+m 591
+m 297
+m 399
+m 384
+m 49
+m 241
+s 11 259 0
+m 132
+m 86
+m 509
+m 121
+m 217
+m 597
+m 217
+m 121
+m 509
+m 86
+m 132
+s 11 458 0
+m 241
+m 49
+m 384
+m 399
+m 297
+m 276
+m 152
+m 397
+s 9 309 1
+m 214
+m 301
+m 274
+m 254
+m 414
+s 3 90 8
+m 483
+m 277
+m 483
+m 354
+m 274
+m 301
+m 214
+s 10 459 1
+m 397
+m 152
+m 276
+m 297
+m 399
+m 384
+m 49
+m 241
+s 11 242 0
+m 330
+m 421
+m 123
+m 267
+m 194
+m 83
+m 508
+m 548
+m 172
+m 226
+m 172
+m 548
+m 508
+m 83
+m 194
+m 267
+m 123
+m 421
+m 330
+m 241
+s 6 197 0
+m 179
+m 555
+s 8 14 1
+m 263
+m 84
+m 312
+m 91
+m 99
+m 432
+m 88
+s 1 26 10
+m 8
+m 88
+m 432
+m 99
+m 91
+m 312
+m 84
+m 263
+m 555
+m 179
+s 11 481 0
+m 241
+m 49
+m 384
+m 399
+m 297
+m 591
+m 94
+m 0
+m 188
+s 11 362 0
+m 447
+m 499
+m 565
+m 464
+m 565
+m 499
+m 447
+m 188
+m 0
+m 94
+m 591
+m 297
+s 11 458 0
+m 399
+m 384
+m 49
+m 241
+m 179
+s 7 213 0
+m 555
+m 369
+m 191
+s 11 545 0
+m 425
+m 490
+m 5
+m 584
+m 435
+m 584
+m 406
+m 598
+m 590
+m 363
+m 415
+m 451
+m 415
+m 363
+m 590
+m 598
+m 406
+m 5
+m 490
+m 425
+s 11 212 0
+m 191
+m 369
+m 555
+m 179
+m 241
+m 330
+m 21
+s 11 259 0
+m 86
+m 509
+m 121
+m 217
+m 597
+m 217
+m 121
+m 509
+m 86
+m 132
+s 11 197 0
+m 241
+m 179
+m 139
+m 470
+m 160
+m 46
+m 556
+m 77
+s 9 1 1
+m 127
+m 286
+m 477
+m 424
+m 68
+m 424
+s 11 187 0
+m 15
+m 506
+m 97
+m 389
+m 268
+m 228
+m 258
+m 160
+m 470
+m 139
+m 179
+s 11 242 0
+m 241
+m 330
+m 421
+m 123
+m 267
+m 194
+m 83
+m 508
+m 548
+s 1 68 5
+m 169
+m 548
+m 508
+m 83
+m 194
+m 267
+m 123
+m 421
+m 330
+m 241
+s 11 187 0
+m 179
+m 139
+m 470
+m 160
+m 258
+m 228
+m 268
+m 389
+m 97
+m 389
+m 268
+m 228
+m 258
+m 160
+m 470
+m 139
+m 179
+s 9 288 0
+m 241
+m 132
+m 86
+m 509
+s 1 115 2
+m 368
+m 509
+m 121
+m 217
+m 571
+m 335
+s 5 168 6
+m 289
+m 460
+m 362
+s 2 41 4
+m 50
+m 264
+m 50
+m 362
+m 460
+m 289
+m 335
+m 571
+m 217
+m 121
+s 10 268 0
+m 509
+m 86
+m 132
+s 10 642 0
+m 330
+m 421
+m 123
+m 14
+m 520
+s 1 145 1
+m 572
+m 307
+s 10 681 1
+m 137
+m 105
+m 426
+s 9 447 1
+m 212
+m 34
+m 212
+m 384
+m 399
+m 297
+m 591
+s 11 377 0
+m 94
+m 0
+m 188
+m 447
+m 499
+m 565
+m 222
+m 130
+m 131
+s 10 383 1
+m 246
+m 164
+m 377
+m 164
+m 246
+m 131
+m 130
+m 222
+m 565
+m 499
+s 11 326 0
+m 95
+m 124
+m 394
+m 188
+m 0
+m 94
+m 591
+m 297
+m 399
+m 384
+m 49
+s 11 676 0
+m 241
+m 426
+m 105
+m 137
+m 307
+m 27
+m 526
+s 11 571 0
+m 106
+m 313
+m 79
+m 202
+m 76
+m 26
+m 482
+m 2
+m 482
+m 26
+m 76
+m 202
+m 79
+m 313
+m 106
+m 526
+m 27
+s 9 677 0
+m 307
+m 137
+m 105
+m 426
+m 241
+s 11 458 0
+m 49
+m 384
+m 399
+m 297
+m 276
+m 152
+m 276
+m 297
+m 399
+m 384
+m 49
+m 241
+m 179
+s 8 14 0
+m 555
+m 263
+m 84
+m 312
+m 91
+m 99
+m 91
+m 312
+m 84
+m 263
+m 555
+m 179
+s 9 187 0
+m 139
+m 470
+m 160
+m 258
+m 228
+m 268
+m 389
+m 97
+s 5 182 6
+m 339
+m 347
+m 501
+m 347
+m 339
+m 97
+m 389
+m 268
+m 228
+m 528
+m 554
+m 160
+s 11 410 0
+m 470
+m 139
+m 179
+m 241
+m 49
+s 11 318 0
+m 384
+m 399
+m 297
+m 40
+m 455
+m 507
+m 475
+m 296
+m 322
+m 109
+s 11 603 0
+m 90
+m 423
+m 287
+m 177
+m 129
+m 269
+m 371
+m 463
+m 371
+m 269
+m 129
+m 177
+m 287
+m 423
+m 90
+m 109
+m 322
+m 296
+s 11 318 0
+m 475
+m 507
+m 455
+m 40
+m 297
+m 399
+m 384
+m 49
+s 11 269 0
+m 241
+m 132
+m 86
+m 66
+s 1 130 1
+m 494
+m 515
+m 434
+m 290
+s 1 45 1
+m 466
+s 7 528 2
+m 170
+m 47
+m 492
+m 498
+m 430
+m 86
+s 11 162 0
+m 509
+m 121
+m 217
+m 571
+m 335
+m 289
+m 460
+m 289
+m 335
+m 571
+m 217
+m 121
+m 509
+m 86
+s 11 249 0
+m 132
+m 330
+m 421
+m 123
+m 535
+m 207
+s 11 235 0
+m 194
+m 83
+m 13
+m 327
+m 12
+m 327
+m 243
+m 508
+m 83
+m 194
+m 267
+m 14
+m 123
+s 3 250 0
+m 421
+m 330
+m 241
+s 11 298 0
+m 49
+m 384
+m 588
+m 461
+m 560
+m 262
+m 283
+m 592
+m 295
+s 1 64 1
+m 150
+s 1 132 2
+m 504
+m 150
+s 11 623 0
+m 252
+m 370
+m 201
+m 225
+m 148
+m 486
+m 34
+m 212
+m 49
+m 241
+s 6 197 0
+m 179
+m 555
+s 11 560 0
+m 263
+m 84
+m 425
+m 490
+m 5
+m 406
+m 598
+m 420
+m 418
+m 420
+m 598
+m 406
+m 5
+m 490
+m 425
+m 84
+m 263
+m 555
+s 10 410 0
+m 179
+m 139
+m 470
+m 160
+m 258
+m 228
+m 268
+m 476
+s 1 395 8
+m 302
+m 476
+m 268
+m 228
+m 258
+m 160
+m 470
+m 139
+m 179
+s 11 484 0
+m 241
+m 49
+m 384
+m 399
+m 297
+m 591
+m 94
+m 0
+m 188
+m 161
+m 489
+m 161
+m 188
+m 0
+m 94
+m 591
+m 297
+m 399
+m 384
+m 49
+m 241
+s 10 469 1
+m 132
+m 86
+m 509
+m 121
+m 217
+m 419
+m 353
+m 180
+m 56
+m 281
+m 56
+m 180
+m 353
+m 419
+m 217
+m 121
+m 509
+m 86
+s 11 508 0
+m 430
+m 498
+m 492
+m 47
+m 170
+m 402
+m 60
+m 402
+m 170
+m 47
+m 492
+m 498
+m 430
+m 45
+m 132
+m 241
+m 49
+s 11 308 0
+m 384
+m 399
+m 297
+m 276
+m 152
+m 397
+m 214
+m 301
+m 274
+s 1 109 9
+m 345
+m 274
+m 301
+m 214
+m 397
+m 152
+m 276
+m 297
+m 399
+m 384
+s 11 410 0
+m 49
+m 241
+m 179
+m 139
+m 470
+m 139
+m 179
+m 241
+s 9 244 0
+m 330
+m 421
+m 123
+m 267
+s 1 50 2
+m 422
+m 267
+m 123
+m 421
+m 330
+m 241
+s 11 318 0
+m 49
+m 384
+m 399
+m 297
+m 40
+m 455
+m 507
+m 475
+m 507
+m 455
+m 40
+m 297
+m 399
+m 384
+m 49
+s 11 432 0
+m 241
+m 132
+m 86
+m 66
+m 515
+m 434
+m 290
+m 210
+m 485
+m 305
+m 316
+s 1 117 1
+m 375
+m 316
+m 305
+m 485
+m 210
+m 290
+m 434
+m 515
+m 66
+m 86
+m 132
+s 11 623 0
+m 241
+m 49
+m 212
+m 34
+m 486
+m 148
+m 225
+m 201
+m 370
+m 252
+m 279
+s 3 716 8
+m 256
+m 53
+m 256
+m 279
+m 252
+m 370
+m 201
+m 225
+m 148
+m 486
+m 34
+s 3 631 0
+m 212
+m 49
+m 241
+s 11 276 0
+m 179
+m 20
+m 340
+m 318
+m 552
+m 67
+m 552
+m 318
+m 498
+s 9 510 1
+m 492
+m 47
+m 492
+m 498
+m 430
+s 10 638 0
+m 86
+m 132
+m 330
+m 421
+m 123
+m 14
+m 520
+m 116
+s 11 652 0
+m 488
+m 478
+m 488
+m 27
+m 526
+m 391
+m 108
+m 328
+m 365
+m 36
+m 365
+m 328
+m 108
+m 391
+m 526
+m 27
+m 307
+m 137
+s 8 644 1
+m 105
+m 426
+m 241
+m 330
+m 421
+m 123
+s 11 222 0
+m 267
+m 194
+m 83
+m 194
+m 267
+m 123
+m 421
+m 330
+m 241
+s 8 212 1
+m 179
+m 555
+m 369
+m 191
+s 5 551 1
+m 425
+m 490
+m 5
+m 584
+s 1 112 1
+m 355
+s 8 514 1
+m 411
+m 239
+m 170
+m 47
+m 492
+m 498
+m 430
+s 8 277 1
+m 45
+m 132
+m 241
+m 179
+s 11 406 0
+m 139
+m 470
+m 160
+m 258
+m 228
+m 268
+m 476
+m 302
+m 338
+s 1 128 3
+m 456
+m 338
+m 302
+m 476
+s 11 182 0
+m 389
+m 97
+m 339
+m 347
+m 501
+m 347
+m 339
+m 97
+m 389
+m 268
+m 228
+m 258
+m 160
+s 11 197 0
+m 470
+s 9 353 1
+m 122
+m 366
+m 122
+m 227
+m 384
+m 49
+s 9 214 1
+m 241
+m 179
+m 555
+s 11 11 0
+m 263
+m 84
+m 312
+m 91
+m 99
+m 432
+m 88
+m 427
+m 118
+m 398
+m 118
+m 427
+m 88
+m 432
+m 99
+m 91
+m 312
+m 84
+m 263
+m 555
+s 7 276 1
+m 340
+m 20
+m 179
+m 241
+s 11 228 0
+m 330
+m 421
+m 123
+m 267
+m 194
+m 83
+m 13
+m 327
+m 12
+m 491
+m 408
+m 491
+m 12
+m 327
+m 13
+m 83
+m 194
+m 267
+m 123
+m 421
+m 330
+s 11 410 0
+m 241
+m 179
+m 139
+m 470
+m 160
+m 258
+m 228
+m 268
+m 476
+s 9 395 1
+m 302
+m 338
+m 539
+m 259
+m 539
+m 338
+m 302
+m 476
+m 268
+m 228
+m 258
+m 160
+s 10 410 0
+m 470
+m 139
+m 179
+m 241
+m 49
+s 10 327 1
+m 384
+m 399
+m 297
+m 591
+m 94
+m 0
+m 188
+m 394
+m 124
+m 394
+m 188
+m 0
+m 94
+m 591
+m 297
+m 399
+s 10 356 0
+m 122
+m 366
+m 122
+m 399
+m 297
+m 591
+m 94
+m 0
+m 188
+m 447
+s 6 382 0
+m 499
+m 565
+m 222
+m 130
+m 131
+m 72
+s 1 104 10
+m 324
+m 72
+m 131
+m 130
+m 222
+m 565
+m 499
+m 447
+m 188
+m 0
+m 94
+s 10 441 1
+m 591
+m 297
+m 399
+m 384
+m 49
+m 241
+m 132
+m 86
+s 10 471 1
+m 509
+m 121
+m 217
+m 419
+m 353
+m 180
+m 387
+m 458
+m 387
+m 180
+m 353
+m 419
+m 217
+m 121
+m 509
+m 86
+m 132
+s 7 641 4
+m 330
+m 421
+m 123
+m 14
+m 520
+m 116
+m 520
+m 14
+m 123
+m 421
+m 330
+m 132
+m 86
+s 11 259 0
+m 509
+m 121
+m 217
+m 597
+m 217
+m 121
+m 509
+m 86
+m 132
+s 11 623 0
+m 241
+m 49
+m 212
+m 34
+m 486
+m 148
+m 225
+m 201
+m 370
+m 252
+m 279
+s 4 697 7
+m 256
+m 173
+m 198
+m 173
+m 256
+m 279
+m 252
+m 370
+m 201
+m 225
+m 148
+m 486
+s 4 630 0
+m 34
+m 212
+m 49
+m 241
+s 6 197 0
+m 179
+m 555
+s 10 14 1
+m 263
+m 84
+m 312
+m 91
+m 99
+m 432
+m 88
+m 356
+s 10 0 1
+m 350
+m 33
+m 135
+m 471
+m 286
+m 477
+m 424
+s 10 187 1
+m 15
+m 506
+m 97
+s 1 100 10
+m 308
+m 97
+m 389
+m 268
+m 228
+m 258
+m 160
+m 470
+m 139
+m 179
+s 11 552 0
+m 555
+m 263
+m 84
+m 425
+m 490
+m 5
+m 406
+m 598
+m 420
+m 538
+m 417
+m 538
+m 420
+m 598
+m 406
+m 5
+m 490
+m 425
+m 84
+m 263
+m 555
+s 11 194 0
+m 179
+m 241
+m 426
+s 2 456 7
+m 467
+m 426
+m 241
+m 179
+m 139
+m 470
+s 2 187 0
+m 160
+m 46
+m 556
+m 77
+s 5 5 3
+m 471
+m 286
+m 477
+m 424
+s 11 187 0
+m 15
+m 506
+m 97
+m 389
+m 268
+m 228
+m 258
+m 160
+m 470
+m 139
+m 179
+s 11 623 0
+m 241
+m 49
+m 212
+m 34
+m 486
+m 148
+m 225
+m 201
+m 370
+m 252
+m 279
+m 252
+m 370
+m 201
+m 225
+m 148
+m 486
+m 34
+m 212
+m 49
+m 241
+s 6 197 0
+m 179
+m 555
+s 11 14 0
+m 263
+m 84
+m 312
+m 91
+m 99
+m 432
+m 88
+m 356
+m 342
+m 373
+m 342
+m 356
+m 88
+m 432
+m 99
+m 91
+m 312
+m 84
+m 263
+m 555
+s 5 197 1
+m 179
+m 241
+m 426
+m 105
+s 11 676 0
+m 137
+m 307
+m 27
+m 526
+m 391
+m 108
+m 22
+m 493
+m 22
+m 108
+m 391
+m 526
+m 27
+m 307
+m 137
+m 105
+m 426
+m 241
+s 11 318 0
+m 49
+m 384
+m 399
+m 297
+m 40
+m 455
+m 507
+m 475
+s 11 494 0
+m 311
+m 546
+m 311
+m 64
+m 283
+m 262
+m 560
+m 461
+m 588
+m 384
+m 49
+m 241
+s 10 249 1
+m 330
+m 421
+m 123
+m 535
+m 123
+m 421
+m 330
+m 241
+s 8 458 0
+m 49
+m 384
+m 399
+s 1 99 5
+m 304
+m 297
+m 276
+m 152
+m 397
+m 204
+s 11 392 0
+m 476
+m 302
+m 338
+m 539
+m 401
+m 377
+s 1 31 2
+m 23
+m 377
+m 401
+m 539
+m 338
+m 302
+m 476
+m 268
+m 228
+m 258
+m 160
+s 11 197 0
+m 470
+m 139
+m 179
+m 241
+s 11 468 0
+m 132
+m 86
+m 509
+m 121
+m 217
+m 419
+m 353
+m 180
+m 56
+m 281
+m 56
+m 180
+m 353
+m 419
+m 217
+m 121
+m 509
+m 86
+m 132
+m 241
+s 8 497 1
+m 49
+m 384
+m 588
+m 461
+m 560
+m 262
+m 283
+m 64
+m 283
+m 262
+m 560
+m 461
+m 588
+m 384
+m 49
+m 241
+s 9 421 2
+m 132
+m 86
+m 66
+m 372
+m 69
+m 372
+m 66
+m 86
+m 132
+m 241
+m 49
+s 11 318 0
+m 384
+m 399
+m 297
+m 40
+m 455
+m 507
+m 475
+m 296
+m 322
+m 296
+m 475
+m 507
+m 455
+m 40
+m 297
+m 399
+m 384
+m 49
+s 11 468 0
+m 241
+m 132
+m 86
+m 509
+m 121
+m 217
+m 419
+m 353
+m 180
+m 56
+s 9 152 0
+m 175
+m 142
+m 85
+m 142
+m 175
+m 56
+m 180
+m 353
+m 419
+m 217
+m 121
+s 1 63 1
+m 140
+m 121
+m 509
+s 10 638 0
+m 86
+m 132
+m 330
+m 421
+m 123
+s 9 244 0
+m 267
+m 123
+m 421
+m 330
+m 241
+s 10 410 1
+m 179
+m 139
+m 470
+m 160
+m 258
+m 228
+m 268
+m 476
+s 11 392 0
+m 302
+m 338
+m 539
+m 401
+m 377
+m 401
+m 539
+m 338
+m 302
+m 476
+s 6 459 2
+m 204
+m 397
+m 152
+m 276
+m 297
+m 276
+m 152
+m 397
+m 204
+m 476
+s 10 393 1
+m 302
+m 338
+m 539
+m 401
+m 377
+m 401
+m 539
+m 338
+m 302
+m 476
+m 268
+m 228
+m 258
+m 160
+s 11 410 0
+m 470
+m 139
+m 179
+m 241
+m 49
+s 10 625 0
+m 212
+m 34
+m 486
+m 65
+m 486
+m 34
+m 212
+m 49
+m 212
+m 34
+m 486
+s 7 618 4
+m 148
+m 225
+m 201
+m 370
+m 252
+m 279
+m 256
+s 11 609 0
+m 53
+m 407
+m 594
+m 287
+m 423
+m 90
+m 109
+m 541
+m 109
+m 90
+m 423
+m 287
+m 594
+m 407
+m 186
+m 407
+m 53
+m 256
+s 10 582 1
+m 279
+m 252
+m 120
+m 252
+m 279
+m 436
+m 26
+m 482
+m 110
+m 2
+m 100
+m 2
+m 482
+m 26
+m 436
+m 279
+m 252
+m 370
+s 11 623 0
+m 201
+m 225
+m 148
+m 486
+m 34
+m 212
+m 49
+m 241
+s 11 197 0
+m 179
+m 555
+s 11 552 0
+m 263
+m 84
+m 425
+m 490
+m 5
+m 406
+m 598
+m 406
+m 5
+m 490
+m 425
+m 84
+m 263
+m 555
+s 10 410 1
+m 179
+m 139
+m 470
+m 160
+m 258
+m 228
+m 268
+m 476
+s 11 392 0
+m 302
+m 338
+m 539
+m 401
+m 377
+m 1
+m 377
+m 401
+m 539
+m 338
+m 302
+m 476
+m 268
+m 228
+m 258
+m 160
+s 11 197 0
+m 470
+m 139
+m 179
+m 241
+s 11 508 0
+m 132
+m 45
+m 430
+m 498
+m 492
+m 47
+m 170
+s 11 515 0
+m 239
+m 411
+m 9
+m 236
+m 9
+m 411
+m 239
+m 170
+m 47
+m 492
+m 498
+s 7 276 1
+m 318
+m 340
+m 20
+m 179
+s 9 187 0
+m 139
+m 470
+m 160
+m 258
+m 228
+m 268
+m 389
+m 97
+s 1 182 9
+m 339
+m 97
+m 389
+m 268
+m 228
+m 258
+m 160
+m 470
+m 139
+s 11 458 0
+m 179
+m 241
+m 49
+m 384
+m 399
+m 297
+s 11 348 0
+m 591
+m 94
+m 208
+m 174
+m 167
+m 174
+m 208
+m 94
+m 591
+m 297
+m 399
+m 384
+m 49
+s 4 508 0
+m 241
+m 132
+m 45
+m 132
+m 241
+m 49
+s 10 623 1
+m 212
+m 34
+m 486
+m 148
+m 225
+m 201
+m 370
+m 252
+m 279
+s 9 588 0
+m 436
+m 26
+s 1 86 1
+m 247
+s 11 689 0
+m 173
+m 256
+m 279
+m 111
+m 480
+m 313
+m 106
+m 526
+m 27
+m 307
+m 137
+s 11 197 0
+m 105
+m 426
+m 241
+m 179
+m 139
+m 470
+m 160
+m 46
+m 556
+m 77
+s 7 3 1
+m 127
+m 286
+m 477
+m 424
+s 11 187 0
+m 15
+m 506
+m 97
+m 389
+m 268
+m 228
+m 258
+m 160
+m 470
+m 139
+m 179
+s 11 623 0
+m 241
+m 49
+m 212
+m 34
+m 486
+m 148
+m 225
+m 201
+m 370
+m 252
+m 370
+m 201
+m 225
+m 148
+m 486
+m 34
+m 212
+s 11 676 0
+m 426
+m 105
+m 137
+m 307
+m 27
+m 526
+m 391
+m 108
+m 22
+m 493
+m 22
+m 108
+m 391
+m 526
+m 27
+m 307
+m 137
+m 105
+m 426
+m 241
+s 11 508 0
+m 132
+m 45
+m 430
+m 498
+m 492
+m 47
+s 1 39 1
+m 43
+m 47
+m 492
+m 498
+m 430
+s 10 260 1
+m 86
+m 509
+m 121
+m 217
+m 419
+m 353
+m 180
+m 56
+m 543
+m 56
+m 180
+m 353
+m 419
+m 217
+m 121
+m 509
+m 86
+s 5 281 0
+m 430
+m 318
+m 340
+s 11 552 0
+m 555
+m 263
+m 84
+m 425
+m 490
+m 5
+m 406
+m 598
+m 420
+m 538
+m 417
+m 538
+m 420
+m 598
+m 406
+m 5
+m 490
+m 425
+m 84
+m 263
+m 555
+s 11 212 0
+m 179
+m 241
+m 49
+s 10 623 1
+m 212
+m 34
+m 486
+m 148
+m 225
+m 201
+m 370
+m 252
+m 279
+s 8 584 3
+m 436
+m 26
+m 482
+m 2
+m 100
+s 1 52 1
+m 78
+m 100
+m 2
+m 482
+m 26
+m 436
+m 279
+m 252
+m 370
+m 201
+s 1 67 1
+m 158
+m 201
+s 11 623 0
+m 225
+m 148
+m 486
+m 34
+m 212
+m 49
+m 241
+s 11 242 0
+m 330
+m 421
+m 123
+m 267
+m 194
+m 83
+m 508
+m 548
+m 172
+m 548
+m 508
+m 83
+m 194
+m 267
+m 123
+m 421
+m 330
+m 241
+s 6 197 0
+m 179
+m 555
+s 11 560 0
+m 263
+m 84
+m 425
+m 490
+m 5
+m 406
+m 598
+m 420
+m 418
+m 420
+m 598
+m 406
+m 5
+m 490
+m 425
+m 84
+m 263
+m 555
+s 5 197 1
+m 179
+m 241
+m 426
+m 105
+s 10 686 0
+m 137
+m 307
+m 27
+m 526
+m 106
+m 313
+s 11 571 0
+m 599
+m 313
+m 79
+m 202
+m 76
+m 26
+m 482
+m 2
+m 482
+m 26
+m 76
+m 202
+m 79
+m 313
+m 106
+m 526
+m 27
+s 9 677 0
+m 307
+m 137
+m 105
+m 426
+m 241
+s 11 410 0
+m 179
+m 139
+m 470
+m 160
+m 258
+m 160
+m 470
+m 139
+m 179
+m 241
+s 10 469 0
+m 132
+m 86
+m 509
+m 121
+m 217
+m 419
+m 353
+m 180
+m 56
+s 11 152 0
+m 175
+m 142
+m 85
+m 512
+m 85
+m 142
+m 175
+m 56
+m 180
+m 353
+m 419
+m 217
+m 121
+m 509
+s 10 441 1
+m 86
+m 132
+m 241
+m 49
+m 384
+m 399
+m 297
+m 591
+m 94
+s 11 377 0
+m 0
+m 188
+m 447
+m 499
+m 565
+m 222
+m 130
+s 1 116 7
+m 374
+m 130
+m 222
+m 565
+m 499
+m 447
+m 188
+m 0
+m 94
+m 591
+s 11 461 0
+m 297
+m 276
+s 1 136 5
+m 531
+m 276
+m 297
+m 399
+m 384
+s 10 289 0
+m 49
+m 241
+m 132
+m 86
+m 509
+m 121
+m 217
+m 571
+m 335
+s 11 162 0
+m 289
+m 460
+m 362
+m 143
+m 439
+m 143
+m 362
+m 460
+m 289
+m 335
+m 571
+m 217
+m 121
+m 509
+m 86
+s 9 639 0
+m 132
+m 330
+m 421
+m 123
+s 10 223 1
+m 267
+m 194
+m 83
+m 13
+m 503
+m 144
+m 503
+m 13
+m 83
+m 194
+m 267
+m 123
+m 421
+m 330
+m 132
+s 7 508 0
+m 45
+m 430
+m 45
+m 132
+m 241
+m 49
+s 9 300 0
+m 384
+m 588
+m 461
+m 560
+m 262
+m 560
+s 11 334 0
+m 40
+m 297
+m 591
+m 94
+m 0
+m 188
+s 11 377 0
+m 447
+m 499
+m 565
+m 222
+m 130
+m 222
+m 565
+m 499
+m 447
+m 188
+m 0
+m 94
+m 591
+s 9 441 1
+m 297
+m 399
+m 384
+m 49
+m 241
+m 132
+m 86
+s 11 524 0
+m 430
+m 498
+m 492
+m 47
+m 170
+m 239
+m 411
+m 9
+m 411
+m 239
+m 170
+m 47
+m 492
+m 498
+m 430
+s 10 638 0
+m 86
+m 132
+m 330
+m 421
+m 123
+m 14
+m 520
+m 116
+s 9 670 2
+m 488
+m 27
+m 307
+m 137
+s 7 645 3
+m 105
+m 426
+m 241
+m 132
+s 10 284 1
+m 45
+m 86
+m 509
+m 121
+s 1 63 1
+m 140
+m 121
+m 509
+m 86
+m 132
+s 6 642 1
+m 330
+m 421
+m 123
+m 14
+m 520
+m 14
+m 123
+m 421
+s 8 215 1
+m 21
+m 330
+m 241
+m 49
+s 10 623 1
+m 212
+m 34
+m 486
+m 148
+m 225
+m 201
+m 370
+m 252
+m 279
+s 11 609 0
+m 256
+m 53
+m 407
+m 594
+m 287
+m 423
+m 90
+m 109
+m 322
+s 9 319 0
+m 296
+m 475
+m 507
+m 455
+m 40
+m 297
+s 11 377 0
+m 591
+m 94
+m 0
+m 188
+m 447
+m 499
+m 565
+m 222
+m 130
+m 131
+m 72
+s 1 81 4
+m 218
+m 72
+m 131
+m 130
+m 222
+m 565
+m 499
+m 447
+m 188
+m 0
+m 94
+s 10 488 0
+m 591
+m 297
+m 399
+m 384
+m 49
+m 241
+s 11 675 0
+m 426
+m 105
+m 137
+m 307
+m 27
+s 11 668 0
+m 488
+m 478
+m 392
+m 431
+m 331
+m 163
+m 331
+m 431
+m 392
+m 478
+m 488
+m 27
+m 526
+m 48
+m 526
+m 27
+m 307
+m 137
+s 11 197 0
+m 105
+m 426
+m 241
+m 179
+m 139
+m 470
+m 160
+m 46
+m 556
+m 77
+s 6 4 1
+m 471
+m 135
+s 1 26 3
+m 8
+m 135
+m 471
+m 286
+m 477
+m 424
+s 11 187 0
+m 15
+m 506
+m 97
+m 389
+m 268
+m 228
+m 258
+m 160
+m 470
+m 139
+m 179
+s 11 288 0
+m 241
+m 132
+m 86
+m 509
+m 121
+m 217
+m 571
+m 335
+m 513
+m 335
+m 571
+m 217
+m 121
+m 509
+m 86
+m 132
+m 241
+m 49
+s 11 318 0
+m 384
+m 399
+m 297
+m 40
+m 297
+m 399
+m 384
+m 49
+s 11 676 0
+m 241
+m 426
+m 105
+m 137
+m 307
+m 27
+m 526
+m 391
+s 1 106 4
+m 341
+m 391
+m 526
+m 27
+m 307
+m 137
+m 105
+m 426
+m 241
+s 7 288 1
+m 132
+m 86
+m 509
+m 121
+m 217
+m 571
+m 335
+s 11 162 0
+m 289
+m 460
+m 362
+m 143
+m 362
+m 460
+m 289
+m 335
+m 571
+m 217
+m 121
+m 509
+m 86
+s 9 442 1
+m 132
+m 241
+m 49
+m 384
+m 399
+m 297
+m 591
+m 94
+s 10 362 1
+m 0
+m 390
+m 0
+m 94
+m 591
+m 297
+s 10 327 0
+m 399
+m 384
+s 1 306 10
+m 588
+m 384
+m 399
+m 297
+m 591
+m 94
+m 0
+m 188
+m 394
+m 124
+m 95
+m 124
+m 394
+m 188
+m 0
+m 94
+m 591
+m 297
+m 399
+m 384
+s 11 212 0
+m 49
+m 241
+m 179
+m 555
+m 369
+m 191
+m 429
+m 159
+m 429
+m 191
+m 369
+m 555
+m 179
+m 241
+m 330
+m 21
+s 11 432 0
+m 86
+m 66
+m 515
+m 434
+m 290
+m 210
+m 485
+m 305
+m 485
+m 210
+m 290
+m 434
+m 515
+m 66
+m 86
+m 132
+m 241
+s 8 484 0
+m 49
+m 384
+m 399
+m 297
+m 591
+m 94
+m 0
+m 188
+s 11 371 0
+m 447
+m 499
+m 233
+m 529
+m 380
+m 540
+m 380
+m 529
+m 233
+m 499
+m 447
+m 188
+m 0
+m 94
+m 591
+m 297
+s 11 458 0
+m 276
+m 152
+m 397
+m 204
+m 293
+m 204
+m 397
+m 152
+m 276
+m 297
+m 399
+m 384
+m 49
+m 241
+m 179
+s 11 187 0
+m 139
+m 470
+m 160
+m 258
+m 228
+m 268
+m 389
+m 97
+m 506
+m 15
+m 506
+m 97
+m 389
+m 268
+m 228
+m 258
+m 160
+m 470
+m 139
+m 179
+s 11 623 0
+m 241
+m 49
+m 212
+m 34
+m 486
+m 148
+m 225
+m 201
+m 370
+m 252
+m 279
+s 6 614 5
+m 256
+m 53
+m 407
+m 186
+m 407
+m 53
+m 256
+m 279
+m 252
+s 10 624 1
+m 370
+m 201
+m 225
+m 148
+m 486
+m 34
+m 212
+m 49
+m 241
+s 9 244 0
+m 330
+m 421
+m 123
+m 267
+m 123
+m 421
+m 330
+m 241
+s 6 197 0
+m 179
+m 555
+s 10 552 0
+m 263
+m 84
+m 425
+m 490
+m 5
+m 406
+m 598
+m 420
+m 538
+s 1 51 10
+m 73
+m 538
+m 420
+m 598
+m 406
+m 5
+m 490
+m 425
+m 84
+m 263
+s 11 212 0
+m 555
+m 179
+m 241
+m 330
+s 6 642 4
+m 421
+m 123
+m 14
+m 520
+m 14
+m 123
+m 421
+m 330
+m 241
+m 179
+m 555
+s 10 552 0
+m 263
+m 84
+m 425
+m 490
+m 5
+m 406
+m 598
+m 420
+m 598
+m 406
+m 5
+m 490
+m 425
+s 3 219 1
+m 191
+m 429
+s 1 84 1
+m 229
+s 10 285 0
+m 492
+m 498
+m 430
+m 86
+m 509
+m 121
+m 217
+m 571
+m 335
+m 571
+m 217
+m 121
+m 509
+m 86
+m 132
+m 241
+s 11 348 0
+m 49
+m 384
+m 399
+m 297
+m 591
+m 94
+m 208
+m 174
+m 167
+m 438
+m 167
+m 174
+m 208
+m 94
+m 591
+m 297
+m 399
+m 384
+s 3 631 0
+m 212
+m 49
+m 241
+s 11 204 0
+m 179
+m 139
+m 470
+m 160
+m 46
+m 383
+m 332
+m 278
+m 367
+m 278
+m 332
+m 383
+m 46
+m 160
+m 470
+m 139
+m 179
+m 555
+m 369
+s 7 218 0
+m 191
+m 429
+m 159
+m 429
+m 191
+m 369
+m 555
+m 179
+m 241
+m 330
+s 11 228 0
+m 421
+m 123
+m 267
+m 194
+m 83
+m 13
+m 327
+m 12
+s 1 102 6
+m 315
+m 12
+m 327
+m 13
+m 83
+m 194
+m 267
+m 123
+m 421
+m 330
+s 10 276 0
+m 241
+m 179
+m 20
+s 1 85 2
+m 230
+m 430
+s 7 528 0
+m 498
+m 492
+m 47
+m 170
+m 239
+m 411
+m 239
+m 170
+m 47
+m 492
+m 498
+m 430
+m 45
+s 11 629 0
+m 132
+m 241
+m 49
+m 212
+m 34
+m 486
+s 6 623 1
+m 148
+m 225
+m 201
+s 11 703 0
+m 557
+m 201
+m 370
+m 252
+m 279
+m 111
+m 480
+m 313
+m 106
+m 320
+m 319
+m 320
+m 106
+s 11 661 0
+m 526
+m 27
+m 488
+m 478
+m 392
+m 533
+m 146
+m 533
+m 392
+m 478
+m 488
+s 11 637 0
+m 116
+m 520
+m 14
+m 123
+m 421
+m 330
+m 132
+m 86
+m 66
+s 11 269 0
+m 515
+m 434
+m 515
+m 66
+m 86
+m 132
+m 241
+s 8 458 1
+m 49
+m 384
+m 399
+m 297
+m 276
+m 152
+m 397
+s 11 308 0
+m 214
+m 301
+m 274
+m 254
+m 414
+m 254
+m 274
+m 301
+m 214
+m 397
+m 152
+m 276
+m 297
+m 399
+m 384
+s 11 212 0
+m 49
+m 241
+m 330
+s 4 249 3
+m 421
+m 123
+m 421
+m 330
+m 241
+m 179
+m 555
+m 369
+m 191
+m 429
+s 1 120 1
+m 393
+m 429
+s 3 218 1
+m 159
+s 7 528 0
+m 47
+m 170
+m 239
+m 411
+m 239
+m 170
+m 47
+m 492
+m 498
+m 430
+s 8 284 0
+m 45
+m 132
+m 330
+s 10 244 0
+m 421
+m 123
+m 267
+m 123
+m 421
+m 330
+s 11 468 0
+m 132
+m 86
+m 509
+m 121
+m 217
+m 419
+m 353
+s 1 53 2
+m 81
+m 353
+m 419
+m 217
+m 121
+m 509
+m 86
+m 132
+m 241
+s 10 623 1
+m 49
+m 212
+m 34
+m 486
+m 148
+m 225
+m 201
+m 370
+m 252
+m 279
+s 6 592 1
+m 433
+m 134
+m 176
+m 269
+m 129
+s 11 494 0
+m 546
+m 311
+m 64
+m 283
+m 262
+m 560
+m 461
+m 588
+m 384
+m 49
+m 241
+s 11 419 0
+m 132
+m 86
+m 66
+m 372
+m 69
+m 372
+m 66
+m 86
+m 132
+m 241
+m 179
+s 11 560 0
+m 555
+m 263
+m 84
+m 425
+m 490
+m 5
+m 406
+m 598
+m 420
+m 418
+m 420
+s 1 544 6
+m 558
+m 420
+m 598
+m 406
+m 5
+m 490
+m 425
+m 84
+m 263
+m 555
+s 11 197 0
+m 179
+m 139
+m 470
+m 160
+s 3 186 5
+m 554
+m 160
+m 470
+m 139
+m 179
+m 241
+s 7 288 1
+m 132
+m 86
+m 509
+m 121
+m 217
+m 571
+m 335
+s 11 162 0
+m 289
+m 460
+m 362
+m 143
+m 362
+m 460
+m 289
+m 335
+m 571
+m 217
+m 121
+m 509
+m 86
+s 9 442 1
+m 132
+m 241
+m 49
+m 384
+m 399
+m 297
+m 591
+m 94
+s 1 61 1
+m 114
+m 94
+s 11 377 0
+m 0
+m 188
+m 447
+m 499
+m 565
+m 222
+m 130
+m 131
+s 2 70 1
+m 521
+m 182
+s 6 388 1
+m 164
+m 377
+m 401
+s 10 174 0
+m 539
+m 75
+m 128
+m 388
+m 347
+m 339
+m 97
+s 10 188 0
+m 389
+m 268
+m 228
+m 258
+m 160
+m 470
+m 139
+m 179
+s 9 645 0
+m 241
+m 426
+m 105
+m 137
+m 307
+m 27
+m 526
+s 1 672 1
+m 48
+m 526
+m 27
+m 307
+m 137
+m 105
+m 426
+m 241
+m 179
+s 11 406 0
+m 139
+m 470
+m 160
+m 258
+m 228
+m 268
+m 476
+m 302
+m 476
+m 268
+m 228
+m 258
+m 160
+m 470
+m 139
+s 11 212 0
+m 179
+m 241
+m 49
+s 10 623 1
+m 212
+m 34
+m 486
+m 148
+m 225
+m 201
+m 370
+m 252
+m 279
+s 11 692 0
+m 256
+m 173
+m 198
+m 523
+m 495
+m 523
+m 198
+m 173
+m 256
+m 279
+m 111
+m 480
+m 313
+m 106
+m 526
+s 11 689 0
+m 27
+m 307
+m 137
+m 307
+m 27
+m 526
+m 106
+m 313
+m 480
+m 111
+m 279
+m 256
+m 173
+s 1 110 1
+m 351
+m 173
+m 256
+m 279
+s 11 623 0
+m 252
+m 370
+m 201
+m 225
+m 148
+m 486
+m 34
+m 212
+m 49
+m 241
+s 11 187 0
+m 179
+m 139
+m 470
+m 160
+m 258
+m 228
+m 268
+m 389
+m 97
+s 4 173 7
+m 103
+m 3
+m 103
+m 97
+m 389
+m 268
+m 228
+m 258
+m 160
+s 11 197 0
+m 470
+m 139
+m 179
+m 555
+s 10 560 1
+m 263
+m 84
+m 425
+m 490
+s 1 66 5
+m 157
+m 490
+m 425
+m 84
+m 263
+m 555
+m 179
+s 10 488 0
+m 241
+m 49
+m 384
+m 399
+m 297
+s 7 319 1
+m 40
+m 455
+m 507
+m 475
+m 296
+m 322
+m 109
+s 11 603 0
+m 90
+m 423
+m 287
+m 177
+m 129
+m 269
+m 371
+m 463
+m 371
+m 269
+m 129
+m 177
+m 287
+m 423
+m 90
+m 109
+m 322
+m 296
+s 11 318 0
+m 475
+m 507
+m 455
+m 40
+m 297
+m 399
+m 384
+m 49
+s 6 197 0
+m 241
+m 179
+m 555
+s 11 560 0
+m 263
+m 84
+m 425
+m 490
+m 5
+m 406
+m 598
+m 420
+m 418
+m 420
+m 598
+m 406
+m 5
+s 1 149 4
+m 579
+m 490
+m 425
+m 84
+m 263
+m 555
+s 10 466 0
+m 179
+m 241
+m 132
+m 86
+s 11 152 0
+m 509
+m 121
+m 217
+m 419
+m 353
+m 180
+m 56
+m 175
+m 56
+m 180
+m 353
+m 419
+m 217
+m 121
+m 509
+s 11 471 0
+m 86
+m 132
+m 241
+s 11 681 0
+m 426
+m 105
+m 137
+m 307
+m 27
+m 526
+m 391
+m 108
+m 385
+m 155
+m 385
+m 108
+m 391
+m 526
+m 27
+m 307
+m 137
+m 105
+m 426
+m 241
+s 11 410 0
+m 179
+m 139
+m 470
+m 160
+m 470
+m 139
+m 179
+m 241
+m 49
+s 10 623 1
+m 212
+m 34
+m 486
+m 148
+m 225
+m 201
+m 370
+m 252
+m 279
+s 4 594 7
+m 433
+m 134
+m 176
+m 134
+m 433
+m 279
+m 252
+m 370
+m 201
+m 225
+m 148
+s 5 629 1
+m 486
+m 34
+m 212
+m 49
+m 241
+s 11 228 0
+m 330
+m 421
+m 123
+m 267
+m 194
+m 83
+m 13
+m 327
+m 12
+s 1 98 6
+m 303
+m 12
+m 327
+m 13
+m 83
+m 194
+m 267
+m 123
+m 421
+m 330
+s 10 285 1
+m 132
+m 86
+m 509
+m 121
+m 217
+m 571
+m 335
+m 571
+m 217
+m 121
+m 509
+m 86
+m 430
+m 498
+m 492
+s 11 528 0
+m 47
+m 170
+m 239
+m 411
+m 9
+m 292
+m 4
+m 441
+m 4
+m 292
+m 9
+m 411
+m 239
+m 170
+m 47
+m 492
+m 498
+m 430
+s 4 508 1
+m 45
+m 132
+m 241
+m 49
+s 10 623 1
+m 212
+m 34
+m 486
+m 148
+m 225
+m 201
+m 370
+m 252
+m 279
+s 11 609 0
+m 256
+m 53
+m 407
+m 594
+m 287
+m 423
+m 90
+m 109
+m 541
+m 109
+m 90
+m 423
+m 287
+m 594
+m 407
+m 53
+m 256
+s 11 623 0
+m 279
+m 252
+m 370
+m 201
+m 225
+m 148
+m 486
+m 34
+m 212
+m 49
+m 241
+s 10 203 0
+m 179
+m 139
+m 470
+m 160
+m 46
+m 556
+s 1 79 6
+m 213
+m 556
+m 46
+m 160
+m 470
+m 139
+m 179
+m 241
+s 11 318 0
+m 49
+m 384
+m 399
+m 297
+m 40
+m 455
+m 507
+m 475
+m 296
+m 322
+m 109
+s 11 603 0
+m 90
+m 423
+m 287
+m 177
+m 129
+m 269
+m 371
+m 463
+m 371
+m 269
+m 129
+m 177
+m 287
+m 423
+m 90
+m 109
+m 322
+m 296
+s 11 318 0
+m 475
+m 507
+m 455
+m 40
+m 297
+m 399
+m 384
+m 49
+s 11 269 0
+m 241
+m 132
+m 86
+m 66
+m 515
+m 434
+s 1 126 5
+m 450
+m 434
+m 515
+m 66
+m 86
+m 132
+s 10 249 1
+m 330
+m 421
+m 123
+m 535
+m 207
+m 300
+m 207
+m 535
+m 123
+m 421
+m 330
+m 241
+s 10 623 1
+m 49
+m 212
+m 34
+m 486
+m 148
+m 225
+m 201
+m 370
+m 252
+m 279
+s 5 587 0
+m 436
+m 26
+m 482
+m 2
+m 100
+s 1 137 5
+m 542
+m 100
+m 2
+m 482
+m 26
+s 9 573 1
+m 76
+m 202
+m 79
+m 313
+m 106
+m 526
+m 27
+s 9 677 0
+m 307
+m 137
+m 105
+m 426
+m 241
+s 8 484 0
+m 49
+m 384
+m 399
+m 297
+m 591
+m 94
+m 0
+m 188
+s 11 377 0
+m 447
+m 499
+m 565
+m 222
+m 130
+m 131
+m 72
+m 131
+m 130
+m 222
+m 565
+m 499
+m 447
+m 188
+m 0
+m 94
+m 591
+s 9 319 1
+m 297
+m 40
+m 455
+m 507
+m 475
+s 11 494 0
+m 311
+m 64
+m 283
+m 262
+m 560
+m 461
+m 588
+m 384
+m 49
+m 241
+s 11 187 0
+m 179
+m 139
+m 470
+m 160
+m 258
+m 228
+m 268
+m 389
+m 97
+m 506
+m 15
+s 5 5 6
+m 424
+m 477
+s 1 43 1
+m 51
+m 286
+m 477
+m 424
+s 11 187 0
+m 15
+m 506
+m 97
+m 389
+m 268
+m 228
+m 258
+m 160
+m 470
+m 139
+m 179
+s 11 471 0
+m 241
+m 132
+m 86
+m 509
+m 121
+m 217
+m 419
+m 353
+m 180
+m 387
+m 458
+s 1 40 8
+m 44
+s 11 152 0
+m 175
+m 56
+m 180
+m 353
+m 419
+m 217
+m 121
+m 509
+s 11 269 0
+m 86
+m 132
+m 241
+m 179
+s 11 552 0
+m 555
+m 263
+m 84
+m 425
+m 490
+m 5
+m 406
+m 598
+m 420
+m 538
+m 417
+m 538
+m 420
+m 598
+m 406
+m 5
+m 490
+m 425
+m 84
+m 263
+m 555
+s 11 410 0
+m 179
+m 139
+m 470
+m 160
+m 258
+m 228
+m 268
+m 476
+m 469
+m 476
+m 268
+m 228
+m 258
+m 160
+m 470
+m 139
+m 179
+m 241
+m 49
+s 10 623 1
+m 212
+m 34
+m 486
+m 148
+m 225
+m 201
+m 370
+m 252
+m 279
+s 11 609 0
+m 256
+m 53
+m 407
+m 594
+m 287
+m 423
+m 90
+m 109
+m 541
+# final score = 1064
+# finish time 2.56485
