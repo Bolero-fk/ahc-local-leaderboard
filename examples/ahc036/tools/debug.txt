@@ -1,0 +1,122 @@
+# detour 297 -> 44: 1
+# detour 124 -> 400: 1
+# detour 175 -> 515: 1
+# detour 230 -> 517: 1
+# detour 320 -> 262: 2
+# detour 591 -> 207: 2
+# detour 217 -> 421: 2
+# detour 79 -> 316: 2
+# detour 172 -> 558: 2
+# detour 544 -> 542: 2
+# detour 65 -> 96: 3
+# detour 592 -> 479: 3
+# detour 297 -> 124: 3
+# detour 411 -> 220: 3
+# detour 162 -> 153: 3
+# detour 281 -> 98: 4
+# detour 77 -> 253: 4
+# detour 90 -> 459: 4
+# detour 421 -> 571: 4
+# detour 419 -> 411: 4
+# detour 238 -> 257: 4
+# detour 532 -> 90: 4
+# detour 90 -> 276: 4
+# detour 173 -> 106: 4
+# detour 203 -> 42: 4
+# detour 174 -> 392: 5
+# detour 143 -> 150: 5
+# detour 60 -> 131: 5
+# detour 143 -> 99: 5
+# detour 476 -> 373: 5
+# detour 0 -> 25: 5
+# detour 431 -> 201: 5
+# detour 400 -> 301: 6
+# detour 330 -> 281: 6
+# detour 582 -> 8: 6
+# detour 103 -> 347: 6
+# detour 494 -> 21: 6
+# detour 354 -> 128: 6
+# detour 107 -> 446: 6
+# detour 370 -> 543: 6
+# detour 498 -> 173: 6
+# detour 105 -> 260: 6
+# detour 557 -> 375: 7
+# detour 401 -> 99: 7
+# detour 99 -> 399: 7
+# detour 282 -> 110: 7
+# detour 205 -> 316: 7
+# detour 7 -> 337: 7
+# detour 316 -> 392: 7
+# detour 39 -> 390: 7
+# detour 493 -> 65: 8
+# detour 587 -> 42: 8
+# detour 456 -> 320: 8
+# detour 551 -> 121: 8
+# detour 420 -> 189: 8
+# detour 226 -> 18: 8
+# detour 197 -> 282: 8
+# detour 347 -> 367: 8
+# detour 565 -> 244: 8
+# detour 455 -> 26: 8
+# detour 588 -> 521: 8
+# detour 260 -> 122: 8
+# detour 317 -> 519: 8
+# detour 94 -> 26: 8
+# detour 518 -> 321: 9
+# detour 225 -> 300: 9
+# detour 375 -> 499: 9
+# detour 14 -> 509: 9
+# detour 44 -> 413: 9
+# detour 35 -> 388: 9
+# detour 421 -> 599: 9
+# detour 413 -> 436: 9
+# detour 103 -> 266: 9
+# detour 519 -> 108: 9
+# detour 372 -> 118: 9
+# detour 189 -> 29: 10
+# detour 571 -> 117: 10
+# detour 316 -> 223: 10
+# detour 31 -> 103: 10
+# detour 283 -> 98: 10
+# detour 31 -> 462: 10
+# detour 461 -> 535: 11
+# detour 207 -> 597: 11
+# detour 406 -> 419: 11
+# detour 566 -> 500: 11
+# detour 17 -> 276: 11
+# detour 21 -> 498: 11
+# detour 214 -> 203: 11
+# detour 509 -> 245: 11
+# detour 337 -> 493: 12
+# detour 98 -> 575: 12
+# detour 354 -> 31: 12
+# detour 118 -> 526: 12
+# detour 337 -> 504: 12
+# detour 257 -> 354: 12
+# detour 486 -> 17: 12
+# detour 358 -> 549: 12
+# detour 237 -> 11: 12
+# detour 173 -> 234: 13
+# detour 97 -> 39: 13
+# detour 21 -> 170: 13
+# detour 226 -> 277: 13
+# detour 108 -> 358: 13
+# detour 371 -> 509: 13
+# detour 322 -> 387: 14
+# detour 319 -> 550: 14
+# detour 430 -> 167: 14
+# detour 117 -> 588: 15
+# detour 250 -> 558: 17
+# detour 367 -> 589: 17
+# detour 8 -> 356: 18
+# Add 521
+# dig 5 path skip 2 steps
+# dig 5 path skip 2 steps
+# dig 7 path skip 2 steps
+# dig 8 path skip 2 steps
+# dig 10 path skip 2 steps
+# dig 10 path skip 2 steps
+# dig 14 path skip 2 steps
+# dig 15 path skip 2 steps
+# dig 15 path skip 2 steps
+1 0: 1 1

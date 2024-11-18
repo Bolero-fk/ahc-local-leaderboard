@@ -1,3 +1,4 @@
+import re
 import subprocess
 from abc import ABC, abstractmethod
 from typing import Optional
@@ -22,18 +23,17 @@ class TestFileProcessorInterface(ABC):
 class AtCoderTestFileProcessor(TestFileProcessorInterface):
     """AtCoderのツールを使用してテストファイルを処理し、スコアを計算するクラス。"""
 
-    def validate_output_format(self, decoded_output: str) -> None:
-        """標準出力が期待するフォーマットか検証します。"""
-        if len(decoded_output.split("\n")) != 2:
-            raise ValueError("入力されたテストファイルでAHCツールを実行するとエラーを返しています")
-
-    def parse_stdout(self, decoded_output: str) -> int:
+    def parse_stdout(self, decoded_output: str) -> Optional[int]:
         """標準出力からスコアを取り出します。"""
-        try:
-            score_str = decoded_output.split(" ")[-1].strip()
-            return int(score_str)
-        except (IndexError, ValueError):
-            raise ValueError("スコアを標準出力から抽出できませんでした。")
+        match = re.search(r"Score = (\d+)", decoded_output)
+        if match:
+            score = int(match.group(1))
+            if 0 < score:
+                return score
+            else:
+                return None
+        else:
+            return None
 
     def process_test_file(self, test_file: TestFile) -> Optional[int]:
         """AHCで配布されるツールを使ってスコアを計算し、成功した場合はスコアを返します。"""
@@ -42,11 +42,11 @@ class AtCoderTestFileProcessor(TestFileProcessorInterface):
                 score_process = subprocess.run(
                     ["cargo", "run", "-r", "--bin", "vis", fin.name, fout.name],
                     stdout=subprocess.PIPE,
-                    stderr=subprocess.DEVNULL,
+                    stderr=subprocess.STDOUT,
                 )
 
                 decoded_output = score_process.stdout.decode("utf-8")
-                self.validate_output_format(decoded_output)
+
                 return self.parse_stdout(decoded_output)
         except Exception:
             return None

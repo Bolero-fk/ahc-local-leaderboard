@@ -1,0 +1,169 @@
+# Add 481
+# rest A: 373 1
+# rest A: 450 2
+# rest A: 162 18 532
+# rest A: 238 21
+# rest A: 184 23 565
+# rest A: 27
+# rest A: 40
+# rest A: 42
+# rest A: 415 49
+# rest A: 393 163 50
+# rest A: 209 51
+# rest A: 146 52
+# rest A: 54
+# rest A: 176 62
+# rest A: 63
+# rest A: 290 122 66 470
+# rest A: 72
+# rest A: 74
+# rest A: 234 78
+# rest A: 517 84
+# rest A: 90
+# rest A: 99
+# rest A: 138 100
+# rest A: 110
+# rest A: 117
+# rest A: 269 358 120
+# rest A: 123
+# rest A: 539 125
+# rest A: 504 126
+# rest A: 198 137
+# rest A: 144
+# rest A: 167 147
+# rest A: 149
+# rest A: 375 418 152 476
+# rest A: 305 155 579
+# rest A: 235 159
+# rest A: 172 171
+# rest A: 485 177
+# rest A: 180
+# rest A: 183
+# rest A: 185
+# rest A: 200
+# rest A: 205
+# rest A: 214
+# rest A: 357 562 218
+# rest A: 219
+# rest A: 239
+# rest A: 510 242
+# rest A: 359 250
+# rest A: 251
+# rest A: 463 261
+# rest A: 262
+# rest A: 390 264
+# rest A: 267
+# rest A: 276
+# rest A: 292
+# rest A: 293
+# rest A: 296
+# rest A: 328 298
+# rest A: 303
+# rest A: 306
+# rest A: 440 307 548
+# rest A: 312
+# rest A: 313
+# rest A: 320
+# rest A: 324
+# rest A: 326
+# rest A: 327
+# rest A: 446 332
+# rest A: 531 339
+# rest A: 341
+# rest A: 344
+# rest A: 345
+# rest A: 346
+# rest A: 400 347
+# rest A: 354
+# rest A: 355
+# rest A: 360
+# rest A: 370 388 363
+# rest A: 367
+# rest A: 527 379
+# rest A: 380
+# rest A: 381
+# rest A: 394
+# rest A: 466 402
+# rest A: 404
+# rest A: 438 405
+# rest A: 408
+# rest A: 409
+# rest A: 411
+# rest A: 417
+# rest A: 421
+# rest A: 423
+# rest A: 424
+# rest A: 427
+# rest A: 474 435
+# rest A: 436
+# rest A: 514 437
+# rest A: 449
+# rest A: 452
+# rest A: 575 454
+# rest A: 456
+# rest A: 457
+# rest A: 459
+# rest A: 462
+# rest A: 478
+# rest A: 480
+# rest A: 483
+# rest A: 486
+# rest A: 497
+# rest A: 499
+# rest A: 501
+# rest A: 503
+# rest A: 508
+# rest A: 512
+# rest A: 515
+# rest A: 595 521
+# rest A: 524
+# rest A: 534
+# rest A: 536
+# rest A: 543
+# rest A: 556
+# rest A: 563
+# rest A: 564
+# rest A: 573
+# rest A: 576
+# rest A: 580
+# rest A: 581
+# rest A: 585
+# rest A: 597
+# min size = 677
+# space size 0
+# dist = 1162
+# 166 / 166
+# min size = 677
+# min size = 677
+# check query: A size = 677
+# final merge 0.428612
+# space size0
+# 677 == LA: 682
+# dist = 1162
+# 166 / 166
+# min size = 685
+# min size = 689
+# min size = 687
+# min size = 678
+# min size = 681
+# min size = 698
+# min size = 691
+# min size = 696
+# min size = 690
+# min size = 699
+# min size = 697
+# min size = 699
+# min size = 698
+# min size = 699
+# min size = 700
+# min size = 697
+# min size = 697
+# min size = 686
+# min size = 696
+# min size = 692
+# min size = 697
+# min size = 704
+# min size = 693
+# min size = 692
+# min size = 692
+# min size = 694

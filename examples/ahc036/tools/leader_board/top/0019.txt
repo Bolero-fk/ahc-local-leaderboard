@@ -1,0 +1,116 @@
+# Add 482
+# rest A: 1
+# rest A: 77 550 88 4
+# rest A: 7
+# rest A: 8
+# rest A: 17
+# rest A: 73 19
+# rest A: 20
+# rest A: 26
+# rest A: 39
+# rest A: 42
+# rest A: 44
+# rest A: 47
+# rest A: 183 55
+# rest A: 57
+# rest A: 59
+# rest A: 67
+# rest A: 85 68
+# rest A: 69
+# rest A: 80
+# rest A: 83
+# rest A: 109
+# rest A: 112
+# rest A: 115
+# rest A: 118
+# rest A: 136
+# rest A: 139
+# rest A: 588 146 596
+# rest A: 162
+# rest A: 595 173
+# rest A: 174
+# rest A: 176
+# rest A: 456 181
+# rest A: 540 184
+# rest A: 188
+# rest A: 200
+# rest A: 217 205
+# rest A: 207
+# rest A: 211
+# rest A: 212
+# rest A: 213
+# rest A: 216
+# rest A: 225
+# rest A: 273 236
+# rest A: 242
+# rest A: 258
+# rest A: 498 261
+# rest A: 263
+# rest A: 275
+# rest A: 502 278
+# rest A: 286
+# rest A: 582 287
+# rest A: 290
+# rest A: 292
+# rest A: 298
+# rest A: 302
+# rest A: 309
+# rest A: 311
+# rest A: 321
+# rest A: 324
+# rest A: 331
+# rest A: 332
+# rest A: 337
+# rest A: 340
+# rest A: 342
+# rest A: 350
+# rest A: 352
+# rest A: 354
+# rest A: 356
+# rest A: 357
+# rest A: 360
+# rest A: 364
+# rest A: 381
+# rest A: 385
+# rest A: 400 386
+# rest A: 389
+# rest A: 395
+# rest A: 398
+# rest A: 410
+# rest A: 417
+# rest A: 423
+# rest A: 428
+# rest A: 434
+# rest A: 445
+# rest A: 449
+# rest A: 453
+# rest A: 460
+# rest A: 463
+# rest A: 469
+# rest A: 566 474
+# rest A: 476
+# rest A: 482
+# rest A: 485
+# rest A: 493
+# rest A: 512
+# rest A: 516
+# rest A: 519
+# rest A: 520
+# rest A: 528
+# rest A: 538
+# rest A: 541
+# rest A: 543
+# rest A: 544
+# rest A: 569
+# rest A: 571
+# rest A: 577
+# rest A: 578
+# rest A: 583
+# rest A: 586
+# rest A: 591
+# rest A: 597
+# rest A: 599
+# min size = 855
+# space size 0
+# dist = 945
+# 174 / 175
