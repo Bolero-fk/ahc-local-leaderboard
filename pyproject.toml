@@ -5,6 +5,8 @@ description = "Manages a local leaderboard for AHC, enabling you to view relativ
 authors = ["bolero"]
 license = "MIT"
 readme = "README.md"
+homepage = "https://github.com/Bolero-fk/ahc-local-leaderboard"
+repository = "https://github.com/Bolero-fk/ahc-local-leaderboard"
 
 packages = [
     { include = "ahc_local_leaderboard", from = "src" }
