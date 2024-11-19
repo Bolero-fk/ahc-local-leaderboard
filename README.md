@@ -16,7 +16,7 @@
 
 以下のコマンドを実行してください：
 ```bash
-pip install ahc-local-leaderboard
+pip install git+https://github.com/Bolero-fk/ahc-local-leaderboard.git
 ```
 
 ## Usage
