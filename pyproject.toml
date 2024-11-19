@@ -49,4 +49,4 @@ lint = ["lint:isort", "lint:black", "mypy", "flake8"]
 
 test = "pytest"
 
-test_with_coverage_report = "pytest --cov ./src --cov-report=xml --cov-report=html tests/"
+test_with_coverage_report = "pytest --cov=src/ahc_local_leaderboard --cov-report=xml --cov-report=html tests/"
