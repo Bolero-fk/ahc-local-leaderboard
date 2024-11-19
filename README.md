@@ -1,4 +1,13 @@
 # ahc-local-leaderboard
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) 
+
+[![Build Status](https://github.com/Bolero-fk/ahc-local-leaderboard/actions/workflows/test.yml/badge.svg)](https://github.com/Bolero-fk/ahc-local-leaderboard/actions)
+
+
+![badge](https://raw.githubusercontent.com/Bolero-fk/ahc-local-leaderboard/_xml_coverage_reports/data/RewriteComment%2343/badge.svg)
+
+[![Python](https://img.shields.io/badge/python-3.10-blue.svg)](https://www.python.org/downloads/release/python-3100/)
+
 `ahc-local-leaderboard`はAtCoderのAHC（AtCoder Heuristic Contest）で使用するツールです。  
 自分の提出スコアを元に、相対順位表をローカル環境で作成・管理できます。
 
