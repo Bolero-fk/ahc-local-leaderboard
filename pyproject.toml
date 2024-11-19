@@ -16,6 +16,7 @@ packages = [
 python = "^3.10"
 pyyaml = "^6.0.2"
 rich = "^13.9.4"
+pytest-cov = "^6.0.0"
 
 [build-system]
 requires = ["poetry-core"]
@@ -47,3 +48,5 @@ format = ["isort", "black", "mypy", "flake8"]
 lint = ["lint:isort", "lint:black", "mypy", "flake8"]
 
 test = "pytest"
+
+test_with_coverage_report = "pytest --cov ./src --cov-report=xml --cov-report=html tests/"
