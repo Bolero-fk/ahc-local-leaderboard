@@ -28,10 +28,25 @@ jobs:
 
     - name: Install dependencies
       run: |
-        poetry install --no-interaction --no-root
+        poetry install --no-interaction
 
     - name: Run Lint
       run: poetry run poe lint
 
-    - name: Run Test
-      run: poetry run poe test
+    - name: Run Test with Coverage Report
+      run: poetry run poe test_with_coverage_report
+
+    - name: Upload coverage report as artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: coverage-report
+        path: ./htmlcov
+
+    - name: Code Coverage Report
+      uses: insightsengineering/coverage-action@v2
+      with:
+        path: ./coverage.xml
+        threshold: 80
+        fail: true
+        publish: true
+        togglable-report: true
