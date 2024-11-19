@@ -30,11 +30,11 @@ local-leaderboard setup
 
 **セットアップ時にスコアの計算方法を尋ねられた場合：**
 
-- 相対評価スコアの計算方法が $ \mathrm{round}(10^9 \times \frac{自身のスコア}{全参加者の最高スコア}) $ の場合は、`1: Maximization`を選択してください。
-- 相対評価スコアの計算方法が $ \mathrm{round}(10^9 \times \frac{全参加者の最小スコア}{自身のスコア}) $ の場合は、`2: Minimization`を選択してください。
+- 相対評価スコアの計算方法が $` \mathrm{round}(10^9 \times \frac{自身のスコア}{全参加者の最高スコア}) `$ の場合は、`1: Maximization`を選択してください。
+- 相対評価スコアの計算方法が $` \mathrm{round}(10^9 \times \frac{全参加者の最小スコア}{自身のスコア}) `$ の場合は、`2: Minimization`を選択してください。
 
 > **注記**: **計算式の詳細な表記**（例:「全参加者の最小スコア」と「全参加者の最小絶対スコア」など）はコンテストごとに異なる可能性がありますが、上記の2つの計算方法に対応しています。  
-**一方、計算式の構造自体が全く異なる場合**（例：[AHC025](https://atcoder.jp/contests/ahc025/tasks/ahc025_a)の$\mathrm{round}(10^9\times (1-\frac{r}{n}))$）には対応していません。
+**一方、計算式の構造自体が全く異なる場合**（例：[AHC025](https://atcoder.jp/contests/ahc025/tasks/ahc025_a)の$`\mathrm{round}(10^9\times (1-\frac{r}{n}))`$）には対応していません。
 
 ### submit
 `submit`コマンドを使うことで、自分の提出結果をローカル順位表に登録できます。
@@ -78,7 +78,7 @@ local-leaderboard view
 |**Rank**|相対スコアに基づく順位を表します。|
 |**Submission Time**|提出の日時を表します。|
 |**Total Absolute Score**|提出全体の絶対スコアの合計値です。<br>（括弧内の数字は、点数計算が失敗したテストケースの総数を表します）|
-|**Total Relative Score**|提出全体の相対スコアの合計値です（最も高いスコアが$10^9$になります）。|
+|**Total Relative Score**|提出全体の相対スコアの合計値です（最も高いスコアが$`10^9`$になります）。|
 
 ---
 #### view option(--details \<id\>, latest)
@@ -108,7 +108,7 @@ local-leaderboard view --detail latest
 | **Test Case**|テストケースの名前です。|
 |**Absolute Score**|各テストケースの絶対スコアです。<br>Noneになっているテストケースは点数計算が失敗したことを表しています。|
 |**Score Diff**|現在のトップスコアとの差分を表します。<br>Noneになっているテストケースは点数計算が失敗したことを表しています。|
-|**Relative Score**|各テストケースの相対スコアです（最も高いスコアが$10^9$となります）。|
+|**Relative Score**|各テストケースの相対スコアです（最も高いスコアが$`10^9`$となります）。|
 
 ---
 #### view option(--details top)
