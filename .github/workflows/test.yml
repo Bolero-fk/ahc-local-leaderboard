@@ -28,7 +28,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        poetry install --no-interaction --no-root
+        poetry install --no-interaction
 
     - name: Run Lint
       run: poetry run poe lint
