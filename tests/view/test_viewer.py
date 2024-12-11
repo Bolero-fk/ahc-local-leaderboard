@@ -9,6 +9,7 @@ from ahc_local_leaderboard.models.detail_score_record import (
     DetailScoreRecords,
     TopDetailScoreRecord,
 )
+from ahc_local_leaderboard.models.sort_config import SortConfig
 from ahc_local_leaderboard.models.summary_score_record import SummaryScoreRecord
 from ahc_local_leaderboard.utils.relative_score_calculater import (
     RelativeScoreCalculaterInterface,
@@ -26,6 +27,11 @@ def mock_relative_score_calculator() -> RelativeScoreCalculaterInterface:
     return cast(
         RelativeScoreCalculaterInterface, create_autospec(RelativeScoreCalculaterInterface)
     )  # mypyのためのcast
+
+
+@pytest.fixture
+def mock_sort_config() -> SortConfig:
+    return cast(SortConfig, create_autospec(SortConfig))  # mypyのためのcast
 
 
 @pytest.fixture
@@ -73,6 +79,7 @@ def test_show_summary_list(
     viewer: Viewer,
     mock_record_read_service: Mock,
     mock_summary_table_builder_functions: Dict[str, MagicMock],
+    mock_sort_config: Mock,
     count: int,
 ) -> None:
 
@@ -81,7 +88,7 @@ def test_show_summary_list(
         records=[MagicMock() for _ in range(count)]
     )
 
-    viewer.show_summary_list(list_length=count)
+    viewer.show_summary_list(list_length=count, sort_config=mock_sort_config)
     mock_record_read_service.fetch_top_summary_record.assert_called_once()
     mock_record_read_service.fetch_recent_summary_records.assert_called_once_with(count)
 
@@ -91,10 +98,10 @@ def test_show_summary_list(
 
 
 @pytest.mark.parametrize("count", [-100, -1])
-def test_show_summary_list_assertions(viewer: Viewer, count: int) -> None:
+def test_show_summary_list_assertions(viewer: Viewer, count: int, mock_sort_config: Mock) -> None:
 
     with pytest.raises(AssertionError):
-        viewer.show_summary_list(list_length=count)
+        viewer.show_summary_list(list_length=count, sort_config=mock_sort_config)
 
 
 def test_show_summary_table(viewer: Viewer, mock_summary_table_builder_functions: Dict[str, MagicMock]) -> None:
@@ -117,7 +124,7 @@ def test_show_test_case_table(viewer: Viewer, mock_detail_table_builder_function
 
 
 @pytest.mark.parametrize("id", [1, 100])
-def test_show_detail(id: int, viewer: Viewer, mock_record_read_service: Mock) -> None:
+def test_show_detail(id: int, viewer: Viewer, mock_record_read_service: Mock, mock_sort_config: Mock) -> None:
     mock_record_read_service.fetch_summary_record_by_id.return_value = MagicMock(spec=SummaryScoreRecord)
     mock_record_read_service.fetch_detail_records_by_id.return_value = MagicMock(spec=DetailScoreRecords)
 
@@ -125,7 +132,7 @@ def test_show_detail(id: int, viewer: Viewer, mock_record_read_service: Mock) ->
         viewer, "show_test_case_table"
     ) as mock_show_test_case_table:
 
-        viewer.show_detail(submission_id=id)
+        viewer.show_detail(submission_id=id, sort_config=mock_sort_config)
         mock_record_read_service.fetch_summary_record_by_id.assert_called_once_with(id)
         mock_show_summary_table.assert_called_once()
         mock_record_read_service.fetch_detail_records_by_id.assert_called_once_with(id)
@@ -133,16 +140,16 @@ def test_show_detail(id: int, viewer: Viewer, mock_record_read_service: Mock) ->
 
 
 @pytest.mark.parametrize("id", [-100, -1, 0])
-def test_show_detail_assertions(id: int, viewer: Viewer) -> None:
+def test_show_detail_assertions(id: int, viewer: Viewer, mock_sort_config: Mock) -> None:
     with pytest.raises(AssertionError):
-        viewer.show_detail(submission_id=id)
+        viewer.show_detail(submission_id=id, sort_config=mock_sort_config)
 
 
-def test_show_latest_detail(viewer: Viewer, mock_record_read_service: Mock) -> None:
+def test_show_latest_detail(viewer: Viewer, mock_record_read_service: Mock, mock_sort_config: Mock) -> None:
     mock_record_read_service.fetch_latest_submission_id.return_value = 10
 
     with patch.object(viewer, "show_detail") as mock_show_detail:
-        viewer.show_latest_detail()
+        viewer.show_latest_detail(mock_sort_config)
         mock_show_detail.assert_called_once()
 
 
