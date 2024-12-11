@@ -72,11 +72,11 @@ class Viewer:
         """指定された提出IDの詳細テーブルを表示します。"""
         assert 0 < submission_id
 
-        summary_record = self.record_read_service.fetch_summary_record_by_id(submission_id)
-        self.show_summary_table(summary_record)
-
         detail_records = self.record_read_service.fetch_detail_records_by_id(submission_id)
         self.show_test_case_table(detail_records)
+
+        summary_record = self.record_read_service.fetch_summary_record_by_id(submission_id)
+        self.show_summary_table(summary_record)
 
     def show_latest_detail(self) -> None:
         """最新の提出の詳細テーブルを表示します。"""
