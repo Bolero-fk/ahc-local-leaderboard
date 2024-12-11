@@ -1,5 +1,6 @@
 from typing import Generic, Optional, TypeVar, Union
 
+from ahc_local_leaderboard.models.sort_config import DetailScoreRecordsSortConfig
 from ahc_local_leaderboard.utils.relative_score_calculater import (
     RelativeScoreCalculaterInterface,
 )
@@ -50,6 +51,10 @@ class DetailScoreRecords(Generic[T]):
 
         self.id = id
         self.records = records
+
+    def sort_records(self, sort_config: DetailScoreRecordsSortConfig) -> None:
+        """入力された設定に従ってrecordsをソートします。"""
+        self.records.sort(key=sort_config.key, reverse=sort_config.order != "asc")
 
     def sort_records_by_input_file_name(self) -> None:
         """入力ファイル名でレコードをソートします。"""

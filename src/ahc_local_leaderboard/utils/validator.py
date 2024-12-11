@@ -109,8 +109,12 @@ class ViewValidator(CommandValidatorBase):
 
             if args.detail.isdigit():
                 self.check_id_exists(int(args.detail))
+                self.check_sort_column_option_of_detail_records(args.sort_column)
             elif args.detail == "latest":
                 self.check_latest_exists()
+                self.check_sort_column_option_of_detail_records(args.sort_column)
+        else:
+            self.check_sort_column_option_of_summary_records(args.sort_column)
 
         return self.is_valid()
 
@@ -132,6 +136,22 @@ class ViewValidator(CommandValidatorBase):
         """'view --detail' オプションの妥当性を確認します。 許可された値（数字、'latest'、'top'）以外の場合にエラーリストに追加します。"""
         if not option.isdigit() and option != "latest" and not option == "top":
             self.errors.append(f"Invalid argument for 'view --detail' option: {option}")
+            return False
+
+        return True
+
+    def check_sort_column_option_of_summary_records(self, column: str) -> bool:
+        """概略情報を表示する際の'view --sort-column' オプションの妥当性を確認します。"""
+        if column not in ["id", "rank", "time", "abs", "rel"]:
+            self.errors.append(f"Invalid argument for 'view --sort-column' option: {column}")
+            return False
+
+        return True
+
+    def check_sort_column_option_of_detail_records(self, column: str) -> bool:
+        """詳細情報を表示する際の'view --sort-column' オプションの妥当性を確認します。"""
+        if column not in ["id", "abs", "rel"]:
+            self.errors.append(f"Invalid argument for 'view --sort-column' option: {column}")
             return False
 
         return True

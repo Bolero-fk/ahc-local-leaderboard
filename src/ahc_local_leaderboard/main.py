@@ -15,6 +15,10 @@ from ahc_local_leaderboard.dependency_setup import (
     setup_scoring_dependencies,
 )
 from ahc_local_leaderboard.init.initializer import Initializer
+from ahc_local_leaderboard.models.sort_config import (
+    DetailScoreRecordsSortConfig,
+    SummaryScoreRecordsSortConfig,
+)
 from ahc_local_leaderboard.models.test_file import TestFiles
 from ahc_local_leaderboard.submit.submitter import Submitter
 from ahc_local_leaderboard.utils.console_handler import ConsoleHandler
@@ -54,10 +58,13 @@ def handle_submit(dependencies: Dependencies, test_files: TestFiles) -> None:
         dependencies["record_read_service"],
         dependencies["relative_score_calculator"],
     )
-    viewer.show_latest_detail()
+
+    sort_config = DetailScoreRecordsSortConfig("id", "asc", dependencies["relative_score_calculator"])
+
+    viewer.show_latest_detail(sort_config)
 
 
-def handle_view(dependencies: Dependencies, limit: int, detail: str) -> None:
+def handle_view(dependencies: Dependencies, limit: int, detail: str, sort_column: str, sort_order: str) -> None:
     """スコア履歴やテストケースの詳細を表示します。"""
     viewer = Viewer(
         dependencies["record_read_service"],
@@ -65,9 +72,15 @@ def handle_view(dependencies: Dependencies, limit: int, detail: str) -> None:
     )
     if detail:
         if detail.isdigit():
-            viewer.show_detail(int(detail))
+            sort_config = DetailScoreRecordsSortConfig(
+                sort_column, sort_order, dependencies["relative_score_calculator"]
+            )
+            viewer.show_detail(int(detail), sort_config)
         elif detail == "latest":
-            viewer.show_latest_detail()
+            sort_config = DetailScoreRecordsSortConfig(
+                sort_column, sort_order, dependencies["relative_score_calculator"]
+            )
+            viewer.show_latest_detail(sort_config)
         elif detail == "top":
             viewer.show_top_detail()
         else:
@@ -80,7 +93,7 @@ def handle_view(dependencies: Dependencies, limit: int, detail: str) -> None:
                 ]
             )
     else:
-        viewer.show_summary_list(limit)
+        viewer.show_summary_list(limit, SummaryScoreRecordsSortConfig(sort_column, sort_order))
 
 
 def main() -> None:
@@ -110,6 +123,22 @@ def main() -> None:
         help="Specify the submission Id to view details (can specify ID, latest, or top)",
         type=str,
         metavar="<id>",
+    )
+
+    view_parser.add_argument(
+        "--sort-column",
+        help="Column to sort by (default: id). Choices: id, rank, time, abs, rel",
+        type=str,
+        choices=["id", "rank", "time", "abs", "rel"],
+        default="id",
+    )
+
+    view_parser.add_argument(
+        "--sort-order",
+        help="Sort order (default: desc).",
+        type=str,
+        choices=["asc", "desc"],
+        default="desc",
     )
 
     args = parser.parse_args()
@@ -156,7 +185,7 @@ def main() -> None:
             view_validator.print_errors()
             return
 
-        handle_view(dependencies, args.limit, args.detail)
+        handle_view(dependencies, args.limit, args.detail, args.sort_column, args.sort_order)
 
     else:
         parser.print_help()
