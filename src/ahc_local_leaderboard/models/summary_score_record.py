@@ -6,6 +6,7 @@ from ahc_local_leaderboard.models.detail_score_record import (
     DetailScoreRecord,
     DetailScoreRecords,
 )
+from ahc_local_leaderboard.models.sort_config import SummaryScoreRecordsSortConfig
 from ahc_local_leaderboard.utils.relative_score_calculater import (
     RelativeScoreCalculaterInterface,
 )
@@ -81,6 +82,10 @@ class SummaryScoreRecords:
     def add_record(self, record: SummaryScoreRecord) -> None:
         """指定された record を records に追加する。"""
         return self.records.append(record)
+
+    def sort_records(self, sort_config: SummaryScoreRecordsSortConfig) -> None:
+        """入力された設定に従ってrecordsをソートします。"""
+        self.records.sort(key=sort_config.key, reverse=sort_config.order != "asc")
 
     def update_relative_ranks(self) -> None:
         """total_relative_score に基づいて records を降順に並べ、relative_rank を設定する。"""
