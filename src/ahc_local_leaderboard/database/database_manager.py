@@ -263,6 +263,24 @@ class ScoreHistoryRepository:
             result: int = cursor.fetchone()[0]
             return result
 
+    def fetch_records_by_absolute_score(self, total_absolute_score: int) -> SummaryScoreRecords:
+        """入力されたスコアと同じ絶対スコアを持つ概略レコードを取得します。"""
+        with self.db_manager as conn:
+            cursor = conn.cursor()
+            cursor.execute(
+                """
+                SELECT id, submission_time, total_absolute_score, total_relative_score,
+                       invalid_score_count, relative_rank
+                FROM score_history
+                WHERE total_absolute_score = ?
+                """,
+                (total_absolute_score,),
+            )
+            rows = cursor.fetchall()
+
+        records = [SummaryScoreRecord.from_row(row) for row in rows]
+        return SummaryScoreRecords(records)
+
 
 class TestCaseRepository:
     """テストケーステーブルへの操作を提供するクラス。"""

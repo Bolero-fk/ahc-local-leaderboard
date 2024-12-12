@@ -228,6 +228,37 @@ def test_fetch_total_record_count(score_history_repository: ScoreHistoryReposito
     assert score_history_repository.fetch_total_record_count() == total_record_count
 
 
+def test_fetch_record_ids_by_absolute_score(score_history_repository: ScoreHistoryRepository) -> None:
+
+    submission_time1 = get_now_time()
+    record1 = score_history_repository.reserve_empty_score_history_record(submission_time1)
+    record1.total_absolute_score = 1
+    record1.total_relative_score = 2
+    record1.invalid_score_count = 3
+    record1.relative_rank = 4
+    score_history_repository.update_score_history(record1)
+
+    submission_time2 = get_now_time() + timedelta(seconds=1)
+    record2 = score_history_repository.reserve_empty_score_history_record(submission_time2)
+    record2.total_absolute_score = 10
+    record2.total_relative_score = 20
+    record2.invalid_score_count = 30
+    record2.relative_rank = 40
+    score_history_repository.update_score_history(record2)
+
+    all_records = score_history_repository.fetch_records_by_absolute_score(1)
+
+    assert len(all_records.records) == 1
+    assert all_records.records[0].id == record1.id
+
+    all_records = score_history_repository.fetch_records_by_absolute_score(10)
+    assert len(all_records.records) == 1
+    assert all_records.records[0].id == record2.id
+
+    all_records = score_history_repository.fetch_records_by_absolute_score(100)
+    assert len(all_records.records) == 0
+
+
 @pytest.fixture
 def test_case_repository(temp_database: DatabaseManager) -> TestCaseRepository:
     return TestCaseRepository(temp_database)
