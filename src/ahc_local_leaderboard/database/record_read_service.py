@@ -58,6 +58,10 @@ class RecordReadService:
         """データベースに存在する提出記録の総数を返します。"""
         return self.score_history_repo.fetch_total_record_count()
 
+    def fetch_records_by_absolute_score(self, total_absolute_score: int) -> SummaryScoreRecords:
+        """入力されたスコアと同じ絶対スコアを持つ概略レコードを取得します。"""
+        return self.score_history_repo.fetch_records_by_absolute_score(total_absolute_score)
+
     def fetch_detail_records_by_id(self, submission_id: int) -> DetailScoreRecords[DetailScoreRecord]:
         """指定した提出IDのテストケースレコードを取得します。"""
         assert 0 < submission_id

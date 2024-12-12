@@ -125,6 +125,19 @@ def test_fetch_total_record_count(
     assert service.fetch_total_record_count() == total_record_count
 
 
+@pytest.mark.parametrize("total_absolute_score", [0, 1, 100])
+def test_fetch_record_ids_by_absolute_score(
+    service: RecordReadService, mock_repos: tuple[MagicMock, MagicMock, MagicMock], total_absolute_score: int
+) -> None:
+
+    mock_data = Mock(spec=SummaryScoreRecords)
+
+    score_history_repo, _, _ = mock_repos
+    score_history_repo.fetch_records_by_absolute_score.return_value = mock_data
+
+    assert service.fetch_records_by_absolute_score(total_absolute_score) == mock_data
+
+
 @pytest.mark.parametrize("submission_id", [1, 10, 100])
 def test_fetch_detail_records_by_id(
     service: RecordReadService, mock_repos: tuple[MagicMock, MagicMock, MagicMock], submission_id: int

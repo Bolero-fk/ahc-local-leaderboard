@@ -42,7 +42,7 @@ def handle_setup(initial_dependencies: PrevDependencies) -> None:
     initializer.execute()
 
 
-def handle_submit(dependencies: Dependencies, test_files: TestFiles) -> None:
+def handle_submit(dependencies: Dependencies, test_files: TestFiles, skip_duplicate: bool) -> None:
     """指定した出力をローカル順位表に送信します。"""
     submitter = Submitter(
         dependencies["record_write_service"],
@@ -50,18 +50,22 @@ def handle_submit(dependencies: Dependencies, test_files: TestFiles) -> None:
         dependencies["test_cases_processor"],
         dependencies["reserved_record_updater"],
         dependencies["relative_score_updater"],
+        dependencies["submission_matcher"],
     )
 
-    submitter.execute(test_files)
+    submit_result = submitter.execute(test_files, skip_duplicate)
 
-    viewer = Viewer(
-        dependencies["record_read_service"],
-        dependencies["relative_score_calculator"],
-    )
+    if submit_result:
+        viewer = Viewer(
+            dependencies["record_read_service"],
+            dependencies["relative_score_calculator"],
+        )
 
-    sort_config = DetailScoreRecordsSortConfig("id", "asc", dependencies["relative_score_calculator"])
+        sort_config = DetailScoreRecordsSortConfig("id", "asc", dependencies["relative_score_calculator"])
 
-    viewer.show_latest_detail(sort_config)
+        viewer.show_latest_detail(sort_config)
+    else:
+        ConsoleHandler.print_info("Skipping duplicate submissions")
 
 
 def handle_view(dependencies: Dependencies, limit: int, detail: str, sort_column: str, sort_order: str) -> None:
@@ -106,6 +110,12 @@ def main() -> None:
     submit_parser = subparsers.add_parser("submit", help="Submit output to the local leaderboard")
     submit_parser.add_argument(
         "--submit-file", type=str, help="Specify the submit file to submit. Default is 'out'.", default="out"
+    )
+
+    submit_parser.add_argument(
+        "--skip-duplicate",
+        action="store_true",
+        help="Skip submission if the same submission already exists in the database.",
     )
 
     view_parser = subparsers.add_parser("view", help="View score history and test case details")
@@ -173,7 +183,7 @@ def main() -> None:
 
         try:
             dependencies["db_manager"].begin_transaction()
-            handle_submit(dependencies, test_files)
+            handle_submit(dependencies, test_files, args.skip_duplicate)
             dependencies["db_manager"].commit()
         except Exception as e:
             dependencies["db_manager"].rollback()
