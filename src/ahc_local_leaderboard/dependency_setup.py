@@ -11,6 +11,7 @@ from ahc_local_leaderboard.database.record_read_service import RecordReadService
 from ahc_local_leaderboard.database.record_write_service import RecordWriteService
 from ahc_local_leaderboard.submit.relative_score_updater import RelativeScoreUpdater
 from ahc_local_leaderboard.submit.reserved_record_updater import ReservedRecordUpdater
+from ahc_local_leaderboard.submit.submission_matcher import SubmissionMatcher
 from ahc_local_leaderboard.submit.test_case_processor import (
     TestCaseProcessor,
     TestCasesProcessor,
@@ -47,6 +48,7 @@ class Dependencies(TypedDict):
     relative_score_updater: RelativeScoreUpdater
     reserved_record_updater: ReservedRecordUpdater
     db_manager: DatabaseManager
+    submission_matcher: SubmissionMatcher
 
 
 def setup_initial_dependencies() -> PrevDependencies:
@@ -91,6 +93,8 @@ def setup_scoring_dependencies(config: Config, initial_dependencies: PrevDepende
         relative_score_calculator,
     )
 
+    submission_matcher = SubmissionMatcher(initial_dependencies["record_read_service"])
+
     all_dependencies: Dependencies = {
         **initial_dependencies,
         "relative_score_calculator": relative_score_calculator,
@@ -98,6 +102,7 @@ def setup_scoring_dependencies(config: Config, initial_dependencies: PrevDepende
         "test_cases_processor": test_cases_processor,
         "relative_score_updater": relative_score_updater,
         "reserved_record_updater": reserved_record_updater,
+        "submission_matcher": submission_matcher,
     }
 
     return all_dependencies
