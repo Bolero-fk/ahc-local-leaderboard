@@ -69,9 +69,10 @@ class PahcerTestFileProcessor(TestFileProcessorInterface):
     def get_case_by_seed(self, seed: int) -> Optional[dict[Any, Any]]:
         """seed番号からcaseを返します。"""
 
-        # seed番目が目的のcaseである可能性が高い
-        if self.pahcer_data["cases"][seed]["seed"] == seed:
-            return self.pahcer_data["cases"][seed]  # type: ignore
+        if seed < len(self.pahcer_data["cases"]):
+            # seed番目が目的のcaseである可能性が高い
+            if self.pahcer_data["cases"][seed]["seed"] == seed:
+                return self.pahcer_data["cases"][seed]  # type: ignore
 
         for case in self.pahcer_data["cases"]:
             if case["seed"] == seed:
