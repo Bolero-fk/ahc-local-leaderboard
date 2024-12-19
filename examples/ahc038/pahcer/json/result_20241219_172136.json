@@ -1,0 +1,49 @@
+{
+  "start_time": "2024-12-19T17:21:36.830666543+09:00",
+  "case_count": 5,
+  "total_score": 143,
+  "total_score_log10": 5.68085200753364,
+  "total_relative_score": 400.0,
+  "max_execution_time": 2.907660435,
+  "comment": "",
+  "wa_seeds": [
+    3
+  ],
+  "cases": [
+    {
+      "seed": 0,
+      "score": 13,
+      "relative_score": 100.0,
+      "execution_time": 2.907470309,
+      "error_message": ""
+    },
+    {
+      "seed": 1,
+      "score": 31,
+      "relative_score": 100.0,
+      "execution_time": 2.907660435,
+      "error_message": ""
+    },
+    {
+      "seed": 2,
+      "score": 85,
+      "relative_score": 100.0,
+      "execution_time": 2.907052023,
+      "error_message": ""
+    },
+    {
+      "seed": 3,
+      "score": 0,
+      "relative_score": 0.0,
+      "execution_time": 0.0,
+      "error_message": "Failed to run (signal: 8 (SIGFPE)). command: \"./a.out\""
+    },
+    {
+      "seed": 4,
+      "score": 14,
+      "relative_score": 100.0,
+      "execution_time": 2.906830768,
+      "error_message": ""
+    }
+  ]
+}
