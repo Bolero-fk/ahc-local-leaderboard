@@ -113,6 +113,13 @@ def main() -> None:
     )
 
     submit_parser.add_argument(
+        "--pahcer-directory",
+        type=str,
+        help="Specify the directory containing pahcer files. If specified, scores will be extracted from these files.",
+        default=None,
+    )
+
+    submit_parser.add_argument(
         "--skip-duplicate",
         action="store_true",
         help="Skip submission if the same submission already exists in the database.",
