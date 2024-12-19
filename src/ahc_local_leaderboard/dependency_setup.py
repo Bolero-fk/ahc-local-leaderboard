@@ -1,4 +1,5 @@
-from typing import TypedDict
+from pathlib import Path
+from typing import Optional, TypedDict
 
 from ahc_local_leaderboard.config import Config
 from ahc_local_leaderboard.database.database_manager import (
@@ -18,6 +19,7 @@ from ahc_local_leaderboard.submit.test_case_processor import (
 )
 from ahc_local_leaderboard.submit.test_file_processor import (
     AtCoderTestFileProcessor,
+    PahcerTestFileProcessor,
     TestFilesProcessor,
 )
 from ahc_local_leaderboard.utils.file_utility import FileUtility
@@ -106,3 +108,21 @@ def setup_scoring_dependencies(config: Config, initial_dependencies: PrevDepende
     }
 
     return all_dependencies
+
+
+def setup_pahcer_test_file_processor(pahcer_directory_path: Path) -> Optional[PahcerTestFileProcessor]:
+    """PahcerTestFileProcessorを初期化します。"""
+
+    latest_json = find_latest_json(pahcer_directory_path / Path("json"))
+    if latest_json is None:
+        return None
+    print(latest_json)
+    return PahcerTestFileProcessor(latest_json)
+
+
+def find_latest_json(directory: Path) -> Optional[Path]:
+    """最も新しいjsonファイルへのパスを返します。"""
+    json_files = list(directory.glob("*.json"))
+    if not json_files:
+        return None
+    return max(json_files, key=lambda f: f.stat().st_mtime)
