@@ -1,4 +1,5 @@
 import argparse
+from pathlib import Path
 
 from ahc_local_leaderboard.config import Config
 from ahc_local_leaderboard.consts import (
@@ -12,6 +13,7 @@ from ahc_local_leaderboard.dependency_setup import (
     Dependencies,
     PrevDependencies,
     setup_initial_dependencies,
+    setup_pahcer_test_file_processor,
     setup_scoring_dependencies,
 )
 from ahc_local_leaderboard.init.initializer import Initializer
@@ -21,6 +23,7 @@ from ahc_local_leaderboard.models.sort_config import (
 )
 from ahc_local_leaderboard.models.test_file import TestFiles
 from ahc_local_leaderboard.submit.submitter import Submitter
+from ahc_local_leaderboard.submit.test_file_processor import TestFilesProcessor
 from ahc_local_leaderboard.utils.console_handler import ConsoleHandler
 from ahc_local_leaderboard.utils.validator import (
     InitValidator,
@@ -113,6 +116,13 @@ def main() -> None:
     )
 
     submit_parser.add_argument(
+        "--pahcer-directory",
+        type=str,
+        help="Specify the directory containing pahcer files. If specified, scores will be extracted from these files.",
+        default=None,
+    )
+
+    submit_parser.add_argument(
         "--skip-duplicate",
         action="store_true",
         help="Skip submission if the same submission already exists in the database.",
@@ -180,6 +190,11 @@ def main() -> None:
         if not submit_validator.validate(args):
             submit_validator.print_errors()
             return
+
+        if args.pahcer_directory:
+            pahcer_test_file_processor = setup_pahcer_test_file_processor(Path(args.pahcer_directory))
+            assert pahcer_test_file_processor
+            dependencies["test_files_processor"] = TestFilesProcessor(pahcer_test_file_processor)
 
         try:
             dependencies["db_manager"].begin_transaction()

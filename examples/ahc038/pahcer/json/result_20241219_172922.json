@@ -1,0 +1,47 @@
+{
+  "start_time": "2024-12-19T17:29:22.153461583+09:00",
+  "case_count": 5,
+  "total_score": 217,
+  "total_score_log10": 7.550083727264616,
+  "total_relative_score": 500.0,
+  "max_execution_time": 2.908907851,
+  "comment": "",
+  "wa_seeds": [],
+  "cases": [
+    {
+      "seed": 0,
+      "score": 13,
+      "relative_score": 100.0,
+      "execution_time": 2.907935329,
+      "error_message": ""
+    },
+    {
+      "seed": 1,
+      "score": 31,
+      "relative_score": 100.0,
+      "execution_time": 2.908907851,
+      "error_message": ""
+    },
+    {
+      "seed": 2,
+      "score": 85,
+      "relative_score": 100.0,
+      "execution_time": 2.907534425,
+      "error_message": ""
+    },
+    {
+      "seed": 3,
+      "score": 74,
+      "relative_score": 100.0,
+      "execution_time": 2.908852304,
+      "error_message": ""
+    },
+    {
+      "seed": 4,
+      "score": 14,
+      "relative_score": 100.0,
+      "execution_time": 2.906344212,
+      "error_message": ""
+    }
+  ]
+}

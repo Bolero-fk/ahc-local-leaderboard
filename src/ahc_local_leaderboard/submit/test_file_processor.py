@@ -1,7 +1,9 @@
+import json
 import re
 import subprocess
 from abc import ABC, abstractmethod
-from typing import Optional
+from pathlib import Path
+from typing import Any, Optional
 
 from rich.progress import track
 
@@ -50,6 +52,46 @@ class AtCoderTestFileProcessor(TestFileProcessorInterface):
                 return self.parse_stdout(decoded_output)
         except Exception:
             return None
+
+
+class PahcerTestFileProcessor(TestFileProcessorInterface):
+    """pahcerファイルからスコアを計算するクラス。"""
+
+    def __init__(self, pahcer_file_path: Path) -> None:
+        super().__init__()
+        self.pahcer_data = self.load_pahcer_file(pahcer_file_path)
+
+    def load_pahcer_file(self, pahcer_file_path: Path) -> dict[Any, Any]:
+        """pahcerファイルを読み込みます。"""
+        with open(pahcer_file_path, "r", encoding="utf-8") as file:
+            return json.load(file)  # type: ignore
+
+    def get_case_by_seed(self, seed: int) -> Optional[dict[Any, Any]]:
+        """seed番号からcaseを返します。"""
+
+        if seed < len(self.pahcer_data["cases"]):
+            # seed番目が目的のcaseである可能性が高い
+            if self.pahcer_data["cases"][seed]["seed"] == seed:
+                return self.pahcer_data["cases"][seed]  # type: ignore
+
+        for case in self.pahcer_data["cases"]:
+            if case["seed"] == seed:
+                return case  # type: ignore
+        return None
+
+    def process_test_file(self, test_file: TestFile) -> Optional[int]:
+        """pahcerファイルを使ってスコアを計算し、成功した場合はスコアを返します。"""
+
+        seed_num = test_file.get_seed_number()
+        if seed_num in self.pahcer_data["wa_seeds"]:
+            return None
+
+        result = self.get_case_by_seed(seed_num)
+
+        if result is None:
+            return None
+
+        return int(result["score"])
 
 
 class TestFilesProcessor:

@@ -1,3 +1,4 @@
+from pathlib import Path
 from typing import Optional
 from unittest.mock import MagicMock, Mock, mock_open, patch
 
@@ -5,6 +6,7 @@ import pytest
 
 from ahc_local_leaderboard.submit.test_file_processor import (
     AtCoderTestFileProcessor,
+    PahcerTestFileProcessor,
     TestFileProcessorInterface,
     TestFilesProcessor,
 )
@@ -137,3 +139,61 @@ def test_process_test_files(
     assert len(test_cases.test_cases) == len(expected_scores)
     for i, test_case in enumerate(test_cases):
         assert test_case.score == expected_scores[i]
+
+
+def sample_pahcer_data() -> dict:  # type: ignore
+    return {
+        "wa_seeds": [1, 3],
+        "cases": [
+            {"seed": 0, "score": 100},
+            {"seed": 1, "score": 0},
+            {"seed": 2, "score": 50},
+            {"seed": 3, "score": 0},
+            {"seed": 10, "score": 8},
+        ],
+    }
+
+
+def test_get_case_by_seed() -> None:
+
+    with patch(
+        "ahc_local_leaderboard.submit.test_file_processor.PahcerTestFileProcessor.load_pahcer_file",
+        return_value=sample_pahcer_data(),
+    ):
+        processor = PahcerTestFileProcessor(Path("mock.json"))
+
+        case = processor.get_case_by_seed(2)
+        assert case == {"seed": 2, "score": 50}
+
+        case = processor.get_case_by_seed(10)
+        assert case == {"seed": 10, "score": 8}
+
+        case = processor.get_case_by_seed(99)
+        assert case is None
+
+
+def test_pahcer_process_test_file() -> None:
+
+    with patch(
+        "ahc_local_leaderboard.submit.test_file_processor.PahcerTestFileProcessor.load_pahcer_file",
+        return_value=sample_pahcer_data(),
+    ):
+        processor = PahcerTestFileProcessor(Path("mock.json"))
+
+        test_file = Mock()
+
+        test_file.get_seed_number.return_value = 0
+        score = processor.process_test_file(test_file)
+        assert score == 100
+
+        test_file.get_seed_number.return_value = 1
+        score = processor.process_test_file(test_file)
+        assert score is None
+
+        test_file.get_seed_number.return_value = 99
+        score = processor.process_test_file(test_file)
+        assert score is None
+
+        test_file.get_seed_number.return_value = 10
+        score = processor.process_test_file(test_file)
+        assert score == 8

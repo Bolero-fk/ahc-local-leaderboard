@@ -12,6 +12,17 @@ class TestFile:
         self.input_file_path = input_file_path
         self.submit_file_path = submit_file_path
 
+    def get_seed_name(self) -> str:
+        """この変数が管理しているテストファイルのseed名を返します。"""
+        return Path(self.file_name).stem
+
+    def get_seed_number(self) -> int:
+        """この変数が管理しているテストファイルのseed番号を返します。"""
+        seed_name = self.get_seed_name()
+        assert seed_name.isdigit()
+
+        return int(seed_name)
+
 
 class TestFiles:
     """複数のテストファイルを管理するクラス。"""

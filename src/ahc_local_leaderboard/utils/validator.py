@@ -88,7 +88,22 @@ class SubmitValidator(CommandValidatorBase):
         required_files = [self.test_files.submit_dir_path / test_file_name for test_file_name in test_file_names]
         self.check_files(required_files)
 
+        if args.pahcer_directory:
+            self.check_pahcer_files(Path(args.pahcer_directory))
+
         return self.is_valid()
+
+    def check_pahcer_files(self, pahcer_directory_path: Path) -> bool:
+        """pahcerファイルを使用する場合に必要なファイルが存在するかどうかを確認します。"""
+        json_directory_path = pahcer_directory_path / "json"
+        if not self.check_directories([pahcer_directory_path, json_directory_path]):
+            return False
+
+        if not any(json_directory_path.glob("*.json")):
+            self.errors.append(f"No JSON files found in {json_directory_path}")
+            return False
+
+        return True
 
 
 class ViewValidator(CommandValidatorBase):

@@ -30,6 +30,13 @@ def test_initialization(temp_directories: tuple[Path, Path]) -> None:
     assert test_files.test_files == []
 
 
+@pytest.mark.parametrize("seed_num", ["0000", "1010", "0"])
+def test_get_seed_number(seed_num: str) -> None:
+
+    test_file = TestFile(seed_num + ".txt", Path("in.txt"), Path("out.txt"))
+    assert test_file.get_seed_number() == int(seed_num)
+
+
 @pytest.mark.parametrize("file_name", ["test_file.txt", "12345.txt", "file_name.in"])
 def test_add_file(temp_directories: tuple[Path, Path], file_name: str) -> None:
     input_dir, submit_dir = temp_directories

@@ -84,7 +84,7 @@ def test_submit_validator_missing_files(mock_test_files: Mock, monkeypatch: pyte
     monkeypatch.setattr(Path, "exists", mock_return_false_func())
 
     validator = SubmitValidator(mock_test_files)
-    args = argparse.Namespace(command="submit")
+    args = argparse.Namespace(command="submit", pahcer_directory=None)
 
     assert validator.validate(args) is False
     assert len(validator.errors) > 0
