@@ -144,6 +144,14 @@ local-leaderboard view --detail top
 |**Absolute Score**|各テストケースの絶対スコアです。|
 |**Id**|このスコアが取得された提出IDを表します。|
 
+#### view option(--sort-column/--sort-order) (🧪β機能)
+`view`コマンドを以下のように使用すると、表示順を変更することができます。
+```bash
+local-leaderboard view --sort-column time --sort-order desc
+```
+`--sort-column`の引数には`id`,`rank`,`time`,`abs`,`rel`が使用できます。
+`--sort-order`の引数には`asc`,`desc`が使用できます。
+
 
 ## License
 このプロジェクトはMITライセンスの下で公開されています。詳細は[LICENSE](./LICENSE)ファイルをご覧ください。
