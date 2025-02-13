@@ -70,6 +70,12 @@ local-leaderboard submit --pahcer-directory <path>
 ```
 指定したディレクトリ内の`pahcer/json/xxx.json` にある JSON ファイルのうち、**最も新しい更新時間のもの** が点数計算に使用されます。
 
+#### submit option (--skip-duplicate 🧪β機能)
+`submit`コマンドを以下のように使用すると、すでに同じ絶対点数の提出がデータベース内に存在する場合、提出処理をスキップします：
+```bash
+local-leaderboard submit --skip-duplicate
+```
+
 ### view
 `view`コマンドを使うことで、過去の提出結果を表示できます。
 ```bash
