@@ -63,6 +63,13 @@ local-leaderboard submit
 
 詳しい見方については、[view](#view)のセクションを参考にしてください。
 
+#### submit option (--pahcer-directory 🧪β機能)
+`submit`コマンドを以下のように使用すると、[pahcer](https://github.com/terry-u16/pahcer)によって出力されるファイルを用いて点数計算ができます：
+```bash
+local-leaderboard submit --pahcer-directory <path>
+```
+指定したディレクトリ内の`pahcer/json/xxx.json` にある JSON ファイルのうち、**最も新しい更新時間のもの** が点数計算に使用されます。
+
 ### view
 `view`コマンドを使うことで、過去の提出結果を表示できます。
 ```bash
@@ -83,7 +90,7 @@ local-leaderboard view
 |**Total Relative Score**|提出全体の相対スコアの合計値です（最も高いスコアが$`10^9`$になります）。|
 
 ---
-#### view option(--details \<id\>, latest)
+#### view option (--details \<id\>, latest)
 `view`コマンドを以下のように使用すると、特定の提出結果や最新の提出結果を詳細表示できます：
 ```bash
 local-leaderboard view --detail <id>
@@ -113,7 +120,7 @@ local-leaderboard view --detail latest
 |**Relative Score**|各テストケースの相対スコアです（最も高いスコアが$`10^9`$となります）。|
 
 ---
-#### view option(--details top)
+#### view option (--details top)
 `view`コマンドを以下のように使用すると、現在のトップスコアの各テストケースごとの詳細が表示されます。
 
 ```bash
